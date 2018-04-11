@@ -64,6 +64,17 @@ void CgSceneControl::handleEvent(CgBaseEvent* e)
     // die Enums sind so gebaut, dass man alle Arten von MausEvents über CgEvent::CgMouseEvent abprüfen kann,
     // siehe dazu die CgEvent enums im CgEnums.h
 
+    if(e->getType() && Cg::Arschgeburt){
+        int x = ((SliderMoveEvent*)e)->getFarbe().x;
+        int y= ((SliderMoveEvent*)e)->getFarbe().y;
+        int z= ((SliderMoveEvent*)e)->getFarbe().z;
+        for(int i=0;i<=h->getDreiecke().size()-1;i++){
+
+            h->getDreiecke().at(i)->getPoly()->setColor(glm::vec3(x,y,z));
+
+        }
+        renderObjects();
+    }
 
     if(e->getType() & Cg::CgMouseEvent)
     {
@@ -92,15 +103,7 @@ void CgSceneControl::handleEvent(CgBaseEvent* e)
          m_proj_matrix=glm::perspective(45.0f, (float)(ev->w()) / ev->h(), 0.01f, 100.0f);
     }
 
-    if(e->getType() && Cg::Arschgeburt){
-        int x = ((SliderMoveEvent*)e)->getFarbe().x;
-        int y= ((SliderMoveEvent*)e)->getFarbe().y;
-        int z= ((SliderMoveEvent*)e)->getFarbe().z;
-        for(int i=0;i<=h->getDreiecke().size()-1;i++){
-            h->getDreiecke().at(i)->getPoly()->setColor(glm::vec3(x,y,z));
-            m_renderer->redraw();
-        }
-    }
+
 
     // an der Stelle an der ein Event abgearbeitet ist wird es auch gelöscht.
     delete e;
