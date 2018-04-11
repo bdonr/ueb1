@@ -265,21 +265,16 @@ glm::vec3 CgExampleTriangle::berechneNormale(){
 std::cout<< "x" <<a.x<< "y"<< a.y<<"z"<< a.z<<std::endl;
 std::cout<< "x" <<b.x<< "y"<< b.y<<"z"<< b.z<<std::endl;
 std::cout<< "x" <<c.x<< "y"<< c.y<<"z"<< c.z<<std::endl;
-// a.x*b.z - b.x*a.z
-// a.z*b.x - b.z* a.x
-// a.y*b.y - b.y* a.y
-    k.x =(float)(a.y * b.z - a.z * b.y);
-    if(k.x<0){
-        k.x=(-1)*k.x;
-    }
-    k.y =(float)(a.z * b.x - a.x * b.z);
-    if(k.y<0){
-        k.y=(-1)*k.y;
-    }
-    k.z= (float)(a.x * b.y - a.y * b.x);
-    if(k.z<0){
-        k.z=(-1)*k.z;
-    }
+
+    glm::vec3 vab = b-a;
+    glm::vec3 vac = c-a;
+
+    k.x = vab.y*vac.z - vac.y*vab.z;
+    k.y = vab.z*vac.x - vac.z*vab.x;
+    k.z = vab.x*vac.y - vac.x*vab.y;
+    if(k.z<0)k.z=(-1)*k.z;
+    if(k.y<0)k.y=(-1)*k.y;
+    if(k.x<0)k.x=(-1)*k.x;
     std::cout<< "kx" <<k.x<< "ky"<< k.y<<"kz"<< k.z<<std::endl;
 
 

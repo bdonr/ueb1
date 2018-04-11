@@ -6,15 +6,15 @@ int MyBox::all_id=1000;
 MyBox::MyBox():id(++all_id)
 {
 
-    m_vertices.push_back(glm::vec3(0.1,0.1,0.1));
-    m_vertices.push_back(glm::vec3(.2,0.1,0.1));
-    m_vertices.push_back(glm::vec3(0.2,0.2,0.1));
-    m_vertices.push_back(glm::vec3(0.1,0.2,0.1));
+    m_vertices.push_back(glm::vec3(0,0,0));
+    m_vertices.push_back(glm::vec3(.1,0,0));
+    m_vertices.push_back(glm::vec3(0.1,0.1,0));
+    m_vertices.push_back(glm::vec3(0,0.1,0));
 
-    m_vertices.push_back(glm::vec3(0.1,0.1,0.2));
-    m_vertices.push_back(glm::vec3(.2,0.1,0.2));
-    m_vertices.push_back(glm::vec3(0.2,0.2,0.2));
-    m_vertices.push_back(glm::vec3(0.1,0.2,0.2));
+    m_vertices.push_back(glm::vec3(0,0,0.1));
+    m_vertices.push_back(glm::vec3(.1,0,0.1));
+    m_vertices.push_back(glm::vec3(0.1,0.1,0.1));
+    m_vertices.push_back(glm::vec3(0,0.1,0.1));
 
 
 
