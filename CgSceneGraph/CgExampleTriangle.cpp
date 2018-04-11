@@ -120,7 +120,7 @@ m_id(++all_id)
     m_triangle_indices.push_back(6);
 */
 
-    m_triangle_indices.push_back(0);
+   m_triangle_indices.push_back(0);
 m_triangle_indices.push_back(1);
 m_triangle_indices.push_back(3);
 
@@ -272,9 +272,10 @@ std::cout<< "x" <<c.x<< "y"<< c.y<<"z"<< c.z<<std::endl;
     k.x = vab.y*vac.z - vac.y*vab.z;
     k.y = vab.z*vac.x - vac.z*vab.x;
     k.z = vab.x*vac.y - vac.x*vab.y;
-    if(k.z<0)k.z=(-1)*k.z;
+ /*   if(k.z<0)k.z=(-1)*k.z;
     if(k.y<0)k.y=(-1)*k.y;
-    if(k.x<0)k.x=(-1)*k.x;
+    if(k.x<0)k.x=(-1)*k.x;*/
+
     std::cout<< "kx" <<k.x<< "ky"<< k.y<<"kz"<< k.z<<std::endl;
 
 

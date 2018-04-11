@@ -7,20 +7,17 @@ MyBox::MyBox():id(++all_id)
 {
 
     m_vertices.push_back(glm::vec3(0,0,0));
-    m_vertices.push_back(glm::vec3(.1,0,0));
-    m_vertices.push_back(glm::vec3(0.1,0.1,0));
-    m_vertices.push_back(glm::vec3(0,0.1,0));
+    m_vertices.push_back(glm::vec3(.3,0,0));
+    m_vertices.push_back(glm::vec3(0.3,0.3,0));
+    m_vertices.push_back(glm::vec3(0,0.3,0));
 
-    m_vertices.push_back(glm::vec3(0,0,0.1));
-    m_vertices.push_back(glm::vec3(.1,0,0.1));
-    m_vertices.push_back(glm::vec3(0.1,0.1,0.1));
-    m_vertices.push_back(glm::vec3(0,0.1,0.1));
-
-
+    m_vertices.push_back(glm::vec3(0,0,0.3));
+    m_vertices.push_back(glm::vec3(.3,0,0.3));
+    m_vertices.push_back(glm::vec3(0.3,0.3,0.3));
+    m_vertices.push_back(glm::vec3(0,0.3,0.3));
 
 
-
-    dreiecke.push_back(new CgExampleTriangle(m_vertices.at(0),m_vertices.at(1),m_vertices.at(3)));
+ /*   dreiecke.push_back(new CgExampleTriangle(m_vertices.at(0),m_vertices.at(1),m_vertices.at(3)));
    dreiecke.push_back(new CgExampleTriangle(m_vertices.at(3),m_vertices.at(2),m_vertices.at(1)));
     dreiecke.push_back(new CgExampleTriangle(m_vertices.at(1),m_vertices.at(5),m_vertices.at(2)));
     dreiecke.push_back(new CgExampleTriangle(m_vertices.at(5),m_vertices.at(6),m_vertices.at(2)));
@@ -32,7 +29,19 @@ MyBox::MyBox():id(++all_id)
     dreiecke.push_back(new CgExampleTriangle(m_vertices.at(3),m_vertices.at(2),m_vertices.at(6)));
     dreiecke.push_back(new CgExampleTriangle(m_vertices.at(0),m_vertices.at(1),m_vertices.at(5)));
     dreiecke.push_back(new CgExampleTriangle(m_vertices.at(0),m_vertices.at(5),m_vertices.at(7)));
-
+*/
+     dreiecke.push_back(new CgExampleTriangle(m_vertices.at(0),m_vertices.at(1),m_vertices.at(2)));
+     dreiecke.push_back(new CgExampleTriangle(m_vertices.at(0),m_vertices.at(2),m_vertices.at(3)));
+     dreiecke.push_back(new CgExampleTriangle(m_vertices.at(0),m_vertices.at(1),m_vertices.at(5)));
+     dreiecke.push_back(new CgExampleTriangle(m_vertices.at(0),m_vertices.at(5),m_vertices.at(4)));
+     dreiecke.push_back(new CgExampleTriangle(m_vertices.at(0),m_vertices.at(4),m_vertices.at(7)));
+     dreiecke.push_back(new CgExampleTriangle(m_vertices.at(0),m_vertices.at(7),m_vertices.at(3)));
+     dreiecke.push_back(new CgExampleTriangle(m_vertices.at(6),m_vertices.at(4),m_vertices.at(5)));
+     dreiecke.push_back(new CgExampleTriangle(m_vertices.at(6),m_vertices.at(7),m_vertices.at(4)));
+     dreiecke.push_back(new CgExampleTriangle(m_vertices.at(6),m_vertices.at(1),m_vertices.at(2)));
+     dreiecke.push_back(new CgExampleTriangle(m_vertices.at(6),m_vertices.at(5),m_vertices.at(1)));
+     dreiecke.push_back(new CgExampleTriangle(m_vertices.at(6),m_vertices.at(3),m_vertices.at(7)));
+     dreiecke.push_back(new CgExampleTriangle(m_vertices.at(6),m_vertices.at(2),m_vertices.at(3)));
 }
 MyBox::~MyBox()
 {
