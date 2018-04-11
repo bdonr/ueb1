@@ -4,7 +4,6 @@
 
 #include "CgBase/CgEnums.h"
 
-
 class CgBaseRenderableObject
 {
 

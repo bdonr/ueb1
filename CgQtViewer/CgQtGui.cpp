@@ -25,6 +25,7 @@
 #include <QMenuBar>
 #include <QActionGroup>
 #include <iostream>
+#include "mylabel.h"
 
 
 
@@ -52,11 +53,34 @@ CgQtGui::CgQtGui(CgQtMainApplication *mw)
     QTabWidget* m_tabs = new QTabWidget();
     m_tabs->addTab(opt,"&My Tab1");
     m_tabs->addTab(otheropt,"&My Tab2");
-    m_tabs->addTab(other3,"&DEINE MUTTER");
+    m_tabs->addTab(other3,"&Tab 3");
 
     QVBoxLayout *h = new QVBoxLayout();
 
+    //MyLabel mlabel = new MyLabel();
+    QLabel * grueninfo = new QLabel();
+    QLabel * rotinfo = new QLabel();
+    QLabel * blauinfo = new QLabel();
 
+    QSlider * rot = createSlider(0,255,1);
+    QObject::connect(rot,SIGNAL(sliderMoved(int)),rotinfo,SLOT(setNum(int)));
+
+    QSlider * gruen = createSlider(0,255,1);
+    QObject::connect(gruen,SIGNAL(sliderMoved(int)),grueninfo,SLOT(setNum(int)));
+
+
+    QSlider * blau = createSlider(0,255,1);
+    QObject::connect(blau,SIGNAL(sliderMoved(int)),blauinfo,SLOT(setNum(int)));
+
+    h->addWidget(new QLabel("Rot"));
+    h->addWidget(rot);
+    h->addWidget(rotinfo);
+    h->addWidget(new QLabel("Blau"));
+    h->addWidget(blau);
+    h->addWidget(blauinfo);
+    h->addWidget(new QLabel("Gruen"));
+    h->addWidget(gruen);
+    h->addWidget(grueninfo);
 
     QPushButton* buttonDon=new QPushButton("&hi");
     h->addWidget(buttonDon);
@@ -150,6 +174,19 @@ QSlider *CgQtGui::createSlider()
     slider->setTickPosition(QSlider::TicksRight);
     return slider;
 }
+
+QSlider *CgQtGui::createSlider(int min,int max,int steps)
+{
+    QSlider *slider = new QSlider(Qt::Horizontal);
+    slider->setRange(min,max);
+    slider->setSingleStep(steps);
+    slider->setPageStep(15 * steps);
+    slider->setTickInterval(15 * steps);
+    slider->setTickPosition(QSlider::TicksRight);
+    return slider;
+}
+
+
 
 
 

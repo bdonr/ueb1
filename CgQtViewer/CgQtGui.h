@@ -76,6 +76,7 @@ protected:
 
 private:
     QSlider *createSlider();
+    QSlider * createSlider(int min,int max,int steps);
 
     // parts of the view
     CgQtGLRenderWidget*    m_glRenderWidget;

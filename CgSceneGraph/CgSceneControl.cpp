@@ -7,10 +7,15 @@
 #include "CgExampleTriangle.h"
 #include <iostream>
 #include <glm/gtc/matrix_transform.hpp>
+#include <CgBase/CgBasePolyline.h>
+#include "mypolyline.h"
+#include "mybox.h"
 
 CgSceneControl::CgSceneControl()
 {
-     m_triangle=new CgExampleTriangle(21,true);
+
+    h = new MyBox();
+    // std::cout<< "hier"<<this->poly->getLineWidth();
      m_current_transformation=glm::mat4(1.);
      m_proj_matrix= glm::mat4x4(glm::vec4(1.792591, 0.0, 0.0, 0.0), glm::vec4(0.0, 1.792591, 0.0, 0.0), glm::vec4(0.0, 0.0, -1.0002, -1.0), glm::vec4(0.0, 0.0, -0.020002, 0.0));
 }
@@ -18,25 +23,37 @@ CgSceneControl::CgSceneControl()
 
 CgSceneControl::~CgSceneControl()
 {
-     delete m_triangle;
+     m_triangle.clear();
+     polies.clear();
+     delete h;
 }
 
 void CgSceneControl::setRenderer(CgBaseRenderer* r)
 {
     m_renderer=r;
     m_renderer->setSceneControl(this);
+    m_renderer->init(h);
+    for(int i=0;i<=h->getDreiecke().size()-1;i++){
+        m_renderer->init(h->getDreiecke().at(i));
+        m_renderer->init(h->getDreiecke().at(i)->getPoly());
+    }
 
-    m_renderer->init(m_triangle);
 }
 
 
 void CgSceneControl::renderObjects()
 {
+
+
     m_renderer->setProjectionMatrix(m_proj_matrix);
+
     m_renderer->setLookAtMatrix(glm::mat4x4(glm::vec4(1.0, 0.0, 0.0, 0.0), glm::vec4(0.0, 1.0, 0.0, 0.0), glm::vec4(0.0, 0.0, 1.0, -1.0), glm::vec4(0.0, 0.0, -1.0, 1.0)));
 
-    m_renderer->render(m_triangle,m_current_transformation);
 
+    for(int i=0;i<=h->getDreiecke().size()-1;i++){
+        m_renderer->render(h->getDreiecke().at(i),m_current_transformation);
+        m_renderer->render(h->getDreiecke().at(i)->getPoly(),m_current_transformation);
+    }
 }
 
 

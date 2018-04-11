@@ -15,7 +15,11 @@ SOURCES += main.cpp \
     CgSceneGraph/CgExampleTriangle.cpp \
     CgQtViewer/CgQtGlBufferObject.cpp \
     CgQtViewer/CgTrackball.cpp \
-    CgEvents/CgWindowResizeEvent.cpp
+    CgEvents/CgWindowResizeEvent.cpp \
+    CgQtViewer/myslider.cpp \
+    CgQtViewer/mylabel.cpp \
+    CgSceneGraph/mypolyline.cpp \
+    CgSceneGraph/mybox.cpp
 
 HEADERS += \
     CgBase/CgBaseRenderWindow.h \
@@ -39,5 +43,9 @@ HEADERS += \
     CgBase/CgBaseSceneControl.h \
     CgQtViewer/CgQtGlBufferObject.h \
     CgQtViewer/CgTrackball.h \
-    CgEvents/CgWindowResizeEvent.h
+    CgEvents/CgWindowResizeEvent.h \
+    CgQtViewer/myslider.h \
+    CgQtViewer/mylabel.h \
+    CgSceneGraph/mypolyline.h \
+    CgSceneGraph/mybox.h
 
