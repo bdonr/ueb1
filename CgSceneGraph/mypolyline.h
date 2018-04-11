@@ -18,6 +18,7 @@ MyPolyline();
 MyPolyline(glm::vec3 start,glm::vec3 end,glm::vec3 color);
     ~MyPolyline();
     const std::vector<glm::vec3>& getVertices() const;
+    void setColor(const glm::vec3);
     glm::vec3 getColor() const;
     unsigned int getLineWidth() const;
     Cg::ObjectType getType() const;

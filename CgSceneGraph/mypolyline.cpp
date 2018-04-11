@@ -34,6 +34,10 @@ unsigned int MyPolyline::getID() const{
     return this->id;
 }
 
+void MyPolyline::setColor(const glm::vec3 x){
+    this->color=x;
+}
+
 
 
 

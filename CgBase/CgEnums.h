@@ -30,7 +30,7 @@ namespace Cg{
     CgSomeSpecialEvent3             = 0x0004000,
     CgSomeSpecialEvent4             = 0x0008000,
     CgEventGroup1                   = 0x000f000,
-
+    Arschgeburt                     = 0x000d000,
     // feel free to add whatever you like
     }EventType;
 

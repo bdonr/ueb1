@@ -10,6 +10,7 @@
 #include <CgBase/CgBasePolyline.h>
 #include "mypolyline.h"
 #include "mybox.h"
+#include "CgEvents/slidermoveevent.h"
 
 CgSceneControl::CgSceneControl()
 {
@@ -91,6 +92,15 @@ void CgSceneControl::handleEvent(CgBaseEvent* e)
          m_proj_matrix=glm::perspective(45.0f, (float)(ev->w()) / ev->h(), 0.01f, 100.0f);
     }
 
+    if(e->getType() && Cg::Arschgeburt){
+        int x = ((SliderMoveEvent*)e)->getFarbe().x;
+        int y= ((SliderMoveEvent*)e)->getFarbe().y;
+        int z= ((SliderMoveEvent*)e)->getFarbe().z;
+        for(int i=0;i<=h->getDreiecke().size()-1;i++){
+            h->getDreiecke().at(i)->getPoly()->setColor(glm::vec3(x,y,z));
+            m_renderer->redraw();
+        }
+    }
 
     // an der Stelle an der ein Event abgearbeitet ist wird es auch gelöscht.
     delete e;

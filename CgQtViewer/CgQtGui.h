@@ -44,6 +44,9 @@
 #include <QWidget>
 #include "../CgBase/CgObservable.h"
 
+#include <vector>
+#include <glm/glm.hpp>
+
 QT_BEGIN_NAMESPACE
 class QSlider;
 class QPushButton;
@@ -70,6 +73,7 @@ public:
     CgBaseRenderer* getRenderer();
 
 
+
 protected:
     void keyPressEvent(QKeyEvent *event) Q_DECL_OVERRIDE;
 
@@ -77,7 +81,7 @@ protected:
 private:
     QSlider *createSlider();
     QSlider * createSlider(int min,int max,int steps);
-
+    glm::vec3 current;
     // parts of the view
     CgQtGLRenderWidget*    m_glRenderWidget;
     CgQtMainApplication*        m_mainWindow;
@@ -114,6 +118,9 @@ private slots:
     void mouseEvent(QMouseEvent* event);
     void viewportChanged(int,int);
     void clickedDonButton();
+    void changeBlue(int);
+    void changeRot(int);
+    void changeGreen(int);
     /* slots example qt gui elements */
     void slotMySpinBox1Changed();
     void slotMyCheckBox1Changed();

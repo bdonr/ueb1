@@ -26,7 +26,7 @@
 #include <QActionGroup>
 #include <iostream>
 #include "mylabel.h"
-
+#include "CgEvents/slidermoveevent.h"
 
 
 CgQtGui::CgQtGui(CgQtMainApplication *mw)
@@ -62,16 +62,18 @@ CgQtGui::CgQtGui(CgQtMainApplication *mw)
     QLabel * rotinfo = new QLabel();
     QLabel * blauinfo = new QLabel();
 
+
     QSlider * rot = createSlider(0,255,1);
     QObject::connect(rot,SIGNAL(sliderMoved(int)),rotinfo,SLOT(setNum(int)));
-
+    QObject::connect(rot,SIGNAL(sliderMoved(int)),this,SLOT(changeRot(int)));
     QSlider * gruen = createSlider(0,255,1);
-    QObject::connect(gruen,SIGNAL(sliderMoved(int)),grueninfo,SLOT(setNum(int)));
 
+    QObject::connect(gruen,SIGNAL(sliderMoved(int)),grueninfo,SLOT(setNum(int)));
+    QObject::connect(gruen,SIGNAL(sliderMoved(int)),this,SLOT(changeGreen(int)));
 
     QSlider * blau = createSlider(0,255,1);
     QObject::connect(blau,SIGNAL(sliderMoved(int)),blauinfo,SLOT(setNum(int)));
-
+    QObject::connect(blau,SIGNAL(sliderMoved(int)),this,SLOT(changeBlue(int)));
     h->addWidget(new QLabel("Rot"));
     h->addWidget(rot);
     h->addWidget(rotinfo);
@@ -384,6 +386,7 @@ void CgQtGui::keyPressEvent(QKeyEvent *event)
 void CgQtGui::viewportChanged(int w, int h)
 {
      CgBaseEvent* e = new CgWindowResizeEvent(Cg::WindowResizeEvent,w,h);
+
      notifyObserver(e);
 }
 
@@ -396,6 +399,39 @@ CgBaseRenderer* CgQtGui::getRenderer()
 {
     return m_glRenderWidget;
 }
+
+void CgQtGui::changeBlue(int b){
+    this->current = glm::vec3(current.x,current.y,b);
+   // std::cout<<current.x << current.y <<current.z<<std::endl;
+    CgBaseEvent * x = new SliderMoveEvent(Cg::Arschgeburt,current);
+    notifyObserver(x);
+}
+
+void CgQtGui::changeRot(int r){
+    this->current = glm::vec3(r,current.y,current.z);
+//std::cout<<current.x << current.y <<current.z<<std::endl;
+CgBaseEvent*x = new SliderMoveEvent(Cg::Arschgeburt,current);
+notifyObserver(x);
+
+}
+
+void CgQtGui::changeGreen(int g){
+    this->current = glm::vec3(current.x,g,current.z);
+//std::cout<<current.x << current.y <<current.z<<std::endl;
+CgBaseEvent* x = new SliderMoveEvent(Cg::Arschgeburt,current);
+notifyObserver(x);
+}
+
+
+
+
+
+
+
+
+
+
+
 
 
 

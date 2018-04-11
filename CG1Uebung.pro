@@ -19,7 +19,8 @@ SOURCES += main.cpp \
     CgQtViewer/myslider.cpp \
     CgQtViewer/mylabel.cpp \
     CgSceneGraph/mypolyline.cpp \
-    CgSceneGraph/mybox.cpp
+    CgSceneGraph/mybox.cpp \
+    CgEvents/slidermoveevent.cpp
 
 HEADERS += \
     CgBase/CgBaseRenderWindow.h \
@@ -47,5 +48,6 @@ HEADERS += \
     CgQtViewer/myslider.h \
     CgQtViewer/mylabel.h \
     CgSceneGraph/mypolyline.h \
-    CgSceneGraph/mybox.h
+    CgSceneGraph/mybox.h \
+    CgEvents/slidermoveevent.h
 
