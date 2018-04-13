@@ -44,13 +44,8 @@ CgQtGui::CgQtGui(CgQtMainApplication *mw)
     QWidget *opt = new QWidget;
     createOptionPanelExample1(opt);
 
-
-    QWidget *otheropt = new QWidget;
-    createOptionPanelExample2(otheropt);
-
     QTabWidget* m_tabs = new QTabWidget();
     m_tabs->addTab(opt,"&My Tab1");
-    m_tabs->addTab(otheropt,"&My Tab2");
     container->addWidget(m_tabs);
 
     m_tabs->setMaximumWidth(400);
