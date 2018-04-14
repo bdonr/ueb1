@@ -1,5 +1,6 @@
 #include "Kegel.h"
 #include <iostream>
+#include <stdlib.h>
 /*        for(float y=x-(3600/refine);y<x;y=y+(3600/refine)){
             std::cout<<"y.x"<<vertices.at(0).x<<"y.y"<<vertices.at(1).y<<"y.z"<<vertices.at(1).z<<std::endl;
 
@@ -9,8 +10,8 @@ Kegel::Kegel(int id,float radius,int hoehe, int refine):id(id),radius(radius),ho
 {
 
     type= Cg::TriangleMesh;
-    erstelleRechtEck(glm::vec3(.1,.1,.2),glm::vec3(.3,.4,.5),glm::vec3(.5,.2,.6),1);
-    //create();
+   // erstelleRechtEck(glm::vec3(.1,.1,.2),glm::vec3(.3,.4,.5),glm::vec3(.5,.2,.6),1);
+    create();
    /* int count=0;
     vertices.push_back(glm::vec3(0,0,0));
     for(float x=0;x<360;x=x+(360/refine)){
@@ -63,6 +64,14 @@ const std::vector<glm::vec3> & Kegel::getFaceColors() const{
 }
 
 int Kegel::create(){
+     /*0*/   vertices.push_back(glm::vec3(0,0,0));
+     /*1*/    vertices.push_back(glm::vec3(0,0,hoehe));
+    for( float x = 0.0;x<360.0+360.0/refine;x=x+(360.0/refine))
+    {
+        vertices.push_back(glm::vec3(radius*glm::cos(glm::radians(x)),radius*glm::sin(glm::radians(x)),0));
+        vertices.push_back(glm::vec3(radius*glm::cos(glm::radians(x)),radius*glm::sin(glm::radians(x)),hoehe));
+    }
+ /*
     vertices.push_back(glm::vec3(0,0,0));
     vertices.push_back(glm::vec3(0,0,hoehe));
 
@@ -71,28 +80,103 @@ int Kegel::create(){
 
     vertices.push_back(glm::vec3(glm::cos(glm::radians(60.)),glm::sin(glm::radians(60.)),0));
     vertices.push_back(glm::vec3(glm::cos(glm::radians(60.)),glm::sin(glm::radians(60.)),hoehe));
+    //----------------
     vertices.push_back(glm::vec3(glm::cos(glm::radians(120.)),glm::sin(glm::radians(120.)),0));
-    vertices.push_back(glm::vec3(glm::cos(glm::radians(120.)),glm::sin(glm::radians(120)),hoehe));
+    vertices.push_back(glm::vec3(glm::cos(glm::radians(120.)),glm::sin(glm::radians(120.)),hoehe));
 
     vertices.push_back(glm::vec3(glm::cos(glm::radians(180.)),glm::sin(glm::radians(180.)),0));
     vertices.push_back(glm::vec3(glm::cos(glm::radians(180.)),glm::sin(glm::radians(180.)),hoehe));
+*/
+    //bottom
+int d;
+    for(d = 0; d<=refine*3;d+=2)
+    {
 
+        //top
+        triangleIndices.push_back(0);
+        triangleIndices.push_back(d+2);
+        triangleIndices.push_back(d+4);
+        //bottom
+        triangleIndices.push_back(1);
+        triangleIndices.push_back(d+3);
+        triangleIndices.push_back(d+5);
+        //side
+        //3.5-5.7-7.9
+        //2.4-4.6-6.8
+        triangleIndices.push_back(d+3);
+        triangleIndices.push_back(d+5);
+        triangleIndices.push_back(d+2);
+
+        triangleIndices.push_back(d+3);
+        triangleIndices.push_back(d+5);
+
+        triangleIndices.push_back(d+4);
+        if(d>= refine*3)
+        {
+            triangleIndices.push_back(d+4);
+            triangleIndices.push_back(d+5);
+            triangleIndices.push_back(3);
+
+            triangleIndices.push_back(d+4);
+            triangleIndices.push_back(2);
+            triangleIndices.push_back(3);
+        }
+    }
+                std::cout<<triangleIndices.size()<<" "<<d<<std::endl;
+
+  /*  triangleIndices.push_back(0);
     triangleIndices.push_back(2);
-    triangleIndices.push_back(3);
     triangleIndices.push_back(4);
 
-    triangleIndices.push_back(2);
-    triangleIndices.push_back(4);
-    triangleIndices.push_back(5);
-
-
-    triangleIndices.push_back(3);
-    triangleIndices.push_back(4);
     triangleIndices.push_back(0);
+    triangleIndices.push_back(4);
+    triangleIndices.push_back(6);
 
-    triangleIndices.push_back(2);
-    triangleIndices.push_back(5);
+    triangleIndices.push_back(0);
+    triangleIndices.push_back(6);
+    triangleIndices.push_back(8);*/
+//top
+/*
     triangleIndices.push_back(1);
+    triangleIndices.push_back(3);
+    triangleIndices.push_back(5);
+
+    triangleIndices.push_back(1);
+    triangleIndices.push_back(5);
+    triangleIndices.push_back(7);
+
+    triangleIndices.push_back(1);
+    triangleIndices.push_back(7);
+    triangleIndices.push_back(9);*/
+
+//side
+    /*
+    triangleIndices.push_back(3);
+    triangleIndices.push_back(5);
+    triangleIndices.push_back(2);
+
+    triangleIndices.push_back(3);
+    triangleIndices.push_back(5);
+    triangleIndices.push_back(4);
+
+    triangleIndices.push_back(5);
+    triangleIndices.push_back(7);
+    triangleIndices.push_back(4);
+
+    triangleIndices.push_back(5);
+    triangleIndices.push_back(7);
+    triangleIndices.push_back(6);
+
+    triangleIndices.push_back(7);
+    triangleIndices.push_back(9);
+    triangleIndices.push_back(6);
+
+    triangleIndices.push_back(7);
+    triangleIndices.push_back(9);
+    triangleIndices.push_back(8);
+
+*/
+
 }
 void Kegel::erstelleRechtEck(glm::vec3 p1, glm::vec3 p2, glm::vec3 p3, int count)
 {

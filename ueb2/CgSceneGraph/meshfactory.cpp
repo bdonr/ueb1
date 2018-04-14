@@ -7,5 +7,5 @@ MeshFactory::MeshFactory()
 
 }
 CgBaseTriangleMesh* MeshFactory::createKegel(){
-    return (CgBaseTriangleMesh*) new Kegel(++all_id,1,1,6);
+    return (CgBaseTriangleMesh*) new Kegel(++all_id,0.1,-1,180);
 }
