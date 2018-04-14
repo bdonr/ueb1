@@ -15,8 +15,9 @@ SOURCES += main.cpp \
     CgQtViewer/CgQtGlBufferObject.cpp \
     CgQtViewer/CgTrackball.cpp \
     CgEvents/CgWindowResizeEvent.cpp \
-    CgSceneGraph/Kegel.cpp \
-    CgSceneGraph/meshfactory.cpp
+    CgSceneGraph/meshfactory.cpp \
+    CgSceneGraph/Zylinder.cpp \
+    CgSceneGraph/kegel.cpp
 
 HEADERS += \
     CgBase/CgBaseRenderWindow.h \
@@ -40,6 +41,7 @@ HEADERS += \
     CgQtViewer/CgQtGlBufferObject.h \
     CgQtViewer/CgTrackball.h \
     CgEvents/CgWindowResizeEvent.h \
-    CgSceneGraph/Kegel.h \
-    CgSceneGraph/meshfactory.h
+    CgSceneGraph/meshfactory.h \
+    CgSceneGraph/Zylinder.h \
+    CgSceneGraph/kegel.h
 

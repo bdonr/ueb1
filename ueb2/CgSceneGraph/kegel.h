@@ -4,13 +4,12 @@
 
 class Kegel: public CgBaseTriangleMesh
 {
-
 private:
     // CgBaseRenderableObject interface
     enum Cg::ObjectType type;
     unsigned int id;
     float radius;
-    int hoehe;
+    float hoehe;
     int refine;
     // CgBaseTriangleMesh interface
     std::vector<glm::vec3> vertices;
@@ -24,7 +23,7 @@ private:
     void erstelleRechtEck(glm::vec3 p1, glm::vec3 p2, glm::vec3 p3, int count);
 public:
     Kegel();
-    Kegel(int id,float radius, int hoehe,int refine);
+    Kegel(int id,float radius, float hoehe,int refine);
 
     // CgBaseRenderableObject interface
     enum Cg::ObjectType getType() const;

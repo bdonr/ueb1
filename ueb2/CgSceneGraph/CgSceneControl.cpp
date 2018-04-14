@@ -8,7 +8,8 @@
 #include <iostream>
 #include <glm/gtc/matrix_transform.hpp>
 #include "meshfactory.h"
-#include "Kegel.h"
+#include "Zylinder.h"
+#include "kegel.h"
 CgSceneControl::CgSceneControl()
 {
     MeshFactory *v = new MeshFactory();

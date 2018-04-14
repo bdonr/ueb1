@@ -1,4 +1,4 @@
-#include "Kegel.h"
+#include "Zylinder.h"
 #include <iostream>
 #include <stdlib.h>
 /*        for(float y=x-(3600/refine);y<x;y=y+(3600/refine)){
@@ -6,7 +6,7 @@
 
         }*/
 
-Kegel::Kegel(int id,float radius,int hoehe, int refine):id(id),radius(radius),hoehe(hoehe),refine(refine)
+Zylinder::Zylinder(int id,float radius,int hoehe, int refine):id(id),radius(radius),hoehe(hoehe),refine(refine)
 {
 
     type= Cg::TriangleMesh;
@@ -33,37 +33,37 @@ Kegel::Kegel(int id,float radius,int hoehe, int refine):id(id),radius(radius),ho
 }
 
 // CgBaseRenderableObject interface
-enum Cg::ObjectType Kegel::getType() const{
+enum Cg::ObjectType Zylinder::getType() const{
     return this->type;
 }
-unsigned int Kegel::getID() const{
+unsigned int Zylinder::getID() const{
     return this->id;
 }
 
 // CgBaseTriangleMesh interface
-const std::vector<glm::vec3> & Kegel::getVertices() const{
+const std::vector<glm::vec3> & Zylinder::getVertices() const{
     return this->vertices;
 }
-const std::vector<glm::vec3> & Kegel::getVertexNormals() const{
+const std::vector<glm::vec3> & Zylinder::getVertexNormals() const{
     return this->vertexNormals;
 }
-const std::vector<glm::vec3> & Kegel::getVertexColors() const{
+const std::vector<glm::vec3> & Zylinder::getVertexColors() const{
     return this->vertexColors;
 }
-const std::vector<glm::vec2> & Kegel::getVertexTexCoords() const{
+const std::vector<glm::vec2> & Zylinder::getVertexTexCoords() const{
     return this->vertexTexCoords;
 }
-const std::vector<unsigned int> & Kegel::getTriangleIndices() const{
+const std::vector<unsigned int> & Zylinder::getTriangleIndices() const{
     return this->triangleIndices;
 }
-const std::vector<glm::vec3> & Kegel::getFaceNormals() const{
+const std::vector<glm::vec3> & Zylinder::getFaceNormals() const{
     return this->faceNormals;
 }
-const std::vector<glm::vec3> & Kegel::getFaceColors() const{
+const std::vector<glm::vec3> & Zylinder::getFaceColors() const{
     return this->faceColors;
 }
 
-int Kegel::create(){
+int Zylinder::create(){
      /*0*/   vertices.push_back(glm::vec3(0,0,0));
      /*1*/    vertices.push_back(glm::vec3(0,0,hoehe));
     for( float x = 0.0;x<360.0+360.0/refine;x=x+(360.0/refine))
@@ -178,7 +178,7 @@ int d;
 */
 
 }
-void Kegel::erstelleRechtEck(glm::vec3 p1, glm::vec3 p2, glm::vec3 p3, int count)
+void Zylinder::erstelleRechtEck(glm::vec3 p1, glm::vec3 p2, glm::vec3 p3, int count)
 {
     glm::vec3 pZusatz1;
     pZusatz1.x = p2.x+(p1.x-p3.x);
