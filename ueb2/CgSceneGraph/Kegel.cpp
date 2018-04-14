@@ -9,13 +9,13 @@ Kegel::Kegel(int id,float radius,int hoehe, int refine):id(id),radius(radius),ho
 {
 
     type= Cg::TriangleMesh;
-    faceColors.push_back(glm::vec3(255,0,0));
-    vertexColors.push_back(glm::vec3(255,255,0));
-    int count=0;
-
+    erstelleRechtEck(glm::vec3(.1,.1,.2),glm::vec3(.3,.4,.5),glm::vec3(.5,.2,.6),1);
+    //create();
+   /* int count=0;
     vertices.push_back(glm::vec3(0,0,0));
     for(float x=0;x<360;x=x+(360/refine)){
-    vertices.push_back(glm::vec3(glm::cos(radius*glm::radians(x)),glm::sin(radius*glm::radians(x)),0));
+    vertices.push_back(glm::vec3(radius*glm::cos(glm::radians(x)),radius*glm::sin(glm::radians(x)),0));
+   // vertices.push_back(glm::vec3(radius*glm::cos(glm::radians(x)),radius*glm::sin(glm::radians(x)),hoehe));
 
     triangleIndices.push_back(0);
     triangleIndices.push_back(count+1);
@@ -28,7 +28,7 @@ Kegel::Kegel(int id,float radius,int hoehe, int refine):id(id),radius(radius),ho
     triangleIndices.push_back(count);
 
 
-
+*/
 }
 
 // CgBaseRenderableObject interface
@@ -60,4 +60,55 @@ const std::vector<glm::vec3> & Kegel::getFaceNormals() const{
 }
 const std::vector<glm::vec3> & Kegel::getFaceColors() const{
     return this->faceColors;
+}
+
+int Kegel::create(){
+    vertices.push_back(glm::vec3(0,0,0));
+    vertices.push_back(glm::vec3(0,0,hoehe));
+
+    vertices.push_back(glm::vec3(glm::cos(glm::radians(0.)),glm::sin(glm::radians(0.)),0));
+    vertices.push_back(glm::vec3(glm::cos(glm::radians(0.)),glm::sin(glm::radians(0.)),hoehe));
+
+    vertices.push_back(glm::vec3(glm::cos(glm::radians(60.)),glm::sin(glm::radians(60.)),0));
+    vertices.push_back(glm::vec3(glm::cos(glm::radians(60.)),glm::sin(glm::radians(60.)),hoehe));
+    vertices.push_back(glm::vec3(glm::cos(glm::radians(120.)),glm::sin(glm::radians(120.)),0));
+    vertices.push_back(glm::vec3(glm::cos(glm::radians(120.)),glm::sin(glm::radians(120)),hoehe));
+
+    vertices.push_back(glm::vec3(glm::cos(glm::radians(180.)),glm::sin(glm::radians(180.)),0));
+    vertices.push_back(glm::vec3(glm::cos(glm::radians(180.)),glm::sin(glm::radians(180.)),hoehe));
+
+    triangleIndices.push_back(2);
+    triangleIndices.push_back(3);
+    triangleIndices.push_back(4);
+
+    triangleIndices.push_back(2);
+    triangleIndices.push_back(4);
+    triangleIndices.push_back(5);
+
+
+    triangleIndices.push_back(3);
+    triangleIndices.push_back(4);
+    triangleIndices.push_back(0);
+
+    triangleIndices.push_back(2);
+    triangleIndices.push_back(5);
+    triangleIndices.push_back(1);
+}
+void Kegel::erstelleRechtEck(glm::vec3 p1, glm::vec3 p2, glm::vec3 p3, int count)
+{
+    glm::vec3 pZusatz1;
+    pZusatz1.x = p2.x+(p1.x-p3.x);
+    pZusatz1.y = p2.y+(p1.y-p3.y);
+    pZusatz1.z = (p2.z+(p1.z-p3.z))*(-1);
+    vertices.push_back(p1);
+    vertices.push_back(p2);
+    vertices.push_back(p3);
+    vertices.push_back(pZusatz1);
+    triangleIndices.push_back(0);
+    triangleIndices.push_back(1);
+    triangleIndices.push_back(2);
+
+    triangleIndices.push_back(0);
+    triangleIndices.push_back(2);
+    triangleIndices.push_back(3);
 }

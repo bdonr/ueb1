@@ -20,6 +20,8 @@ private:
     std::vector<unsigned int> triangleIndices;
     std::vector<glm::vec3> faceNormals;
     std::vector<glm::vec3> faceColors;
+    int create();
+    void erstelleRechtEck(glm::vec3 p1, glm::vec3 p2, glm::vec3 p3, int count);
 public:
     Kegel();
     Kegel(int id,float radius, int hoehe,int refine);
