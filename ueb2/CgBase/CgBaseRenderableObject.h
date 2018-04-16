@@ -2,7 +2,8 @@
 #define CGBASERENDERABLEOBJECT
 
 
-#include "CgBase/CgEnums.h"
+#include "../CgBase/CgEnums.h"
+#include "CgEnums.h"
 
 
 class CgBaseRenderableObject

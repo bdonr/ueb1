@@ -17,7 +17,8 @@ SOURCES += main.cpp \
     CgEvents/CgWindowResizeEvent.cpp \
     CgSceneGraph/meshfactory.cpp \
     CgSceneGraph/Zylinder.cpp \
-    CgSceneGraph/kegel.cpp
+    CgSceneGraph/kegel.cpp \
+    CgSceneGraph/Mypolyline.cpp
 
 HEADERS += \
     CgBase/CgBaseRenderWindow.h \
@@ -43,5 +44,6 @@ HEADERS += \
     CgEvents/CgWindowResizeEvent.h \
     CgSceneGraph/meshfactory.h \
     CgSceneGraph/Zylinder.h \
-    CgSceneGraph/kegel.h
+    CgSceneGraph/kegel.h \
+    CgSceneGraph/Mypolyline.h
 

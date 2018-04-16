@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE QtCreatorProject>
-<!-- Written by QtCreator 3.5.1, 2018-04-14T15:44:50. -->
+<!-- Written by QtCreator 3.5.1, 2018-04-16T10:42:29. -->
 <qtcreator>
  <data>
   <variable>EnvironmentId</variable>
@@ -178,8 +178,8 @@
     <value type="int" key="PE.EnvironmentAspect.Base">2</value>
     <valuelist type="QVariantList" key="PE.EnvironmentAspect.Changes"/>
     <value type="QString" key="ProjectExplorer.ProjectConfiguration.DefaultDisplayName">CG1Uebung</value>
-    <value type="QString" key="ProjectExplorer.ProjectConfiguration.DisplayName"></value>
-    <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">Qt4ProjectManager.Qt4RunConfiguration:/home/don/Schreibtisch/cg uebung/ueb1/basis/CG1Uebung.pro</value>
+    <value type="QString" key="ProjectExplorer.ProjectConfiguration.DisplayName">CG1Uebung2</value>
+    <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">Qt4ProjectManager.Qt4RunConfiguration:/home/don/Schreibtisch/cg uebung/ueb1/ueb2/CG1Uebung.pro</value>
     <value type="QString" key="Qt4ProjectManager.Qt4RunConfiguration.CommandLineArguments"></value>
     <value type="QString" key="Qt4ProjectManager.Qt4RunConfiguration.ProFile">CG1Uebung.pro</value>
     <value type="bool" key="Qt4ProjectManager.Qt4RunConfiguration.UseDyldImageSuffix">false</value>

@@ -1,8 +1,8 @@
 #include "CgQtGlBufferObject.h"
-#include "CgBase/CgBasePolyline.h"
-#include "CgBase/CgBasePolygonMesh.h"
-#include "CgBase/CgBaseTriangleMesh.h"
-#include "CgBase/CgBasePointCloud.h"
+#include "../CgBase/CgBasePolyline.h"
+#include "../CgBase/CgBasePolygonMesh.h"
+#include "../CgBase/CgBaseTriangleMesh.h"
+#include "../CgBase/CgBasePointCloud.h"
 
 CgQtGlBufferObject::CgQtGlBufferObject():
     m_vert_size(0)

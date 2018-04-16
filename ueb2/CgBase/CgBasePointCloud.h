@@ -3,7 +3,7 @@
 
 #include <vector>
 #include <glm/glm.hpp>
-#include "CgBase/CgBaseRenderableObject.h"
+#include "../CgBase/CgBaseRenderableObject.h"
 
 class CgBasePointCloud : public CgBaseRenderableObject
 {

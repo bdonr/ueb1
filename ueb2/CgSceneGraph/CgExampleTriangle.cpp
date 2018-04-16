@@ -1,5 +1,6 @@
 #include "CgExampleTriangle.h"
-#include "CgBase/CgEnums.h"
+#include "../CgBase/CgEnums.h"
+#include "../CgBase/CgEnums.h"
 
 CgExampleTriangle::CgExampleTriangle():
 m_type(Cg::TriangleMesh),

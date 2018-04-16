@@ -123,9 +123,17 @@ QSlider *CgQtGui::createSlider()
     return slider;
 }
 
+QSlider *CgQtGui::createSlider(int r,int size,int max,int min,int steps)
+{
+    QSlider *slider = new QSlider(Qt::Vertical);
+    slider->setRange(min, max );
+    slider->setSingleStep(1);
+    slider->setPageStep(1);
+    slider->setTickInterval(1);
+    slider->setTickPosition(QSlider::TicksRight);
+    return slider;
 
-
-
+}
 
 
 void CgQtGui::createOptionPanelExample1(QWidget* parent)

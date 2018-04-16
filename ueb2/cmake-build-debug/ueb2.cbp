@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6"/>
+	<Project>
+		<Option title="ueb2"/>
+		<Option makefile_is_custom="1"/>
+		<Option compiler="gcc"/>
+		<Option virtualFolders="CMake Files\;"/>
+		<Build>
+			<Target title="all">
+				<Option working_dir="/home/don/Schreibtisch/cg uebung/ueb1/ueb2/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/don/Schreibtisch/cg\ uebung/ueb1/ueb2/cmake-build-debug/Makefile&quot;  VERBOSE=1 all"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/don/Schreibtisch/cg\ uebung/ueb1/ueb2/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/don/Schreibtisch/cg\ uebung/ueb1/ueb2/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/don/Schreibtisch/cg\ uebung/ueb1/ueb2/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="rebuild_cache">
+				<Option working_dir="/home/don/Schreibtisch/cg uebung/ueb1/ueb2/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/don/Schreibtisch/cg\ uebung/ueb1/ueb2/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/don/Schreibtisch/cg\ uebung/ueb1/ueb2/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/don/Schreibtisch/cg\ uebung/ueb1/ueb2/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/don/Schreibtisch/cg\ uebung/ueb1/ueb2/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="edit_cache">
+				<Option working_dir="/home/don/Schreibtisch/cg uebung/ueb1/ueb2/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/don/Schreibtisch/cg\ uebung/ueb1/ueb2/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/don/Schreibtisch/cg\ uebung/ueb1/ueb2/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/don/Schreibtisch/cg\ uebung/ueb1/ueb2/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/don/Schreibtisch/cg\ uebung/ueb1/ueb2/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="ueb2">
+				<Option output="/home/don/Schreibtisch/cg uebung/ueb1/ueb2/cmake-build-debug/ueb2" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/don/Schreibtisch/cg uebung/ueb1/ueb2/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/usr/include/c++/5"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/5"/>
+					<Add directory="/usr/include/c++/5/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/5/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/don/Schreibtisch/cg\ uebung/ueb1/ueb2/cmake-build-debug/Makefile&quot;  VERBOSE=1 ueb2"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/don/Schreibtisch/cg\ uebung/ueb1/ueb2/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/don/Schreibtisch/cg\ uebung/ueb1/ueb2/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/don/Schreibtisch/cg\ uebung/ueb1/ueb2/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="ueb2/fast">
+				<Option output="/home/don/Schreibtisch/cg uebung/ueb1/ueb2/cmake-build-debug/ueb2" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/don/Schreibtisch/cg uebung/ueb1/ueb2/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/usr/include/c++/5"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/5"/>
+					<Add directory="/usr/include/c++/5/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/5/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/don/Schreibtisch/cg\ uebung/ueb1/ueb2/cmake-build-debug/Makefile&quot;  VERBOSE=1 ueb2/fast"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/don/Schreibtisch/cg\ uebung/ueb1/ueb2/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/don/Schreibtisch/cg\ uebung/ueb1/ueb2/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/don/Schreibtisch/cg\ uebung/ueb1/ueb2/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+		</Build>
+		<Unit filename="/home/don/Schreibtisch/cg uebung/ueb1/ueb2/CgBase/CgBaseEvent.h">
+			<Option target="ueb2"/>
+		</Unit>
+		<Unit filename="/home/don/Schreibtisch/cg uebung/ueb1/ueb2/CgBase/CgBasePointCloud.h">
+			<Option target="ueb2"/>
+		</Unit>
+		<Unit filename="/home/don/Schreibtisch/cg uebung/ueb1/ueb2/CgBase/CgBasePolygonMesh.h">
+			<Option target="ueb2"/>
+		</Unit>
+		<Unit filename="/home/don/Schreibtisch/cg uebung/ueb1/ueb2/CgBase/CgBasePolyline.h">
+			<Option target="ueb2"/>
+		</Unit>
+		<Unit filename="/home/don/Schreibtisch/cg uebung/ueb1/ueb2/CgBase/CgBaseRenderWindow.h">
+			<Option target="ueb2"/>
+		</Unit>
+		<Unit filename="/home/don/Schreibtisch/cg uebung/ueb1/ueb2/CgBase/CgBaseRenderableObject.h">
+			<Option target="ueb2"/>
+		</Unit>
+		<Unit filename="/home/don/Schreibtisch/cg uebung/ueb1/ueb2/CgBase/CgBaseRenderer.h">
+			<Option target="ueb2"/>
+		</Unit>
+		<Unit filename="/home/don/Schreibtisch/cg uebung/ueb1/ueb2/CgBase/CgBaseSceneControl.h">
+			<Option target="ueb2"/>
+		</Unit>
+		<Unit filename="/home/don/Schreibtisch/cg uebung/ueb1/ueb2/CgBase/CgBaseTriangleMesh.h">
+			<Option target="ueb2"/>
+		</Unit>
+		<Unit filename="/home/don/Schreibtisch/cg uebung/ueb1/ueb2/CgBase/CgEnums.h">
+			<Option target="ueb2"/>
+		</Unit>
+		<Unit filename="/home/don/Schreibtisch/cg uebung/ueb1/ueb2/CgBase/CgObservable.cpp">
+			<Option target="ueb2"/>
+		</Unit>
+		<Unit filename="/home/don/Schreibtisch/cg uebung/ueb1/ueb2/CgBase/CgObservable.h">
+			<Option target="ueb2"/>
+		</Unit>
+		<Unit filename="/home/don/Schreibtisch/cg uebung/ueb1/ueb2/CgBase/CgObserver.h">
+			<Option target="ueb2"/>
+		</Unit>
+		<Unit filename="/home/don/Schreibtisch/cg uebung/ueb1/ueb2/CgEvents/CgKeyEvent.cpp">
+			<Option target="ueb2"/>
+		</Unit>
+		<Unit filename="/home/don/Schreibtisch/cg uebung/ueb1/ueb2/CgEvents/CgKeyEvent.h">
+			<Option target="ueb2"/>
+		</Unit>
+		<Unit filename="/home/don/Schreibtisch/cg uebung/ueb1/ueb2/CgEvents/CgMouseEvent.cpp">
+			<Option target="ueb2"/>
+		</Unit>
+		<Unit filename="/home/don/Schreibtisch/cg uebung/ueb1/ueb2/CgEvents/CgMouseEvent.h">
+			<Option target="ueb2"/>
+		</Unit>
+		<Unit filename="/home/don/Schreibtisch/cg uebung/ueb1/ueb2/CgEvents/CgWindowResizeEvent.cpp">
+			<Option target="ueb2"/>
+		</Unit>
+		<Unit filename="/home/don/Schreibtisch/cg uebung/ueb1/ueb2/CgEvents/CgWindowResizeEvent.h">
+			<Option target="ueb2"/>
+		</Unit>
+		<Unit filename="/home/don/Schreibtisch/cg uebung/ueb1/ueb2/CgQtViewer/CGQtGLRenderWidget.cpp">
+			<Option target="ueb2"/>
+		</Unit>
+		<Unit filename="/home/don/Schreibtisch/cg uebung/ueb1/ueb2/CgQtViewer/CgQtGLRenderWidget.h">
+			<Option target="ueb2"/>
+		</Unit>
+		<Unit filename="/home/don/Schreibtisch/cg uebung/ueb1/ueb2/CgQtViewer/CgQtGLRenderWindow.cpp">
+			<Option target="ueb2"/>
+		</Unit>
+		<Unit filename="/home/don/Schreibtisch/cg uebung/ueb1/ueb2/CgQtViewer/CgQtGLRenderWindow.h">
+			<Option target="ueb2"/>
+		</Unit>
+		<Unit filename="/home/don/Schreibtisch/cg uebung/ueb1/ueb2/CgQtViewer/CgQtGlBufferObject.cpp">
+			<Option target="ueb2"/>
+		</Unit>
+		<Unit filename="/home/don/Schreibtisch/cg uebung/ueb1/ueb2/CgQtViewer/CgQtGlBufferObject.h">
+			<Option target="ueb2"/>
+		</Unit>
+		<Unit filename="/home/don/Schreibtisch/cg uebung/ueb1/ueb2/CgQtViewer/CgQtGui.cpp">
+			<Option target="ueb2"/>
+		</Unit>
+		<Unit filename="/home/don/Schreibtisch/cg uebung/ueb1/ueb2/CgQtViewer/CgQtGui.h">
+			<Option target="ueb2"/>
+		</Unit>
+		<Unit filename="/home/don/Schreibtisch/cg uebung/ueb1/ueb2/CgQtViewer/CgQtMainApplication.cpp">
+			<Option target="ueb2"/>
+		</Unit>
+		<Unit filename="/home/don/Schreibtisch/cg uebung/ueb1/ueb2/CgQtViewer/CgQtMainApplication.h">
+			<Option target="ueb2"/>
+		</Unit>
+		<Unit filename="/home/don/Schreibtisch/cg uebung/ueb1/ueb2/CgQtViewer/CgTrackball.cpp">
+			<Option target="ueb2"/>
+		</Unit>
+		<Unit filename="/home/don/Schreibtisch/cg uebung/ueb1/ueb2/CgQtViewer/CgTrackball.h">
+			<Option target="ueb2"/>
+		</Unit>
+		<Unit filename="/home/don/Schreibtisch/cg uebung/ueb1/ueb2/CgSceneGraph/CgExampleTriangle.cpp">
+			<Option target="ueb2"/>
+		</Unit>
+		<Unit filename="/home/don/Schreibtisch/cg uebung/ueb1/ueb2/CgSceneGraph/CgSceneControl.cpp">
+			<Option target="ueb2"/>
+		</Unit>
+		<Unit filename="/home/don/Schreibtisch/cg uebung/ueb1/ueb2/CgSceneGraph/CgSceneControl.h">
+			<Option target="ueb2"/>
+		</Unit>
+		<Unit filename="/home/don/Schreibtisch/cg uebung/ueb1/ueb2/CgSceneGraph/Mypolyline.cpp">
+			<Option target="ueb2"/>
+		</Unit>
+		<Unit filename="/home/don/Schreibtisch/cg uebung/ueb1/ueb2/CgSceneGraph/Mypolyline.h">
+			<Option target="ueb2"/>
+		</Unit>
+		<Unit filename="/home/don/Schreibtisch/cg uebung/ueb1/ueb2/CgSceneGraph/Zylinder.cpp">
+			<Option target="ueb2"/>
+		</Unit>
+		<Unit filename="/home/don/Schreibtisch/cg uebung/ueb1/ueb2/CgSceneGraph/Zylinder.h">
+			<Option target="ueb2"/>
+		</Unit>
+		<Unit filename="/home/don/Schreibtisch/cg uebung/ueb1/ueb2/CgSceneGraph/kegel.cpp">
+			<Option target="ueb2"/>
+		</Unit>
+		<Unit filename="/home/don/Schreibtisch/cg uebung/ueb1/ueb2/CgSceneGraph/kegel.h">
+			<Option target="ueb2"/>
+		</Unit>
+		<Unit filename="/home/don/Schreibtisch/cg uebung/ueb1/ueb2/CgSceneGraph/meshfactory.cpp">
+			<Option target="ueb2"/>
+		</Unit>
+		<Unit filename="/home/don/Schreibtisch/cg uebung/ueb1/ueb2/CgSceneGraph/meshfactory.h">
+			<Option target="ueb2"/>
+		</Unit>
+		<Unit filename="/home/don/Schreibtisch/cg uebung/ueb1/ueb2/main.cpp">
+			<Option target="ueb2"/>
+		</Unit>
+		<Unit filename="/home/don/Schreibtisch/cg uebung/ueb1/ueb2/moc_CgQtGLRenderWidget.cpp">
+			<Option target="ueb2"/>
+		</Unit>
+		<Unit filename="/home/don/Schreibtisch/cg uebung/ueb1/ueb2/moc_CgQtGui.cpp">
+			<Option target="ueb2"/>
+		</Unit>
+		<Unit filename="/home/don/Schreibtisch/cg uebung/ueb1/ueb2/moc_CgQtMainApplication.cpp">
+			<Option target="ueb2"/>
+		</Unit>
+		<Unit filename="/home/don/Schreibtisch/cg uebung/ueb1/ueb2/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\"/>
+		</Unit>
+	</Project>
+</CodeBlocks_project_file>

@@ -1,0 +1,430 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/don/Schreibtisch/cg uebung/ueb1/ueb2/CgBase/CgBaseEvent.h
+cstdlib
+-
+CgEnums.h
+/home/don/Schreibtisch/cg uebung/ueb1/ueb2/CgBase/CgEnums.h
+
+/home/don/Schreibtisch/cg uebung/ueb1/ueb2/CgBase/CgBasePointCloud.h
+vector
+-
+glm/glm.hpp
+-
+../CgBase/CgBaseRenderableObject.h
+/home/don/Schreibtisch/cg uebung/ueb1/ueb2/CgBase/CgBaseRenderableObject.h
+
+/home/don/Schreibtisch/cg uebung/ueb1/ueb2/CgBase/CgBasePolygonMesh.h
+vector
+-
+glm/glm.hpp
+-
+../CgBase/CgBaseRenderableObject.h
+/home/don/Schreibtisch/cg uebung/ueb1/ueb2/CgBase/CgBaseRenderableObject.h
+
+/home/don/Schreibtisch/cg uebung/ueb1/ueb2/CgBase/CgBasePolyline.h
+vector
+-
+glm/glm.hpp
+-
+CgBaseRenderableObject.h
+/home/don/Schreibtisch/cg uebung/ueb1/ueb2/CgBase/CgBaseRenderableObject.h
+
+/home/don/Schreibtisch/cg uebung/ueb1/ueb2/CgBase/CgBaseRenderableObject.h
+../CgBase/CgEnums.h
+/home/don/Schreibtisch/cg uebung/ueb1/ueb2/CgBase/CgEnums.h
+CgEnums.h
+/home/don/Schreibtisch/cg uebung/ueb1/ueb2/CgBase/CgEnums.h
+
+/home/don/Schreibtisch/cg uebung/ueb1/ueb2/CgBase/CgBaseRenderer.h
+glm/glm.hpp
+-
+
+/home/don/Schreibtisch/cg uebung/ueb1/ueb2/CgBase/CgBaseTriangleMesh.h
+vector
+-
+glm/glm.hpp
+-
+../CgBase/CgBaseRenderableObject.h
+/home/don/Schreibtisch/cg uebung/ueb1/ueb2/CgBase/CgBaseRenderableObject.h
+CgBaseRenderableObject.h
+/home/don/Schreibtisch/cg uebung/ueb1/ueb2/CgBase/CgBaseRenderableObject.h
+
+/home/don/Schreibtisch/cg uebung/ueb1/ueb2/CgBase/CgEnums.h
+
+/home/don/Schreibtisch/cg uebung/ueb1/ueb2/CgBase/CgObservable.cpp
+CgObservable.h
+/home/don/Schreibtisch/cg uebung/ueb1/ueb2/CgBase/CgObservable.h
+CgObserver.h
+/home/don/Schreibtisch/cg uebung/ueb1/ueb2/CgBase/CgObserver.h
+
+/home/don/Schreibtisch/cg uebung/ueb1/ueb2/CgBase/CgObservable.h
+list
+-
+
+/home/don/Schreibtisch/cg uebung/ueb1/ueb2/CgBase/CgObserver.h
+CgBaseEvent.h
+/home/don/Schreibtisch/cg uebung/ueb1/ueb2/CgBase/CgBaseEvent.h
+
+/home/don/Schreibtisch/cg uebung/ueb1/ueb2/CgEvents/CgKeyEvent.cpp
+CgKeyEvent.h
+/home/don/Schreibtisch/cg uebung/ueb1/ueb2/CgEvents/CgKeyEvent.h
+
+/home/don/Schreibtisch/cg uebung/ueb1/ueb2/CgEvents/CgKeyEvent.h
+../CgBase/CgBaseEvent.h
+/home/don/Schreibtisch/cg uebung/ueb1/ueb2/CgBase/CgBaseEvent.h
+../CgBase/CgEnums.h
+/home/don/Schreibtisch/cg uebung/ueb1/ueb2/CgBase/CgEnums.h
+string
+-
+iostream
+-
+
+/home/don/Schreibtisch/cg uebung/ueb1/ueb2/CgEvents/CgMouseEvent.cpp
+CgMouseEvent.h
+/home/don/Schreibtisch/cg uebung/ueb1/ueb2/CgEvents/CgMouseEvent.h
+
+/home/don/Schreibtisch/cg uebung/ueb1/ueb2/CgEvents/CgMouseEvent.h
+../CgBase/CgBaseEvent.h
+/home/don/Schreibtisch/cg uebung/ueb1/ueb2/CgBase/CgBaseEvent.h
+glm/glm.hpp
+/home/don/Schreibtisch/cg uebung/ueb1/ueb2/CgEvents/glm/glm.hpp
+iostream
+-
+
+/home/don/Schreibtisch/cg uebung/ueb1/ueb2/CgEvents/CgWindowResizeEvent.cpp
+CgWindowResizeEvent.h
+/home/don/Schreibtisch/cg uebung/ueb1/ueb2/CgEvents/CgWindowResizeEvent.h
+
+/home/don/Schreibtisch/cg uebung/ueb1/ueb2/CgEvents/CgWindowResizeEvent.h
+../CgBase/CgBaseEvent.h
+/home/don/Schreibtisch/cg uebung/ueb1/ueb2/CgBase/CgBaseEvent.h
+../CgBase/CgEnums.h
+/home/don/Schreibtisch/cg uebung/ueb1/ueb2/CgBase/CgEnums.h
+iostream
+-
+
+/home/don/Schreibtisch/cg uebung/ueb1/ueb2/CgQtViewer/CGQtGLRenderWidget.cpp
+CgQtGLRenderWidget.h
+/home/don/Schreibtisch/cg uebung/ueb1/ueb2/CgQtViewer/CgQtGLRenderWidget.h
+CgQtGlBufferObject.h
+/home/don/Schreibtisch/cg uebung/ueb1/ueb2/CgQtViewer/CgQtGlBufferObject.h
+CgBase/CgBasePolyline.h
+/home/don/Schreibtisch/cg uebung/ueb1/ueb2/CgQtViewer/CgBase/CgBasePolyline.h
+CgBase/CgBasePolygonMesh.h
+/home/don/Schreibtisch/cg uebung/ueb1/ueb2/CgQtViewer/CgBase/CgBasePolygonMesh.h
+CgBase/CgBaseRenderableObject.h
+/home/don/Schreibtisch/cg uebung/ueb1/ueb2/CgQtViewer/CgBase/CgBaseRenderableObject.h
+CgBase/CgEnums.h
+/home/don/Schreibtisch/cg uebung/ueb1/ueb2/CgQtViewer/CgBase/CgEnums.h
+QMouseEvent
+-
+QOpenGLShaderProgram
+-
+QCoreApplication
+-
+math.h
+-
+glm/gtc/matrix_transform.hpp
+-
+glm/gtc/type_ptr.hpp
+-
+glm/ext.hpp
+-
+iostream
+-
+CgBase/CgBaseSceneControl.h
+/home/don/Schreibtisch/cg uebung/ueb1/ueb2/CgQtViewer/CgBase/CgBaseSceneControl.h
+CgTrackball.h
+/home/don/Schreibtisch/cg uebung/ueb1/ueb2/CgQtViewer/CgTrackball.h
+
+/home/don/Schreibtisch/cg uebung/ueb1/ueb2/CgQtViewer/CgQtGLRenderWidget.h
+QOpenGLWidget
+-
+QOpenGLFunctions
+-
+QOpenGLVertexArrayObject
+-
+QOpenGLBuffer
+-
+QMatrix4x4
+-
+../CgBase/CgBaseRenderer.h
+/home/don/Schreibtisch/cg uebung/ueb1/ueb2/CgBase/CgBaseRenderer.h
+glm/glm.hpp
+-
+
+/home/don/Schreibtisch/cg uebung/ueb1/ueb2/CgQtViewer/CgQtGLRenderWindow.cpp
+iostream
+-
+GL/glew.h
+-
+CgQtGLRenderWindow.h
+/home/don/Schreibtisch/cg uebung/ueb1/ueb2/CgQtViewer/CgQtGLRenderWindow.h
+QtOpenGL/QtOpenGL
+-
+
+/home/don/Schreibtisch/cg uebung/ueb1/ueb2/CgQtViewer/CgQtGLRenderWindow.h
+CgBase/CgBaseRenderWindow.h
+/home/don/Schreibtisch/cg uebung/ueb1/ueb2/CgQtViewer/CgBase/CgBaseRenderWindow.h
+GL/gl.h
+-
+QGLFunctions
+-
+
+/home/don/Schreibtisch/cg uebung/ueb1/ueb2/CgQtViewer/CgQtGlBufferObject.cpp
+CgQtGlBufferObject.h
+/home/don/Schreibtisch/cg uebung/ueb1/ueb2/CgQtViewer/CgQtGlBufferObject.h
+../CgBase/CgBasePolyline.h
+/home/don/Schreibtisch/cg uebung/ueb1/ueb2/CgBase/CgBasePolyline.h
+../CgBase/CgBasePolygonMesh.h
+/home/don/Schreibtisch/cg uebung/ueb1/ueb2/CgBase/CgBasePolygonMesh.h
+../CgBase/CgBaseTriangleMesh.h
+/home/don/Schreibtisch/cg uebung/ueb1/ueb2/CgBase/CgBaseTriangleMesh.h
+../CgBase/CgBasePointCloud.h
+/home/don/Schreibtisch/cg uebung/ueb1/ueb2/CgBase/CgBasePointCloud.h
+
+/home/don/Schreibtisch/cg uebung/ueb1/ueb2/CgQtViewer/CgQtGlBufferObject.h
+QOpenGLBuffer
+-
+QOpenGLVertexArrayObject
+-
+QOpenGLShaderProgram
+-
+
+/home/don/Schreibtisch/cg uebung/ueb1/ueb2/CgQtViewer/CgQtGui.cpp
+CgQtGLRenderWidget.h
+/home/don/Schreibtisch/cg uebung/ueb1/ueb2/CgQtViewer/CgQtGLRenderWidget.h
+CgQtGui.h
+/home/don/Schreibtisch/cg uebung/ueb1/ueb2/CgQtViewer/CgQtGui.h
+CgQtMainApplication.h
+/home/don/Schreibtisch/cg uebung/ueb1/ueb2/CgQtViewer/CgQtMainApplication.h
+../CgBase/CgEnums.h
+/home/don/Schreibtisch/cg uebung/ueb1/ueb2/CgBase/CgEnums.h
+../CgEvents/CgMouseEvent.h
+/home/don/Schreibtisch/cg uebung/ueb1/ueb2/CgEvents/CgMouseEvent.h
+../CgEvents/CgKeyEvent.h
+/home/don/Schreibtisch/cg uebung/ueb1/ueb2/CgEvents/CgKeyEvent.h
+../CgEvents/CgWindowResizeEvent.h
+/home/don/Schreibtisch/cg uebung/ueb1/ueb2/CgEvents/CgWindowResizeEvent.h
+QSlider
+-
+QVBoxLayout
+-
+QHBoxLayout
+-
+QKeyEvent
+-
+QPushButton
+-
+QDesktopWidget
+-
+QApplication
+-
+QMessageBox
+-
+QLabel
+-
+QSpinBox
+-
+QCheckBox
+-
+QPushButton
+-
+QGroupBox
+-
+QButtonGroup
+-
+QRadioButton
+-
+QMenuBar
+-
+QActionGroup
+-
+iostream
+-
+
+/home/don/Schreibtisch/cg uebung/ueb1/ueb2/CgQtViewer/CgQtGui.h
+QWidget
+-
+../CgBase/CgObservable.h
+/home/don/Schreibtisch/cg uebung/ueb1/ueb2/CgBase/CgObservable.h
+
+/home/don/Schreibtisch/cg uebung/ueb1/ueb2/CgQtViewer/CgQtMainApplication.cpp
+CgQtMainApplication.h
+/home/don/Schreibtisch/cg uebung/ueb1/ueb2/CgQtViewer/CgQtMainApplication.h
+CgQtGui.h
+/home/don/Schreibtisch/cg uebung/ueb1/ueb2/CgQtViewer/CgQtGui.h
+QMenuBar
+-
+QMenu
+-
+QMessageBox
+-
+iostream
+-
+
+/home/don/Schreibtisch/cg uebung/ueb1/ueb2/CgQtViewer/CgQtMainApplication.h
+QMainWindow
+-
+
+/home/don/Schreibtisch/cg uebung/ueb1/ueb2/CgQtViewer/CgTrackball.cpp
+CgTrackball.h
+/home/don/Schreibtisch/cg uebung/ueb1/ueb2/CgQtViewer/CgTrackball.h
+
+/home/don/Schreibtisch/cg uebung/ueb1/ueb2/CgQtViewer/CgTrackball.h
+vector
+-
+glm/glm.hpp
+-
+glm/gtx/quaternion.hpp
+-
+
+/home/don/Schreibtisch/cg uebung/ueb1/ueb2/CgSceneGraph/CgExampleTriangle.cpp
+CgExampleTriangle.h
+/home/don/Schreibtisch/cg uebung/ueb1/ueb2/CgSceneGraph/CgExampleTriangle.h
+../CgBase/CgEnums.h
+/home/don/Schreibtisch/cg uebung/ueb1/ueb2/CgBase/CgEnums.h
+../CgBase/CgEnums.h
+/home/don/Schreibtisch/cg uebung/ueb1/ueb2/CgBase/CgEnums.h
+
+/home/don/Schreibtisch/cg uebung/ueb1/ueb2/CgSceneGraph/CgSceneControl.cpp
+CgSceneControl.h
+/home/don/Schreibtisch/cg uebung/ueb1/ueb2/CgSceneGraph/CgSceneControl.h
+CgBase/CgEnums.h
+/home/don/Schreibtisch/cg uebung/ueb1/ueb2/CgSceneGraph/CgBase/CgEnums.h
+CgEvents/CgMouseEvent.h
+/home/don/Schreibtisch/cg uebung/ueb1/ueb2/CgSceneGraph/CgEvents/CgMouseEvent.h
+CgEvents/CgKeyEvent.h
+/home/don/Schreibtisch/cg uebung/ueb1/ueb2/CgSceneGraph/CgEvents/CgKeyEvent.h
+CgEvents/CgWindowResizeEvent.h
+/home/don/Schreibtisch/cg uebung/ueb1/ueb2/CgSceneGraph/CgEvents/CgWindowResizeEvent.h
+CgBase/CgBaseRenderer.h
+/home/don/Schreibtisch/cg uebung/ueb1/ueb2/CgSceneGraph/CgBase/CgBaseRenderer.h
+iostream
+-
+glm/gtc/matrix_transform.hpp
+-
+meshfactory.h
+/home/don/Schreibtisch/cg uebung/ueb1/ueb2/CgSceneGraph/meshfactory.h
+Zylinder.h
+/home/don/Schreibtisch/cg uebung/ueb1/ueb2/CgSceneGraph/Zylinder.h
+kegel.h
+/home/don/Schreibtisch/cg uebung/ueb1/ueb2/CgSceneGraph/kegel.h
+
+/home/don/Schreibtisch/cg uebung/ueb1/ueb2/CgSceneGraph/CgSceneControl.h
+CgBase/CgObserver.h
+/home/don/Schreibtisch/cg uebung/ueb1/ueb2/CgSceneGraph/CgBase/CgObserver.h
+CgBase/CgBaseSceneControl.h
+/home/don/Schreibtisch/cg uebung/ueb1/ueb2/CgSceneGraph/CgBase/CgBaseSceneControl.h
+glm/glm.hpp
+-
+CgBase/CgBaseTriangleMesh.h
+-
+Mypolyline.h
+/home/don/Schreibtisch/cg uebung/ueb1/ueb2/CgSceneGraph/Mypolyline.h
+../CgBase/CgBaseTriangleMesh.h
+/home/don/Schreibtisch/cg uebung/ueb1/ueb2/CgBase/CgBaseTriangleMesh.h
+
+/home/don/Schreibtisch/cg uebung/ueb1/ueb2/CgSceneGraph/Mypolyline.cpp
+Mypolyline.h
+/home/don/Schreibtisch/cg uebung/ueb1/ueb2/CgSceneGraph/Mypolyline.h
+
+/home/don/Schreibtisch/cg uebung/ueb1/ueb2/CgSceneGraph/Mypolyline.h
+CgBase/CgBasePolyline.h
+-
+../CgBase/CgBasePolyline.h
+/home/don/Schreibtisch/cg uebung/ueb1/ueb2/CgBase/CgBasePolyline.h
+../CgBase/CgEnums.h
+/home/don/Schreibtisch/cg uebung/ueb1/ueb2/CgBase/CgEnums.h
+
+/home/don/Schreibtisch/cg uebung/ueb1/ueb2/CgSceneGraph/Zylinder.cpp
+Zylinder.h
+/home/don/Schreibtisch/cg uebung/ueb1/ueb2/CgSceneGraph/Zylinder.h
+iostream
+-
+stdlib.h
+-
+
+/home/don/Schreibtisch/cg uebung/ueb1/ueb2/CgSceneGraph/Zylinder.h
+CgBase/CgBaseTriangleMesh.h
+-
+
+/home/don/Schreibtisch/cg uebung/ueb1/ueb2/CgSceneGraph/kegel.cpp
+kegel.h
+/home/don/Schreibtisch/cg uebung/ueb1/ueb2/CgSceneGraph/kegel.h
+iostream
+-
+
+/home/don/Schreibtisch/cg uebung/ueb1/ueb2/CgSceneGraph/kegel.h
+CgBase/CgBaseTriangleMesh.h
+-
+CgBase/CgBasePolyline.h
+-
+
+/home/don/Schreibtisch/cg uebung/ueb1/ueb2/CgSceneGraph/meshfactory.cpp
+meshfactory.h
+/home/don/Schreibtisch/cg uebung/ueb1/ueb2/CgSceneGraph/meshfactory.h
+Zylinder.h
+/home/don/Schreibtisch/cg uebung/ueb1/ueb2/CgSceneGraph/Zylinder.h
+kegel.h
+/home/don/Schreibtisch/cg uebung/ueb1/ueb2/CgSceneGraph/kegel.h
+Mypolyline.h
+/home/don/Schreibtisch/cg uebung/ueb1/ueb2/CgSceneGraph/Mypolyline.h
+
+/home/don/Schreibtisch/cg uebung/ueb1/ueb2/CgSceneGraph/meshfactory.h
+CgBase/CgBaseTriangleMesh.h
+-
+CgBase/CgBasePolyline.h
+-
+
+/home/don/Schreibtisch/cg uebung/ueb1/ueb2/main.cpp
+QApplication
+-
+QDesktopWidget
+-
+QSurfaceFormat
+-
+QCommandLineParser
+-
+QCommandLineOption
+-
+CgQtViewer/CgQtMainApplication.h
+/home/don/Schreibtisch/cg uebung/ueb1/ueb2/CgQtViewer/CgQtMainApplication.h
+CgQtViewer/CgQtGLRenderWidget.h
+/home/don/Schreibtisch/cg uebung/ueb1/ueb2/CgQtViewer/CgQtGLRenderWidget.h
+CgQtViewer/CgQtGui.h
+/home/don/Schreibtisch/cg uebung/ueb1/ueb2/CgQtViewer/CgQtGui.h
+CgSceneGraph/CgSceneControl.h
+/home/don/Schreibtisch/cg uebung/ueb1/ueb2/CgSceneGraph/CgSceneControl.h
+
+/home/don/Schreibtisch/cg uebung/ueb1/ueb2/moc_CgQtGLRenderWidget.cpp
+CgQtViewer/CgQtGLRenderWidget.h
+/home/don/Schreibtisch/cg uebung/ueb1/ueb2/CgQtViewer/CgQtGLRenderWidget.h
+QtCore/qbytearray.h
+-
+QtCore/qmetatype.h
+-
+
+/home/don/Schreibtisch/cg uebung/ueb1/ueb2/moc_CgQtGui.cpp
+CgQtViewer/CgQtGui.h
+/home/don/Schreibtisch/cg uebung/ueb1/ueb2/CgQtViewer/CgQtGui.h
+QtCore/qbytearray.h
+-
+QtCore/qmetatype.h
+-
+
+/home/don/Schreibtisch/cg uebung/ueb1/ueb2/moc_CgQtMainApplication.cpp
+CgQtViewer/CgQtMainApplication.h
+/home/don/Schreibtisch/cg uebung/ueb1/ueb2/CgQtViewer/CgQtMainApplication.h
+QtCore/qbytearray.h
+-
+QtCore/qmetatype.h
+-
+

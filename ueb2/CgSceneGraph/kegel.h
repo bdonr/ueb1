@@ -1,7 +1,7 @@
 #ifndef KEGEL_H
 #define KEGEL_H
 #include <CgBase/CgBaseTriangleMesh.h>
-
+#include <CgBase/CgBasePolyline.h>
 class Kegel: public CgBaseTriangleMesh
 {
 private:
