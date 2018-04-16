@@ -258,7 +258,7 @@ void CgQtGui::slotMySpinBox1Changed()
 
 void CgQtGui::sliderMove(int x){
 std::cout<<x<<"    "<<std::endl;
-setMaximumWidth(400);
+
 
 
 }
