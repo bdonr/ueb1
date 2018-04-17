@@ -13,7 +13,7 @@ CgBaseTriangleMesh* MeshFactory::createZylinder(){
 CgBaseTriangleMesh* MeshFactory::createKegel(){
     return (CgBaseTriangleMesh*) new Kegel(++all_id,0.2,0.3,360);
 }
-CgBasePolyline* MeshFactory::createMyPolyline(std::vector<glm::vec3> x){
-    return (MyPolyline*) new MyPolyline(++all_id,glm::vec3(255,255,0),x);
+MyPolyline* MeshFactory::createMyPolyline(std::vector<glm::vec3> x){
+    return new MyPolyline(++all_id,glm::vec3(255,255,0),x);
 }
 

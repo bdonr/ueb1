@@ -19,14 +19,13 @@ public:
     ~CgSceneControl();
     void handleEvent(CgBaseEvent* e);
     void setRenderer(CgBaseRenderer* r);
-    std::vector<glm::vec3>& rechne(std::vector<glm::vec3> &x);
-    std::vector<glm::vec3> &fuelleAuf(std::vector<glm::vec3>&x);
+
 
     void renderObjects();
 
 private:
     CgBaseRenderer* m_renderer;
-    std::vector<CgBasePolyline*> poly;
+    std::vector<MyPolyline*> poly;
     std::vector<CgBaseTriangleMesh*> m_triangle;
     glm::mat4 m_current_transformation;
     glm::mat4 m_proj_matrix;

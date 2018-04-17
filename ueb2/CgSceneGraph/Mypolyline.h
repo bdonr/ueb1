@@ -15,9 +15,11 @@ public:
     void setColor(const glm::vec3 x);
 
     // CgBasePolyline interface
-    const std::vector<glm::vec3> &getVertices() const;
+    const std::vector<glm::vec3>& getVertices() const;
     glm::vec3 getColor() const;
     unsigned int getLineWidth() const;
+void rechne(std::vector<glm::vec3> x);
+void fuelleAuf(std::vector<glm::vec3> x);
     MyPolyline();
     ~MyPolyline();
 private:

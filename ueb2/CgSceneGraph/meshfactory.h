@@ -2,6 +2,7 @@
 #define MESHFACTORY_H
 #include <CgBase/CgBaseTriangleMesh.h>
 #include <CgBase/CgBasePolyline.h>
+#include "Mypolyline.h"
 class MeshFactory
 {
 
@@ -10,7 +11,7 @@ private: int id;
 public:
     static CgBaseTriangleMesh* createZylinder();
     static CgBaseTriangleMesh* createKegel();
-    static CgBasePolyline* createMyPolyline(std::vector<glm::vec3> x);
+    static MyPolyline* createMyPolyline(std::vector<glm::vec3> x);
 
     MeshFactory();
 
