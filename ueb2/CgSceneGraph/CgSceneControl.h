@@ -19,8 +19,7 @@ public:
     ~CgSceneControl();
     void handleEvent(CgBaseEvent* e);
     void setRenderer(CgBaseRenderer* r);
-
-
+    void resetRender(int d);
     void renderObjects();
 
 private:
@@ -29,6 +28,8 @@ private:
     std::vector<CgBaseTriangleMesh*> m_triangle;
     glm::mat4 m_current_transformation;
     glm::mat4 m_proj_matrix;
+
+
 
 };
 

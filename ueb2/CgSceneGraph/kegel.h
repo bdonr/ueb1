@@ -19,15 +19,20 @@ private:
     std::vector<unsigned int> triangleIndices;
     std::vector<glm::vec3> faceNormals;
     std::vector<glm::vec3> faceColors;
-    int create();
+
     void erstelleRechtEck(glm::vec3 p1, glm::vec3 p2, glm::vec3 p3, int count);
 public:
+    int create();
     Kegel();
     Kegel(int id,float radius, float hoehe,int refine);
 
     // CgBaseRenderableObject interface
     enum Cg::ObjectType getType() const;
     unsigned int getID() const;
+
+    void setRefine(int wert);
+    void setHoehe(float wert);
+
 
     // CgBaseTriangleMesh interface
     const std::vector<glm::vec3> &getVertices() const;

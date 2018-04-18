@@ -47,23 +47,34 @@ int Kegel::create(){
     }
 
     //bottom
-int d;
-    for(d = 0; d<=refine*3;d+=2)
+    int d;
+    for(d = 0; d<=refine*3;d+=1)
     {
 
         //bottom
         triangleIndices.push_back(0);
         triangleIndices.push_back(d+2);
-        triangleIndices.push_back(d+4);
+        triangleIndices.push_back(d+3);
 
         //side
         //3.5-5.7-7.9
         //2.4-4.6-6.8
+        triangleIndices.push_back(d+2);
         triangleIndices.push_back(d+3);
-        triangleIndices.push_back(d+5);
         triangleIndices.push_back(1);
 
     }
     std::cout<<triangleIndices.size()<<" "<<d<<std::endl;
 
 }
+
+void Kegel::setRefine(int wert){
+    this->refine = wert;
+    create();
+}
+void Kegel::setHoehe(float wert){
+    this->hoehe = wert;
+    create();
+}
+
+

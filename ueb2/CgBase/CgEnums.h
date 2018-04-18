@@ -25,8 +25,8 @@ namespace Cg{
     WindowResizeEvent               = 0x0000100,
 
     // unused, may be changed to whatever
-    CgSomeSpecialEvent1             = 0x0001000,
-    CgSomeSpecialEvent2             = 0x0002000,
+    ZylinderChange                  = 0x0001000,
+    KegelChange                     = 0x0002000,
     CgSomeSpecialEvent3             = 0x0004000,
     CgSomeSpecialEvent4             = 0x0008000,
     CgEventGroup1                   = 0x000f000,
@@ -380,8 +380,8 @@ namespace Cg{
     TriangleMesh		=0x00000004,
     PolygonalMesh		=0x00000008,
     //the following are unused, feel free to change
-    SomeOtherType1		=0x00000010,
-    SomeOtherType2		=0x00000020,
+    Zylinder        	=0x00000010,
+    Kegel       		=0x00000020,
     SomeOtherType3		=0x00000040,
     SomeOtherType4		=0x00000080,
     SomeOtherType5      =0x000000A0,

@@ -18,7 +18,8 @@ SOURCES += main.cpp \
     CgSceneGraph/meshfactory.cpp \
     CgSceneGraph/Zylinder.cpp \
     CgSceneGraph/kegel.cpp \
-    CgSceneGraph/Mypolyline.cpp
+    CgSceneGraph/Mypolyline.cpp \
+    CgSceneGraph/slidermoveevent.cpp
 
 HEADERS += \
     CgBase/CgBaseRenderWindow.h \
@@ -45,5 +46,6 @@ HEADERS += \
     CgSceneGraph/meshfactory.h \
     CgSceneGraph/Zylinder.h \
     CgSceneGraph/kegel.h \
-    CgSceneGraph/Mypolyline.h
+    CgSceneGraph/Mypolyline.h \
+    CgSceneGraph/slidermoveevent.h
 

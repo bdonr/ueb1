@@ -120,7 +120,7 @@ private slots:
     void slotLoadMeshFile();
     void sliderMove(int x);
 
-
+    void sliderMoveEvent(int x);
 
 
 

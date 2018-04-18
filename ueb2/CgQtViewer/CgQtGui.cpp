@@ -7,6 +7,8 @@
 #include "../CgEvents/CgMouseEvent.h"
 #include "../CgEvents/CgKeyEvent.h"
 #include "../CgEvents/CgWindowResizeEvent.h"
+#include "../CgSceneGraph/CgSceneControl.h"
+#include "../CgSceneGraph/slidermoveevent.h"
 #include <QSlider>
 #include <QVBoxLayout>
 #include <QHBoxLayout>
@@ -31,6 +33,7 @@
 CgQtGui::CgQtGui(CgQtMainApplication *mw)
     : m_mainWindow(mw)
 {
+
     m_glRenderWidget = new CgQtGLRenderWidget;
 
     connect(m_glRenderWidget, SIGNAL(mouseEvent(QMouseEvent*)), this, SLOT(mouseEvent(QMouseEvent*)));
@@ -162,13 +165,11 @@ void CgQtGui::createOptionPanelExample1(QWidget* parent)
 
     QSlider *mySlider = createSlider();
     tab1_control->addWidget(mySlider);
-    mySlider->setMinimum(1);
-    mySlider->setMaximum(20);
-    mySlider->setValue(10);
-    mySlider->setTickInterval(2);
-   // connect(mySlider, SIGNAL(sliderMoved()), this, SLOT(sliderMove(QMouseEvent* bla)));
-   // connect(mySlider,SIGNAL(valueChanged()),this,SLOT(sliderMove(10);));
-    connect(mySlider, SIGNAL(valueChanged(int)), this, SLOT(sliderMove(int)));
+    mySlider->setMinimum(3);
+    mySlider->setMaximum(100);
+    mySlider->setValue(20);
+    mySlider->setTickInterval(1);
+    connect(mySlider, SIGNAL(sliderMoved(int)), this, SLOT(sliderMoveEvent(int)));
 
 
 
@@ -187,7 +188,6 @@ void CgQtGui::createOptionPanelExample1(QWidget* parent)
     tab1_control->addWidget(myButton1);
 
     connect(myButton1, SIGNAL( clicked() ), this, SLOT(slotMyButton1Pressed()) );
-
 
 
     parent->setLayout(tab1_control);
@@ -334,6 +334,11 @@ void CgQtGui::viewportChanged(int w, int h)
 CgBaseRenderer* CgQtGui::getRenderer()
 {
     return m_glRenderWidget;
+}
+
+void CgQtGui::sliderMoveEvent(int x){
+    CgBaseEvent* ding = new SliderMoveEvent(Cg::KegelChange,x);
+    notifyObserver(ding);
 }
 
 
