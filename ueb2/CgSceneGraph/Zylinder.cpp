@@ -36,6 +36,9 @@ Zylinder::Zylinder(int id,float radius,int hoehe, int refine):id(id),radius(radi
 enum Cg::ObjectType Zylinder::getType() const{
     return this->type;
 }
+void Zylinder::setType(enum Cg::ObjectType type){
+    this->type = type;
+}
 unsigned int Zylinder::getID() const{
     return this->id;
 }
@@ -196,3 +199,14 @@ void Zylinder::erstelleRechtEck(glm::vec3 p1, glm::vec3 p2, glm::vec3 p3, int co
     triangleIndices.push_back(2);
     triangleIndices.push_back(3);
 }
+
+
+void Zylinder::setRefine(int wert){
+    this->refine = wert;
+    create();
+}
+void Zylinder::setHoehe(float wert){
+    this->hoehe = wert;
+    create();
+}
+

@@ -9,7 +9,7 @@ class MeshFactory
 private: int id;
     static int all_id;
 public:
-    static CgBaseTriangleMesh* createZylinder();
+    static CgBaseTriangleMesh* createZylinder(int refine);
     static CgBaseTriangleMesh* createKegel(int refine);
     static MyPolyline* createMyPolyline(std::vector<glm::vec3> x);
 

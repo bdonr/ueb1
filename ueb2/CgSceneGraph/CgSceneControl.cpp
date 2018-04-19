@@ -49,12 +49,17 @@ void CgSceneControl::setRenderer(CgBaseRenderer *r) {
     m_renderer->init(m_triangle.at(0));
 
 }
- void CgSceneControl::resetRender(int d){
+ void CgSceneControl::resetRenderKegel(int d){
+
      Kegel* x = (Kegel*)MeshFactory::createKegel(d);
      this->m_triangle.pop_back();
      this->m_triangle.push_back(x);
+ }
+ void CgSceneControl::resetRenderZylinder(int d){
 
-
+     Kegel* x = (Kegel*)MeshFactory::createZylinder(d);
+     this->m_triangle.pop_back();
+     this->m_triangle.push_back(x);
  }
 
 
@@ -110,18 +115,29 @@ void CgSceneControl::handleEvent(CgBaseEvent *e) {
         int x = ((SliderMoveEvent*)e)->getWert();
         enum Cg::EventType y = ((SliderMoveEvent*)e)->getType();
         for(int i = 0;i<=m_triangle.size()-1;i++){
-            std::cout<<m_triangle.at(i)->getType()<<"bla"<<std::endl;
-            if(m_triangle.at(i)->getType()==4){
-
+            std::cout<<m_triangle.at(i)->getType()<<"type Keg"<<std::endl;
+            if(m_triangle.at(i)->getType() ==Cg::Kegel){
                ((Kegel *) m_triangle.at(i))->setRefine(x);
-                std::cout<<"bla"<<x<<std::endl;
 
-                resetRender(x);
-                m_renderer->init(m_triangle.at(i));
-
+              //  resetRenderKegel(x);
+                m_renderer->redraw();
             }
         }
 
+    }
+
+    if(e->getType() & Cg::ZylinderChange){
+        int x = ((SliderMoveEvent*)e)->getWert();
+        enum Cg::EventType y = ((SliderMoveEvent*)e)->getType();
+        for(int i = 0; i<=m_triangle.size()-1;i++){
+            std::cout<<m_triangle.at(i)->getType()<<"type Zyl"<<std::endl;
+            if(m_triangle.at(i)->getType()==Cg::Zylinder){
+                ((Zylinder *)m_triangle.at(i))->setRefine(x);
+                ((Zylinder *)m_triangle.at(i))->setType(Cg::TriangleMesh);
+              //  resetRenderZylinder(x);
+                m_renderer->redraw();
+            }
+        }
     }
 
 

@@ -29,6 +29,7 @@ public:
     // CgBaseRenderableObject interface
     enum Cg::ObjectType getType() const;
     unsigned int getID() const;
+    void setType(enum Cg::ObjectType type);
 
     // CgBaseTriangleMesh interface
     const std::vector<glm::vec3> &getVertices() const;
@@ -38,6 +39,9 @@ public:
     const std::vector<unsigned int> &getTriangleIndices() const;
     const std::vector<glm::vec3> &getFaceNormals() const;
     const std::vector<glm::vec3> &getFaceColors() const;
+    void setRefine(int wert);
+    void setHoehe(float wert);
+
 };
 
 #endif // Zylinder_H

@@ -7,8 +7,8 @@ MeshFactory::MeshFactory()
 {
 
 }
-CgBaseTriangleMesh* MeshFactory::createZylinder(){
-    return (CgBaseTriangleMesh*) new Zylinder(++all_id,0.1,-1,20);
+CgBaseTriangleMesh* MeshFactory::createZylinder(int refine){
+    return (CgBaseTriangleMesh*) new Zylinder(++all_id,0.1,-1,refine);
 }
 CgBaseTriangleMesh* MeshFactory::createKegel(int refine){
     return (CgBaseTriangleMesh*) new Kegel(++all_id,0.2,0.3,refine);

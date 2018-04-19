@@ -166,7 +166,7 @@ void CgQtGui::createOptionPanelExample1(QWidget* parent)
     QSlider *mySlider = createSlider();
     tab1_control->addWidget(mySlider);
     mySlider->setMinimum(3);
-    mySlider->setMaximum(100);
+    mySlider->setMaximum(60);
     mySlider->setValue(20);
     mySlider->setTickInterval(1);
     connect(mySlider, SIGNAL(sliderMoved(int)), this, SLOT(sliderMoveEvent(int)));
@@ -338,7 +338,9 @@ CgBaseRenderer* CgQtGui::getRenderer()
 
 void CgQtGui::sliderMoveEvent(int x){
     CgBaseEvent* ding = new SliderMoveEvent(Cg::KegelChange,x);
+    CgBaseEvent* fing = new SliderMoveEvent(Cg::ZylinderChange,x);
     notifyObserver(ding);
+    notifyObserver(fing);
 }
 
 
