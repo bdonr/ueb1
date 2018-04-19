@@ -382,9 +382,9 @@ namespace Cg{
     //the following are unused, feel free to change
     Zylinder        	=0x00000010,
     Kegel       		=0x00000020,
-    SomeOtherType3		=0x00000040,
-    SomeOtherType4		=0x00000080,
-    SomeOtherType5      =0x000000A0,
+    addKegelButton		=0x00000040,
+    addZylinderButton		=0x00000080,
+    addBothButton      =0x000000A0,
     SomeOtherType6		=0x00000100,
     SomeOtherType7	    =0x00000200,
     }ObjectType;

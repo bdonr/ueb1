@@ -3,7 +3,7 @@
 
 Kegel::Kegel(int id,float radius,float hoehe, int refine):id(id),radius(radius),hoehe(hoehe),refine(refine)
 {
-type= Cg::TriangleMesh;
+type= Cg::TriangleMesh,intern=Cg::Kegel;
 create();
 }
 
@@ -11,6 +11,15 @@ create();
 enum Cg::ObjectType Kegel::getType() const{
     return this->type;
 }
+
+enum Cg::ObjectType Kegel::getInternType() const{
+    return this->intern;
+}
+
+void Kegel::setType(enum Cg::ObjectType x){
+    this->type=x;
+}
+
 unsigned int Kegel::getID() const{
     return this->id;
 }

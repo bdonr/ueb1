@@ -7,6 +7,7 @@ class Kegel: public CgBaseTriangleMesh
 private:
     // CgBaseRenderableObject interface
     enum Cg::ObjectType type;
+    enum Cg::ObjectType intern;
     unsigned int id;
     float radius;
     float hoehe;
@@ -25,9 +26,12 @@ public:
     int create();
     Kegel();
     Kegel(int id,float radius, float hoehe,int refine);
+    void setType(enum Cg::ObjectType x);
 
     // CgBaseRenderableObject interface
     enum Cg::ObjectType getType() const;
+    enum Cg::ObjectType getInternType() const;
+
     unsigned int getID() const;
 
     void setRefine(int wert);

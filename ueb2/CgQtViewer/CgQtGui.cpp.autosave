@@ -345,14 +345,14 @@ CgBaseRenderer* CgQtGui::getRenderer()
 }
 
 
-void CgQtGui::zylinderSlider(int x){
-    CgBaseEvent* ding = new SliderMoveEvent(Cg::ZylinderChange,);
+void CgQtGui::zylinderSlider(float radius,float hoehe,int refine){
+    CgBaseEvent* ding = new SliderMoveEvent(Cg::ZylinderChange,radius,hoehe,refine);
     notifyObserver(ding);
 
 }
 
-void CgQtGui::kegelSlider(int x){
-    CgBaseEvent* ding = new SliderMoveEvent(Cg::KegelChange,x);
+void CgQtGui::kegelSlider(float radius,float hoehe,int refine);
+    CgBaseEvent* ding = new SliderMoveEvent(Cg::KegelChange,radius,hoehe,refine);
     notifyObserver(ding);
 }
 

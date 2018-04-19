@@ -8,14 +8,19 @@ class SliderMoveEvent: public CgBaseEvent
 {
 private:
     enum Cg::EventType type;
-    int wert;
+    float radius;
+    int refine;
+    float hoehe;
 
 public:
+
      SliderMoveEvent();
-     SliderMoveEvent(enum Cg::EventType type, int wert);
+     SliderMoveEvent(enum Cg::EventType type, int refine,float hoehe,float radius);
     Cg::EventType getType();
     CgBaseEvent *clone();
-    int getWert();
+    int getRefine();
+    float getRadius();
+    float getHoehe();
 };
 
 #endif // SLIDERMOVEEVENT_H

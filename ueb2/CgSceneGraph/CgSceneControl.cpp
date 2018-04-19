@@ -25,7 +25,8 @@ c.push_back(glm::vec3(0.2,0,0));
 c.push_back(glm::vec3(0.2,0.075,0));
 
 poly.push_back(MeshFactory::createMyPolyline(c));
-m_triangle.push_back(MeshFactory::createKegel(10));
+
+m_triangle.push_back(MeshFactory::createKegel(0,.0,0));
 
 //resetRender(100);
 
@@ -49,15 +50,15 @@ void CgSceneControl::setRenderer(CgBaseRenderer *r) {
     m_renderer->init(m_triangle.at(0));
 
 }
- void CgSceneControl::resetRenderKegel(int d){
+ void CgSceneControl::resetRenderKegel(int refine,float hoehe,float radius){
 
-     Kegel* x = (Kegel*)MeshFactory::createKegel(d);
+     Kegel* x = (Kegel*)MeshFactory::createKegel(refine,hoehe,radius);
      this->m_triangle.pop_back();
      this->m_triangle.push_back(x);
  }
- void CgSceneControl::resetRenderZylinder(int d){
+ void CgSceneControl::resetRenderZylinder(int refine,float hoehe,float radius){
 
-     Kegel* x = (Kegel*)MeshFactory::createZylinder(d);
+     Zylinder* x = (Zylinder*)MeshFactory::createZylinder(refine,hoehe,radius);
      this->m_triangle.pop_back();
      this->m_triangle.push_back(x);
  }
@@ -110,33 +111,26 @@ void CgSceneControl::handleEvent(CgBaseEvent *e) {
         m_proj_matrix = glm::perspective(45.0f, (float) (ev->w()) / ev->h(), 0.01f, 100.0f);
 
     }
-
+//(int refine,float hoehe,float radius)
     if (e->getType() & Cg::KegelChange){
-        int x = ((SliderMoveEvent*)e)->getWert();
-        enum Cg::EventType y = ((SliderMoveEvent*)e)->getType();
-        for(int i = 0;i<=m_triangle.size()-1;i++){
-            std::cout<<m_triangle.at(i)->getType()<<"type Keg"<<std::endl;
-            if(m_triangle.at(i)->getType() ==Cg::Kegel){
-               ((Kegel *) m_triangle.at(i))->setRefine(x);
+        int refine= ((SliderMoveEvent*)e)->getRefine();
+        float radius= ((SliderMoveEvent*)e)->getRadius();
+        float hoehe= ((SliderMoveEvent*)e)->getHoehe();
 
-              //  resetRenderKegel(x);
-                m_renderer->redraw();
-            }
+        for(int i = 0;i<=m_triangle.size()-1;i++){
+                resetRenderKegel(refine,hoehe,radius);
+                m_renderer->init(m_triangle.at(i));
         }
 
     }
 
     if(e->getType() & Cg::ZylinderChange){
-        int x = ((SliderMoveEvent*)e)->getWert();
-        enum Cg::EventType y = ((SliderMoveEvent*)e)->getType();
+        int refine= ((SliderMoveEvent*)e)->getRefine();
+        float radius= ((SliderMoveEvent*)e)->getRadius();
+        float hoehe= ((SliderMoveEvent*)e)->getHoehe();
         for(int i = 0; i<=m_triangle.size()-1;i++){
-            std::cout<<m_triangle.at(i)->getType()<<"type Zyl"<<std::endl;
-            if(m_triangle.at(i)->getType()==Cg::Zylinder){
-                ((Zylinder *)m_triangle.at(i))->setRefine(x);
-                ((Zylinder *)m_triangle.at(i))->setType(Cg::TriangleMesh);
-              //  resetRenderZylinder(x);
-                m_renderer->redraw();
-            }
+            resetRenderZylinder(refine,hoehe,radius);
+            m_renderer->init(m_triangle.at(i));
         }
     }
 

@@ -19,8 +19,8 @@ public:
     ~CgSceneControl();
     void handleEvent(CgBaseEvent* e);
     void setRenderer(CgBaseRenderer* r);
-    void resetRenderKegel(int d);
-    void resetRenderZylinder(int d);
+    void resetRenderKegel(int refine,float hoehe,float radius);
+    void resetRenderZylinder(int refine,float hoehe,float radius);
     void renderObjects();
 
 private:

@@ -7,11 +7,11 @@ MeshFactory::MeshFactory()
 {
 
 }
-CgBaseTriangleMesh* MeshFactory::createZylinder(int refine){
-    return (CgBaseTriangleMesh*) new Zylinder(++all_id,0.1,-1,refine);
+CgBaseTriangleMesh* MeshFactory::createZylinder(int refine,float hoehe,float radius){
+    return (CgBaseTriangleMesh*) new Zylinder(++all_id,radius,hoehe,refine);
 }
-CgBaseTriangleMesh* MeshFactory::createKegel(int refine){
-    return (CgBaseTriangleMesh*) new Kegel(++all_id,0.2,0.3,refine);
+CgBaseTriangleMesh* MeshFactory::createKegel(int refine,float hoehe,float radius){
+    return (CgBaseTriangleMesh*) new Kegel(++all_id,radius,hoehe,refine);
 }
 
 MyPolyline* MeshFactory::createMyPolyline(std::vector<glm::vec3> x){

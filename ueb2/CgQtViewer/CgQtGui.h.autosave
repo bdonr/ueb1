@@ -123,15 +123,22 @@ private slots:
     void slotLoadMeshFile();
     void sliderMove(int x);
 
-    void zylinderSlider(int x);
-    void kegelSlider(int x);
+    void zylinderSlider(float radius,float hoehe,int refine);
+    void kegelSlider(float radius,float hoehe,int refine);
    // void pressButton(Cg::ObjectType);
 
-    void changeRadius(int x);
-    void changeHoehe(int x);
-    void changeRefine(int x);
-
-
+    void changeRadiusKegel(int x);
+    
+    void changeHoeheKegel(int x);
+    
+    void changeRefineKegel(int x);
+    
+    void changeRadiusZylinder(int x);
+    
+    void changeHoeheZylinder(int x);
+    
+    void changeRefineZylinder(int x);
+    
 };
 
 #endif

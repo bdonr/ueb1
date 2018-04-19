@@ -4,7 +4,7 @@ SliderMoveEvent::SliderMoveEvent()
 {
 
 }
-SliderMoveEvent::SliderMoveEvent(enum Cg::EventType type, int wert):type(type),wert(wert){
+SliderMoveEvent::SliderMoveEvent(enum Cg::EventType type, int refine,float hoehe,float radius):type(type),refine(refine),hoehe(hoehe),radius(radius){
 
 }
 
@@ -13,9 +13,16 @@ Cg::EventType SliderMoveEvent::getType(){
 }
 
 CgBaseEvent* SliderMoveEvent::clone(){
-    return new SliderMoveEvent(this->type,this->wert);
+    return new SliderMoveEvent(this->type,refine,hoehe,radius);
+}
+int SliderMoveEvent::getRefine(){
+    return refine;
 }
 
-int SliderMoveEvent::getWert(){
-    return this->wert;
+float SliderMoveEvent::getRadius(){
+    return radius;
+}
+
+float SliderMoveEvent::getHoehe(){
+    return hoehe;
 }
