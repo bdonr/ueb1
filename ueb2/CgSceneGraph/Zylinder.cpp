@@ -6,7 +6,7 @@
 
         }*/
 
-Zylinder::Zylinder(int id,float radius,int hoehe, int refine):id(id),radius(radius),hoehe(hoehe),refine(refine)
+Zylinder::Zylinder(int id,float radius,float hoehe, int refine):id(id),radius(radius),hoehe(hoehe),refine(refine)
 {
 
     type= Cg::TriangleMesh;

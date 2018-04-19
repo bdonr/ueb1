@@ -17,8 +17,6 @@ CgSceneControl::CgSceneControl() {
    m_triangle.push_back(MeshFactory::createZylinder());
 */
 std::vector<glm::vec3> c;
-
-
 c.push_back(glm::vec3(0,0,0));
 c.push_back(glm::vec3(0.1,0.075,0));
 c.push_back(glm::vec3(0.2,0,0));
@@ -113,10 +111,11 @@ void CgSceneControl::handleEvent(CgBaseEvent *e) {
     }
 //(int refine,float hoehe,float radius)
     if (e->getType() & Cg::KegelChange){
+
         int refine= ((SliderMoveEvent*)e)->getRefine();
         float radius= ((SliderMoveEvent*)e)->getRadius();
         float hoehe= ((SliderMoveEvent*)e)->getHoehe();
-
+std::cout<<refine<<" "<<radius<<" kegel "<<hoehe<<std::endl;
         for(int i = 0;i<=m_triangle.size()-1;i++){
                 resetRenderKegel(refine,hoehe,radius);
                 m_renderer->init(m_triangle.at(i));
@@ -128,6 +127,7 @@ void CgSceneControl::handleEvent(CgBaseEvent *e) {
         int refine= ((SliderMoveEvent*)e)->getRefine();
         float radius= ((SliderMoveEvent*)e)->getRadius();
         float hoehe= ((SliderMoveEvent*)e)->getHoehe();
+std::cout<<refine<<" "<<radius<<" Zylinder "<<hoehe<<std::endl;
         for(int i = 0; i<=m_triangle.size()-1;i++){
             resetRenderZylinder(refine,hoehe,radius);
             m_renderer->init(m_triangle.at(i));

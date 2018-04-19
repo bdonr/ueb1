@@ -10,7 +10,7 @@ private:
     enum Cg::ObjectType type;
     unsigned int id;
     float radius;
-    int hoehe;
+    float hoehe;
     int refine;
     // CgBaseTriangleMesh interface
     std::vector<glm::vec3> vertices;
@@ -24,7 +24,7 @@ private:
     void erstelleRechtEck(glm::vec3 p1, glm::vec3 p2, glm::vec3 p3, int count);
 public:
     Zylinder();
-    Zylinder(int id,float radius, int hoehe,int refine);
+    Zylinder(int id,float radius, float hoehe,int refine);
 
     // CgBaseRenderableObject interface
     enum Cg::ObjectType getType() const;

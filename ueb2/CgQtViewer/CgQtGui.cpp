@@ -31,7 +31,7 @@
 
 
 CgQtGui::CgQtGui(CgQtMainApplication *mw)
-    : m_mainWindow(mw)
+    : m_mainWindow(mw),radius(0.0),hoehe(0.0),refine(0)
 {
 
     m_glRenderWidget = new CgQtGLRenderWidget;
@@ -117,7 +117,7 @@ CgQtGui::CgQtGui(CgQtMainApplication *mw)
 
 QSlider *CgQtGui::createSlider()
 {
-    QSlider *slider = new QSlider(Qt::Vertical);
+    QSlider *slider = new QSlider(Qt::Horizontal);
     slider->setRange(0, 360 * 16);
     slider->setSingleStep(16);
     slider->setPageStep(15 * 16);
@@ -163,21 +163,53 @@ void CgQtGui::createOptionPanelExample1(QWidget* parent)
     connect(mySpinBox1, SIGNAL(valueChanged(int) ), this, SLOT(slotMySpinBox1Changed()) );
     tab1_control->addWidget(mySpinBox1);
 
-    QSlider *zylinder = createSlider();
-    tab1_control->addWidget(zylinder);
-    zylinder->setMinimum(3);
-    zylinder->setMaximum(60);
-    zylinder->setValue(20);
-    zylinder->setTickInterval(1);
-    connect(zylinder, SIGNAL(sliderMoved(int)), this, SLOT(zylinderSlider(x,int,z)));
+    QSlider *zylinderHoeheSlider = createSlider();
+    tab1_control->addWidget(zylinderHoeheSlider);
+    zylinderHoeheSlider->setMinimum(0);
+    zylinderHoeheSlider->setMaximum(60);
+    zylinderHoeheSlider->setValue(20);
+    zylinderHoeheSlider->setTickInterval(1);
+    connect(zylinderHoeheSlider, SIGNAL(sliderMoved(int)), this, SLOT(changeHoeheZylinder(int)));
 
-    QSlider *kegelslider = createSlider();
-    tab1_control->addWidget(kegelslider);
-    kegelslider->setMinimum(3);
-    kegelslider->setMaximum(60);
-    kegelslider->setValue(20);
-    kegelslider->setTickInterval(1);
-    connect(kegelslider, SIGNAL(sliderMoved(int)), this, SLOT(kegelSlider(int)));
+    QSlider *zylinderRadiusSlider = createSlider();
+    tab1_control->addWidget(zylinderRadiusSlider);
+    zylinderRadiusSlider->setMinimum(0);
+    zylinderRadiusSlider->setMaximum(60);
+    zylinderRadiusSlider->setValue(20);
+    zylinderRadiusSlider->setTickInterval(1);
+    connect(zylinderRadiusSlider, SIGNAL(sliderMoved(int)), this, SLOT(changeRadiusZylinder(int)));
+
+    QSlider *zylinderRefineSlider = createSlider();
+    tab1_control->addWidget(zylinderRefineSlider);
+    zylinderRefineSlider->setMinimum(3);
+    zylinderRefineSlider->setMaximum(60);
+    zylinderRefineSlider->setValue(20);
+    zylinderRefineSlider->setTickInterval(1);
+    connect(zylinderRefineSlider, SIGNAL(sliderMoved(int)), this, SLOT(changeRefineZylinder(int)));
+
+    QSlider *kegelRefineSlider = createSlider();
+    tab1_control->addWidget(kegelRefineSlider);
+    kegelRefineSlider->setMinimum(3);
+    kegelRefineSlider->setMaximum(60);
+    kegelRefineSlider->setValue(20);
+    kegelRefineSlider->setTickInterval(1);
+    connect(kegelRefineSlider, SIGNAL(sliderMoved(int)), this, SLOT(changeRefineKegel(int)));
+
+    QSlider *kegelRadiusSlider = createSlider();
+    tab1_control->addWidget(kegelRadiusSlider);
+    kegelRadiusSlider->setMinimum(0);
+    kegelRadiusSlider->setMaximum(60);
+    kegelRadiusSlider->setValue(20);
+    kegelRadiusSlider->setTickInterval(1);
+    connect(kegelRadiusSlider, SIGNAL(sliderMoved(int)), this, SLOT(changeRadiusKegel(int)));
+
+    QSlider *kegelHoeheSlider = createSlider();
+    tab1_control->addWidget(kegelHoeheSlider);
+    kegelHoeheSlider->setMinimum(0);
+    kegelHoeheSlider->setMaximum(60);
+    kegelHoeheSlider->setValue(20);
+    kegelHoeheSlider->setTickInterval(1);
+    connect(kegelHoeheSlider, SIGNAL(sliderMoved(int)), this, SLOT(changeHoeheKegel(int)));
 
 
 
@@ -345,50 +377,51 @@ CgBaseRenderer* CgQtGui::getRenderer()
 }
 
 
-void CgQtGui::zylinderSlider(int x){
-    CgBaseEvent* ding = new SliderMoveEvent(Cg::ZylinderChange,);
+void CgQtGui::zylinderSlider(){
+    CgBaseEvent* ding = new SliderMoveEvent(Cg::ZylinderChange, refine, hoehe, radius);
     notifyObserver(ding);
 
 }
 
-void CgQtGui::kegelSlider(int x){
-    CgBaseEvent* ding = new SliderMoveEvent(Cg::KegelChange,x);
+void CgQtGui::kegelSlider(){
+    CgBaseEvent* ding = new SliderMoveEvent(Cg::KegelChange, refine, hoehe, radius);
     notifyObserver(ding);
 }
 
 void CgQtGui::changeRadiusKegel(int x){
-    this->radius=x/10*10;
-    kegelSlider(radius,hoehe,refine);
+    this->radius=(x*0.05);
+    kegelSlider();
 
 }
 
 void CgQtGui::changeHoeheKegel(int x){
-    this->hoehe=x/10*10;
-    kegelSlider(radius,hoehe,refine);
+    this->hoehe=(x*0.05);
+    std::cout<<" changehoehkegel "<<hoehe<<std::endl;
+    kegelSlider();
 
 }
 
 void CgQtGui::changeRefineKegel(int x){
     this->refine=x;
-    kegelSlider(radius,hoehe,refine);
+    kegelSlider();
 
 }
 
 void CgQtGui::changeRadiusZylinder(int x){
-    this->radius=x/10*10;
-    kegelSlider(radius,hoehe,refine);
+    this->radius=(x*0.05);
+    zylinderSlider();
 
 }
 
 void CgQtGui::changeHoeheZylinder(int x){
-    this->hoehe=x/10*10;
-    kegelSlider(radius,hoehe,refine);
+    this->hoehe=(x*0.05);
+    zylinderSlider();
 
 }
 
 void CgQtGui::changeRefineZylinder(int x){
     this->refine=x;
-    kegelSlider(radius,hoehe,refine);
+    zylinderSlider();
 
 }
 

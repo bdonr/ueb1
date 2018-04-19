@@ -69,6 +69,8 @@ class CgQtGui : public QWidget,public CgObservable
 public:
     CgQtGui(CgQtMainApplication *mw);
     CgBaseRenderer* getRenderer();
+    void zylinderSlider();
+    void kegelSlider();
 
 
 protected:
@@ -123,13 +125,15 @@ private slots:
     void slotLoadMeshFile();
     void sliderMove(int x);
 
-    void zylinderSlider(int x);
-    void kegelSlider(int x);
-   // void pressButton(Cg::ObjectType);
 
-    void changeRadius(int x);
-    void changeHoehe(int x);
-    void changeRefine(int x);
+   // void pressButton                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           Cg::ObjectType);
+
+    void changeRadiusKegel(int x);
+    void changeHoeheKegel(int x);
+    void changeRefineKegel(int x);
+    void changeRadiusZylinder(int x);
+    void changeHoeheZylinder(int x);
+    void changeRefineZylinder(int x);
 
 
 };
