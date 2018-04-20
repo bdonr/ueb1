@@ -5,15 +5,9 @@ MyPolyline::~MyPolyline(){
 
 }
 MyPolyline::MyPolyline(int id,glm::vec3 color,std::vector<glm::vec3> x):id(id),type(Cg::Polyline){
-
     this->color=color;
     this->width=.1;
     this->vertices=x;
-    fuelleAuf();
-
-
-
-
 }
  const std::vector<glm::vec3>& MyPolyline::getVertices()  const{
      return this->vertices;
@@ -43,7 +37,6 @@ void MyPolyline::setColor(const glm::vec3 x){
 }
 
 void MyPolyline::fuelleAuf(){
-
     int mitte = this->vertices.size() / 2;
     int ende = this->vertices.size();
     std::cout << ende << "," << mitte << std::endl;

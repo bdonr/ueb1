@@ -9,6 +9,7 @@ private:
     int refine;
     int id;
     std::vector <MyPolyline*> polyVec;
+    glm::vec3 vectorMalMatrix(glm::vec3 vector,std::vector<glm::vec3>matrix);
 
 public:
     std::vector <MyPolyline*> getPolyVec();

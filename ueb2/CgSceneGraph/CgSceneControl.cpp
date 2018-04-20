@@ -18,7 +18,7 @@ CgSceneControl::CgSceneControl() {
    m_triangle.push_back(MeshFactory::createZylinder());
 */
 
-poly = MeshFactory::createRotationKoerper(50);
+poly = MeshFactory::createRotationKoerper(30);
 m_triangle.push_back(MeshFactory::createKegel(0,.0,0));
 
 //resetRender(100);
@@ -38,9 +38,9 @@ void CgSceneControl::setRenderer(CgBaseRenderer *r) {
     m_renderer = r;
     m_renderer->setSceneControl(this);
 
-for(int i = 0; i<poly->getPolyVec().size();i++){
+for(int i = 0; i<=poly->getPolyVec().size()-1;i++){
     m_renderer->init(poly->getPolyVec().at(i));
-    std::cout<<poly->getPolyVec().at(i)->getVertices().at(3).y<<std::endl;
+    std::cout<<poly->getPolyVec().at(i)->getVertices().at(2).y<<std::endl;
 }
     m_renderer->init(m_triangle.at(0));
 
@@ -64,8 +64,9 @@ void CgSceneControl::renderObjects() {
     m_renderer->setLookAtMatrix(
             glm::mat4x4(glm::vec4(1.0, 0.0, 0.0, 0.0), glm::vec4(0.0, 1.0, 0.0, 0.0), glm::vec4(0.0, 0.0, 1.0, -1.0),
                         glm::vec4(0.0, 0.0, -1.0, 1.0)));
-    for(int i = 0; i<poly->getPolyVec().size();i++){
-    m_renderer->render(poly->getPolyVec().at(i),m_current_transformation);
+    for(int i = 0; i<poly->getPolyVec().size()-1;i++){
+
+        m_renderer->render(poly->getPolyVec().at(i),m_current_transformation);
     }
 
     if(!m_triangle.empty()){
