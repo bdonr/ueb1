@@ -11,19 +11,14 @@
 #include "Zylinder.h"
 #include "kegel.h"
 
+
 CgSceneControl::CgSceneControl() {
     MeshFactory *v = new MeshFactory();
   /* m_triangle.push_back(MeshFactory::createKegel());
    m_triangle.push_back(MeshFactory::createZylinder());
 */
-std::vector<glm::vec3> c;
-c.push_back(glm::vec3(0,0,0));
-c.push_back(glm::vec3(0.1,0.075,0));
-c.push_back(glm::vec3(0.2,0,0));
-c.push_back(glm::vec3(0.2,0.075,0));
 
-poly.push_back(MeshFactory::createMyPolyline(c));
-
+poly = MeshFactory::createRotationKoerper(50);
 m_triangle.push_back(MeshFactory::createKegel(0,.0,0));
 
 //resetRender(100);
@@ -43,8 +38,10 @@ void CgSceneControl::setRenderer(CgBaseRenderer *r) {
     m_renderer = r;
     m_renderer->setSceneControl(this);
 
-
-    m_renderer->init(poly.at(0));
+for(int i = 0; i<poly->getPolyVec().size();i++){
+    m_renderer->init(poly->getPolyVec().at(i));
+    std::cout<<poly->getPolyVec().at(i)->getVertices().at(3).y<<std::endl;
+}
     m_renderer->init(m_triangle.at(0));
 
 }
@@ -67,8 +64,9 @@ void CgSceneControl::renderObjects() {
     m_renderer->setLookAtMatrix(
             glm::mat4x4(glm::vec4(1.0, 0.0, 0.0, 0.0), glm::vec4(0.0, 1.0, 0.0, 0.0), glm::vec4(0.0, 0.0, 1.0, -1.0),
                         glm::vec4(0.0, 0.0, -1.0, 1.0)));
-
-    m_renderer->render(poly.at(0),m_current_transformation);
+    for(int i = 0; i<poly->getPolyVec().size();i++){
+    m_renderer->render(poly->getPolyVec().at(i),m_current_transformation);
+    }
 
     if(!m_triangle.empty()){
     for(int i =0;i<=m_triangle.size()-1;i++){

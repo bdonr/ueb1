@@ -74,22 +74,7 @@ int Zylinder::create(){
         vertices.push_back(glm::vec3(radius*glm::cos(glm::radians(x)),radius*glm::sin(glm::radians(x)),0));
         vertices.push_back(glm::vec3(radius*glm::cos(glm::radians(x)),radius*glm::sin(glm::radians(x)),hoehe));
     }
- /*
-    vertices.push_back(glm::vec3(0,0,0));
-    vertices.push_back(glm::vec3(0,0,hoehe));
 
-    vertices.push_back(glm::vec3(glm::cos(glm::radians(0.)),glm::sin(glm::radians(0.)),0));
-    vertices.push_back(glm::vec3(glm::cos(glm::radians(0.)),glm::sin(glm::radians(0.)),hoehe));
-
-    vertices.push_back(glm::vec3(glm::cos(glm::radians(60.)),glm::sin(glm::radians(60.)),0));
-    vertices.push_back(glm::vec3(glm::cos(glm::radians(60.)),glm::sin(glm::radians(60.)),hoehe));
-    //----------------
-    vertices.push_back(glm::vec3(glm::cos(glm::radians(120.)),glm::sin(glm::radians(120.)),0));
-    vertices.push_back(glm::vec3(glm::cos(glm::radians(120.)),glm::sin(glm::radians(120.)),hoehe));
-
-    vertices.push_back(glm::vec3(glm::cos(glm::radians(180.)),glm::sin(glm::radians(180.)),0));
-    vertices.push_back(glm::vec3(glm::cos(glm::radians(180.)),glm::sin(glm::radians(180.)),hoehe));
-*/
     //bottom
 int d;
     for(d = 0; d<=refine*3;d+=2)

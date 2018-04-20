@@ -47,11 +47,19 @@ CgQtGui::CgQtGui(CgQtMainApplication *mw)
     QWidget *opt = new QWidget;
     createOptionPanelExample1(opt);
 
+    QWidget *opt2 = new QWidget;
+    createOptionPanelExample3(opt2);
+
     QTabWidget* m_tabs = new QTabWidget();
     m_tabs->addTab(opt,"&My Tab1");
     container->addWidget(m_tabs);
 
-    m_tabs->setMaximumWidth(400);
+
+    m_tabs->addTab(opt2,"&My Tab2");
+    container->addWidget(m_tabs);
+
+
+    m_tabs->setMaximumWidth(300);
 
     container->addWidget(m_glRenderWidget);
 
@@ -284,6 +292,12 @@ void CgQtGui::createOptionPanelExample2(QWidget* parent)
 
 }
 
+void CgQtGui::createOptionPanelExample3(QWidget* parent)
+{
+    QVBoxLayout *tab2_control = new QVBoxLayout();
+    QHBoxLayout *subBox = new QHBoxLayout();
+
+}
 
 
 void CgQtGui::slotButtonGroupSelectionChanged()

@@ -104,6 +104,7 @@ private:
     /* example for usage of qt gui elements, feel free to add what you like */
     void createOptionPanelExample1(QWidget* panel);
     void createOptionPanelExample2(QWidget* panel);
+    void createOptionPanelExample3(QWidget* panel);
     QButtonGroup* myButtonGroup;
     QCheckBox* myCheckBox1;
     QSpinBox* mySpinBox1;

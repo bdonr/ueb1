@@ -5,8 +5,8 @@
 #include "CgBase/CgBaseSceneControl.h"
 #include <glm/glm.hpp>
 #include <CgBase/CgBaseTriangleMesh.h>
-#include "Mypolyline.h"
 #include "CgBase/CgBaseTriangleMesh.h"
+#include "rotationskoerper.h"
 
 class CgBaseEvent;
 class CgBaseRenderer;
@@ -25,7 +25,8 @@ public:
 
 private:
     CgBaseRenderer* m_renderer;
-    std::vector<MyPolyline*> poly;
+
+    RotationsKoerper* poly;
     std::vector<CgBaseTriangleMesh*> m_triangle;
     glm::mat4 m_current_transformation;
     glm::mat4 m_proj_matrix;

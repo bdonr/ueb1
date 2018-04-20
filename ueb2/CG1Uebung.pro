@@ -19,7 +19,8 @@ SOURCES += main.cpp \
     CgSceneGraph/Zylinder.cpp \
     CgSceneGraph/kegel.cpp \
     CgSceneGraph/Mypolyline.cpp \
-    CgSceneGraph/slidermoveevent.cpp
+    CgSceneGraph/slidermoveevent.cpp \
+    CgSceneGraph/rotationskoerper.cpp
 
 HEADERS += \
     CgBase/CgBaseRenderWindow.h \
@@ -47,5 +48,6 @@ HEADERS += \
     CgSceneGraph/Zylinder.h \
     CgSceneGraph/kegel.h \
     CgSceneGraph/Mypolyline.h \
-    CgSceneGraph/slidermoveevent.h
+    CgSceneGraph/slidermoveevent.h \
+    CgSceneGraph/rotationskoerper.h
 

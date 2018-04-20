@@ -9,8 +9,8 @@ MyPolyline::MyPolyline(int id,glm::vec3 color,std::vector<glm::vec3> x):id(id),t
     this->color=color;
     this->width=.1;
     this->vertices=x;
-    fuelleAuf(this->vertices);
-    fuelleAuf(this->vertices);
+    fuelleAuf();
+
 
 
 
@@ -42,7 +42,7 @@ void MyPolyline::setColor(const glm::vec3 x){
     this->color=x;
 }
 
-void MyPolyline::fuelleAuf(std::vector<glm::vec3> x){
+void MyPolyline::fuelleAuf(){
 
     int mitte = this->vertices.size() / 2;
     int ende = this->vertices.size();
@@ -85,14 +85,12 @@ void MyPolyline::fuelleAuf(std::vector<glm::vec3> x){
 
         this->vertices.at(1) = this->vertices.at(0);
     }
-     rechne(x);
+     rechne();
 
 }
 
-void MyPolyline::rechne(std::vector<glm::vec3> x) {
+void MyPolyline::rechne() {
     int laenge = this->vertices.size();
-    int laenge2 = x.size();
-    std::cout<<"laenge 1 "<<laenge<<"laenge 2 "<<laenge2<<std::endl;
     for (int i = 0; i < laenge - 2; i=i+2) {
         this->vertices.at(i).x = (this->vertices.at(i).x*0.75)+(this->vertices.at(i+2).x*0.25);
         this->vertices.at(i).y = (this->vertices.at(i).y*0.75)+(this->vertices.at(i+2).y*0.25);
@@ -103,7 +101,6 @@ void MyPolyline::rechne(std::vector<glm::vec3> x) {
 
 
     }
-
-
 }
+
 
