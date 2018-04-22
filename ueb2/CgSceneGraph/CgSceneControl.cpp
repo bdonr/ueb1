@@ -11,7 +11,7 @@
 #include "Zylinder.h"
 #include "kegel.h"
 
-
+// bla dingens
 CgSceneControl::CgSceneControl() {
   /* m_triangle.push_back(MeshFactory::createKegel());
    m_triangle.push_back(MeshFactory::createZylinder());
