@@ -13,7 +13,6 @@
 
 
 CgSceneControl::CgSceneControl() {
-    MeshFactory *v = new MeshFactory();
   /* m_triangle.push_back(MeshFactory::createKegel());
    m_triangle.push_back(MeshFactory::createZylinder());
 */
@@ -40,7 +39,10 @@ void CgSceneControl::setRenderer(CgBaseRenderer *r) {
 
 for(int i = 0; i<=poly->getPolyVec().size()-1;i++){
     m_renderer->init(poly->getPolyVec().at(i));
-    std::cout<<poly->getPolyVec().at(i)->getVertices().at(2).y<<std::endl;
+}
+
+for(int i = 0; i<=poly->getKeisVec().size()-1;i++){
+    m_renderer->init(poly->getKeisVec().at(i));
 }
     m_renderer->init(m_triangle.at(0));
 
@@ -74,6 +76,11 @@ void CgSceneControl::renderObjects() {
     m_renderer->render(m_triangle.at(i),m_current_transformation);
 
     }
+    std::cout<<poly->getKeisVec().size()<<std::endl;
+    for(int i = 0; i<=poly->getKeisVec().size()-2;i++){
+        m_renderer->render(poly->getKeisVec().at(i),m_current_transformation);
+    }
+
     }
 m_renderer->redraw();
 }

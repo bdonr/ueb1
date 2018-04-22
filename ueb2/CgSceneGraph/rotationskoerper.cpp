@@ -18,18 +18,20 @@ std::vector <MyPolyline*> RotationsKoerper::getPolyVec(){
     return this->polyVec;
 }
 
+std::vector <MyPolyline*> RotationsKoerper::getKeisVec(){
+    return this->kreisVec;
+}
+
+
 void RotationsKoerper::drehe(){
     int count = 0;
 float y = 0;
 std::vector<glm::vec3> vect;
-vect.push_back(glm::vec3(0,0,0));
-vect.push_back(glm::vec3(.5,-.10,0));
-vect.push_back(glm::vec3(.5,.2,0));
+vect.push_back(glm::vec3(0,.0,0));
+vect.push_back(glm::vec3(.1,.25,0));
+vect.push_back(glm::vec3(.2,.5,0));
 
-vect.push_back(glm::vec3(.7,.3,0));
-vect.push_back(glm::vec3(.5,.4,0));
-vect.push_back(glm::vec3(.0,.5,0));
-vect.push_back(glm::vec3(.5,.7,0));
+vect.push_back(glm::vec3(.3,.0,0));
 
     for( float y = 0.0;y<360.0+360.0/refine;y=y+(360.0/refine))
     {
@@ -42,16 +44,18 @@ vect.push_back(glm::vec3(.5,.7,0));
         for(int i=0;i<vect.size();i++){
             std::cout<<"hallo"<<i<<vect.size()-1 <<std::endl;
             vectneu.push_back(vectorMalMatrix(vect.at(i),matrix));
+            //vectneu.at(i)->fuelleAuf();
+
         }
 
         polyVec.push_back(MeshFactory::createMyPolyline(vectneu));
 
+        polyVec.at(count)->fuelleAuf();
         //polyVec.at(count)->fuelleAuf();
-
-        //polyVec.at(count)->fuelleAuf();
-
-    count++;
+        count++;
     }
+    zieheLinieZwischenZweiNachBarSegmenten();
+
 }
 
 glm::vec3 RotationsKoerper::vectorMalMatrix(glm::vec3 vector,std::vector<glm::vec3>matrix){
@@ -62,3 +66,15 @@ glm::vec3 RotationsKoerper::vectorMalMatrix(glm::vec3 vector,std::vector<glm::ve
     return erg;
 }
 
+void RotationsKoerper::zieheLinieZwischenZweiNachBarSegmenten(){
+    //-2 da wir am ende nicht doppelt haben wollen
+     for(int i=0;i<=this->polyVec.size()-2;i++){
+         for(int j=0;j<=this->polyVec.at(i)->getVertices().size()-1;j++){
+            std::vector<glm::vec3> x;
+            std::cout<<j<<std::endl;
+            x.push_back(polyVec.at(i)->getVertices().at(j));
+            x.push_back(polyVec.at(i+1)->getVertices().at(j));
+            this->kreisVec.push_back(MeshFactory::createMyPolyline(x));
+        }
+    }
+}
