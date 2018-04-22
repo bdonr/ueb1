@@ -44,6 +44,9 @@ for(int i = 0; i<=poly->getPolyVec().size()-1;i++){
 for(int i = 0; i<=poly->getKeisVec().size()-1;i++){
     m_renderer->init(poly->getKeisVec().at(i));
 }
+for(int i = 0; i<=poly->getNormale().size()-1;i++){
+    m_renderer->init(poly->getNormale().at(i));
+}
     m_renderer->init(m_triangle.at(0));
 
 }
@@ -79,6 +82,9 @@ void CgSceneControl::renderObjects() {
     std::cout<<poly->getKeisVec().size()<<std::endl;
     for(int i = 0; i<=poly->getKeisVec().size()-2;i++){
         m_renderer->render(poly->getKeisVec().at(i),m_current_transformation);
+    }
+    for(int i = 0; i<=poly->getNormale().size()-1;i++){
+        m_renderer->render(poly->getNormale().at(i),m_current_transformation);
     }
 
     }

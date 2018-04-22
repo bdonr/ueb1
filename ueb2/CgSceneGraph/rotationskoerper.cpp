@@ -21,7 +21,9 @@ std::vector <MyPolyline*> RotationsKoerper::getPolyVec(){
 std::vector <MyPolyline*> RotationsKoerper::getKeisVec(){
     return this->kreisVec;
 }
-
+std::vector<MyPolyline*> RotationsKoerper::getNormale(){
+    return this->normale;
+}
 
 void RotationsKoerper::drehe(){
     int count = 0;
@@ -72,18 +74,58 @@ void RotationsKoerper::zieheLinieZwischenZweiNachBarSegmenten(){
          for(int j=0;j<this->polyVec.at(i)->getVertices().size()-1;j++){
             std::vector<glm::vec3> x;
             std::vector<glm::vec3> y;
+            glm::vec3 a=polyVec.at(i)->getVertices().at(j);
+            glm::vec3 b=polyVec.at(i+1)->getVertices().at(j);
+            glm::vec3 c=polyVec.at(i+1)->getVertices().at(j+1);
+            glm::vec3 d=polyVec.at(i+1)->getVertices().at(j+1);
             std::cout<<j<<std::endl;
-            x.push_back(polyVec.at(i)->getVertices().at(j));
-            x.push_back(polyVec.at(i+1)->getVertices().at(j));
+            x.push_back(a);
+            x.push_back(b);
             this->kreisVec.push_back(MeshFactory::createMyPolyline(x));
-
-            y.push_back(polyVec.at(i)->getVertices().at(j));
-            y.push_back(polyVec.at(i+1)->getVertices().at(j+1));
+            y.push_back(a);
+            y.push_back(c);
             this->kreisVec.push_back(MeshFactory::createMyPolyline(y));
+            std::vector<glm::vec3> k;
+            glm::vec3 mittelpunkt=mittelPunkt(a,b,c);
+            k.push_back(mittelpunkt);
+            k.push_back(normalen(a,b,c,mittelpunkt));
 
-
+            std::vector<glm::vec3> m;
+            glm::vec3 mittelpunkt2=mittelPunkt(a,b,d);
+            this->normale.push_back(MeshFactory::createMyPolyline(k));
+            m.push_back(normalen(a,b,d,mittelpunkt2));
+            this->normale.push_back(MeshFactory::createMyPolyline(m));
         }
     }
 }
+
+glm::vec3 RotationsKoerper::mittelPunkt(glm::vec3 a,glm::vec3 b, glm::vec3 c){
+     glm::vec3 mittelPunkt;
+    mittelPunkt= a+b+c;
+
+     mittelPunkt.x = mittelPunkt.x/3;
+      mittelPunkt.y = mittelPunkt.y/3;
+          mittelPunkt.z = mittelPunkt.z/3;
+     return mittelPunkt;
+}
+
+glm::vec3 RotationsKoerper::normalen(glm::vec3 a,glm::vec3 b, glm::vec3 c,glm::vec3 mittelpunkt){
+        glm::vec3 k;
+
+        glm::vec3 vab = b-a;
+        glm::vec3 vac = c-a;
+
+        k.x = vab.y*vac.z - vac.y*vab.z;
+        k.y = vab.z*vac.x - vac.z*vab.x;
+    k.z = vab.x*vac.y - vac.x*vab.y;
+
+       k.x=k.x+mittelpunkt.x;
+       k.y=k.y+mittelpunkt.y;
+       k.z=k.z+mittelpunkt.z;
+        std::cout<< "kx" <<k.x<< "ky"<< k.y<<"kz"<< k.z<<std::endl;
+       return k;
+}
+
+
 
 
