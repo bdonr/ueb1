@@ -50,7 +50,7 @@ CgQtGui::CgQtGui(CgQtMainApplication *mw)
     createOptionPanelExample3(opt2);
 
     QWidget* opt3 = new QWidget;
-    createOptionPanelExample4(opt3);
+    meineAufgabe3(opt3);
 
     QWidget* opt4 = new QWidget;
     createOptionPanelExample5(opt4);
@@ -406,7 +406,7 @@ void CgQtGui::createOptionPanelExample3(QWidget* parent)
 
 
 }
-void CgQtGui::createOptionPanelExample4(QWidget* parent)
+void CgQtGui::meineAufgabe3(QWidget* parent)
 {
     QVBoxLayout *tab4_control = new QVBoxLayout();
 

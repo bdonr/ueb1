@@ -105,7 +105,7 @@ private:
     void createOptionPanelExample1(QWidget* panel);
     void createOptionPanelExample2(QWidget* panel);
     void createOptionPanelExample3(QWidget* panel);
-    void createOptionPanelExample4(QWidget* panel);
+    void meineAufgabe3(QWidget* panel);
     void createOptionPanelExample5(QWidget* panel);
     QButtonGroup* myButtonGroup;
     QCheckBox* myCheckBox1;
