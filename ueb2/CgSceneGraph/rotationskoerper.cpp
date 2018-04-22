@@ -30,8 +30,8 @@ void RotationsKoerper::drehe(){
 float y = 0;
 std::vector<glm::vec3> vect;
 vect.push_back(glm::vec3(0,.0,0));
-vect.push_back(glm::vec3(.1,.25,0));
-vect.push_back(glm::vec3(.2,.5,0));
+vect.push_back(glm::vec3(.65,.25,0));
+vect.push_back(glm::vec3(1,.0,0));
 
 vect.push_back(glm::vec3(.3,.0,0));
 
@@ -91,9 +91,9 @@ void RotationsKoerper::zieheLinieZwischenZweiNachBarSegmenten(){
             k.push_back(normalen(a,b,c,mittelpunkt));
 
             std::vector<glm::vec3> m;
-            glm::vec3 mittelpunkt2=mittelPunkt(a,b,d);
+            glm::vec3 mittelpunkt2=mittelPunkt(d,b,c);
             this->normale.push_back(MeshFactory::createMyPolyline(k));
-            m.push_back(normalen(a,b,d,mittelpunkt2));
+            m.push_back(normalen(d,b,c,mittelpunkt2));
             this->normale.push_back(MeshFactory::createMyPolyline(m));
         }
     }
