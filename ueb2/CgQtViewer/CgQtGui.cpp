@@ -43,29 +43,37 @@ CgQtGui::CgQtGui(CgQtMainApplication *mw)
     QVBoxLayout *mainLayout = new QVBoxLayout;
     QHBoxLayout *container = new QHBoxLayout;
 
-
     QWidget *opt = new QWidget;
     createOptionPanelExample1(opt);
 
     QWidget *opt2 = new QWidget;
     createOptionPanelExample3(opt2);
 
+    QWidget* opt3 = new QWidget;
+    createOptionPanelExample4(opt3);
+
+    QWidget* opt4 = new QWidget;
+    createOptionPanelExample5(opt4);
+
+
     QTabWidget* m_tabs = new QTabWidget();
-    m_tabs->addTab(opt,"&My Tab1");
+    m_tabs->addTab(opt2,"&Aufgabe 1");
+    m_tabs->addTab(opt,"&Aufgabe 2");
+    m_tabs->addTab(opt3,"&Aufagbe 3");
+    m_tabs->addTab(opt4,"&Aufagbe 4");
+
     container->addWidget(m_tabs);
 
-
-    m_tabs->addTab(opt2,"&My Tab2");
-    container->addWidget(m_tabs);
-
-
-    m_tabs->setMaximumWidth(300);
+    m_tabs->setMinimumWidth(400);
+    m_tabs->setMaximumWidth(600);
 
     container->addWidget(m_glRenderWidget);
 
     QWidget *w = new QWidget;
     w->setLayout(container);
     mainLayout->addWidget(w);
+
+    m_glRenderWidget->setMinimumWidth(600);
 
     setLayout(mainLayout);
     setWindowTitle(tr("Übung Computergrafik 1 -  SoSe 2018"));
@@ -152,24 +160,43 @@ void CgQtGui::createOptionPanelExample1(QWidget* parent)
     QVBoxLayout *tab1_control = new QVBoxLayout();
 
 
-    /*Example for using a label */
 
-    QLabel *options_label = new QLabel("Options");
-    tab1_control->addWidget(options_label);
-    options_label->setAlignment(Qt::AlignCenter);
+    QPushButton* myButton2 = new QPushButton("Zeige Polyline");
+    tab1_control->addWidget(myButton2);
+    connect(myButton2, SIGNAL( clicked() ), this, SLOT(slotMyButton1Pressed()) );
+
+    QLabel* lab7= new QLabel("RotationsKörper Refine");
+    tab1_control->addWidget(lab7);
+
+    QSlider *RotationsSlider = createSlider();
+    tab1_control->addWidget(RotationsSlider);
+    RotationsSlider->setMinimum(0);
+    RotationsSlider->setMaximum(60);
+    RotationsSlider->setValue(20);
+    RotationsSlider->setTickInterval(1);
+  //  connect(RotationsSlider, SIGNAL(sliderMoved(int)), this, SLOT(changeHoeheZylinder(int)));
+
+    QLabel* lab8= new QLabel("RotationsKörper Hoehe");
+    tab1_control->addWidget(lab8);
+
+    QSlider *HoeheSlider = createSlider();
+    tab1_control->addWidget(HoeheSlider);
+    HoeheSlider->setMinimum(0);
+    HoeheSlider->setMaximum(60);
+    HoeheSlider->setValue(20);
+    HoeheSlider->setTickInterval(1);
+  //  connect(RotationsSlider, SIGNAL(sliderMoved(int)), this, SLOT(changeHoeheZylinder(int)));
 
 
-    /*Example for using a spinbox */
+    QLabel* lab9= new QLabel("----------------------------------------------------------------------------------");
+    tab1_control->addWidget(lab9);
 
-    mySpinBox1 = new QSpinBox();
-    tab1_control->addWidget(mySpinBox1);
-    mySpinBox1->setMinimum(1);
-    mySpinBox1->setMaximum(50);
-    mySpinBox1->setValue(3);
-   // mySpinBox1->setSuffix("   suffix");
-   // mySpinBox1->setPrefix("Prefix:  ");
-    connect(mySpinBox1, SIGNAL(valueChanged(int) ), this, SLOT(slotMySpinBox1Changed()) );
-    tab1_control->addWidget(mySpinBox1);
+    QPushButton* myButton1 = new QPushButton("Zeige Normale");
+    tab1_control->addWidget(myButton1);
+    connect(myButton1, SIGNAL( clicked() ), this, SLOT(slotMyButton1Pressed()) );
+
+    QLabel* lab1= new QLabel("Zylinder Hoehe");
+    tab1_control->addWidget(lab1);
 
     QSlider *zylinderHoeheSlider = createSlider();
     tab1_control->addWidget(zylinderHoeheSlider);
@@ -179,6 +206,9 @@ void CgQtGui::createOptionPanelExample1(QWidget* parent)
     zylinderHoeheSlider->setTickInterval(1);
     connect(zylinderHoeheSlider, SIGNAL(sliderMoved(int)), this, SLOT(changeHoeheZylinder(int)));
 
+    QLabel* lab2= new QLabel("Zylinder Radius");
+    tab1_control->addWidget(lab2);
+
     QSlider *zylinderRadiusSlider = createSlider();
     tab1_control->addWidget(zylinderRadiusSlider);
     zylinderRadiusSlider->setMinimum(0);
@@ -186,6 +216,9 @@ void CgQtGui::createOptionPanelExample1(QWidget* parent)
     zylinderRadiusSlider->setValue(20);
     zylinderRadiusSlider->setTickInterval(1);
     connect(zylinderRadiusSlider, SIGNAL(sliderMoved(int)), this, SLOT(changeRadiusZylinder(int)));
+
+    QLabel* lab3= new QLabel("Zylinder Refine");
+    tab1_control->addWidget(lab3);
 
     QSlider *zylinderRefineSlider = createSlider();
     tab1_control->addWidget(zylinderRefineSlider);
@@ -195,6 +228,9 @@ void CgQtGui::createOptionPanelExample1(QWidget* parent)
     zylinderRefineSlider->setTickInterval(1);
     connect(zylinderRefineSlider, SIGNAL(sliderMoved(int)), this, SLOT(changeRefineZylinder(int)));
 
+    QLabel* lab4= new QLabel("Kegel Refine");
+    tab1_control->addWidget(lab4);
+
     QSlider *kegelRefineSlider = createSlider();
     tab1_control->addWidget(kegelRefineSlider);
     kegelRefineSlider->setMinimum(3);
@@ -203,6 +239,9 @@ void CgQtGui::createOptionPanelExample1(QWidget* parent)
     kegelRefineSlider->setTickInterval(1);
     connect(kegelRefineSlider, SIGNAL(sliderMoved(int)), this, SLOT(changeRefineKegel(int)));
 
+    QLabel* lab5= new QLabel("Kegel Radius");
+    tab1_control->addWidget(lab5);
+
     QSlider *kegelRadiusSlider = createSlider();
     tab1_control->addWidget(kegelRadiusSlider);
     kegelRadiusSlider->setMinimum(0);
@@ -210,6 +249,9 @@ void CgQtGui::createOptionPanelExample1(QWidget* parent)
     kegelRadiusSlider->setValue(20);
     kegelRadiusSlider->setTickInterval(1);
     connect(kegelRadiusSlider, SIGNAL(sliderMoved(int)), this, SLOT(changeRadiusKegel(int)));
+
+    QLabel* lab6= new QLabel("Kegel Hoehe");
+    tab1_control->addWidget(lab6);
 
     QSlider *kegelHoeheSlider = createSlider();
     tab1_control->addWidget(kegelHoeheSlider);
@@ -221,21 +263,7 @@ void CgQtGui::createOptionPanelExample1(QWidget* parent)
 
 
 
-    /*Example for using a checkbox */
 
-    myCheckBox1 = new QCheckBox("enable Option 1");
-    myCheckBox1->setCheckable(true);
-    myCheckBox1->setChecked(false);
-    connect(myCheckBox1, SIGNAL( clicked() ), this, SLOT(slotMyCheckBox1Changed()) );
-    tab1_control->addWidget(myCheckBox1);
-
-
-    /*Example for using a button */
-
-    QPushButton* myButton1 = new QPushButton("&drueck mich");
-    tab1_control->addWidget(myButton1);
-
-    connect(myButton1, SIGNAL( clicked() ), this, SLOT(slotMyButton1Pressed()) );
 
 
     parent->setLayout(tab1_control);
@@ -249,7 +277,40 @@ void CgQtGui::createOptionPanelExample2(QWidget* parent)
     QVBoxLayout *tab2_control = new QVBoxLayout();
     QHBoxLayout *subBox = new QHBoxLayout();
 
+    /*Example for using a label */
 
+    QLabel *options_label = new QLabel("Options");
+    tab2_control->addWidget(options_label);
+    options_label->setAlignment(Qt::AlignCenter);
+
+
+    /*Example for using a spinbox */
+
+    mySpinBox1 = new QSpinBox();
+    tab2_control->addWidget(mySpinBox1);
+    mySpinBox1->setMinimum(1);
+    mySpinBox1->setMaximum(50);
+    mySpinBox1->setValue(3);
+   // mySpinBox1->setSuffix("   suffix");
+   // mySpinBox1->setPrefix("Prefix:  ");
+    connect(mySpinBox1, SIGNAL(valueChanged(int) ), this, SLOT(slotMySpinBox1Changed()) );
+    tab2_control->addWidget(mySpinBox1);
+
+    /*Example for using a checkbox */
+
+    myCheckBox1 = new QCheckBox("enable Option 1");
+    myCheckBox1->setCheckable(true);
+    myCheckBox1->setChecked(false);
+    connect(myCheckBox1, SIGNAL( clicked() ), this, SLOT(slotMyCheckBox1Changed()) );
+    tab2_control->addWidget(myCheckBox1);
+
+
+    /*Example for using a button */
+
+    QPushButton* myButton1 = new QPushButton("&drueck mich");
+    tab2_control->addWidget(myButton1);
+
+    connect(myButton1, SIGNAL( clicked() ), this, SLOT(slotMyButton1Pressed()) );
 
     /*Example for using a button group */
 
@@ -294,8 +355,77 @@ void CgQtGui::createOptionPanelExample2(QWidget* parent)
 
 void CgQtGui::createOptionPanelExample3(QWidget* parent)
 {
-    QVBoxLayout *tab2_control = new QVBoxLayout();
-    QHBoxLayout *subBox = new QHBoxLayout();
+    QVBoxLayout *tab3_control = new QVBoxLayout();
+
+    QLabel* lab1= new QLabel("erstelle Wuerfel");
+    tab3_control->addWidget(lab1);
+
+    QPushButton* myButton1 = new QPushButton("Zeige Würfell");
+    tab3_control->addWidget(myButton1);
+    connect(myButton1, SIGNAL( clicked() ), this, SLOT(slotMyButton1Pressed()) );
+
+    QPushButton* myButton2 = new QPushButton("Zeige Normale");
+    tab3_control->addWidget(myButton2);
+    connect(myButton2, SIGNAL( clicked() ), this, SLOT(slotMyButton1Pressed()) );
+
+
+    QLabel* lab2= new QLabel("Rot");
+    tab3_control->addWidget(lab2);
+
+    QSlider *wuerfelRot = createSlider();
+    tab3_control->addWidget(wuerfelRot);
+    wuerfelRot->setMinimum(0);
+    wuerfelRot->setMaximum(255);
+    wuerfelRot->setValue(20);
+    wuerfelRot->setTickInterval(4);
+    //connect(zylinderHoeheSlider, SIGNAL(sliderMoved(int)), this, SLOT(ÄNDERE FARBE));
+
+    QLabel* lab3= new QLabel("Gruen");
+    tab3_control->addWidget(lab3);
+
+    QSlider *wuerfelGruen = createSlider();
+    tab3_control->addWidget(wuerfelGruen);
+    wuerfelGruen->setMinimum(0);
+    wuerfelGruen->setMaximum(255);
+    wuerfelGruen->setValue(20);
+    wuerfelGruen->setTickInterval(4);
+    //connect(zylinderRadiusSlider, SIGNAL(sliderMoved(int)), this, SLOT(ÄNDERE FARBE));
+
+    QLabel* lab4= new QLabel("Blau");
+    tab3_control->addWidget(lab4);
+    QSlider *wuerfelBlau = createSlider();
+    tab3_control->addWidget(wuerfelBlau);
+    wuerfelBlau->setMinimum(3);
+    wuerfelBlau->setMaximum(255);
+    wuerfelBlau->setValue(20);
+    wuerfelBlau->setTickInterval(4);
+    //connect(zylinderRefineSlider, SIGNAL(sliderMoved(int)), this, SLOT(ÄNDERE FARBE));
+
+
+   parent->setLayout(tab3_control);
+
+
+}
+void CgQtGui::createOptionPanelExample4(QWidget* parent)
+{
+    QVBoxLayout *tab4_control = new QVBoxLayout();
+
+    QLabel* lab1= new QLabel("aufgabe 3");
+    tab4_control->addWidget(lab1);
+
+   parent->setLayout(tab4_control);
+
+}
+
+void CgQtGui::createOptionPanelExample5(QWidget* parent)
+{
+    QVBoxLayout *tab5_control = new QVBoxLayout();
+
+    QLabel* lab1= new QLabel("aufgabe 4");
+    tab5_control->addWidget(lab1);
+
+   parent->setLayout(tab5_control);
+
 
 }
 
