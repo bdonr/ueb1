@@ -17,7 +17,7 @@ CgSceneControl::CgSceneControl() {
    m_triangle.push_back(MeshFactory::createZylinder());
 */
 
-poly = MeshFactory::createRotationKoerper(30);
+poly = MeshFactory::createRotationKoerper(6);
 m_triangle.push_back(MeshFactory::createKegel(0,.0,0));
 
 //resetRender(100);

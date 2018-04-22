@@ -51,7 +51,7 @@ vect.push_back(glm::vec3(.3,.0,0));
         polyVec.push_back(MeshFactory::createMyPolyline(vectneu));
 
         polyVec.at(count)->fuelleAuf();
-        //polyVec.at(count)->fuelleAuf();
+        polyVec.at(count)->fuelleAuf();
         count++;
     }
     zieheLinieZwischenZweiNachBarSegmenten();
@@ -69,12 +69,21 @@ glm::vec3 RotationsKoerper::vectorMalMatrix(glm::vec3 vector,std::vector<glm::ve
 void RotationsKoerper::zieheLinieZwischenZweiNachBarSegmenten(){
     //-2 da wir am ende nicht doppelt haben wollen
      for(int i=0;i<=this->polyVec.size()-2;i++){
-         for(int j=0;j<=this->polyVec.at(i)->getVertices().size()-1;j++){
+         for(int j=0;j<this->polyVec.at(i)->getVertices().size()-1;j++){
             std::vector<glm::vec3> x;
+            std::vector<glm::vec3> y;
             std::cout<<j<<std::endl;
             x.push_back(polyVec.at(i)->getVertices().at(j));
             x.push_back(polyVec.at(i+1)->getVertices().at(j));
             this->kreisVec.push_back(MeshFactory::createMyPolyline(x));
+
+            y.push_back(polyVec.at(i)->getVertices().at(j));
+            y.push_back(polyVec.at(i+1)->getVertices().at(j+1));
+            this->kreisVec.push_back(MeshFactory::createMyPolyline(y));
+
+
         }
     }
 }
+
+
