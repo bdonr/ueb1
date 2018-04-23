@@ -173,7 +173,7 @@ void CgQtGui::createOptionPanelExample1(QWidget* parent)
     RotationsSlider->setMaximum(60);
     RotationsSlider->setValue(20);
     RotationsSlider->setTickInterval(1);
-  //  connect(RotationsSlider, SIGNAL(sliderMoved(int)), this, SLOT(changeHoeheZylinder(int)));
+    connect(RotationsSlider, SIGNAL(sliderMoved(int)), this, SLOT(changeRefineRota(int)));
 
     QLabel* lab8= new QLabel("RotationsKörper Hoehe");
     tab1_control->addWidget(lab8);
@@ -236,7 +236,7 @@ void CgQtGui::createOptionPanelExample1(QWidget* parent)
     kegelRefineSlider->setMaximum(60);
     kegelRefineSlider->setValue(20);
     kegelRefineSlider->setTickInterval(1);
-    connect(kegelRefineSlider, SIGNAL(sliderMoved(int)), this, SLOT(changeRefineKegel(int)));
+    connect(kegelRefineSlider, SIGNAL(sliderMoved(int)), this, SLOT(changeRadiusKegel(int)));
 
     QLabel* lab5= new QLabel("Kegel Radius");
     tab1_control->addWidget(lab5);
@@ -522,6 +522,12 @@ CgBaseRenderer* CgQtGui::getRenderer()
 
 void CgQtGui::zylinderSlider(){
     CgBaseEvent* ding = new SliderMoveEvent(Cg::ZylinderChange, refine, hoehe, radius);
+    notifyObserver(ding);
+
+}
+
+void CgQtGui::changeRefineRota(int x){
+    CgBaseEvent* ding = new SliderMoveEvent(Cg::RefineRota, x);
     notifyObserver(ding);
 
 }

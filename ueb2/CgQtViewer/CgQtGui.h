@@ -137,8 +137,7 @@ private slots:
     void changeRadiusZylinder(int x);
     void changeHoeheZylinder(int x);
     void changeRefineZylinder(int x);
-
-
+    void changeRefineRota(int x);
 };
 
 #endif

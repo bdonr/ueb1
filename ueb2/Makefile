@@ -33,7 +33,7 @@ MOVE          = mv -f
 TAR           = tar -cf
 COMPRESS      = gzip -9f
 DISTNAME      = uebung11.0.0
-DISTDIR = /home/leoon/Schreibtisch/sem4/cg1/aufgaben/ueb2_test/eub1\ NEU/ueb1/ueb2/.tmp/uebung11.0.0
+DISTDIR = /home/don/Schreibtisch/cg\ uebung/ueb1/ueb2/.tmp/uebung11.0.0
 LINK          = g++
 LFLAGS        = -m64 -Wl,-O1
 LIBS          = $(SUBLIBS) -L/usr/X11R6/lib64 -lQt5OpenGL -lQt5Widgets -lQt5Gui -lQt5Core -lGL -lpthread 
@@ -382,15 +382,15 @@ compiler_moc_header_clean:
 	-$(DEL_FILE) moc_CgQtGLRenderWidget.cpp moc_CgQtGui.cpp moc_CgQtMainApplication.cpp
 moc_CgQtGLRenderWidget.cpp: CgBase/CgBaseRenderer.h \
 		CgQtViewer/CgQtGLRenderWidget.h
-	/usr/lib/x86_64-linux-gnu/qt5/bin/moc $(DEFINES) -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++-64 -I'/home/leoon/Schreibtisch/sem4/cg1/aufgaben/ueb2_test/eub1 NEU/ueb1/ueb2' -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtOpenGL -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/5 -I/usr/include/x86_64-linux-gnu/c++/5 -I/usr/include/c++/5/backward -I/usr/lib/gcc/x86_64-linux-gnu/5/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include CgQtViewer/CgQtGLRenderWidget.h -o moc_CgQtGLRenderWidget.cpp
+	/usr/lib/x86_64-linux-gnu/qt5/bin/moc $(DEFINES) -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++-64 -I'/home/don/Schreibtisch/cg uebung/ueb1/ueb2' -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtOpenGL -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/5 -I/usr/include/x86_64-linux-gnu/c++/5 -I/usr/include/c++/5/backward -I/usr/lib/gcc/x86_64-linux-gnu/5/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include CgQtViewer/CgQtGLRenderWidget.h -o moc_CgQtGLRenderWidget.cpp
 
 moc_CgQtGui.cpp: CgBase/CgObservable.h \
 		CgBase/CgEnums.h \
 		CgQtViewer/CgQtGui.h
-	/usr/lib/x86_64-linux-gnu/qt5/bin/moc $(DEFINES) -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++-64 -I'/home/leoon/Schreibtisch/sem4/cg1/aufgaben/ueb2_test/eub1 NEU/ueb1/ueb2' -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtOpenGL -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/5 -I/usr/include/x86_64-linux-gnu/c++/5 -I/usr/include/c++/5/backward -I/usr/lib/gcc/x86_64-linux-gnu/5/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include CgQtViewer/CgQtGui.h -o moc_CgQtGui.cpp
+	/usr/lib/x86_64-linux-gnu/qt5/bin/moc $(DEFINES) -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++-64 -I'/home/don/Schreibtisch/cg uebung/ueb1/ueb2' -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtOpenGL -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/5 -I/usr/include/x86_64-linux-gnu/c++/5 -I/usr/include/c++/5/backward -I/usr/lib/gcc/x86_64-linux-gnu/5/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include CgQtViewer/CgQtGui.h -o moc_CgQtGui.cpp
 
 moc_CgQtMainApplication.cpp: CgQtViewer/CgQtMainApplication.h
-	/usr/lib/x86_64-linux-gnu/qt5/bin/moc $(DEFINES) -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++-64 -I'/home/leoon/Schreibtisch/sem4/cg1/aufgaben/ueb2_test/eub1 NEU/ueb1/ueb2' -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtOpenGL -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/5 -I/usr/include/x86_64-linux-gnu/c++/5 -I/usr/include/c++/5/backward -I/usr/lib/gcc/x86_64-linux-gnu/5/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include CgQtViewer/CgQtMainApplication.h -o moc_CgQtMainApplication.cpp
+	/usr/lib/x86_64-linux-gnu/qt5/bin/moc $(DEFINES) -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++-64 -I'/home/don/Schreibtisch/cg uebung/ueb1/ueb2' -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtOpenGL -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/5 -I/usr/include/x86_64-linux-gnu/c++/5 -I/usr/include/c++/5/backward -I/usr/lib/gcc/x86_64-linux-gnu/5/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include CgQtViewer/CgQtMainApplication.h -o moc_CgQtMainApplication.cpp
 
 compiler_moc_source_make_all:
 compiler_moc_source_clean:
@@ -418,8 +418,10 @@ main.o: main.cpp CgQtViewer/CgQtMainApplication.h \
 		CgBase/CgBaseSceneControl.h \
 		CgBase/CgBaseTriangleMesh.h \
 		CgBase/CgBaseRenderableObject.h \
+		CgSceneGraph/rotationskoerper.h \
 		CgSceneGraph/Mypolyline.h \
-		CgBase/CgBasePolyline.h
+		CgBase/CgBasePolyline.h \
+		CgSceneGraph/meshfactory.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o main.cpp
 
 CGQtGLRenderWidget.o: CgQtViewer/CGQtGLRenderWidget.cpp CgQtViewer/CgQtGLRenderWidget.h \
@@ -448,8 +450,10 @@ CgQtGui.o: CgQtViewer/CgQtGui.cpp CgQtViewer/CgQtGLRenderWidget.h \
 		CgBase/CgBaseSceneControl.h \
 		CgBase/CgBaseTriangleMesh.h \
 		CgBase/CgBaseRenderableObject.h \
+		CgSceneGraph/rotationskoerper.h \
 		CgSceneGraph/Mypolyline.h \
 		CgBase/CgBasePolyline.h \
+		CgSceneGraph/meshfactory.h \
 		CgSceneGraph/slidermoveevent.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o CgQtGui.o CgQtViewer/CgQtGui.cpp
 
@@ -477,14 +481,15 @@ CgSceneControl.o: CgSceneGraph/CgSceneControl.cpp CgSceneGraph/CgSceneControl.h 
 		CgBase/CgBaseSceneControl.h \
 		CgBase/CgBaseTriangleMesh.h \
 		CgBase/CgBaseRenderableObject.h \
+		CgSceneGraph/rotationskoerper.h \
 		CgSceneGraph/Mypolyline.h \
 		CgBase/CgBasePolyline.h \
+		CgSceneGraph/meshfactory.h \
 		CgEvents/CgMouseEvent.h \
 		CgEvents/CgKeyEvent.h \
 		CgEvents/CgWindowResizeEvent.h \
 		CgBase/CgBaseRenderer.h \
 		CgSceneGraph/slidermoveevent.h \
-		CgSceneGraph/meshfactory.h \
 		CgSceneGraph/Zylinder.h \
 		CgSceneGraph/kegel.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o CgSceneControl.o CgSceneGraph/CgSceneControl.cpp
@@ -517,6 +522,7 @@ meshfactory.o: CgSceneGraph/meshfactory.cpp CgSceneGraph/meshfactory.h \
 		CgBase/CgEnums.h \
 		CgBase/CgBasePolyline.h \
 		CgSceneGraph/Mypolyline.h \
+		CgSceneGraph/rotationskoerper.h \
 		CgSceneGraph/Zylinder.h \
 		CgSceneGraph/kegel.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o meshfactory.o CgSceneGraph/meshfactory.cpp
@@ -551,7 +557,9 @@ rotationskoerper.o: CgSceneGraph/rotationskoerper.cpp CgSceneGraph/rotationskoer
 		CgSceneGraph/Mypolyline.h \
 		CgBase/CgBasePolyline.h \
 		CgBase/CgBaseRenderableObject.h \
-		CgBase/CgEnums.h
+		CgBase/CgEnums.h \
+		CgSceneGraph/meshfactory.h \
+		CgBase/CgBaseTriangleMesh.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o rotationskoerper.o CgSceneGraph/rotationskoerper.cpp
 
 moc_CgQtGLRenderWidget.o: moc_CgQtGLRenderWidget.cpp 

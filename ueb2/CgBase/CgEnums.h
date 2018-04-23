@@ -27,7 +27,7 @@ namespace Cg{
     // unused, may be changed to whatever
     ZylinderChange                  = 0x0001000,
     KegelChange                     = 0x0002000,
-    CgSomeSpecialEvent3             = 0x0004000,
+    RefineRota                       = 0x0004000,
     CgSomeSpecialEvent4             = 0x0008000,
     CgEventGroup1                   = 0x000f000,
 

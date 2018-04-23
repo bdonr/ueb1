@@ -8,6 +8,10 @@ SliderMoveEvent::SliderMoveEvent(enum Cg::EventType type, int refine,float hoehe
 
 }
 
+SliderMoveEvent::SliderMoveEvent(enum Cg::EventType type, int refine):type(type),refine(refine){
+
+}
+
 Cg::EventType SliderMoveEvent::getType(){
     return type;
 }

@@ -15,6 +15,7 @@ private:
 public:
 
      SliderMoveEvent();
+     SliderMoveEvent(enum Cg::EventType type,int x);
      SliderMoveEvent(enum Cg::EventType type, int refine,float hoehe,float radius);
     Cg::EventType getType();
     CgBaseEvent *clone();

@@ -145,6 +145,24 @@ std::cout<<refine<<" "<<radius<<" Zylinder "<<hoehe<<std::endl;
             m_renderer->init(m_triangle.at(i));
         }
     }
+    if(e->getType() & Cg::RefineRota){
+        int refine= ((SliderMoveEvent*)e)->getRefine();
+        std::cout<<"asdsa"<<refine<<std::endl;
+        delete this->poly;
+        this->poly = MeshFactory::createRotationKoerper(refine);
+
+        for(int i = 0; i<=poly->getKeisVec().size()-1;i++){
+             m_renderer->init(poly->getKeisVec().at(i));
+        }
+
+        for(int i = 0; i<=poly->getNormale().size()-1;i++){
+             m_renderer->init(poly->getNormale().at(i));
+        }
+        for(int i = 0; i<=poly->getPolyVec().size()-1;i++){
+             m_renderer->init(poly->getPolyVec().at(i));
+        }
+
+    }
 
 
     // an der Stelle an der ein Event abgearbeitet ist wird es auch gelöscht.
