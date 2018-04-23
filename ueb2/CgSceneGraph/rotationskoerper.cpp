@@ -50,7 +50,7 @@ vect.push_back(glm::vec3(.3,.0,0));
 
         }
 
-        polyVec.push_back(MeshFactory::createMyPolyline(vectneu));
+        polyVec.push_back(MeshFactory::createMyPolyline(glm::vec3(255,0,0),vectneu));
 
         polyVec.at(count)->fuelleAuf();
         polyVec.at(count)->fuelleAuf();
@@ -81,10 +81,10 @@ void RotationsKoerper::zieheLinieZwischenZweiNachBarSegmenten(){
             std::cout<<j<<std::endl;
             x.push_back(a);
             x.push_back(b);
-            this->kreisVec.push_back(MeshFactory::createMyPolyline(x));
+            this->kreisVec.push_back(MeshFactory::createMyPolyline(glm::vec3(255,0,255),x));
             y.push_back(a);
             y.push_back(c);
-            this->kreisVec.push_back(MeshFactory::createMyPolyline(y));
+            this->kreisVec.push_back(MeshFactory::createMyPolyline(glm::vec3(255,0,255),y));
             std::vector<glm::vec3> k;
             glm::vec3 mittelpunkt=mittelPunkt(a,b,c);
             k.push_back(mittelpunkt);
@@ -92,9 +92,9 @@ void RotationsKoerper::zieheLinieZwischenZweiNachBarSegmenten(){
 
             std::vector<glm::vec3> m;
             glm::vec3 mittelpunkt2=mittelPunkt(d,b,c);
-            this->normale.push_back(MeshFactory::createMyPolyline(k));
+            this->normale.push_back(MeshFactory::createMyPolyline(glm::vec3(0,255,0),k));
             m.push_back(normalen(d,b,c,mittelpunkt2));
-            this->normale.push_back(MeshFactory::createMyPolyline(m));
+            this->normale.push_back(MeshFactory::createMyPolyline(glm::vec3(0,255,0),m));
         }
     }
 }
