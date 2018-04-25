@@ -2,7 +2,7 @@
 #define DREIECK_H
 #include "CgBase/CgBaseTriangleMesh.h"
 
-class Dreieck:public CgBaseTriangleMesh
+class Dreiecke:public CgBaseTriangleMesh
 {
 
 private:
@@ -18,8 +18,8 @@ private:
     std::vector<glm::vec3> fcolor;
 
 public:
-    Dreieck();
-    Dreieck(int id,std::vector<glm::vec3>x);
+    Dreiecke();
+    Dreiecke(int id,std::vector<glm::vec3>x,std::vector<unsigned int>k);
 
     // CgBaseRenderableObject interface
     Cg::ObjectType getType() const;
@@ -33,6 +33,8 @@ public:
     const std::vector<unsigned int> &getTriangleIndices() const;
     const std::vector<glm::vec3> &getFaceNormals() const;
     const std::vector<glm::vec3> &getFaceColors() const;
+    int create();
+
 };
 
 #endif // DREIECK_H

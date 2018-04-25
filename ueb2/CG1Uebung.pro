@@ -22,7 +22,7 @@ SOURCES += main.cpp \
     CgSceneGraph/slidermoveevent.cpp \
     CgSceneGraph/rotationskoerper.cpp \
     CgUtils/ObjLoader.cpp \
-    CgSceneGraph/dreieck.cpp
+    CgSceneGraph/dreiecke.cpp
 
 
 HEADERS += \
@@ -54,4 +54,4 @@ HEADERS += \
     CgSceneGraph/slidermoveevent.h \
     CgSceneGraph/rotationskoerper.h \
 CgUtils/ObjLoader.h \
-    CgSceneGraph/dreieck.h
+    CgSceneGraph/dreiecke.h

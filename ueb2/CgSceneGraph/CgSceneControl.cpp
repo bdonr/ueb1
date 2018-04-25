@@ -10,33 +10,25 @@
 #include "meshfactory.h"
 #include "Zylinder.h"
 #include "kegel.h"
+#include <stdio.h>
+#include <string.h>
 #include "CgUtils/ObjLoader.h"
 // bla dingens
 CgSceneControl::CgSceneControl() {
   /* m_triangle.push_back(MeshFactory::createKegel());
    m_triangle.push_back(MeshFactory::createZylinder());
 */
-std::string file = "/home/don/Schreibtisch/bunny.obj";
+std::string file = "/home/don/Schreibtisch/porsche.obj";
 ObjLoader loader;
+x=1;
 loader.load(file);
-std::vector<glm::vec3> vertices;
+loader.getPositionData(dreickevertices);
 
-std::vector<unsigned int> cords;
-loader.getPositionData(vertices);
-
-loader.getFaceIndexData(cords);
-for(int i =0;i<=cords.size()-3;i=i+3){
-    std::cout<<"coordsi "<<cords.at(i)<<"vert "<<vertices.at(cords.at(i)).z<<std::endl;
-    std::vector<glm::vec3> x;
-    x.push_back(vertices.at(cords.at(i)));
-    x.push_back(vertices.at(cords.at(i+1)));
-    x.push_back(vertices.at(cords.at(i+2)));
-    this->dreiecke.push_back(MeshFactory::createDreieck(x));
-}
+loader.getFaceIndexData(dreieckecords);
+dreiecke = MeshFactory::createDreiecke(dreickevertices,dreieckecords);
 
 
-
-poly = MeshFactory::createRotationKoerper(100);
+poly = MeshFactory::createRotationKoerper(1);
 m_triangle.push_back(MeshFactory::createKegel(0,.0,0));
 
 //resetRender(100);
@@ -60,10 +52,7 @@ void CgSceneControl::setRenderer(CgBaseRenderer *r) {
 for(int i = 0; i<=poly->getPolyVec().size()-1;i++){
     m_renderer->init(poly->getPolyVec().at(i));
 }
-std::cout<<"dreicke: "<<dreiecke.size()<<std::endl;
-    this->m_renderer->init(dreiecke.at(0));
-this->m_renderer->init(dreiecke.at(1));
-this->m_renderer->init(dreiecke.at(3));
+    this->m_renderer->init(dreiecke);
 
 
 
@@ -89,6 +78,11 @@ for(int i = 0; i<=poly->getNormale().size()-1;i++){
      this->m_triangle.push_back(x);
  }
 
+ void CgSceneControl::resetObject(){
+     delete dreiecke;
+     this->dreiecke=(Dreiecke*) MeshFactory::createDreiecke(dreickevertices,dreieckecords);
+ }
+
 
 void CgSceneControl::renderObjects() {
     m_renderer->setProjectionMatrix(m_proj_matrix);
@@ -109,12 +103,11 @@ void CgSceneControl::renderObjects() {
         m_renderer->render(poly->getKeisVec().at(i),m_current_transformation);
     }
     for(int i = 0; i<=poly->getNormale().size()-1;i++){
+
         m_renderer->render(poly->getNormale().at(i),m_current_transformation);
     }
+    m_renderer->render(dreiecke,m_current_transformation);
 
-    for(int i=0;i<3;i++){
-        this->m_renderer->render(dreiecke.at(i),m_current_transformation);
-    }
 
     }
 m_renderer->redraw();
@@ -188,7 +181,37 @@ void CgSceneControl::handleEvent(CgBaseEvent *e) {
         }
 
     }
+    std::cout<<"code key "<<((CgKeyEvent*)e)->getType()<<"spezial "<<Cg::Key_0<<" "<<((CgKeyEvent*)e)->key()<<std::endl;
+    if(((CgKeyEvent*)e)->key()==Cg::Key_Minus){
 
+        m_current_transformation=(glm::mat4x4(glm::vec4(x,0,0,x),
+                                                  glm::vec4(0,x,0,x),
+                                                  glm::vec4(0,0,x,x),
+                                                  glm::vec4(0,0,0,1)));
+        x=x-1;
+
+        if(x==-100){
+            x=1;
+        }
+       // resetObject();
+        m_renderer->init(dreiecke);
+        //m_renderer->render(dreiecke,m_current_transformation);
+    }
+
+    if(((CgKeyEvent*)e)->key()==Cg::Key_Plus){
+
+        m_current_transformation=(glm::mat4x4(glm::vec4(x*1,0,0,0),
+                                                  glm::vec4(0,x*1,0,0),
+                                                  glm::vec4(0,0,x*1,0),
+                                                  glm::vec4(0,0,0,1)));
+        x=x+1;
+        if(x==100){
+            x=1;
+        }
+       // resetObject();
+        m_renderer->init(dreiecke);
+       // m_renderer->render(dreiecke,m_current_transformation);
+    }
 
     // an der Stelle an der ein Event abgearbeitet ist wird es auch gelöscht.
     delete e;

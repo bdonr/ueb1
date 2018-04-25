@@ -2,7 +2,7 @@
 #include "Zylinder.h"
 #include "kegel.h"
 #include "Mypolyline.h"
-#include "dreieck.h"
+#include "dreiecke.h"
 #include <iostream>
 int MeshFactory::all_id=1;
 MeshFactory::MeshFactory()
@@ -26,6 +26,6 @@ RotationsKoerper* MeshFactory::createRotationKoerper(int refine){
 return new RotationsKoerper(++all_id, refine);
 }
 
-Dreieck * MeshFactory::createDreieck(std::vector<glm::vec3> c){
-    return new Dreieck(++all_id,c);
+Dreiecke * MeshFactory::createDreiecke(std::vector<glm::vec3>x,std::vector<unsigned int>k){
+    return new Dreiecke(++all_id,x,k);
 }
