@@ -21,7 +21,8 @@ SOURCES += main.cpp \
     CgSceneGraph/Mypolyline.cpp \
     CgSceneGraph/slidermoveevent.cpp \
     CgSceneGraph/rotationskoerper.cpp \
-    CgUtils/ObjLoader.cpp
+    CgUtils/ObjLoader.cpp \
+    CgSceneGraph/dreieck.cpp
 
 
 HEADERS += \
@@ -52,4 +53,5 @@ HEADERS += \
     CgSceneGraph/Mypolyline.h \
     CgSceneGraph/slidermoveevent.h \
     CgSceneGraph/rotationskoerper.h \
-CgUtils/ObjLoader.h
+CgUtils/ObjLoader.h \
+    CgSceneGraph/dreieck.h

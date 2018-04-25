@@ -10,12 +10,22 @@
 #include "meshfactory.h"
 #include "Zylinder.h"
 #include "kegel.h"
-
+#include "CgUtils/ObjLoader.h"
 // bla dingens
 CgSceneControl::CgSceneControl() {
   /* m_triangle.push_back(MeshFactory::createKegel());
    m_triangle.push_back(MeshFactory::createZylinder());
 */
+std::string file = "bunny.obj";
+ObjLoader loader;
+loader.load(file);
+std::vector<glm::vec3> pos;
+loader.getPositionData(pos);
+
+std::vector<unsigned int> index;
+loader.getFaceIndexData(index);
+
+
 
 poly = MeshFactory::createRotationKoerper(100);
 m_triangle.push_back(MeshFactory::createKegel(0,.0,0));
@@ -36,6 +46,23 @@ CgSceneControl::~CgSceneControl() {
 void CgSceneControl::setRenderer(CgBaseRenderer *r) {
     m_renderer = r;
     m_renderer->setSceneControl(this);
+
+    std::string file = "/home/don/Schreibtisch/bunny.obj";
+    ObjLoader loader;
+    loader.load(file);
+    std::vector<glm::vec3> vertices;
+
+    std::vector<unsigned int> cords;
+    loader.getPositionData(vertices);
+
+    loader.getFaceIndexData(cords);
+    for(int i =0;i<=cords.size()-3;i=i+3){
+        this->dreiecke.push_back(MeshFactory::createDreieck(vertices));
+    }
+    for(int i =0;i<dreiecke.size()-1;i++){
+        this->m_renderer->init(dreiecke.at(i));
+    }
+    m_renderer->redraw();
 
 for(int i = 0; i<=poly->getPolyVec().size()-1;i++){
     m_renderer->init(poly->getPolyVec().at(i));
@@ -79,12 +106,16 @@ void CgSceneControl::renderObjects() {
     m_renderer->render(m_triangle.at(i),m_current_transformation);
 
     }
-    std::cout<<poly->getKeisVec().size()<<std::endl;
     for(int i = 0; i<=poly->getKeisVec().size()-2;i++){
         m_renderer->render(poly->getKeisVec().at(i),m_current_transformation);
     }
     for(int i = 0; i<=poly->getNormale().size()-1;i++){
         m_renderer->render(poly->getNormale().at(i),m_current_transformation);
+    }
+
+
+    for(int i =0;i<dreiecke.size()-1;i++){
+        this->m_renderer->render(dreiecke.at(i),m_current_transformation);
     }
 
     }
@@ -99,7 +130,6 @@ void CgSceneControl::handleEvent(CgBaseEvent *e) {
 
     if (e->getType() & Cg::CgMouseEvent) {
         CgMouseEvent *ev = (CgMouseEvent *) e;
-        std::cout << *ev << std::endl;
 
         // hier kommt jetzt die Abarbeitung des Events hin...
     }
@@ -127,7 +157,6 @@ void CgSceneControl::handleEvent(CgBaseEvent *e) {
         int refine= ((SliderMoveEvent*)e)->getRefine();
         float radius= ((SliderMoveEvent*)e)->getRadius();
         float hoehe= ((SliderMoveEvent*)e)->getHoehe();
-std::cout<<refine<<" "<<radius<<" kegel "<<hoehe<<std::endl;
         for(int i = 0;i<=m_triangle.size()-1;i++){
                 resetRenderKegel(refine,hoehe,radius);
                 m_renderer->init(m_triangle.at(i));
@@ -139,7 +168,6 @@ std::cout<<refine<<" "<<radius<<" kegel "<<hoehe<<std::endl;
         int refine= ((SliderMoveEvent*)e)->getRefine();
         float radius= ((SliderMoveEvent*)e)->getRadius();
         float hoehe= ((SliderMoveEvent*)e)->getHoehe();
-std::cout<<refine<<" "<<radius<<" Zylinder "<<hoehe<<std::endl;
         for(int i = 0; i<=m_triangle.size()-1;i++){
             resetRenderZylinder(refine,hoehe,radius);
             m_renderer->init(m_triangle.at(i));
@@ -147,7 +175,6 @@ std::cout<<refine<<" "<<radius<<" Zylinder "<<hoehe<<std::endl;
     }
     if(e->getType() & Cg::RefineRota){
         int refine= ((SliderMoveEvent*)e)->getRefine();
-        std::cout<<"asdsa"<<refine<<std::endl;
         delete this->poly;
         this->poly = MeshFactory::createRotationKoerper(refine);
 

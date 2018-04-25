@@ -25,7 +25,7 @@ public:
 
 private:
     CgBaseRenderer* m_renderer;
-
+    std::vector<Dreieck*> dreiecke;
     RotationsKoerper* poly;
     std::vector<CgBaseTriangleMesh*> m_triangle;
     glm::mat4 m_current_transformation;

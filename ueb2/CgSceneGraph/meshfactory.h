@@ -4,6 +4,7 @@
 #include <CgBase/CgBasePolyline.h>
 #include "Mypolyline.h"
 #include "rotationskoerper.h"
+#include "dreieck.h"
 class RotationsKoerper;
 class MeshFactory
 {
@@ -15,7 +16,7 @@ public:
     static CgBaseTriangleMesh* createKegel(int refine,float hoehe,float radius);
     static MyPolyline* createMyPolyline(glm::vec3 color,std::vector<glm::vec3> x);
     static RotationsKoerper* createRotationKoerper(int refine);
-
+    static Dreieck * createDreieck(std::vector<glm::vec3>x);
     MeshFactory();
 
 };
