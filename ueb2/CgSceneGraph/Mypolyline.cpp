@@ -8,7 +8,6 @@ MyPolyline::MyPolyline(int id,glm::vec3 color,std::vector<glm::vec3> x):id(id),t
     this->color=color;
     this->width=.1;
     this->vertices=x;
-    std::cout<<"poly"<<this->vertices.size();
 
 }
  const std::vector<glm::vec3>& MyPolyline::getVertices()  const{
@@ -42,12 +41,10 @@ void MyPolyline::setColor(const glm::vec3 x){
 void MyPolyline::fuelleAuf(){
     int mitte = this->vertices.size() / 2;
     int ende = this->vertices.size();
-    std::cout << ende << "," << mitte << std::endl;
     //unterscheide grade und ungerade anzahl
     if (this->vertices.size() % 2 == 0) {
         //hänge an altes array doppelte ab mitte an
         for (int i = mitte; i < ende; i++) {
-            std::cout << "-------" << std::endl;
             this->vertices.push_back(this->vertices.at(i));
             this->vertices.push_back(this->vertices.at(i));
         }
@@ -64,7 +61,6 @@ void MyPolyline::fuelleAuf(){
         //hänge an altes array doppelte ab mitte an
         this->vertices.push_back(this->vertices.at(mitte));
         for (int i = mitte + 1; i < ende; i++) {
-            std::cout << "-------" << std::endl;
             this->vertices.push_back(this->vertices.at(i));
             this->vertices.push_back(this->vertices.at(i));
 
@@ -75,7 +71,6 @@ void MyPolyline::fuelleAuf(){
         for (int i = 2; i < ende - 1; i = i + 2) {
             this->vertices.at(ende - i) = this->vertices.at(mitte - div);
             this->vertices.at(ende - i - 1) = this->vertices.at(mitte - div);
-            std::cout<<"er geht da nicht rein!"<<std::endl;
             div++;
         }
 

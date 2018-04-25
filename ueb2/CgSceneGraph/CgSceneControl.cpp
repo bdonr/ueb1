@@ -16,14 +16,23 @@ CgSceneControl::CgSceneControl() {
   /* m_triangle.push_back(MeshFactory::createKegel());
    m_triangle.push_back(MeshFactory::createZylinder());
 */
-std::string file = "bunny.obj";
+std::string file = "/home/don/Schreibtisch/bunny.obj";
 ObjLoader loader;
 loader.load(file);
-std::vector<glm::vec3> pos;
-loader.getPositionData(pos);
+std::vector<glm::vec3> vertices;
 
-std::vector<unsigned int> index;
-loader.getFaceIndexData(index);
+std::vector<unsigned int> cords;
+loader.getPositionData(vertices);
+
+loader.getFaceIndexData(cords);
+for(int i =0;i<=cords.size()-3;i=i+3){
+    std::cout<<"coordsi "<<cords.at(i)<<"vert "<<vertices.at(cords.at(i)).z<<std::endl;
+    std::vector<glm::vec3> x;
+    x.push_back(vertices.at(cords.at(i)));
+    x.push_back(vertices.at(cords.at(i+1)));
+    x.push_back(vertices.at(cords.at(i+2)));
+    this->dreiecke.push_back(MeshFactory::createDreieck(x));
+}
 
 
 
@@ -47,26 +56,16 @@ void CgSceneControl::setRenderer(CgBaseRenderer *r) {
     m_renderer = r;
     m_renderer->setSceneControl(this);
 
-    std::string file = "/home/don/Schreibtisch/bunny.obj";
-    ObjLoader loader;
-    loader.load(file);
-    std::vector<glm::vec3> vertices;
-
-    std::vector<unsigned int> cords;
-    loader.getPositionData(vertices);
-
-    loader.getFaceIndexData(cords);
-    for(int i =0;i<=cords.size()-3;i=i+3){
-        this->dreiecke.push_back(MeshFactory::createDreieck(vertices));
-    }
-    for(int i =0;i<dreiecke.size()-1;i++){
-        this->m_renderer->init(dreiecke.at(i));
-    }
-    m_renderer->redraw();
 
 for(int i = 0; i<=poly->getPolyVec().size()-1;i++){
     m_renderer->init(poly->getPolyVec().at(i));
 }
+std::cout<<"dreicke: "<<dreiecke.size()<<std::endl;
+    this->m_renderer->init(dreiecke.at(0));
+this->m_renderer->init(dreiecke.at(1));
+this->m_renderer->init(dreiecke.at(3));
+
+
 
 for(int i = 0; i<=poly->getKeisVec().size()-1;i++){
     m_renderer->init(poly->getKeisVec().at(i));
@@ -113,8 +112,7 @@ void CgSceneControl::renderObjects() {
         m_renderer->render(poly->getNormale().at(i),m_current_transformation);
     }
 
-
-    for(int i =0;i<dreiecke.size()-1;i++){
+    for(int i=0;i<3;i++){
         this->m_renderer->render(dreiecke.at(i),m_current_transformation);
     }
 

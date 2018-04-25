@@ -18,7 +18,6 @@ CgBaseTriangleMesh* MeshFactory::createKegel(int refine,float hoehe,float radius
 }
 
 MyPolyline* MeshFactory::createMyPolyline(glm::vec3 color,std::vector<glm::vec3> x){
-        std::cout<<all_id<<" polyline id"<<std::endl;
     return new MyPolyline(++all_id,color,x);
 
 }

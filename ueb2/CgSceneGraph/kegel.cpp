@@ -73,7 +73,6 @@ int Kegel::create(){
         triangleIndices.push_back(1);
 
     }
-    std::cout<<triangleIndices.size()<<" "<<d<<std::endl;
 
 }
 

@@ -44,7 +44,6 @@ vect.push_back(glm::vec3(.3,.0,0));
         std::vector<glm::vec3> vectneu;
        // std::cout<<"hallo"<<vectneu.size()<<std::endl;
         for(int i=0;i<vect.size();i++){
-            std::cout<<"hallo"<<i<<vect.size()-1 <<std::endl;
             vectneu.push_back(vectorMalMatrix(vect.at(i),matrix));
             //vectneu.at(i)->fuelleAuf();
 
@@ -78,7 +77,6 @@ void RotationsKoerper::zieheLinieZwischenZweiNachBarSegmenten(){
             glm::vec3 b=polyVec.at(i+1)->getVertices().at(j);
             glm::vec3 c=polyVec.at(i+1)->getVertices().at(j+1);
             glm::vec3 d=polyVec.at(i+1)->getVertices().at(j+1);
-            std::cout<<j<<std::endl;
             x.push_back(a);
             x.push_back(b);
             this->kreisVec.push_back(MeshFactory::createMyPolyline(glm::vec3(255,0,255),x));
@@ -122,7 +120,6 @@ glm::vec3 RotationsKoerper::normalen(glm::vec3 a,glm::vec3 b, glm::vec3 c,glm::v
        k.x=k.x+mittelpunkt.x;
        k.y=k.y+mittelpunkt.y;
        k.z=k.z+mittelpunkt.z;
-        std::cout<< "kx" <<k.x<< "ky"<< k.y<<"kz"<< k.z<<std::endl;
        return k;
 }
 
