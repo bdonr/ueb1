@@ -7,7 +7,7 @@
 #include <CgBase/CgBaseTriangleMesh.h>
 #include "CgBase/CgBaseTriangleMesh.h"
 #include "rotationskoerper.h"
-
+#include "koordinatensystem.h"
 class CgBaseEvent;
 class CgBaseRenderer;
 class CgExampleTriangle;
@@ -30,9 +30,12 @@ private:
     std::vector<CgBaseTriangleMesh*> m_triangle;
     glm::mat4 m_current_transformation;
     glm::mat4 m_proj_matrix;
+    float s;
     float x;
+    float y;
+    float z;
     std::vector<glm::vec3> dreickevertices;
-
+    Koordinatensystem* koordinatensystem;
     std::vector<unsigned int> dreieckecords;
 
 

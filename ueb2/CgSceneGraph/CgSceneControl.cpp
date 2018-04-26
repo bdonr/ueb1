@@ -19,8 +19,10 @@ CgSceneControl::CgSceneControl() {
    m_triangle.push_back(MeshFactory::createZylinder());
 */
 std::string file = "../CgData/bunny.obj";
+koordinatensystem = new Koordinatensystem();
 ObjLoader loader;
-x=0.5;
+s=0.5;
+y=0.0;
 loader.load(file);
 loader.getPositionData(dreickevertices);
 
@@ -65,6 +67,10 @@ for(int i = 0; i<=poly->getKeisVec().size()-1;i++){
 }
 for(int i = 0; i<=poly->getNormale().size()-1;i++){
     m_renderer->init(poly->getNormale().at(i));
+}
+
+for(int i = 0; i<=koordinatensystem->getPolylines().size()-1;i++){
+    m_renderer->init(koordinatensystem->getPolylines().at(i));
 }
     m_renderer->init(m_triangle.at(0));
 
@@ -112,6 +118,9 @@ void CgSceneControl::renderObjects() {
     }
     m_renderer->render(dreiecke,m_current_transformation);
 
+    for(int i = 0; i<=koordinatensystem->getPolylines().size()-1;i++){
+        m_renderer->render(koordinatensystem->getPolylines().at(i),m_current_transformation);
+    }
 
     }
 m_renderer->redraw();
@@ -187,14 +196,14 @@ void CgSceneControl::handleEvent(CgBaseEvent *e) {
     }
     std::cout<<"code key "<<((CgKeyEvent*)e)->getType()<<"spezial "<<Cg::Key_0<<" "<<((CgKeyEvent*)e)->key()<<std::endl;
     if(((CgKeyEvent*)e)->key()==Cg::Key_Minus){
-        if(x<0.01){
-            x=0.01;
+        if(s<0.01){
+            s=0.01;
         }else{
-            x=x-0.02;
+            s=s-0.02;
         }
-            m_current_transformation=(glm::mat4x4(glm::vec4(x,0,0,0),
-                                                  glm::vec4(0,x,0,0),
-                                                  glm::vec4(0,0,x,0),
+            m_current_transformation=(glm::mat4x4(glm::vec4(s,0,0,0),
+                                                  glm::vec4(0,s,0,0),
+                                                  glm::vec4(0,0,s,0),
                                                   glm::vec4(0,0,0,1)));
         m_renderer->init(dreiecke);
         m_renderer->render(dreiecke, m_current_transformation);
@@ -213,15 +222,15 @@ void CgSceneControl::handleEvent(CgBaseEvent *e) {
     }
 
     if(((CgKeyEvent*)e)->key()==Cg::Key_Plus){
-        if(x>0.9){
-            x=0.9;
+        if(s>0.9){
+            s=0.9;
         }else{
-            x=x+0.02;
+            s=s+0.02;
         }
 
-        m_current_transformation=(glm::mat4x4(glm::vec4(x,0,0,0),
-                                              glm::vec4(0,x,0,0),
-                                              glm::vec4(0,0,x,0),
+        m_current_transformation=(glm::mat4x4(glm::vec4(s,0,0,0),
+                                              glm::vec4(0,s,0,0),
+                                              glm::vec4(0,0,s,0),
                                               glm::vec4(0,0,0,1)));
     m_renderer->init(dreiecke);
     m_renderer->render(dreiecke, m_current_transformation);
@@ -236,6 +245,48 @@ void CgSceneControl::handleEvent(CgBaseEvent *e) {
         m_renderer->init(dreiecke);
         //renderObjects();
         m_renderer->render(dreiecke,m_current_transformation);
+    }
+
+    if(((CgKeyEvent*)e)->key()==Cg::Key_Y){
+        m_current_transformation=m_current_transformation*(glm::mat4x4(glm::vec4(glm::cos(glm::radians(y)),0,glm::sin(glm::radians(y)),0),
+                                              glm::vec4(0,1,0,0),
+                                              glm::vec4((-1)*glm::sin(glm::radians(y)),0,glm::cos(glm::radians(y)),0),
+                                              glm::vec4(0,0,0,1)));
+        if(y==3){
+            y=0;
+        }
+        else{
+            y=y+.5;
+        }
+
+    }
+
+    if(((CgKeyEvent*)e)->key()==Cg::Key_X){
+        m_current_transformation=m_current_transformation*(glm::mat4x4(glm::vec4(1,0,0,0),
+                                              glm::vec4(0,glm::cos(glm::radians(x)),(-1)*glm::sin(glm::radians(x)),0),
+                                              glm::vec4(0,glm::sin(glm::radians(x)),glm::cos(glm::radians(x)),0),
+                                              glm::vec4(0,0,0,1)));
+        if(x==3){
+            x=0;
+        }
+        else{
+            x=x+0.5;
+        }
+
+    }
+
+    if(((CgKeyEvent*)e)->key()==Cg::Key_Z){
+        m_current_transformation=m_current_transformation*(glm::mat4x4(glm::vec4(glm::cos(glm::radians(z)),(-1)*glm::sin(glm::radians(z)),0,0),
+                                              glm::vec4(glm::sin(glm::radians(z)),glm::cos(glm::radians(z)),0,0),
+                                              glm::vec4(0,0,1,0),
+                                              glm::vec4(0,0,0,1)));
+        if(z==3){
+            z=0;
+        }
+        else{
+            z=z+0.5;
+        }
+
     }
 
     // an der Stelle an der ein Event abgearbeitet ist wird es auch gelöscht.

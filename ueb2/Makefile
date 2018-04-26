@@ -66,7 +66,8 @@ SOURCES       = main.cpp \
 		CgSceneGraph/slidermoveevent.cpp \
 		CgSceneGraph/rotationskoerper.cpp \
 		CgUtils/ObjLoader.cpp \
-		CgSceneGraph/dreiecke.cpp moc_CgQtGLRenderWidget.cpp \
+		CgSceneGraph/dreiecke.cpp \
+		CgSceneGraph/koordinatensystem.cpp moc_CgQtGLRenderWidget.cpp \
 		moc_CgQtGui.cpp \
 		moc_CgQtMainApplication.cpp
 OBJECTS       = main.o \
@@ -88,6 +89,7 @@ OBJECTS       = main.o \
 		rotationskoerper.o \
 		ObjLoader.o \
 		dreiecke.o \
+		koordinatensystem.o \
 		moc_CgQtGLRenderWidget.o \
 		moc_CgQtGui.o \
 		moc_CgQtMainApplication.o
@@ -175,7 +177,8 @@ DIST          = /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
 		CgSceneGraph/slidermoveevent.h \
 		CgSceneGraph/rotationskoerper.h \
 		CgUtils/ObjLoader.h \
-		CgSceneGraph/dreiecke.h main.cpp \
+		CgSceneGraph/dreiecke.h \
+		CgSceneGraph/koordinatensystem.h main.cpp \
 		CgQtViewer/CGQtGLRenderWidget.cpp \
 		CgQtViewer/CgQtGui.cpp \
 		CgBase/CgObservable.cpp \
@@ -193,7 +196,8 @@ DIST          = /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
 		CgSceneGraph/slidermoveevent.cpp \
 		CgSceneGraph/rotationskoerper.cpp \
 		CgUtils/ObjLoader.cpp \
-		CgSceneGraph/dreiecke.cpp
+		CgSceneGraph/dreiecke.cpp \
+		CgSceneGraph/koordinatensystem.cpp
 QMAKE_TARGET  = uebung1
 DESTDIR       = #avoid trailing-slash linebreak
 TARGET        = uebung1
@@ -361,8 +365,8 @@ dist: distdir FORCE
 distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
-	$(COPY_FILE) --parents CgBase/CgBaseRenderWindow.h CgQtViewer/CgQtGLRenderWidget.h CgQtViewer/CgQtGui.h CgBase/CgObserver.h CgBase/CgObservable.h CgBase/CgBaseEvent.h CgBase/CgEnums.h CgEvents/CgMouseEvent.h CgQtViewer/CgQtMainApplication.h CgSceneGraph/CgSceneControl.h CgEvents/CgKeyEvent.h CgBase/CgBaseRenderer.h CgBase/CgBaseRenderableObject.h CgBase/CgBasePointCloud.h CgBase/CgBaseTriangleMesh.h CgBase/CgBasePolygonMesh.h CgBase/CgBasePolyline.h CgBase/CgBaseSceneControl.h CgQtViewer/CgQtGlBufferObject.h CgQtViewer/CgTrackball.h CgEvents/CgWindowResizeEvent.h CgSceneGraph/meshfactory.h CgSceneGraph/Zylinder.h CgSceneGraph/kegel.h CgSceneGraph/Mypolyline.h CgSceneGraph/slidermoveevent.h CgSceneGraph/rotationskoerper.h CgUtils/ObjLoader.h CgSceneGraph/dreiecke.h $(DISTDIR)/
-	$(COPY_FILE) --parents main.cpp CgQtViewer/CGQtGLRenderWidget.cpp CgQtViewer/CgQtGui.cpp CgBase/CgObservable.cpp CgEvents/CgMouseEvent.cpp CgQtViewer/CgQtMainApplication.cpp CgSceneGraph/CgSceneControl.cpp CgEvents/CgKeyEvent.cpp CgQtViewer/CgQtGlBufferObject.cpp CgQtViewer/CgTrackball.cpp CgEvents/CgWindowResizeEvent.cpp CgSceneGraph/meshfactory.cpp CgSceneGraph/Zylinder.cpp CgSceneGraph/kegel.cpp CgSceneGraph/Mypolyline.cpp CgSceneGraph/slidermoveevent.cpp CgSceneGraph/rotationskoerper.cpp CgUtils/ObjLoader.cpp CgSceneGraph/dreiecke.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents CgBase/CgBaseRenderWindow.h CgQtViewer/CgQtGLRenderWidget.h CgQtViewer/CgQtGui.h CgBase/CgObserver.h CgBase/CgObservable.h CgBase/CgBaseEvent.h CgBase/CgEnums.h CgEvents/CgMouseEvent.h CgQtViewer/CgQtMainApplication.h CgSceneGraph/CgSceneControl.h CgEvents/CgKeyEvent.h CgBase/CgBaseRenderer.h CgBase/CgBaseRenderableObject.h CgBase/CgBasePointCloud.h CgBase/CgBaseTriangleMesh.h CgBase/CgBasePolygonMesh.h CgBase/CgBasePolyline.h CgBase/CgBaseSceneControl.h CgQtViewer/CgQtGlBufferObject.h CgQtViewer/CgTrackball.h CgEvents/CgWindowResizeEvent.h CgSceneGraph/meshfactory.h CgSceneGraph/Zylinder.h CgSceneGraph/kegel.h CgSceneGraph/Mypolyline.h CgSceneGraph/slidermoveevent.h CgSceneGraph/rotationskoerper.h CgUtils/ObjLoader.h CgSceneGraph/dreiecke.h CgSceneGraph/koordinatensystem.h $(DISTDIR)/
+	$(COPY_FILE) --parents main.cpp CgQtViewer/CGQtGLRenderWidget.cpp CgQtViewer/CgQtGui.cpp CgBase/CgObservable.cpp CgEvents/CgMouseEvent.cpp CgQtViewer/CgQtMainApplication.cpp CgSceneGraph/CgSceneControl.cpp CgEvents/CgKeyEvent.cpp CgQtViewer/CgQtGlBufferObject.cpp CgQtViewer/CgTrackball.cpp CgEvents/CgWindowResizeEvent.cpp CgSceneGraph/meshfactory.cpp CgSceneGraph/Zylinder.cpp CgSceneGraph/kegel.cpp CgSceneGraph/Mypolyline.cpp CgSceneGraph/slidermoveevent.cpp CgSceneGraph/rotationskoerper.cpp CgUtils/ObjLoader.cpp CgSceneGraph/dreiecke.cpp CgSceneGraph/koordinatensystem.cpp $(DISTDIR)/
 
 
 clean: compiler_clean 
@@ -430,7 +434,8 @@ main.o: main.cpp CgQtViewer/CgQtMainApplication.h \
 		CgSceneGraph/Mypolyline.h \
 		CgBase/CgBasePolyline.h \
 		CgSceneGraph/meshfactory.h \
-		CgSceneGraph/dreiecke.h
+		CgSceneGraph/dreiecke.h \
+		CgSceneGraph/koordinatensystem.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o main.cpp
 
 CGQtGLRenderWidget.o: CgQtViewer/CGQtGLRenderWidget.cpp CgQtViewer/CgQtGLRenderWidget.h \
@@ -464,6 +469,7 @@ CgQtGui.o: CgQtViewer/CgQtGui.cpp CgQtViewer/CgQtGLRenderWidget.h \
 		CgBase/CgBasePolyline.h \
 		CgSceneGraph/meshfactory.h \
 		CgSceneGraph/dreiecke.h \
+		CgSceneGraph/koordinatensystem.h \
 		CgSceneGraph/slidermoveevent.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o CgQtGui.o CgQtViewer/CgQtGui.cpp
 
@@ -496,6 +502,7 @@ CgSceneControl.o: CgSceneGraph/CgSceneControl.cpp CgSceneGraph/CgSceneControl.h 
 		CgBase/CgBasePolyline.h \
 		CgSceneGraph/meshfactory.h \
 		CgSceneGraph/dreiecke.h \
+		CgSceneGraph/koordinatensystem.h \
 		CgEvents/CgMouseEvent.h \
 		CgEvents/CgKeyEvent.h \
 		CgEvents/CgWindowResizeEvent.h \
@@ -584,6 +591,17 @@ dreiecke.o: CgSceneGraph/dreiecke.cpp CgSceneGraph/dreiecke.h \
 		CgBase/CgBaseRenderableObject.h \
 		CgBase/CgEnums.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o dreiecke.o CgSceneGraph/dreiecke.cpp
+
+koordinatensystem.o: CgSceneGraph/koordinatensystem.cpp CgSceneGraph/koordinatensystem.h \
+		CgSceneGraph/Mypolyline.h \
+		CgBase/CgBasePolyline.h \
+		CgBase/CgBaseRenderableObject.h \
+		CgBase/CgEnums.h \
+		CgSceneGraph/meshfactory.h \
+		CgBase/CgBaseTriangleMesh.h \
+		CgSceneGraph/rotationskoerper.h \
+		CgSceneGraph/dreiecke.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o koordinatensystem.o CgSceneGraph/koordinatensystem.cpp
 
 moc_CgQtGLRenderWidget.o: moc_CgQtGLRenderWidget.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_CgQtGLRenderWidget.o moc_CgQtGLRenderWidget.cpp
