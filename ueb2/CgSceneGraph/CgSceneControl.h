@@ -30,7 +30,7 @@ private:
     std::vector<CgBaseTriangleMesh*> m_triangle;
     glm::mat4 m_current_transformation;
     glm::mat4 m_proj_matrix;
-    int x;
+    float x;
     std::vector<glm::vec3> dreickevertices;
 
     std::vector<unsigned int> dreieckecords;

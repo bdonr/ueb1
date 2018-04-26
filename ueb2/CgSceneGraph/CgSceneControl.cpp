@@ -18,9 +18,9 @@ CgSceneControl::CgSceneControl() {
   /* m_triangle.push_back(MeshFactory::createKegel());
    m_triangle.push_back(MeshFactory::createZylinder());
 */
-std::string file = "/home/don/Schreibtisch/porsche.obj";
+std::string file = "../CgData/bunny.obj";
 ObjLoader loader;
-x=1;
+x=0.5;
 loader.load(file);
 loader.getPositionData(dreickevertices);
 
@@ -37,6 +37,10 @@ m_triangle.push_back(MeshFactory::createKegel(0,.0,0));
 m_current_transformation = glm::mat4(1.);
 m_proj_matrix = glm::mat4x4(glm::vec4(1.792591, 0.0, 0.0, 0.0), glm::vec4(0.0, 1.792591, 0.0, 0.0),
                 glm::vec4(0.0, 0.0, -1.0002, -1.0), glm::vec4(0.0, 0.0, -0.020002, 0.0));
+/*
+m_proj_matrix = glm::mat4x4(glm::vec4(1.792591, 0.0, 0.0, 0.0), glm::vec4(0.0, 1.792591, 0.0, 0.0),
+                glm::vec4(0.0, 0.0, -1.0002, -1.0), glm::vec4(0.0, 0.0, -0.020002, 0.0));
+*/
 }
 
 CgSceneControl::~CgSceneControl() {
@@ -183,34 +187,55 @@ void CgSceneControl::handleEvent(CgBaseEvent *e) {
     }
     std::cout<<"code key "<<((CgKeyEvent*)e)->getType()<<"spezial "<<Cg::Key_0<<" "<<((CgKeyEvent*)e)->key()<<std::endl;
     if(((CgKeyEvent*)e)->key()==Cg::Key_Minus){
-
-        m_current_transformation=(glm::mat4x4(glm::vec4(x,0,0,x),
-                                                  glm::vec4(0,x,0,x),
-                                                  glm::vec4(0,0,x,x),
-                                                  glm::vec4(0,0,0,1)));
-        x=x-1;
-
-        if(x==-100){
-            x=1;
+        if(x<0.01){
+            x=0.01;
+        }else{
+            x=x-0.02;
         }
-       // resetObject();
+            m_current_transformation=(glm::mat4x4(glm::vec4(x,0,0,0),
+                                                  glm::vec4(0,x,0,0),
+                                                  glm::vec4(0,0,x,0),
+                                                  glm::vec4(0,0,0,1)));
         m_renderer->init(dreiecke);
-        //m_renderer->render(dreiecke,m_current_transformation);
+        m_renderer->render(dreiecke, m_current_transformation);
+
+         /* m_current_transformation=(glm::mat4x4(glm::vec4(-x,0,0,0),
+                                                  glm::vec4(0,-x,0,0),
+                                                  glm::vec4(0,0,-x,0),
+                                                  glm::vec4(0,0,0,1)));
+        */
+
+
+        resetObject();
+        m_renderer->init(dreiecke);
+        //renderObjects();
+        m_renderer->render(dreiecke,m_current_transformation);
     }
 
     if(((CgKeyEvent*)e)->key()==Cg::Key_Plus){
-
-        m_current_transformation=(glm::mat4x4(glm::vec4(x*1,0,0,0),
-                                                  glm::vec4(0,x*1,0,0),
-                                                  glm::vec4(0,0,x*1,0),
-                                                  glm::vec4(0,0,0,1)));
-        x=x+1;
-        if(x==100){
-            x=1;
+        if(x>0.9){
+            x=0.9;
+        }else{
+            x=x+0.02;
         }
-       // resetObject();
+
+        m_current_transformation=(glm::mat4x4(glm::vec4(x,0,0,0),
+                                              glm::vec4(0,x,0,0),
+                                              glm::vec4(0,0,x,0),
+                                              glm::vec4(0,0,0,1)));
+    m_renderer->init(dreiecke);
+    m_renderer->render(dreiecke, m_current_transformation);
+/*
+        m_current_transformation=(glm::mat4x4(glm::vec4(x,0,0,0),
+                                              glm::vec4(0,x,0,0),
+                                              glm::vec4(0,0,x,0),
+                                              glm::vec4(0,0,0,1)));
+                                              */
+
+        resetObject();
         m_renderer->init(dreiecke);
-       // m_renderer->render(dreiecke,m_current_transformation);
+        //renderObjects();
+        m_renderer->render(dreiecke,m_current_transformation);
     }
 
     // an der Stelle an der ein Event abgearbeitet ist wird es auch gelöscht.
