@@ -407,12 +407,95 @@ void CgQtGui::createOptionPanelExample3(QWidget* parent)
 }
 void CgQtGui::aufgabe3(QWidget* parent)
 {
+    void CgQtGui::aufgabe3(QWidget* parent)
+{
+    //tab4_control-->subBox-->myGroupBox-->vbox-->addWidget(radioButton123)    myButtonGroup-->addButton(addButton)
+
     QVBoxLayout *tab4_control = new QVBoxLayout();
+//---------------------------------------------------------------------------------------
+    QVBoxLayout *subBox = new QVBoxLayout();
 
-    QLabel* lab1= new QLabel("aufgabe 3");
+
+    QGroupBox* myGroupBox = new QGroupBox("Figur darstellen ");
+
+    myButtonGroup = new QButtonGroup(subBox);
+    myButtonGroup->setExclusive(true);
+
+    QRadioButton* radiobutton1 = new QRadioButton( "&Hase");
+
+    QRadioButton* radiobutton2 = new QRadioButton( "&Tyranosaorus");
+
+    QRadioButton* radiobutton3 = new QRadioButton( "&Porsche");
+
+    radiobutton3->setChecked(true);
+
+    myButtonGroup->addButton(radiobutton1,0);
+    myButtonGroup->addButton(radiobutton2,1);
+    myButtonGroup->addButton(radiobutton3,2);
+
+
+
+    QVBoxLayout *vbox = new QVBoxLayout;
+    vbox->addWidget(radiobutton1);
+    vbox->addWidget(radiobutton2);
+    vbox->addWidget(radiobutton3);
+
+    vbox->addStretch(1);
+    myGroupBox->setLayout(vbox);
+    subBox->addWidget(myGroupBox);
+    tab4_control->addLayout(subBox);
+//----------------------------------------------------------------------------------------
+QGroupBox* mySpinnerBox = new QGroupBox("figur drehen ");
+QHBoxLayout* SBox = new QHBoxLayout;
+mySpinnerBox->setLayout(SBox);
+
+QVBoxLayout *subSBox = new QVBoxLayout();
+    subSBox->addWidget(mySpinnerBox);
+tab4_control->addLayout(subSBox);
+
+
+    QLabel* lab2= new QLabel("drehung X achse");
+    subSBox->addWidget(lab2);
+
+    QSpinBox* spin1 = new QSpinBox();
+    tab4_control->addWidget(spin1);
+    spin1->setMinimum(1);
+    spin1->setMaximum(50);
+    spin1->setValue(1);
+   // spin1->setSuffix("   suffix");
+   // mySpinBox1->setPrefix("Prefix:  ");
+    connect( spin1, SIGNAL(valueChanged(int) ), this, SLOT(slotMySpinBox1Changed()) );
+    subSBox->addWidget(spin1);
+
+    QLabel* lab3= new QLabel("drehung Y achse");
+    subSBox->addWidget(lab3);
+
+    QSpinBox* spin2 = new QSpinBox();
+    tab4_control->addWidget(spin2);
+    spin2->setMinimum(1);
+    spin2->setMaximum(50);
+    spin2->setValue(1);
+   // spin1->setSuffix("   suffix");
+   // mySpinBox1->setPrefix("Prefix:  ");
+    connect( spin2, SIGNAL(valueChanged(int) ), this, SLOT(slotMySpinBox1Changed()) );
+    subSBox->addWidget(spin2);
+
+    QLabel* lab4= new QLabel("drehung Z achse");
+    subSBox->addWidget(lab4);
+
+    QSpinBox* spin3 = new QSpinBox();
+    tab4_control->addWidget(spin3);
+    spin3->setMinimum(1);
+    spin3->setMaximum(50);
+    spin3->setValue(1);
+   // spin1->setSuffix("   suffix");
+   // mySpinBox1->setPrefix("Prefix:  ");
+    connect( spin3, SIGNAL(valueChanged(int) ), this, SLOT(slotMySpinBox1Changed()) );
+    subSBox->addWidget(spin3);
+
+    QLabel* lab1= new QLabel("zoom mit +/- \n drehen mit y/x/z");
     tab4_control->addWidget(lab1);
-
-   parent->setLayout(tab4_control);
+           parent->setLayout(tab4_control);
 
 }
 
