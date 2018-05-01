@@ -121,7 +121,6 @@ void CgSceneControl::renderObjects() {
                 glm::mat4x4(glm::vec4(1.0, 0.0, 0.0, 0.0), glm::vec4(0.0, 1.0, 0.0, 0.0), glm::vec4(0.0, 0.0, 1.0, -1.0),
                             glm::vec4(0.0, 0.0, -1.0, 1.0)));
     if(changed==0){
-        std::cout<<"changed =0"<<std::endl;
         if(poly!= NULL){
             if(poly->getPolyVec().size()>0){
                 for(int i = 0; i<poly->getPolyVec().size()-1;i++){
@@ -360,8 +359,9 @@ void CgSceneControl::handleEvent(CgBaseEvent *e) {
 
     }
 
-    if(e->getType() & Cg::CgChangeWahl){
+    if(e->getType()==Cg::CgChangeWahl){
         dreiecke = objecte.at(((ObjectOpenEvent*) e)->getWahl());
+        std::cout<<"hallo"<<std::endl;
     }
 
     // an der Stelle an der ein Event abgearbeitet ist wird es auch gelöscht.

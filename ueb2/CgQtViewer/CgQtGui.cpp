@@ -420,10 +420,11 @@ void CgQtGui::aufgabe3(QWidget* parent)
     myButtonGroup->setExclusive(true);
 
     QRadioButton* radiobutton1 = new QRadioButton( "&Hase");
-
+connect(radiobutton1, SIGNAL(pressed()), this, objectOpenSelect(1));
     QRadioButton* radiobutton2 = new QRadioButton( "&Tyranosaorus");
-
+connect(radiobutton2, SIGNAL(pressed()), this, objectOpenSelect(2));
     QRadioButton* radiobutton3 = new QRadioButton( "&Porsche");
+connect(radiobutton3, SIGNAL(pressed()), this, objectOpenSelect(3));
 
     radiobutton3->setChecked(true);
 
