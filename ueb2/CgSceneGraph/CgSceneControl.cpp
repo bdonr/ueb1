@@ -284,15 +284,6 @@ void CgSceneControl::handleEvent(CgBaseEvent *e) {
                                               glm::vec4(0,s,0,0),
                                               glm::vec4(0,0,s,0),
                                               glm::vec4(0,0,0,1)));
-        if(dreiecke!=NULL){
-            m_renderer->init(dreiecke);
-            m_renderer->render(dreiecke, m_current_transformation);
-
-            resetObject();
-            m_renderer->init(dreiecke);
-            //renderObjects();
-            m_renderer->render(dreiecke,m_current_transformation);
-        }
     }
 
     if(((CgKeyEvent*)e)->key()==Cg::Key_Plus){
@@ -306,15 +297,7 @@ void CgSceneControl::handleEvent(CgBaseEvent *e) {
                                               glm::vec4(0,s,0,0),
                                               glm::vec4(0,0,s,0),
                                               glm::vec4(0,0,0,1)));
-        if(dreiecke!=NULL){
-            m_renderer->init(dreiecke);
-            m_renderer->render(dreiecke, m_current_transformation);
 
-            resetObject();
-            m_renderer->init(dreiecke);
-            //renderObjects();
-            m_renderer->render(dreiecke,m_current_transformation);
-        }
     }
 
     if(((CgKeyEvent*)e)->key()==Cg::Key_Y){
@@ -361,6 +344,8 @@ void CgSceneControl::handleEvent(CgBaseEvent *e) {
 
     if(e->getType()==Cg::CgChangeWahl){
         dreiecke = objecte.at(((ObjectOpenEvent*) e)->getWahl());
+        this->m_renderer->init(dreiecke);
+        this->m_renderer->redraw();
         std::cout<<"hallo"<<std::endl;
     }
 

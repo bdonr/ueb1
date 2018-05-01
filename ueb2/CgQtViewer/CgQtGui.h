@@ -127,9 +127,10 @@ private slots:
     void slotButtonGroupSelectionChanged();
     void slotLoadMeshFile();
     void sliderMove(int x);
-    void objectOpenSelect(int x);
 
-
+    void  objectOpenSelect1(void);
+void  objectOpenSelect2(void);
+void  objectOpenSelect3(void);
 
    // void pressButton                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           Cg::ObjectType);
 

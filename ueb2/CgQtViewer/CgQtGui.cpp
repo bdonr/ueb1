@@ -420,11 +420,11 @@ void CgQtGui::aufgabe3(QWidget* parent)
     myButtonGroup->setExclusive(true);
 
     QRadioButton* radiobutton1 = new QRadioButton( "&Hase");
-connect(radiobutton1, SIGNAL(pressed()), this, objectOpenSelect(1));
+    connect(radiobutton1, SIGNAL(pressed()), this, SLOT(objectOpenSelect1()));
     QRadioButton* radiobutton2 = new QRadioButton( "&Tyranosaorus");
-connect(radiobutton2, SIGNAL(pressed()), this, objectOpenSelect(2));
+    connect(radiobutton2, SIGNAL(pressed()), this, SLOT(objectOpenSelect2()));
     QRadioButton* radiobutton3 = new QRadioButton( "&Porsche");
-connect(radiobutton3, SIGNAL(pressed()), this, objectOpenSelect(3));
+    connect(radiobutton3, SIGNAL(pressed()), this, SLOT(objectOpenSelect3()));
 
     radiobutton3->setChecked(true);
 
@@ -655,8 +655,18 @@ void CgQtGui::changeRefineZylinder(int x){
     zylinderSlider();
 
 }
-void  CgQtGui::objectOpenSelect(int x){
-    ObjectOpenEvent* ob = new ObjectOpenEvent(x);
+
+void  CgQtGui::objectOpenSelect1(void){
+    ObjectOpenEvent* ob = new ObjectOpenEvent(0);
+    notifyObserver(ob);
+}
+void  CgQtGui::objectOpenSelect2(void){
+    ObjectOpenEvent* ob = new ObjectOpenEvent(1);
+    notifyObserver(ob);
+}
+
+void  CgQtGui::objectOpenSelect3(void){
+    ObjectOpenEvent* ob = new ObjectOpenEvent(2);
     notifyObserver(ob);
 }
 

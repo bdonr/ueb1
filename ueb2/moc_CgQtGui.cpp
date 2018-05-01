@@ -19,8 +19,8 @@
 
 QT_BEGIN_MOC_NAMESPACE
 struct qt_meta_stringdata_CgQtGui_t {
-    QByteArrayData data[21];
-    char stringdata0[332];
+    QByteArrayData data[23];
+    char stringdata0[369];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -42,14 +42,16 @@ QT_MOC_LITERAL(9, 121, 31), // "slotButtonGroupSelectionChanged"
 QT_MOC_LITERAL(10, 153, 16), // "slotLoadMeshFile"
 QT_MOC_LITERAL(11, 170, 10), // "sliderMove"
 QT_MOC_LITERAL(12, 181, 1), // "x"
-QT_MOC_LITERAL(13, 183, 16), // "objectOpenSelect"
-QT_MOC_LITERAL(14, 200, 17), // "changeRadiusKegel"
-QT_MOC_LITERAL(15, 218, 16), // "changeHoeheKegel"
-QT_MOC_LITERAL(16, 235, 17), // "changeRefineKegel"
-QT_MOC_LITERAL(17, 253, 20), // "changeRadiusZylinder"
-QT_MOC_LITERAL(18, 274, 19), // "changeHoeheZylinder"
-QT_MOC_LITERAL(19, 294, 20), // "changeRefineZylinder"
-QT_MOC_LITERAL(20, 315, 16) // "changeRefineRota"
+QT_MOC_LITERAL(13, 183, 17), // "objectOpenSelect1"
+QT_MOC_LITERAL(14, 201, 17), // "objectOpenSelect2"
+QT_MOC_LITERAL(15, 219, 17), // "objectOpenSelect3"
+QT_MOC_LITERAL(16, 237, 17), // "changeRadiusKegel"
+QT_MOC_LITERAL(17, 255, 16), // "changeHoeheKegel"
+QT_MOC_LITERAL(18, 272, 17), // "changeRefineKegel"
+QT_MOC_LITERAL(19, 290, 20), // "changeRadiusZylinder"
+QT_MOC_LITERAL(20, 311, 19), // "changeHoeheZylinder"
+QT_MOC_LITERAL(21, 331, 20), // "changeRefineZylinder"
+QT_MOC_LITERAL(22, 352, 16) // "changeRefineRota"
 
     },
     "CgQtGui\0mouseEvent\0\0QMouseEvent*\0event\0"
@@ -57,7 +59,8 @@ QT_MOC_LITERAL(20, 315, 16) // "changeRefineRota"
     "slotMyCheckBox1Changed\0slotMyButton1Pressed\0"
     "slotButtonGroupSelectionChanged\0"
     "slotLoadMeshFile\0sliderMove\0x\0"
-    "objectOpenSelect\0changeRadiusKegel\0"
+    "objectOpenSelect1\0objectOpenSelect2\0"
+    "objectOpenSelect3\0changeRadiusKegel\0"
     "changeHoeheKegel\0changeRefineKegel\0"
     "changeRadiusZylinder\0changeHoeheZylinder\0"
     "changeRefineZylinder\0changeRefineRota"
@@ -70,7 +73,7 @@ static const uint qt_meta_data_CgQtGui[] = {
        7,       // revision
        0,       // classname
        0,    0, // classinfo
-      16,   14, // methods
+      18,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -78,22 +81,24 @@ static const uint qt_meta_data_CgQtGui[] = {
        0,       // signalCount
 
  // slots: name, argc, parameters, tag, flags
-       1,    1,   94,    2, 0x08 /* Private */,
-       5,    2,   97,    2, 0x08 /* Private */,
-       6,    0,  102,    2, 0x08 /* Private */,
-       7,    0,  103,    2, 0x08 /* Private */,
-       8,    0,  104,    2, 0x08 /* Private */,
-       9,    0,  105,    2, 0x08 /* Private */,
-      10,    0,  106,    2, 0x08 /* Private */,
-      11,    1,  107,    2, 0x08 /* Private */,
-      13,    1,  110,    2, 0x08 /* Private */,
-      14,    1,  113,    2, 0x08 /* Private */,
-      15,    1,  116,    2, 0x08 /* Private */,
-      16,    1,  119,    2, 0x08 /* Private */,
-      17,    1,  122,    2, 0x08 /* Private */,
-      18,    1,  125,    2, 0x08 /* Private */,
-      19,    1,  128,    2, 0x08 /* Private */,
-      20,    1,  131,    2, 0x08 /* Private */,
+       1,    1,  104,    2, 0x08 /* Private */,
+       5,    2,  107,    2, 0x08 /* Private */,
+       6,    0,  112,    2, 0x08 /* Private */,
+       7,    0,  113,    2, 0x08 /* Private */,
+       8,    0,  114,    2, 0x08 /* Private */,
+       9,    0,  115,    2, 0x08 /* Private */,
+      10,    0,  116,    2, 0x08 /* Private */,
+      11,    1,  117,    2, 0x08 /* Private */,
+      13,    0,  120,    2, 0x08 /* Private */,
+      14,    0,  121,    2, 0x08 /* Private */,
+      15,    0,  122,    2, 0x08 /* Private */,
+      16,    1,  123,    2, 0x08 /* Private */,
+      17,    1,  126,    2, 0x08 /* Private */,
+      18,    1,  129,    2, 0x08 /* Private */,
+      19,    1,  132,    2, 0x08 /* Private */,
+      20,    1,  135,    2, 0x08 /* Private */,
+      21,    1,  138,    2, 0x08 /* Private */,
+      22,    1,  141,    2, 0x08 /* Private */,
 
  // slots: parameters
     QMetaType::Void, 0x80000000 | 3,    4,
@@ -104,7 +109,9 @@ static const uint qt_meta_data_CgQtGui[] = {
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void, QMetaType::Int,   12,
-    QMetaType::Void, QMetaType::Int,   12,
+    QMetaType::Void,
+    QMetaType::Void,
+    QMetaType::Void,
     QMetaType::Void, QMetaType::Int,   12,
     QMetaType::Void, QMetaType::Int,   12,
     QMetaType::Void, QMetaType::Int,   12,
@@ -130,14 +137,16 @@ void CgQtGui::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, voi
         case 5: _t->slotButtonGroupSelectionChanged(); break;
         case 6: _t->slotLoadMeshFile(); break;
         case 7: _t->sliderMove((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 8: _t->objectOpenSelect((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 9: _t->changeRadiusKegel((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 10: _t->changeHoeheKegel((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 11: _t->changeRefineKegel((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 12: _t->changeRadiusZylinder((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 13: _t->changeHoeheZylinder((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 14: _t->changeRefineZylinder((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 15: _t->changeRefineRota((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 8: _t->objectOpenSelect1(); break;
+        case 9: _t->objectOpenSelect2(); break;
+        case 10: _t->objectOpenSelect3(); break;
+        case 11: _t->changeRadiusKegel((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 12: _t->changeHoeheKegel((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 13: _t->changeRefineKegel((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 14: _t->changeRadiusZylinder((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 15: _t->changeHoeheZylinder((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 16: _t->changeRefineZylinder((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 17: _t->changeRefineRota((*reinterpret_cast< int(*)>(_a[1]))); break;
         default: ;
         }
     }
@@ -170,13 +179,13 @@ int CgQtGui::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 16)
+        if (_id < 18)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 16;
+        _id -= 18;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 16)
+        if (_id < 18)
             *reinterpret_cast<int*>(_a[0]) = -1;
-        _id -= 16;
+        _id -= 18;
     }
     return _id;
 }
