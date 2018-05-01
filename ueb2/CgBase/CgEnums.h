@@ -21,7 +21,7 @@ namespace Cg{
     CgKeyPressEvent                 = 0x00000010,
     CgKeyReleaseEvent               = 0x00000020,
     CgKeyEvent                      = 0x000000F0,
-
+    CgChangeWahl                    = 0x01230000,
     WindowResizeEvent               = 0x0000100,
 
     // unused, may be changed to whatever

@@ -13,22 +13,30 @@
 #include <stdio.h>
 #include <string.h>
 #include "CgUtils/ObjLoader.h"
+#include "../CgEvents/objectopenevent.h"
+
 // bla dingens
 CgSceneControl::CgSceneControl() {
     /* m_triangle.push_back(MeshFactory::createKegel());
    m_triangle.push_back(MeshFactory::createZylinder());
 */
     changed=0;
-    std::string file = "../CgData/bunny.obj";
     koordinatensystem = new Koordinatensystem();
     ObjLoader loader;
     s=0.5;
     y=0.0;
-    loader.load(file);
+    loader.load("../CgData/bunny.obj");
     loader.getPositionData(dreickevertices);
-
     loader.getFaceIndexData(dreieckecords);
-    dreiecke = MeshFactory::createDreiecke(dreickevertices,dreieckecords);
+    objecte.push_back(MeshFactory::createDreiecke(dreickevertices,dreieckecords));
+    loader.load("../CgData/tyra.obj");
+    loader.getPositionData(dreickevertices);
+    loader.getFaceIndexData(dreieckecords);
+    objecte.push_back(MeshFactory::createDreiecke(dreickevertices,dreieckecords));
+    loader.load("../CgData/porsche.obj");
+    loader.getPositionData(dreickevertices);
+    loader.getFaceIndexData(dreieckecords);
+    objecte.push_back(MeshFactory::createDreiecke(dreickevertices,dreieckecords));
 
 
     poly = MeshFactory::createRotationKoerper(1);
@@ -189,81 +197,84 @@ void CgSceneControl::handleEvent(CgBaseEvent *e) {
     if (e->getType() & Cg::KegelChange){
 
         int refine= ((SliderMoveEvent*)e)->getRefine();
+        float radius= ((SliderMoveEvent*)e)->getRadius();
+        float hoehe= ((SliderMoveEvent*)e)->getHoehe();
+
         if(refine<=3){
             this->reset();
         }
-        float radius= ((SliderMoveEvent*)e)->getRadius();
-        float hoehe= ((SliderMoveEvent*)e)->getHoehe();
+
         if(changed==1 && refine>3){
             changed=0;
             this->m_triangle.push_back(MeshFactory::createKegel(refine,hoehe,radius));
-            if(m_triangle.size()>0){
-                for(int i = 0;i<=m_triangle.size()-1;i++){
-                    m_renderer->init(m_triangle.at(i));
-                    m_renderer->render(m_triangle.at(i),m_current_transformation);
-                }
-            }
-            std::cout<<changed<<"asas"<<m_triangle.size()<<std::endl;
+
         }
-        if(m_triangle.size()>0){
-            for(int i = 0; i<=m_triangle.size()-1;i++){
-                resetRenderKegel(refine,hoehe,radius);
-                m_renderer->init(m_triangle.at(i));
+        if(changed==0 && refine>3){
+            if(m_triangle.size()>0){
+                for(int i = 0; i<=m_triangle.size()-1;i++){
+                    resetRenderKegel(refine,hoehe,radius);
+                    m_renderer->init(m_triangle.at(i));
+                }
             }
         }
     }
 
     if(e->getType() & Cg::ZylinderChange){
         int refine= ((SliderMoveEvent*)e)->getRefine();
+        float radius= ((SliderMoveEvent*)e)->getRadius();
+        float hoehe= ((SliderMoveEvent*)e)->getHoehe();
+
         if(refine<=3){
             this->reset();
         }
-        float radius= ((SliderMoveEvent*)e)->getRadius();
-        float hoehe= ((SliderMoveEvent*)e)->getHoehe();
+
         if(changed==1 && refine>3){
             changed=0;
             this->m_triangle.push_back(MeshFactory::createZylinder(refine,hoehe,radius));
-            if(m_triangle.size()>0){
-                for(int i = 0;i<=m_triangle.size()-1;i++){
-                    m_renderer->init(m_triangle.at(i));
-                    m_renderer->render(m_triangle.at(i),m_current_transformation);
-                }
-            }
-            std::cout<<changed<<"asas"<<m_triangle.size()<<std::endl;
+
         }
-        if(m_triangle.size()>0){
-            for(int i = 0; i<=m_triangle.size()-1;i++){
-                resetRenderZylinder(refine,hoehe,radius);
-                m_renderer->init(m_triangle.at(i));
+        if(changed==0 && refine>3){
+            if(m_triangle.size()>0){
+                for(int i = 0; i<=m_triangle.size()-1;i++){
+                    resetRenderZylinder(refine,hoehe,radius);
+                    m_renderer->init(m_triangle.at(i));
+                }
             }
         }
     }
+
     if(e->getType() & Cg::RefineRota){
         int refine= ((SliderMoveEvent*)e)->getRefine();
         if(refine<=3){
             this->reset();
+        }if(changed==1 && refine>3){
+            changed=0;
+            this->poly = MeshFactory::createRotationKoerper(refine);
         }
-        if(refine>3){
+        if(refine>3 && changed==0){
             this->poly = MeshFactory::createRotationKoerper(refine);
             if(poly->getKeisVec().size()>0){
                 for(int i = 0; i<=poly->getKeisVec().size()-1;i++){
                     m_renderer->init(poly->getKeisVec().at(i));
+                    m_renderer->render(poly->getKeisVec().at(i),m_current_transformation);
                 }
             }
             if(poly->getNormale().size()>0){
                 for(int i = 0; i<=poly->getNormale().size()-1;i++){
                     m_renderer->init(poly->getNormale().at(i));
+                    m_renderer->render(poly->getNormale().at(i),m_current_transformation);
                 }
             }
             if(poly->getPolyVec().size()>0){
                 for(int i = 0; i<=poly->getPolyVec().size()-1;i++){
                     m_renderer->init(poly->getPolyVec().at(i));
+                    m_renderer->render(poly->getPolyVec().at(i),m_current_transformation);
                 }
             }
         }
 
     }
-    std::cout<<"code key "<<((CgKeyEvent*)e)->getType()<<"spezial "<<Cg::Key_0<<" "<<((CgKeyEvent*)e)->key()<<std::endl;
+
     if(((CgKeyEvent*)e)->key()==Cg::Key_Minus){
         if(s<0.01){
             s=0.01;
@@ -274,20 +285,15 @@ void CgSceneControl::handleEvent(CgBaseEvent *e) {
                                               glm::vec4(0,s,0,0),
                                               glm::vec4(0,0,s,0),
                                               glm::vec4(0,0,0,1)));
-        m_renderer->init(dreiecke);
-        m_renderer->render(dreiecke, m_current_transformation);
+        if(dreiecke!=NULL){
+            m_renderer->init(dreiecke);
+            m_renderer->render(dreiecke, m_current_transformation);
 
-        /* m_current_transformation=(glm::mat4x4(glm::vec4(-x,0,0,0),
-                                                  glm::vec4(0,-x,0,0),
-                                                  glm::vec4(0,0,-x,0),
-                                                  glm::vec4(0,0,0,1)));
-        */
-
-
-        resetObject();
-        m_renderer->init(dreiecke);
-        //renderObjects();
-        m_renderer->render(dreiecke,m_current_transformation);
+            resetObject();
+            m_renderer->init(dreiecke);
+            //renderObjects();
+            m_renderer->render(dreiecke,m_current_transformation);
+        }
     }
 
     if(((CgKeyEvent*)e)->key()==Cg::Key_Plus){
@@ -301,19 +307,15 @@ void CgSceneControl::handleEvent(CgBaseEvent *e) {
                                               glm::vec4(0,s,0,0),
                                               glm::vec4(0,0,s,0),
                                               glm::vec4(0,0,0,1)));
-        m_renderer->init(dreiecke);
-        m_renderer->render(dreiecke, m_current_transformation);
-        /*
-        m_current_transformation=(glm::mat4x4(glm::vec4(x,0,0,0),
-                                              glm::vec4(0,x,0,0),
-                                              glm::vec4(0,0,x,0),
-                                              glm::vec4(0,0,0,1)));
-                                              */
+        if(dreiecke!=NULL){
+            m_renderer->init(dreiecke);
+            m_renderer->render(dreiecke, m_current_transformation);
 
-        resetObject();
-        m_renderer->init(dreiecke);
-        //renderObjects();
-        m_renderer->render(dreiecke,m_current_transformation);
+            resetObject();
+            m_renderer->init(dreiecke);
+            //renderObjects();
+            m_renderer->render(dreiecke,m_current_transformation);
+        }
     }
 
     if(((CgKeyEvent*)e)->key()==Cg::Key_Y){
@@ -356,6 +358,10 @@ void CgSceneControl::handleEvent(CgBaseEvent *e) {
             z=z+0.5;
         }
 
+    }
+
+    if(e->getType() & Cg::CgChangeWahl){
+        dreiecke = objecte.at(((ObjectOpenEvent*) e)->getWahl());
     }
 
     // an der Stelle an der ein Event abgearbeitet ist wird es auch gelöscht.

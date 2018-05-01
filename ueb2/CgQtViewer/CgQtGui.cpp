@@ -26,7 +26,7 @@
 #include <QMenuBar>
 #include <QActionGroup>
 #include <iostream>
-
+#include "../CgEvents/objectopenevent.h"
 
 
 CgQtGui::CgQtGui(CgQtMainApplication *mw)
@@ -653,6 +653,10 @@ void CgQtGui::changeRefineZylinder(int x){
     this->refine=x;
     zylinderSlider();
 
+}
+void  CgQtGui::objectOpenSelect(int x){
+    ObjectOpenEvent* ob = new ObjectOpenEvent(x);
+    notifyObserver(ob);
 }
 
 

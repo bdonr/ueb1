@@ -26,6 +26,7 @@ public:
     void reset();
     int getChanged();
 private:
+    std::vector <Dreiecke*> objecte;
     CgBaseRenderer* m_renderer;
     Dreiecke* dreiecke;
     RotationsKoerper* poly;

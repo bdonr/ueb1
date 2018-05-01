@@ -23,7 +23,8 @@ SOURCES += main.cpp \
     CgSceneGraph/rotationskoerper.cpp \
     CgUtils/ObjLoader.cpp \
     CgSceneGraph/dreiecke.cpp \
-    CgSceneGraph/koordinatensystem.cpp
+    CgSceneGraph/koordinatensystem.cpp \
+    CgEvents/objectopenevent.cpp
 
 
 HEADERS += \
@@ -56,4 +57,5 @@ HEADERS += \
     CgSceneGraph/rotationskoerper.h \
 CgUtils/ObjLoader.h \
     CgSceneGraph/dreiecke.h \
-    CgSceneGraph/koordinatensystem.h
+    CgSceneGraph/koordinatensystem.h \
+    CgEvents/objectopenevent.h
