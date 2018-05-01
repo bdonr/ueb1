@@ -23,6 +23,8 @@ public:
     void resetRenderZylinder(int refine,float hoehe,float radius);
     void renderObjects();
     void resetObject();
+    void reset();
+    int getChanged();
 private:
     CgBaseRenderer* m_renderer;
     Dreiecke* dreiecke;
@@ -34,6 +36,7 @@ private:
     float x;
     float y;
     float z;
+    int changed;
     std::vector<glm::vec3> dreickevertices;
     Koordinatensystem* koordinatensystem;
     std::vector<unsigned int> dreieckecords;

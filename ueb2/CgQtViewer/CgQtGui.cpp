@@ -169,7 +169,7 @@ void CgQtGui::createOptionPanelExample1(QWidget* parent)
 
     QSlider *RotationsSlider = createSlider();
     tab1_control->addWidget(RotationsSlider);
-    RotationsSlider->setMinimum(0);
+    RotationsSlider->setMinimum(3);
     RotationsSlider->setMaximum(60);
     RotationsSlider->setValue(20);
     RotationsSlider->setTickInterval(1);
@@ -180,7 +180,7 @@ void CgQtGui::createOptionPanelExample1(QWidget* parent)
 
     QSlider *HoeheSlider = createSlider();
     tab1_control->addWidget(HoeheSlider);
-    HoeheSlider->setMinimum(0);
+    HoeheSlider->setMinimum(1);
     HoeheSlider->setMaximum(60);
     HoeheSlider->setValue(20);
     HoeheSlider->setTickInterval(1);
@@ -221,7 +221,7 @@ void CgQtGui::createOptionPanelExample1(QWidget* parent)
 
     QSlider *zylinderRefineSlider = createSlider();
     tab1_control->addWidget(zylinderRefineSlider);
-    zylinderRefineSlider->setMinimum(3);
+    zylinderRefineSlider->setMinimum(1);
     zylinderRefineSlider->setMaximum(60);
     zylinderRefineSlider->setValue(20);
     zylinderRefineSlider->setTickInterval(1);
@@ -236,7 +236,7 @@ void CgQtGui::createOptionPanelExample1(QWidget* parent)
     kegelRefineSlider->setMaximum(60);
     kegelRefineSlider->setValue(20);
     kegelRefineSlider->setTickInterval(1);
-    connect(kegelRefineSlider, SIGNAL(sliderMoved(int)), this, SLOT(changeRadiusKegel(int)));
+    connect(kegelRefineSlider, SIGNAL(sliderMoved(int)), this, SLOT(changeRefineKegel(int)));
 
     QLabel* lab5= new QLabel("Kegel Radius");
     tab1_control->addWidget(lab5);
@@ -407,9 +407,7 @@ void CgQtGui::createOptionPanelExample3(QWidget* parent)
 }
 void CgQtGui::aufgabe3(QWidget* parent)
 {
-    void CgQtGui::aufgabe3(QWidget* parent)
-{
-    //tab4_control-->subBox-->myGroupBox-->vbox-->addWidget(radioButton123)    myButtonGroup-->addButton(addButton)
+        //tab4_control-->subBox-->myGroupBox-->vbox-->addWidget(radioButton123)    myButtonGroup-->addButton(addButton)
 
     QVBoxLayout *tab4_control = new QVBoxLayout();
 //---------------------------------------------------------------------------------------

@@ -76,73 +76,73 @@ void CgQtGLRenderWidget::cleanup()
 }
 
 static const char *vertexShaderSourceCore =
-    "#version 150\n"
-    "in vec4 vertex;\n"
-    "in vec3 normal;\n"
-    "out vec3 vert;\n"
-    "out vec3 vertNormal;\n"
-    "uniform mat4 projMatrix;\n"
-    "uniform mat4 mvMatrix;\n"
-    "uniform mat3 normalMatrix;\n"
-    "void main() {\n"
-    "   vert = vertex.xyz;\n"
-    "   vertNormal = normalMatrix * normal;\n"
-    "   gl_Position = projMatrix * mvMatrix * vertex;\n"
-    "}\n";
+        "#version 150\n"
+        "in vec4 vertex;\n"
+        "in vec3 normal;\n"
+        "out vec3 vert;\n"
+        "out vec3 vertNormal;\n"
+        "uniform mat4 projMatrix;\n"
+        "uniform mat4 mvMatrix;\n"
+        "uniform mat3 normalMatrix;\n"
+        "void main() {\n"
+        "   vert = vertex.xyz;\n"
+        "   vertNormal = normalMatrix * normal;\n"
+        "   gl_Position = projMatrix * mvMatrix * vertex;\n"
+        "}\n";
 
 static const char *fragmentShaderSourceCore =
-    "#version 150\n"
-    "in highp vec3 vert;\n"
-    "in highp vec3 vertNormal;\n"
-    "out highp vec4 fragColor;\n"
-    "uniform highp vec3 lightPos;\n"
-    "void main() {\n"
-    "   highp vec3 L = normalize(lightPos - vert);\n"
-    "   highp float NL = max(dot(normalize(vertNormal), L), 0.0);\n"
-    "   highp vec3 color = vec3(0.39, 1.0, 0.0);\n"
-    "   highp vec3 col = clamp(color * 0.2 + color * 0.8 * NL, 0.0, 1.0);\n"
-    "   fragColor = vec4(col, 1.0);\n"
-    "}\n";
+        "#version 150\n"
+        "in highp vec3 vert;\n"
+        "in highp vec3 vertNormal;\n"
+        "out highp vec4 fragColor;\n"
+        "uniform highp vec3 lightPos;\n"
+        "void main() {\n"
+        "   highp vec3 L = normalize(lightPos - vert);\n"
+        "   highp float NL = max(dot(normalize(vertNormal), L), 0.0);\n"
+        "   highp vec3 color = vec3(0.39, 1.0, 0.0);\n"
+        "   highp vec3 col = clamp(color * 0.2 + color * 0.8 * NL, 0.0, 1.0);\n"
+        "   fragColor = vec4(col, 1.0);\n"
+        "}\n";
 
 static const char *vertexShaderSource =
-    "attribute vec4 vertex;\n"
-    "attribute vec3 normal;\n"
-    "varying vec3 vert;\n"
-    "varying vec3 vertNormal;\n"
-    "uniform mat4 projMatrix;\n"
-    "uniform mat4 mvMatrix;\n"
-    "uniform mat3 normalMatrix;\n"
-    "void main() {\n"
-    "   vert = vertex.xyz;\n"
-    "   vertNormal = normalMatrix * normal;\n"
-    "   gl_Position = projMatrix * mvMatrix * vertex;\n"
-    "}\n";
+        "attribute vec4 vertex;\n"
+        "attribute vec3 normal;\n"
+        "varying vec3 vert;\n"
+        "varying vec3 vertNormal;\n"
+        "uniform mat4 projMatrix;\n"
+        "uniform mat4 mvMatrix;\n"
+        "uniform mat3 normalMatrix;\n"
+        "void main() {\n"
+        "   vert = vertex.xyz;\n"
+        "   vertNormal = normalMatrix * normal;\n"
+        "   gl_Position = projMatrix * mvMatrix * vertex;\n"
+        "}\n";
 
 static const char *fragmentShaderSource =
-    "varying highp vec3 vert;\n"
-    "varying highp vec3 vertNormal;\n"
-    "uniform highp vec3 lightPos;\n"
-    "uniform bool  calcLighting;\n"
-    "uniform vec3 singlecolor;\n"
-    "uniform bool use_single_color;\n"
+        "varying highp vec3 vert;\n"
+        "varying highp vec3 vertNormal;\n"
+        "uniform highp vec3 lightPos;\n"
+        "uniform bool  calcLighting;\n"
+        "uniform vec3 singlecolor;\n"
+        "uniform bool use_single_color;\n"
 
-    "void main() {\n"
-    "   highp vec3 L = normalize(lightPos - vert);\n"
-    "   highp float NL = max(dot(normalize(vertNormal), L), 0.0);\n"
-    "   highp vec3 color;\n"
-    "   if(use_single_color)\n"
-    "   {\n "
-    "      color=singlecolor;\n"
-    "    }\n"
-    "   else\n"
-    "   {\n "
-    "      color= vec3(0.39, 1.0, 0.0);\n"
-    "    }\n"
-    "   highp vec3 col = clamp(color * 0.2 + color * 0.8 * NL, 0.0, 1.0);\n"
-    "   if(!calcLighting)\n"
-    "      { col=color;} \n"
-    "   gl_FragColor = vec4(col, 1.0);\n"
-    "}\n";
+        "void main() {\n"
+        "   highp vec3 L = normalize(lightPos - vert);\n"
+        "   highp float NL = max(dot(normalize(vertNormal), L), 0.0);\n"
+        "   highp vec3 color;\n"
+        "   if(use_single_color)\n"
+        "   {\n "
+        "      color=singlecolor;\n"
+        "    }\n"
+        "   else\n"
+        "   {\n "
+        "      color= vec3(0.39, 1.0, 0.0);\n"
+        "    }\n"
+        "   highp vec3 col = clamp(color * 0.2 + color * 0.8 * NL, 0.0, 1.0);\n"
+        "   if(!calcLighting)\n"
+        "      { col=color;} \n"
+        "   gl_FragColor = vec4(col, 1.0);\n"
+        "}\n";
 
 
 
@@ -177,23 +177,23 @@ void CgQtGLRenderWidget::render(CgBaseRenderableObject* obj,glm::mat4 world_coor
 
     if(obj->getType()==Cg::Polyline)
     {
-      CgBasePolyline* c_obj=(CgBasePolyline*)obj;
-      m_program->setUniformValue(m_ColorLoc,QVector3D(c_obj->getColor().x,c_obj->getColor().y,c_obj->getColor().z));
-      m_program->setUniformValue(m_UseSingleColorLoc,true);
+        CgBasePolyline* c_obj=(CgBasePolyline*)obj;
+        m_program->setUniformValue(m_ColorLoc,QVector3D(c_obj->getColor().x,c_obj->getColor().y,c_obj->getColor().z));
+        m_program->setUniformValue(m_UseSingleColorLoc,true);
     }
 
 
     if(obj->getType()==Cg::TriangleMesh)
     {
-      m_program->setUniformValue(m_UseSingleColorLoc,false);
-      glLineWidth(1.0f);
+        m_program->setUniformValue(m_UseSingleColorLoc,false);
+        glLineWidth(1.0f);
     }
 
 
 
     if(m_gl_buffer_objects.find(obj->getID())!=m_gl_buffer_objects.end())
     {
-         m_gl_buffer_objects[obj->getID()]->draw(obj);
+        m_gl_buffer_objects[obj->getID()]->draw(obj);
     }
 
 
@@ -207,7 +207,7 @@ void CgQtGLRenderWidget::setLookAtMatrix(glm::mat4 lookat)
 
 void CgQtGLRenderWidget::setProjectionMatrix(glm::mat4 proj)
 {
-   m_proj=proj;
+    m_proj=proj;
 }
 
 
@@ -314,7 +314,7 @@ void CgQtGLRenderWidget::paintGL()
         break;
     case 2: glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
         break;
-     default: break;
+    default: break;
     }
 
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -323,8 +323,10 @@ void CgQtGLRenderWidget::paintGL()
 
     m_program->bind();
 
+
     if(m_scene_control!=NULL)
-    m_scene_control->renderObjects();
+        m_scene_control->renderObjects();
+
 
 
 
@@ -393,7 +395,7 @@ void CgQtGLRenderWidget::mouseMoveEvent(QMouseEvent *event)
 
     emit mouseEvent(event);
 
-       update();
+    update();
 }
 
 
@@ -401,44 +403,44 @@ void CgQtGLRenderWidget::mouseReleaseEvent(QMouseEvent *event)
 {
     if(event->button()&Qt::LeftButton)
     {
-     m_trackball->endDrag();
+        m_trackball->endDrag();
 
     }
-     emit mouseEvent(event);
-     update();
+    emit mouseEvent(event);
+    update();
 }
 
 
 
 void CgQtGLRenderWidget::slotCustomRotation()
 {
-     m_custom_rotation=!m_custom_rotation;
-      update();
+    m_custom_rotation=!m_custom_rotation;
+    update();
 }
 
 void CgQtGLRenderWidget::slotLighting()
 {
     m_lighting=!m_lighting;
-     update();
+    update();
 }
 
 
 void CgQtGLRenderWidget::slotPolygonPoints()
 {
     m_polygonmode=0;
-     update();
+    update();
 }
 
 
 void CgQtGLRenderWidget::slotPolygonWireframe()
 {
     m_polygonmode=1;
-     update();
+    update();
 }
 
 void CgQtGLRenderWidget::slotPolygonFilled()
 {
-   m_polygonmode=2;
+    m_polygonmode=2;
     update();
 }
 
