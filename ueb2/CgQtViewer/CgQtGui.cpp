@@ -503,7 +503,7 @@ void CgQtGui::createOptionPanelExample5(QWidget* parent)
     QVBoxLayout *tab5_control = new QVBoxLayout();
     //---------------------------------------------------------------------------------------
     QVBoxLayout *subBox = new QVBoxLayout();
-
+//    QVBoxLayout *subBox2 = new QVBoxLayout();
 
     QGroupBox* myGroupBox = new QGroupBox("Figur darstellen ");
 
@@ -515,28 +515,31 @@ void CgQtGui::createOptionPanelExample5(QWidget* parent)
     QRadioButton* radiobutton12 = new QRadioButton( "&Y");
     connect(radiobutton12, SIGNAL(pressed()), this, SLOT(selectY()));
     QRadioButton* radiobutton13 = new QRadioButton( "&Z");
-        connect(radiobutton13, SIGNAL(pressed()), this, SLOT(selectX()));
-        kkk = new QSlider(Qt::Vertical);
-        kkk->setMaximum(360);
-        kkk->setValue(0);
-        kkk->setTickInterval(1);
-        kkk->setVisible(x);
+    connect(radiobutton13, SIGNAL(pressed()), this, SLOT(selectZ()));
+
+    kkk = new QSlider(Qt::Horizontal);
+    kkk->setMaximum(360);
+    kkk->setValue(0);
+    kkk->setTickInterval(1);
+    kkk->setVisible(x);
 
 
-        kkk1 = new QSlider(Qt::Vertical);
-        kkk1->setMaximum(360);
-        kkk1->setValue(0);
-        kkk1->setTickInterval(1);
-        kkk1->setVisible(y);
 
-        kkk2 = new QSlider(Qt::Vertical);
-        kkk2->setMaximum(360);
-        kkk2->setValue(0);
-        kkk2->setTickInterval(1);
-        kkk2->setVisible(z);
-connect(radiobutton11, SIGNAL(pressed()), this, SLOT(changeVisibleX()));
-connect(radiobutton12, SIGNAL(pressed()), this, SLOT(changeVisibleY()));
-connect(radiobutton13, SIGNAL(pressed()), this, SLOT(changeVisibleZ()));
+    kkk1 = new QSlider(Qt::Horizontal);
+    kkk1->setMaximum(360);
+    kkk1->setValue(0);
+    kkk1->setTickInterval(1);
+    kkk1->setVisible(y);
+
+    kkk2 = new QSlider(Qt::Horizontal);
+    kkk2->setMaximum(360);
+    kkk2->setValue(0);
+    kkk2->setTickInterval(1);
+    kkk2->setVisible(z);
+
+    connect(radiobutton11, SIGNAL(pressed()), this, SLOT(changeVisibleX()));
+    connect(radiobutton12, SIGNAL(pressed()), this, SLOT(changeVisibleY()));
+    connect(radiobutton13, SIGNAL(pressed()), this, SLOT(changeVisibleZ()));
 
     myButtonGroup->addButton(radiobutton11,0);
     myButtonGroup->addButton(radiobutton12,1);
@@ -555,9 +558,13 @@ connect(radiobutton13, SIGNAL(pressed()), this, SLOT(changeVisibleZ()));
     vbox->addStretch(1);
 
     myGroupBox->setLayout(vbox);
-   // subBox->addWidget(rotationsSlider);
+    // subBox->addWidget(rotationsSlider);
     subBox->addWidget(myGroupBox);
+//    subBox2->addWidget(kkk);
+//    subBox2->addWidget(kkk1);
+//    subBox2->addWidget(kkk2);
     tab5_control->addLayout(subBox);
+//    tab5_control->addLayout(subBox2);
     parent->setLayout(tab5_control);
 }
 
@@ -755,26 +762,14 @@ void  CgQtGui::selectZ(void){
 }
 
 void CgQtGui::changeVisibleX(void){
-   if(x){
     kkk->setVisible(x);
-   }
-   else{
-       kkk->setVisible(x);
-   }
+
 }
 void CgQtGui::changeVisibleY(void){
-   if(y){
-    kkk->setVisible(y);
-   }
-   else{
-       kkk->setVisible(y);
-   }
+    kkk1->setVisible(y);
+
 }
 void CgQtGui::changeVisibleZ(void){
-   if(z){
-    kkk->setVisible(z);
-   }
-   else{
-       kkk->setVisible(z);
-   }
+    kkk2->setVisible(z);
+
 }
