@@ -34,10 +34,10 @@ void RotationsKoerper::drehe(){
     std::vector<glm::vec3> matrix;
 
 
-    for(float i=0.0; i<=360.;i=i+20.){
+    for(float i=0.0; i<=180.;i=i+20.){
         std::cout<<i<<std::endl;
         // std::cout<<"hallo"<<vectneu.size()<<std::endl;
-            vect.push_back(glm::vec3(glm::cos(glm::radians(i)),glm::sin(glm::radians(i)),0));
+            vect.push_back(glm::vec3(glm::sin(glm::radians(i)),glm::cos(glm::radians(i)),0));
         //    std::cout<<glm::cos(i)<<","<<glm::sin(i)<<"i"<<i<<std::endl;
             //vectneu.at(i)->fuelleAuf();
     }

@@ -110,6 +110,12 @@ private:
     QButtonGroup* myButtonGroup;
     QCheckBox* myCheckBox1;
     QSpinBox* mySpinBox1;
+    QSlider * kkk;
+    QSlider * kkk1;
+    QSlider * kkk2;
+    bool x;
+    bool y;
+    bool z;
 
 
 private slots:
@@ -129,10 +135,10 @@ private slots:
     void sliderMove(int x);
 
     void  objectOpenSelect1(void);
-void  objectOpenSelect2(void);
-void  objectOpenSelect3(void);
+    void  objectOpenSelect2(void);
+    void  objectOpenSelect3(void);
 
-   // void pressButton                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           Cg::ObjectType);
+    // void pressButton                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           Cg::ObjectType);
 
     void changeRadiusKegel(int x);
     void changeHoeheKegel(int x);
@@ -141,6 +147,14 @@ void  objectOpenSelect3(void);
     void changeHoeheZylinder(int x);
     void changeRefineZylinder(int x);
     void changeRefineRota(int x);
+
+    void  selectY(void);
+    void  selectX(void);
+    void  selectZ(void);
+    void  changeVisibleX(void);
+    void  changeVisibleY(void);
+    void  changeVisibleZ(void);
+
 };
 
 #endif

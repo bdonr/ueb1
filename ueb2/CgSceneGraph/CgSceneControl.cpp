@@ -146,7 +146,8 @@ void CgSceneControl::reset(){
     delete poly;
     poly=NULL;
     m_triangle.clear();
-    objecte.clear();
+
+    //objecte.clear();
     changed=1;
 }
 int CgSceneControl::getChanged(){

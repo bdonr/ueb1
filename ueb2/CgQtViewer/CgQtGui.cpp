@@ -37,7 +37,7 @@ CgQtGui::CgQtGui(CgQtMainApplication *mw)
 
     connect(m_glRenderWidget, SIGNAL(mouseEvent(QMouseEvent*)), this, SLOT(mouseEvent(QMouseEvent*)));
     connect(m_glRenderWidget, SIGNAL(viewportChanged(int,int)), this, SLOT(viewportChanged(int,int)));
- //  connect(m_glRenderWidget, SIGNAL(valueChanged(int)), this, SLOT(sliderMove(int)));
+    //  connect(m_glRenderWidget, SIGNAL(valueChanged(int)), this, SLOT(sliderMove(int)));
 
     QVBoxLayout *mainLayout = new QVBoxLayout;
     QHBoxLayout *container = new QHBoxLayout;
@@ -184,7 +184,7 @@ void CgQtGui::createOptionPanelExample1(QWidget* parent)
     HoeheSlider->setMaximum(60);
     HoeheSlider->setValue(20);
     HoeheSlider->setTickInterval(1);
-  //  connect(RotationsSlider, SIGNAL(sliderMoved(int)), this, SLOT(changeHoeheZylinder(int)));
+    //  connect(RotationsSlider, SIGNAL(sliderMoved(int)), this, SLOT(changeHoeheZylinder(int)));
 
 
     QLabel* lab9= new QLabel("----------------------------------------------------------------------------------");
@@ -290,8 +290,8 @@ void CgQtGui::createOptionPanelExample2(QWidget* parent)
     mySpinBox1->setMinimum(1);
     mySpinBox1->setMaximum(50);
     mySpinBox1->setValue(3);
-   // mySpinBox1->setSuffix("   suffix");
-   // mySpinBox1->setPrefix("Prefix:  ");
+    // mySpinBox1->setSuffix("   suffix");
+    // mySpinBox1->setPrefix("Prefix:  ");
     connect(mySpinBox1, SIGNAL(valueChanged(int) ), this, SLOT(slotMySpinBox1Changed()) );
     tab2_control->addWidget(mySpinBox1);
 
@@ -401,16 +401,16 @@ void CgQtGui::createOptionPanelExample3(QWidget* parent)
     //connect(zylinderRefineSlider, SIGNAL(sliderMoved(int)), this, SLOT(ÄNDERE FARBE));
 
 
-   parent->setLayout(tab3_control);
+    parent->setLayout(tab3_control);
 
 
 }
 void CgQtGui::aufgabe3(QWidget* parent)
 {
-        //tab4_control-->subBox-->myGroupBox-->vbox-->addWidget(radioButton123)    myButtonGroup-->addButton(addButton)
+    //tab4_control-->subBox-->myGroupBox-->vbox-->addWidget(radioButton123)    myButtonGroup-->addButton(addButton)
 
     QVBoxLayout *tab4_control = new QVBoxLayout();
-//---------------------------------------------------------------------------------------
+    //---------------------------------------------------------------------------------------
     QVBoxLayout *subBox = new QVBoxLayout();
 
 
@@ -443,14 +443,14 @@ void CgQtGui::aufgabe3(QWidget* parent)
     myGroupBox->setLayout(vbox);
     subBox->addWidget(myGroupBox);
     tab4_control->addLayout(subBox);
-//----------------------------------------------------------------------------------------
-QGroupBox* mySpinnerBox = new QGroupBox("figur drehen ");
-QHBoxLayout* SBox = new QHBoxLayout;
-mySpinnerBox->setLayout(SBox);
+    //----------------------------------------------------------------------------------------
+    QGroupBox* mySpinnerBox = new QGroupBox("figur drehen ");
+    QHBoxLayout* SBox = new QHBoxLayout;
+    mySpinnerBox->setLayout(SBox);
 
-QVBoxLayout *subSBox = new QVBoxLayout();
+    QVBoxLayout *subSBox = new QVBoxLayout();
     subSBox->addWidget(mySpinnerBox);
-tab4_control->addLayout(subSBox);
+    tab4_control->addLayout(subSBox);
 
 
     QLabel* lab2= new QLabel("drehung X achse");
@@ -461,8 +461,8 @@ tab4_control->addLayout(subSBox);
     spin1->setMinimum(1);
     spin1->setMaximum(50);
     spin1->setValue(1);
-   // spin1->setSuffix("   suffix");
-   // mySpinBox1->setPrefix("Prefix:  ");
+    // spin1->setSuffix("   suffix");
+    // mySpinBox1->setPrefix("Prefix:  ");
     connect( spin1, SIGNAL(valueChanged(int) ), this, SLOT(slotMySpinBox1Changed()) );
     subSBox->addWidget(spin1);
 
@@ -474,8 +474,8 @@ tab4_control->addLayout(subSBox);
     spin2->setMinimum(1);
     spin2->setMaximum(50);
     spin2->setValue(1);
-   // spin1->setSuffix("   suffix");
-   // mySpinBox1->setPrefix("Prefix:  ");
+    // spin1->setSuffix("   suffix");
+    // mySpinBox1->setPrefix("Prefix:  ");
     connect( spin2, SIGNAL(valueChanged(int) ), this, SLOT(slotMySpinBox1Changed()) );
     subSBox->addWidget(spin2);
 
@@ -487,27 +487,78 @@ tab4_control->addLayout(subSBox);
     spin3->setMinimum(1);
     spin3->setMaximum(50);
     spin3->setValue(1);
-   // spin1->setSuffix("   suffix");
-   // mySpinBox1->setPrefix("Prefix:  ");
+    // spin1->setSuffix("   suffix");
+    // mySpinBox1->setPrefix("Prefix:  ");
     connect( spin3, SIGNAL(valueChanged(int) ), this, SLOT(slotMySpinBox1Changed()) );
     subSBox->addWidget(spin3);
 
     QLabel* lab1= new QLabel("zoom mit +/- \n drehen mit y/x/z");
     tab4_control->addWidget(lab1);
-           parent->setLayout(tab4_control);
+    parent->setLayout(tab4_control);
 
 }
 
 void CgQtGui::createOptionPanelExample5(QWidget* parent)
 {
     QVBoxLayout *tab5_control = new QVBoxLayout();
-
-    QLabel* lab1= new QLabel("aufgabe 4");
-    tab5_control->addWidget(lab1);
-
-   parent->setLayout(tab5_control);
+    //---------------------------------------------------------------------------------------
+    QVBoxLayout *subBox = new QVBoxLayout();
 
 
+    QGroupBox* myGroupBox = new QGroupBox("Figur darstellen ");
+
+    myButtonGroup = new QButtonGroup(subBox);
+    myButtonGroup->setExclusive(false);
+
+    QRadioButton* radiobutton11 = new QRadioButton( "&X");
+    connect(radiobutton11, SIGNAL(pressed()), this, SLOT(selectX()));
+    QRadioButton* radiobutton12 = new QRadioButton( "&Y");
+    connect(radiobutton12, SIGNAL(pressed()), this, SLOT(selectY()));
+    QRadioButton* radiobutton13 = new QRadioButton( "&Z");
+        connect(radiobutton13, SIGNAL(pressed()), this, SLOT(selectX()));
+        kkk = new QSlider(Qt::Vertical);
+        kkk->setMaximum(360);
+        kkk->setValue(0);
+        kkk->setTickInterval(1);
+        kkk->setVisible(x);
+
+
+        kkk1 = new QSlider(Qt::Vertical);
+        kkk1->setMaximum(360);
+        kkk1->setValue(0);
+        kkk1->setTickInterval(1);
+        kkk1->setVisible(y);
+
+        kkk2 = new QSlider(Qt::Vertical);
+        kkk2->setMaximum(360);
+        kkk2->setValue(0);
+        kkk2->setTickInterval(1);
+        kkk2->setVisible(z);
+connect(radiobutton11, SIGNAL(pressed()), this, SLOT(changeVisibleX()));
+connect(radiobutton12, SIGNAL(pressed()), this, SLOT(changeVisibleY()));
+connect(radiobutton13, SIGNAL(pressed()), this, SLOT(changeVisibleZ()));
+
+    myButtonGroup->addButton(radiobutton11,0);
+    myButtonGroup->addButton(radiobutton12,1);
+    myButtonGroup->addButton(radiobutton13,2);
+
+
+
+    QVBoxLayout *vbox = new QVBoxLayout;
+    vbox->addWidget(radiobutton11);
+    vbox->addWidget(kkk);
+    vbox->addWidget(radiobutton12);
+    vbox->addWidget(kkk1);
+    vbox->addWidget(radiobutton13);
+    vbox->addWidget(kkk2);
+
+    vbox->addStretch(1);
+
+    myGroupBox->setLayout(vbox);
+   // subBox->addWidget(rotationsSlider);
+    subBox->addWidget(myGroupBox);
+    tab5_control->addLayout(subBox);
+    parent->setLayout(tab5_control);
 }
 
 
@@ -522,7 +573,7 @@ void CgQtGui::slotMySpinBox1Changed()
 }
 
 void CgQtGui::sliderMove(int x){
-std::cout<<x<<"    "<<std::endl;
+    std::cout<<x<<"    "<<std::endl;
 
 
 
@@ -530,7 +581,7 @@ std::cout<<x<<"    "<<std::endl;
 
 void CgQtGui::slotMyCheckBox1Changed()
 {
-std::cout<<"bla ding tralala"<<std::endl;
+    std::cout<<"bla ding tralala"<<std::endl;
 }
 
 
@@ -545,7 +596,7 @@ void CgQtGui::slotLoadMeshFile()
 
 void CgQtGui::slotMyButton1Pressed()
 {
-   std::cout << "button 1 pressed " << std::endl;
+    std::cout << "button 1 pressed " << std::endl;
 
 }
 
@@ -553,14 +604,14 @@ void CgQtGui::slotMyButton1Pressed()
 void CgQtGui::mouseEvent(QMouseEvent* event)
 {
 
-   // std::cout << QApplication::keyboardModifiers() << std::endl;
+    // std::cout << QApplication::keyboardModifiers() << std::endl;
 
-  //  if(QApplication::keyboardModifiers().testFlag(Qt::ControlModifier)==true)
+    //  if(QApplication::keyboardModifiers().testFlag(Qt::ControlModifier)==true)
     //    std::cout << Cg::ControlModifier << endl;
 
 
-   if(event->type()==QEvent::MouseButtonPress)
-   {
+    if(event->type()==QEvent::MouseButtonPress)
+    {
 
 
         CgBaseEvent* e = new CgMouseEvent(Cg::CgMouseButtonPress,
@@ -568,15 +619,15 @@ void CgQtGui::mouseEvent(QMouseEvent* event)
                                           (Cg::MouseButtons)event->button());
 
         notifyObserver(e);
-   }
+    }
 
-   if(event->type()==QEvent::MouseMove)
-   {
-       CgBaseEvent* e= new CgMouseEvent(Cg::CgMouseMove,
-                                        glm::vec2(event->localPos().x() ,event->localPos().y()),
-                                        (Cg::MouseButtons)event->button());
-       notifyObserver(e);
-   }
+    if(event->type()==QEvent::MouseMove)
+    {
+        CgBaseEvent* e= new CgMouseEvent(Cg::CgMouseMove,
+                                         glm::vec2(event->localPos().x() ,event->localPos().y()),
+                                         (Cg::MouseButtons)event->button());
+        notifyObserver(e);
+    }
 
 
 
@@ -584,15 +635,15 @@ void CgQtGui::mouseEvent(QMouseEvent* event)
 
 void CgQtGui::keyPressEvent(QKeyEvent *event)
 {
-   CgBaseEvent* e= new CgKeyEvent(Cg::CgKeyPressEvent,(Cg::Key)event->key(),(Cg::KeyboardModifiers)event->nativeModifiers(),event->text().toStdString());
-   notifyObserver(e);
+    CgBaseEvent* e= new CgKeyEvent(Cg::CgKeyPressEvent,(Cg::Key)event->key(),(Cg::KeyboardModifiers)event->nativeModifiers(),event->text().toStdString());
+    notifyObserver(e);
 }
 
 
 void CgQtGui::viewportChanged(int w, int h)
 {
-     CgBaseEvent* e = new CgWindowResizeEvent(Cg::WindowResizeEvent,w,h);
-     notifyObserver(e);
+    CgBaseEvent* e = new CgWindowResizeEvent(Cg::WindowResizeEvent,w,h);
+    notifyObserver(e);
 }
 
 
@@ -670,4 +721,60 @@ void  CgQtGui::objectOpenSelect3(void){
     notifyObserver(ob);
 }
 
+void  CgQtGui::selectY(void){
+    if(y){
+        y=false;
+        std::cout<<"y unchecked"<<std::endl;
+    }
+    else{
+        y=true;
+        std::cout<<"y checked"<<std::endl;
+    }
+}
 
+void  CgQtGui::selectX(void){
+    if(x){
+        x=false;
+        std::cout<<"x unchecked"<<std::endl;
+    }
+    else{
+        x=true;
+        std::cout<<"x checked"<<std::endl;
+    }
+}
+
+void  CgQtGui::selectZ(void){
+    if(z){
+        z=false;
+        std::cout<<"z unchecked"<<std::endl;
+    }
+    else{
+        z=true;
+        std::cout<<"z checked"<<std::endl;
+    }
+}
+
+void CgQtGui::changeVisibleX(void){
+   if(x){
+    kkk->setVisible(x);
+   }
+   else{
+       kkk->setVisible(x);
+   }
+}
+void CgQtGui::changeVisibleY(void){
+   if(y){
+    kkk->setVisible(y);
+   }
+   else{
+       kkk->setVisible(y);
+   }
+}
+void CgQtGui::changeVisibleZ(void){
+   if(z){
+    kkk->setVisible(z);
+   }
+   else{
+       kkk->setVisible(z);
+   }
+}

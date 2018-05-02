@@ -19,8 +19,8 @@
 
 QT_BEGIN_MOC_NAMESPACE
 struct qt_meta_stringdata_CgQtGui_t {
-    QByteArrayData data[23];
-    char stringdata0[369];
+    QByteArrayData data[29];
+    char stringdata0[438];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -51,7 +51,13 @@ QT_MOC_LITERAL(18, 272, 17), // "changeRefineKegel"
 QT_MOC_LITERAL(19, 290, 20), // "changeRadiusZylinder"
 QT_MOC_LITERAL(20, 311, 19), // "changeHoeheZylinder"
 QT_MOC_LITERAL(21, 331, 20), // "changeRefineZylinder"
-QT_MOC_LITERAL(22, 352, 16) // "changeRefineRota"
+QT_MOC_LITERAL(22, 352, 16), // "changeRefineRota"
+QT_MOC_LITERAL(23, 369, 7), // "selectY"
+QT_MOC_LITERAL(24, 377, 7), // "selectX"
+QT_MOC_LITERAL(25, 385, 7), // "selectZ"
+QT_MOC_LITERAL(26, 393, 14), // "changeVisibleX"
+QT_MOC_LITERAL(27, 408, 14), // "changeVisibleY"
+QT_MOC_LITERAL(28, 423, 14) // "changeVisibleZ"
 
     },
     "CgQtGui\0mouseEvent\0\0QMouseEvent*\0event\0"
@@ -63,7 +69,9 @@ QT_MOC_LITERAL(22, 352, 16) // "changeRefineRota"
     "objectOpenSelect3\0changeRadiusKegel\0"
     "changeHoeheKegel\0changeRefineKegel\0"
     "changeRadiusZylinder\0changeHoeheZylinder\0"
-    "changeRefineZylinder\0changeRefineRota"
+    "changeRefineZylinder\0changeRefineRota\0"
+    "selectY\0selectX\0selectZ\0changeVisibleX\0"
+    "changeVisibleY\0changeVisibleZ"
 };
 #undef QT_MOC_LITERAL
 
@@ -73,7 +81,7 @@ static const uint qt_meta_data_CgQtGui[] = {
        7,       // revision
        0,       // classname
        0,    0, // classinfo
-      18,   14, // methods
+      24,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -81,24 +89,30 @@ static const uint qt_meta_data_CgQtGui[] = {
        0,       // signalCount
 
  // slots: name, argc, parameters, tag, flags
-       1,    1,  104,    2, 0x08 /* Private */,
-       5,    2,  107,    2, 0x08 /* Private */,
-       6,    0,  112,    2, 0x08 /* Private */,
-       7,    0,  113,    2, 0x08 /* Private */,
-       8,    0,  114,    2, 0x08 /* Private */,
-       9,    0,  115,    2, 0x08 /* Private */,
-      10,    0,  116,    2, 0x08 /* Private */,
-      11,    1,  117,    2, 0x08 /* Private */,
-      13,    0,  120,    2, 0x08 /* Private */,
-      14,    0,  121,    2, 0x08 /* Private */,
-      15,    0,  122,    2, 0x08 /* Private */,
-      16,    1,  123,    2, 0x08 /* Private */,
-      17,    1,  126,    2, 0x08 /* Private */,
-      18,    1,  129,    2, 0x08 /* Private */,
-      19,    1,  132,    2, 0x08 /* Private */,
-      20,    1,  135,    2, 0x08 /* Private */,
-      21,    1,  138,    2, 0x08 /* Private */,
-      22,    1,  141,    2, 0x08 /* Private */,
+       1,    1,  134,    2, 0x08 /* Private */,
+       5,    2,  137,    2, 0x08 /* Private */,
+       6,    0,  142,    2, 0x08 /* Private */,
+       7,    0,  143,    2, 0x08 /* Private */,
+       8,    0,  144,    2, 0x08 /* Private */,
+       9,    0,  145,    2, 0x08 /* Private */,
+      10,    0,  146,    2, 0x08 /* Private */,
+      11,    1,  147,    2, 0x08 /* Private */,
+      13,    0,  150,    2, 0x08 /* Private */,
+      14,    0,  151,    2, 0x08 /* Private */,
+      15,    0,  152,    2, 0x08 /* Private */,
+      16,    1,  153,    2, 0x08 /* Private */,
+      17,    1,  156,    2, 0x08 /* Private */,
+      18,    1,  159,    2, 0x08 /* Private */,
+      19,    1,  162,    2, 0x08 /* Private */,
+      20,    1,  165,    2, 0x08 /* Private */,
+      21,    1,  168,    2, 0x08 /* Private */,
+      22,    1,  171,    2, 0x08 /* Private */,
+      23,    0,  174,    2, 0x08 /* Private */,
+      24,    0,  175,    2, 0x08 /* Private */,
+      25,    0,  176,    2, 0x08 /* Private */,
+      26,    0,  177,    2, 0x08 /* Private */,
+      27,    0,  178,    2, 0x08 /* Private */,
+      28,    0,  179,    2, 0x08 /* Private */,
 
  // slots: parameters
     QMetaType::Void, 0x80000000 | 3,    4,
@@ -119,6 +133,12 @@ static const uint qt_meta_data_CgQtGui[] = {
     QMetaType::Void, QMetaType::Int,   12,
     QMetaType::Void, QMetaType::Int,   12,
     QMetaType::Void, QMetaType::Int,   12,
+    QMetaType::Void,
+    QMetaType::Void,
+    QMetaType::Void,
+    QMetaType::Void,
+    QMetaType::Void,
+    QMetaType::Void,
 
        0        // eod
 };
@@ -147,6 +167,12 @@ void CgQtGui::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, voi
         case 15: _t->changeHoeheZylinder((*reinterpret_cast< int(*)>(_a[1]))); break;
         case 16: _t->changeRefineZylinder((*reinterpret_cast< int(*)>(_a[1]))); break;
         case 17: _t->changeRefineRota((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 18: _t->selectY(); break;
+        case 19: _t->selectX(); break;
+        case 20: _t->selectZ(); break;
+        case 21: _t->changeVisibleX(); break;
+        case 22: _t->changeVisibleY(); break;
+        case 23: _t->changeVisibleZ(); break;
         default: ;
         }
     }
@@ -179,13 +205,13 @@ int CgQtGui::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 18)
+        if (_id < 24)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 18;
+        _id -= 24;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 18)
+        if (_id < 24)
             *reinterpret_cast<int*>(_a[0]) = -1;
-        _id -= 18;
+        _id -= 24;
     }
     return _id;
 }
