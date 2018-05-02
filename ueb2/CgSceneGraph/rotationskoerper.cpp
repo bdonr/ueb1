@@ -11,7 +11,7 @@ RotationsKoerper::RotationsKoerper(MyPolyline* poly, int refine):poly(poly), ref
 
 RotationsKoerper::RotationsKoerper(int id, int refine):refine(refine), id(id)
 {
-drehe();
+    drehe();
 }
 
 std::vector <MyPolyline*> RotationsKoerper::getPolyVec(){
@@ -27,22 +27,29 @@ std::vector<MyPolyline*> RotationsKoerper::getNormale(){
 
 void RotationsKoerper::drehe(){
     int count = 0;
-float y = 0;
-std::vector<glm::vec3> vect;
-vect.push_back(glm::vec3(0,.0,0));
-vect.push_back(glm::vec3(.65,.25,0));
-vect.push_back(glm::vec3(1,.0,0));
+    float y = 0;
 
-vect.push_back(glm::vec3(.3,.0,0));
+
+    std::vector<glm::vec3> vect;
+    std::vector<glm::vec3> matrix;
+
+
+    for(float i=0.0; i<=360.;i=i+20.){
+        std::cout<<i<<std::endl;
+        // std::cout<<"hallo"<<vectneu.size()<<std::endl;
+            vect.push_back(glm::vec3(glm::cos(glm::radians(i)),glm::sin(glm::radians(i)),0));
+        //    std::cout<<glm::cos(i)<<","<<glm::sin(i)<<"i"<<i<<std::endl;
+            //vectneu.at(i)->fuelleAuf();
+    }
 
     for( float y = 0.0;y<360.0+360.0/refine;y=y+(360.0/refine))
     {
         std::vector<glm::vec3> matrix;
-        matrix.push_back(glm::vec3(1,0,0));
-        matrix.push_back(glm::vec3(0,glm::cos(glm::radians(y)),(-1)*glm::sin(glm::radians(y))));
-        matrix.push_back(glm::vec3(0,glm::sin(glm::radians(y)),glm::cos(glm::radians(y))));
+        matrix.push_back(glm::vec3(glm::cos(glm::radians(y)),0,glm::sin(glm::radians(y))));
+        matrix.push_back(glm::vec3(0,1,0));
+        matrix.push_back(glm::vec3((-1)*glm::sin(glm::radians(y)),0,glm::cos(glm::radians(y))));
         std::vector<glm::vec3> vectneu;
-       // std::cout<<"hallo"<<vectneu.size()<<std::endl;
+        // std::cout<<"hallo"<<vectneu.size()<<std::endl;
         for(int i=0;i<vect.size();i++){
             vectneu.push_back(vectorMalMatrix(vect.at(i),matrix));
             //vectneu.at(i)->fuelleAuf();
@@ -51,8 +58,9 @@ vect.push_back(glm::vec3(.3,.0,0));
 
         polyVec.push_back(MeshFactory::createMyPolyline(glm::vec3(255,0,0),vectneu));
 
-       polyVec.at(count)->fuelleAuf();
-        polyVec.at(count)->fuelleAuf();
+        // polyVec.at(count)->fuelleAuf();
+        // polyVec.at(count)->fuelleAuf();
+
         count++;
     }
     zieheLinieZwischenZweiNachBarSegmenten();
@@ -69,8 +77,8 @@ glm::vec3 RotationsKoerper::vectorMalMatrix(glm::vec3 vector,std::vector<glm::ve
 
 void RotationsKoerper::zieheLinieZwischenZweiNachBarSegmenten(){
     //-2 da wir am ende nicht doppelt haben wollen
-     for(int i=0;i<=this->polyVec.size()-2;i++){
-         for(int j=0;j<this->polyVec.at(i)->getVertices().size()-1;j++){
+    for(int i=0;i<=this->polyVec.size()-2;i++){
+        for(int j=0;j<this->polyVec.at(i)->getVertices().size()-1;j++){
             std::vector<glm::vec3> x;
             std::vector<glm::vec3> y;
             glm::vec3 a=polyVec.at(i)->getVertices().at(j);
@@ -98,29 +106,29 @@ void RotationsKoerper::zieheLinieZwischenZweiNachBarSegmenten(){
 }
 
 glm::vec3 RotationsKoerper::mittelPunkt(glm::vec3 a,glm::vec3 b, glm::vec3 c){
-     glm::vec3 mittelPunkt;
+    glm::vec3 mittelPunkt;
     mittelPunkt= a+b+c;
 
-     mittelPunkt.x = mittelPunkt.x/3;
-      mittelPunkt.y = mittelPunkt.y/3;
-          mittelPunkt.z = mittelPunkt.z/3;
-     return mittelPunkt;
+    mittelPunkt.x = mittelPunkt.x/3;
+    mittelPunkt.y = mittelPunkt.y/3;
+    mittelPunkt.z = mittelPunkt.z/3;
+    return mittelPunkt;
 }
 
 glm::vec3 RotationsKoerper::normalen(glm::vec3 a,glm::vec3 b, glm::vec3 c,glm::vec3 mittelpunkt){
-        glm::vec3 k;
+    glm::vec3 k;
 
-        glm::vec3 vab = b-a;
-        glm::vec3 vac = c-a;
+    glm::vec3 vab = b-a;
+    glm::vec3 vac = c-a;
 
-        k.x = vab.y*vac.z - vac.y*vab.z;
-        k.y = vab.z*vac.x - vac.z*vab.x;
+    k.x = vab.y*vac.z - vac.y*vab.z;
+    k.y = vab.z*vac.x - vac.z*vab.x;
     k.z = vab.x*vac.y - vac.x*vab.y;
 
-       k.x=k.x+mittelpunkt.x;
-       k.y=k.y+mittelpunkt.y;
-       k.z=k.z+mittelpunkt.z;
-       return k;
+    k.x=k.x+mittelpunkt.x;
+    k.y=k.y+mittelpunkt.y;
+    k.z=k.z+mittelpunkt.z;
+    return k;
 }
 
 

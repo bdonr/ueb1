@@ -10,17 +10,17 @@ MyPolyline::MyPolyline(int id,glm::vec3 color,std::vector<glm::vec3> x):id(id),t
     this->vertices=x;
 
 }
- const std::vector<glm::vec3>& MyPolyline::getVertices()  const{
-     return this->vertices;
- }
+const std::vector<glm::vec3>& MyPolyline::getVertices()  const{
+    return this->vertices;
+}
 
 void MyPolyline::setVertices(std::vector<glm::vec3> x){
     this->vertices=x;
 
 }
- glm::vec3 MyPolyline::getColor()const{
-     return this->color;
- }
+glm::vec3 MyPolyline::getColor()const{
+    return this->color;
+}
 unsigned int MyPolyline::getLineWidth() const{
     return this->width;
 }
@@ -41,42 +41,17 @@ void MyPolyline::setColor(const glm::vec3 x){
 void MyPolyline::fuelleAuf(){
     int mitte = this->vertices.size() / 2;
     int ende = this->vertices.size();
-    //unterscheide grade und ungerade anzahl
-    if (this->vertices.size() % 2 == 0) {
-        //hänge an altes array doppelte ab mitte an
-        for (int i = mitte; i < ende; i++) {
-            this->vertices.push_back(this->vertices.at(i));
-            this->vertices.push_back(this->vertices.at(i));
-        }
-
-        //hänge an altes array doppelte ab mitte an
-        int div = 1;
-        for (int i = 1; i < ende; i = i + 2) {
-            this->vertices.at(ende - i) = this->vertices.at(mitte - div);
-            this->vertices.at(ende - i - 1) = this->vertices.at(mitte - div);
-            div++;
-        }
-    } else {
-
-        //hänge an altes array doppelte ab mitte an
-        this->vertices.push_back(this->vertices.at(mitte));
-        for (int i = mitte + 1; i < ende; i++) {
-            this->vertices.push_back(this->vertices.at(i));
-            this->vertices.push_back(this->vertices.at(i));
-
-        }
-        // von mitte aus nach links alle doppel eintragen
-        this->vertices.at(ende - 1) = this->vertices.at(mitte);
-        int div = 1;
-        for (int i = 2; i < ende - 1; i = i + 2) {
-            this->vertices.at(ende - i) = this->vertices.at(mitte - div);
-            this->vertices.at(ende - i - 1) = this->vertices.at(mitte - div);
-            div++;
-        }
-
-        this->vertices.at(1) = this->vertices.at(0);
+    std::cout<<"mitte"<<mitte<<"ende"<<ende<<std::endl;
+    this->vertices.resize(ende+ende);
+    std::cout<<this->vertices.size()<<std::endl;
+    int neuende = this->vertices.size()-1;
+    for(int i=ende-1;i>=0;i--){
+        std::cout<<"i"<<i<<"neuende"<<neuende<<std::endl;
+        this->vertices.at(neuende) = this->vertices.at(i);
+        this->vertices.at(neuende-1)=this->vertices.at(i);
+        neuende=neuende-2;
     }
-     rechne();
+    rechne();
 
 }
 
@@ -89,9 +64,35 @@ void MyPolyline::rechne() {
         this->vertices.at(i+1).x = (this->vertices.at(i).x*0.25)+(this->vertices.at(i+2).x*0.75);
         this->vertices.at(i+1).y = (this->vertices.at(i).y*0.25)+(this->vertices.at(i+2).y*0.75);
         this->vertices.at(i+1).z = (this->vertices.at(i).z*0.25)+(this->vertices.at(i+2).z*0.75);
-
-
     }
+}
+
+void MyPolyline::rechneVierPunkteSchema(){
+    int mitte = this->vertices.size() / 2;
+    int ende = this->vertices.size();
+    float w = .0625;
+//    std::cout<<"mitte"<<mitte<<"ende"<<ende<<std::endl;
+    this->vertices.resize(ende+ende);
+    std::cout<<this->vertices.size()<<std::endl;
+    int neuende = this->vertices.size()-1;
+    for(int i =ende-2; i>=4;i--){
+        std::cout<<"i"<<i<<"i*2+1"<<i*2+1<<vertices.at((2*i)+1).x<<std::endl;
+        std::cout<<"y"<<vertices.at((2*i)+1).y<<std::endl;
+        if(((i*2)+4)>=neuende){
+            this->vertices.at((2*i)+1).x = (w*(-1.)*(this->vertices.at(2*i).x))+((.5+w)*this->vertices.at((2*i)-2).x)+((.5+w)*(this->vertices.at((2*i)+2).x))+((-1.)*w*vertices.at((2*i)+4).x);
+              this->vertices.at((2*i)+1).y = (w*(-1.)*(this->vertices.at(2*i).y))+((.5+w)*this->vertices.at((2*i)-2).y)+((.5+w)*(this->vertices.at((2*i)+2).y))+((-1.)*w*vertices.at((2*i)+4).y);
+              this->vertices.at((2*i)+1).z = (w*(-1.)*(this->vertices.at(2*i).z))+((.5+w)*this->vertices.at((2*i)-2).z)+((.5+w)*(this->vertices.at((2*i)+2).z))+((-1.)*w*vertices.at((2*i)+4).z);
+        }
+        else{
+      this->vertices.at((2*i)+1).x = (w*(-1.)*(this->vertices.at(2*i).x))+((.5+w)*this->vertices.at((2*i)-2).x)+((.5+w)*(this->vertices.at((2*i)+2).x))+((-1.)*w*vertices.at((2*i)-4).x);
+        this->vertices.at((2*i)+1).y = (w*(-1.)*(this->vertices.at(2*i).y))+((.5+w)*this->vertices.at((2*i)-2).y)+((.5+w)*(this->vertices.at((2*i)+2).y))+((-1.)*w*vertices.at((2*i)-4).y);
+        this->vertices.at((2*i)+1).z = (w*(-1.)*(this->vertices.at(2*i).z))+((.5+w)*this->vertices.at((2*i)-2).z)+((.5+w)*(this->vertices.at((2*i)+2).z))+((-1.)*w*vertices.at((2*i)-4).z);
+
+        }std::cout<<"x"<<vertices.at((2*i)+1).x<<std::endl;
+        std::cout<<"y"<<vertices.at((2*i)+1).y<<std::endl;
+        std::cout<<(2*i)+4<<std::endl;
+    }
+
 }
 
 

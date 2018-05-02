@@ -21,6 +21,7 @@ public:
     void rechne();
     void fuelleAuf();
 
+    void rechneVierPunkteSchema();
 
     MyPolyline();
     ~MyPolyline();

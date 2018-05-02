@@ -24,7 +24,8 @@ SOURCES += main.cpp \
     CgUtils/ObjLoader.cpp \
     CgSceneGraph/dreiecke.cpp \
     CgSceneGraph/koordinatensystem.cpp \
-    CgEvents/objectopenevent.cpp
+    CgEvents/objectopenevent.cpp \
+    CgSceneGraph/kugel.cpp
 
 
 HEADERS += \
@@ -58,4 +59,5 @@ HEADERS += \
 CgUtils/ObjLoader.h \
     CgSceneGraph/dreiecke.h \
     CgSceneGraph/koordinatensystem.h \
-    CgEvents/objectopenevent.h
+    CgEvents/objectopenevent.h \
+    CgSceneGraph/kugel.h
