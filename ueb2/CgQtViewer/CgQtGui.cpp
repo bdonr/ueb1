@@ -27,6 +27,7 @@
 #include <QActionGroup>
 #include <iostream>
 #include "../CgEvents/objectopenevent.h"
+#include "CgSceneGraph/besterslidermoveevent.h"
 
 
 CgQtGui::CgQtGui(CgQtMainApplication *mw)
@@ -34,7 +35,7 @@ CgQtGui::CgQtGui(CgQtMainApplication *mw)
 {
 
     m_glRenderWidget = new CgQtGLRenderWidget;
-
+    traegerklasse=new TraegerKlasse();
     connect(m_glRenderWidget, SIGNAL(mouseEvent(QMouseEvent*)), this, SLOT(mouseEvent(QMouseEvent*)));
     connect(m_glRenderWidget, SIGNAL(viewportChanged(int,int)), this, SLOT(viewportChanged(int,int)));
     //  connect(m_glRenderWidget, SIGNAL(valueChanged(int)), this, SLOT(sliderMove(int)));
@@ -537,6 +538,8 @@ void CgQtGui::createOptionPanelExample5(QWidget* parent)
     kkk2->setTickInterval(1);
     kkk2->setVisible(z);
 
+
+
     connect(radiobutton11, SIGNAL(pressed()), this, SLOT(changeVisibleX()));
     connect(radiobutton12, SIGNAL(pressed()), this, SLOT(changeVisibleY()));
     connect(radiobutton13, SIGNAL(pressed()), this, SLOT(changeVisibleZ()));
@@ -545,7 +548,9 @@ void CgQtGui::createOptionPanelExample5(QWidget* parent)
     myButtonGroup->addButton(radiobutton12,1);
     myButtonGroup->addButton(radiobutton13,2);
 
-
+    connect(kkk,SIGNAL(sliderMoved(int)),this,SLOT(changeX(int)));
+    connect(kkk1,SIGNAL(sliderMoved(int)),this,SLOT(changeY(int)));
+    connect(kkk2,SIGNAL(sliderMoved(int)),this,SLOT(changeZ(int)));
 
     QVBoxLayout *vbox = new QVBoxLayout;
     vbox->addWidget(radiobutton11);
@@ -772,4 +777,23 @@ void CgQtGui::changeVisibleY(void){
 void CgQtGui::changeVisibleZ(void){
     kkk2->setVisible(z);
 
+}
+
+void CgQtGui::changeX(int x)
+{
+
+    traegerklasse->setX(x);
+    notifyObserver(new bestersliderMoveEvent(Cg::CgChangeRota,traegerklasse));
+}
+
+void CgQtGui::changeY(int y)
+{
+    traegerklasse->setY(y);
+    notifyObserver(new bestersliderMoveEvent(Cg::CgChangeRota,traegerklasse));
+}
+
+void CgQtGui::changeZ(int z)
+{
+    traegerklasse->setZ(z);
+    notifyObserver(new bestersliderMoveEvent(Cg::CgChangeRota,traegerklasse));
 }

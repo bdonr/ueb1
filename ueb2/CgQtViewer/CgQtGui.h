@@ -44,6 +44,7 @@
 #include <QWidget>
 #include "../CgBase/CgObservable.h"
 #include "../CgBase/CgEnums.h"
+#include "CgSceneGraph/traegerklasse.h"
 
 QT_BEGIN_NAMESPACE
 class QSlider;
@@ -116,6 +117,7 @@ private:
     bool x;
     bool y;
     bool z;
+    TraegerKlasse *traegerklasse;
 
 
 private slots:
@@ -154,6 +156,11 @@ private slots:
     void  changeVisibleX(void);
     void  changeVisibleY(void);
     void  changeVisibleZ(void);
+
+    void changeX(int x);
+    void changeY(int y);
+    void changeZ(int z);
+
 
 };
 

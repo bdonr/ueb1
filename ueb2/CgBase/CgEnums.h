@@ -30,6 +30,7 @@ namespace Cg{
     RefineRota                       = 0x0004000,
     CgSomeSpecialEvent4             = 0x0008000,
     CgEventGroup1                   = 0x000f000,
+    CgChangeRota                    = 0x0001001,
 
     // feel free to add whatever you like
     }EventType;

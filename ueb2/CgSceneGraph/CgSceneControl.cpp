@@ -14,6 +14,7 @@
 #include <string.h>
 #include "CgUtils/ObjLoader.h"
 #include "../CgEvents/objectopenevent.h"
+#include "besterslidermoveevent.h"
 
 // bla dingens
 CgSceneControl::CgSceneControl() {
@@ -330,6 +331,12 @@ void CgSceneControl::handleEvent(CgBaseEvent *e) {
 
         }
 
+        if(e->getType()==Cg::CgChangeRota){
+            std::cout<<((bestersliderMoveEvent*)e)->getTraegerKlasse()->getIntvec().x<<std::endl;
+            std::cout<<((bestersliderMoveEvent*)e)->getTraegerKlasse()->getIntvec().y<<std::endl;
+            std::cout<<((bestersliderMoveEvent*)e)->getTraegerKlasse()->getIntvec().z<<std::endl;
+
+        }
         if(e->getType()==Cg::CgChangeWahl){
 
             if(objecte.empty()){

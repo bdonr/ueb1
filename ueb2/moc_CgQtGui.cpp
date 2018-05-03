@@ -19,8 +19,8 @@
 
 QT_BEGIN_MOC_NAMESPACE
 struct qt_meta_stringdata_CgQtGui_t {
-    QByteArrayData data[29];
-    char stringdata0[438];
+    QByteArrayData data[34];
+    char stringdata0[466];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -57,7 +57,12 @@ QT_MOC_LITERAL(24, 377, 7), // "selectX"
 QT_MOC_LITERAL(25, 385, 7), // "selectZ"
 QT_MOC_LITERAL(26, 393, 14), // "changeVisibleX"
 QT_MOC_LITERAL(27, 408, 14), // "changeVisibleY"
-QT_MOC_LITERAL(28, 423, 14) // "changeVisibleZ"
+QT_MOC_LITERAL(28, 423, 14), // "changeVisibleZ"
+QT_MOC_LITERAL(29, 438, 7), // "changeX"
+QT_MOC_LITERAL(30, 446, 7), // "changeY"
+QT_MOC_LITERAL(31, 454, 1), // "y"
+QT_MOC_LITERAL(32, 456, 7), // "changeZ"
+QT_MOC_LITERAL(33, 464, 1) // "z"
 
     },
     "CgQtGui\0mouseEvent\0\0QMouseEvent*\0event\0"
@@ -71,7 +76,8 @@ QT_MOC_LITERAL(28, 423, 14) // "changeVisibleZ"
     "changeRadiusZylinder\0changeHoeheZylinder\0"
     "changeRefineZylinder\0changeRefineRota\0"
     "selectY\0selectX\0selectZ\0changeVisibleX\0"
-    "changeVisibleY\0changeVisibleZ"
+    "changeVisibleY\0changeVisibleZ\0changeX\0"
+    "changeY\0y\0changeZ\0z"
 };
 #undef QT_MOC_LITERAL
 
@@ -81,7 +87,7 @@ static const uint qt_meta_data_CgQtGui[] = {
        7,       // revision
        0,       // classname
        0,    0, // classinfo
-      24,   14, // methods
+      27,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -89,30 +95,33 @@ static const uint qt_meta_data_CgQtGui[] = {
        0,       // signalCount
 
  // slots: name, argc, parameters, tag, flags
-       1,    1,  134,    2, 0x08 /* Private */,
-       5,    2,  137,    2, 0x08 /* Private */,
-       6,    0,  142,    2, 0x08 /* Private */,
-       7,    0,  143,    2, 0x08 /* Private */,
-       8,    0,  144,    2, 0x08 /* Private */,
-       9,    0,  145,    2, 0x08 /* Private */,
-      10,    0,  146,    2, 0x08 /* Private */,
-      11,    1,  147,    2, 0x08 /* Private */,
-      13,    0,  150,    2, 0x08 /* Private */,
-      14,    0,  151,    2, 0x08 /* Private */,
-      15,    0,  152,    2, 0x08 /* Private */,
-      16,    1,  153,    2, 0x08 /* Private */,
-      17,    1,  156,    2, 0x08 /* Private */,
-      18,    1,  159,    2, 0x08 /* Private */,
-      19,    1,  162,    2, 0x08 /* Private */,
-      20,    1,  165,    2, 0x08 /* Private */,
-      21,    1,  168,    2, 0x08 /* Private */,
-      22,    1,  171,    2, 0x08 /* Private */,
-      23,    0,  174,    2, 0x08 /* Private */,
-      24,    0,  175,    2, 0x08 /* Private */,
-      25,    0,  176,    2, 0x08 /* Private */,
-      26,    0,  177,    2, 0x08 /* Private */,
-      27,    0,  178,    2, 0x08 /* Private */,
-      28,    0,  179,    2, 0x08 /* Private */,
+       1,    1,  149,    2, 0x08 /* Private */,
+       5,    2,  152,    2, 0x08 /* Private */,
+       6,    0,  157,    2, 0x08 /* Private */,
+       7,    0,  158,    2, 0x08 /* Private */,
+       8,    0,  159,    2, 0x08 /* Private */,
+       9,    0,  160,    2, 0x08 /* Private */,
+      10,    0,  161,    2, 0x08 /* Private */,
+      11,    1,  162,    2, 0x08 /* Private */,
+      13,    0,  165,    2, 0x08 /* Private */,
+      14,    0,  166,    2, 0x08 /* Private */,
+      15,    0,  167,    2, 0x08 /* Private */,
+      16,    1,  168,    2, 0x08 /* Private */,
+      17,    1,  171,    2, 0x08 /* Private */,
+      18,    1,  174,    2, 0x08 /* Private */,
+      19,    1,  177,    2, 0x08 /* Private */,
+      20,    1,  180,    2, 0x08 /* Private */,
+      21,    1,  183,    2, 0x08 /* Private */,
+      22,    1,  186,    2, 0x08 /* Private */,
+      23,    0,  189,    2, 0x08 /* Private */,
+      24,    0,  190,    2, 0x08 /* Private */,
+      25,    0,  191,    2, 0x08 /* Private */,
+      26,    0,  192,    2, 0x08 /* Private */,
+      27,    0,  193,    2, 0x08 /* Private */,
+      28,    0,  194,    2, 0x08 /* Private */,
+      29,    1,  195,    2, 0x08 /* Private */,
+      30,    1,  198,    2, 0x08 /* Private */,
+      32,    1,  201,    2, 0x08 /* Private */,
 
  // slots: parameters
     QMetaType::Void, 0x80000000 | 3,    4,
@@ -139,6 +148,9 @@ static const uint qt_meta_data_CgQtGui[] = {
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
+    QMetaType::Void, QMetaType::Int,   12,
+    QMetaType::Void, QMetaType::Int,   31,
+    QMetaType::Void, QMetaType::Int,   33,
 
        0        // eod
 };
@@ -173,6 +185,9 @@ void CgQtGui::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, voi
         case 21: _t->changeVisibleX(); break;
         case 22: _t->changeVisibleY(); break;
         case 23: _t->changeVisibleZ(); break;
+        case 24: _t->changeX((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 25: _t->changeY((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 26: _t->changeZ((*reinterpret_cast< int(*)>(_a[1]))); break;
         default: ;
         }
     }
@@ -205,13 +220,13 @@ int CgQtGui::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 24)
+        if (_id < 27)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 24;
+        _id -= 27;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 24)
+        if (_id < 27)
             *reinterpret_cast<int*>(_a[0]) = -1;
-        _id -= 24;
+        _id -= 27;
     }
     return _id;
 }

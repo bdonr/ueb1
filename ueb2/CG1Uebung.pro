@@ -25,7 +25,9 @@ SOURCES += main.cpp \
     CgSceneGraph/dreiecke.cpp \
     CgSceneGraph/koordinatensystem.cpp \
     CgEvents/objectopenevent.cpp \
-    CgSceneGraph/kugel.cpp
+    CgSceneGraph/kugel.cpp \
+    CgSceneGraph/besterslidermoveevent.cpp \
+    CgSceneGraph/traegerklasse.cpp
 
 
 HEADERS += \
@@ -60,4 +62,6 @@ CgUtils/ObjLoader.h \
     CgSceneGraph/dreiecke.h \
     CgSceneGraph/koordinatensystem.h \
     CgEvents/objectopenevent.h \
-    CgSceneGraph/kugel.h
+    CgSceneGraph/kugel.h \
+    CgSceneGraph/besterslidermoveevent.h \
+    CgSceneGraph/traegerklasse.h

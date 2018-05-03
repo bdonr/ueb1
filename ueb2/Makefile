@@ -33,7 +33,7 @@ MOVE          = mv -f
 TAR           = tar -cf
 COMPRESS      = gzip -9f
 DISTNAME      = uebung11.0.0
-DISTDIR = /home/leoon/Schreibtisch/sem4/cg1/aufgaben/neu\ workpace/ueb1/ueb2/.tmp/uebung11.0.0
+DISTDIR = /home/don/Schreibtisch/cg\ uebung/ueb1/ueb2/.tmp/uebung11.0.0
 LINK          = g++
 LFLAGS        = -m64 -Wl,-O1
 LIBS          = $(SUBLIBS) -L/usr/X11R6/lib64 -lQt5OpenGL -lQt5Widgets -lQt5Gui -lQt5Core -lGL -lpthread 
@@ -68,7 +68,10 @@ SOURCES       = main.cpp \
 		CgUtils/ObjLoader.cpp \
 		CgSceneGraph/dreiecke.cpp \
 		CgSceneGraph/koordinatensystem.cpp \
-		CgEvents/objectopenevent.cpp moc_CgQtGLRenderWidget.cpp \
+		CgEvents/objectopenevent.cpp \
+		CgSceneGraph/kugel.cpp \
+		CgSceneGraph/besterslidermoveevent.cpp \
+		CgSceneGraph/traegerklasse.cpp moc_CgQtGLRenderWidget.cpp \
 		moc_CgQtGui.cpp \
 		moc_CgQtMainApplication.cpp
 OBJECTS       = main.o \
@@ -92,6 +95,9 @@ OBJECTS       = main.o \
 		dreiecke.o \
 		koordinatensystem.o \
 		objectopenevent.o \
+		kugel.o \
+		besterslidermoveevent.o \
+		traegerklasse.o \
 		moc_CgQtGLRenderWidget.o \
 		moc_CgQtGui.o \
 		moc_CgQtMainApplication.o
@@ -181,7 +187,10 @@ DIST          = /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
 		CgUtils/ObjLoader.h \
 		CgSceneGraph/dreiecke.h \
 		CgSceneGraph/koordinatensystem.h \
-		CgEvents/objectopenevent.h main.cpp \
+		CgEvents/objectopenevent.h \
+		CgSceneGraph/kugel.h \
+		CgSceneGraph/besterslidermoveevent.h \
+		CgSceneGraph/traegerklasse.h main.cpp \
 		CgQtViewer/CGQtGLRenderWidget.cpp \
 		CgQtViewer/CgQtGui.cpp \
 		CgBase/CgObservable.cpp \
@@ -201,7 +210,10 @@ DIST          = /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
 		CgUtils/ObjLoader.cpp \
 		CgSceneGraph/dreiecke.cpp \
 		CgSceneGraph/koordinatensystem.cpp \
-		CgEvents/objectopenevent.cpp
+		CgEvents/objectopenevent.cpp \
+		CgSceneGraph/kugel.cpp \
+		CgSceneGraph/besterslidermoveevent.cpp \
+		CgSceneGraph/traegerklasse.cpp
 QMAKE_TARGET  = uebung1
 DESTDIR       = #avoid trailing-slash linebreak
 TARGET        = uebung1
@@ -369,8 +381,8 @@ dist: distdir FORCE
 distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
-	$(COPY_FILE) --parents CgBase/CgBaseRenderWindow.h CgQtViewer/CgQtGLRenderWidget.h CgQtViewer/CgQtGui.h CgBase/CgObserver.h CgBase/CgObservable.h CgBase/CgBaseEvent.h CgBase/CgEnums.h CgEvents/CgMouseEvent.h CgQtViewer/CgQtMainApplication.h CgSceneGraph/CgSceneControl.h CgEvents/CgKeyEvent.h CgBase/CgBaseRenderer.h CgBase/CgBaseRenderableObject.h CgBase/CgBasePointCloud.h CgBase/CgBaseTriangleMesh.h CgBase/CgBasePolygonMesh.h CgBase/CgBasePolyline.h CgBase/CgBaseSceneControl.h CgQtViewer/CgQtGlBufferObject.h CgQtViewer/CgTrackball.h CgEvents/CgWindowResizeEvent.h CgSceneGraph/meshfactory.h CgSceneGraph/Zylinder.h CgSceneGraph/kegel.h CgSceneGraph/Mypolyline.h CgSceneGraph/slidermoveevent.h CgSceneGraph/rotationskoerper.h CgUtils/ObjLoader.h CgSceneGraph/dreiecke.h CgSceneGraph/koordinatensystem.h CgEvents/objectopenevent.h $(DISTDIR)/
-	$(COPY_FILE) --parents main.cpp CgQtViewer/CGQtGLRenderWidget.cpp CgQtViewer/CgQtGui.cpp CgBase/CgObservable.cpp CgEvents/CgMouseEvent.cpp CgQtViewer/CgQtMainApplication.cpp CgSceneGraph/CgSceneControl.cpp CgEvents/CgKeyEvent.cpp CgQtViewer/CgQtGlBufferObject.cpp CgQtViewer/CgTrackball.cpp CgEvents/CgWindowResizeEvent.cpp CgSceneGraph/meshfactory.cpp CgSceneGraph/Zylinder.cpp CgSceneGraph/kegel.cpp CgSceneGraph/Mypolyline.cpp CgSceneGraph/slidermoveevent.cpp CgSceneGraph/rotationskoerper.cpp CgUtils/ObjLoader.cpp CgSceneGraph/dreiecke.cpp CgSceneGraph/koordinatensystem.cpp CgEvents/objectopenevent.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents CgBase/CgBaseRenderWindow.h CgQtViewer/CgQtGLRenderWidget.h CgQtViewer/CgQtGui.h CgBase/CgObserver.h CgBase/CgObservable.h CgBase/CgBaseEvent.h CgBase/CgEnums.h CgEvents/CgMouseEvent.h CgQtViewer/CgQtMainApplication.h CgSceneGraph/CgSceneControl.h CgEvents/CgKeyEvent.h CgBase/CgBaseRenderer.h CgBase/CgBaseRenderableObject.h CgBase/CgBasePointCloud.h CgBase/CgBaseTriangleMesh.h CgBase/CgBasePolygonMesh.h CgBase/CgBasePolyline.h CgBase/CgBaseSceneControl.h CgQtViewer/CgQtGlBufferObject.h CgQtViewer/CgTrackball.h CgEvents/CgWindowResizeEvent.h CgSceneGraph/meshfactory.h CgSceneGraph/Zylinder.h CgSceneGraph/kegel.h CgSceneGraph/Mypolyline.h CgSceneGraph/slidermoveevent.h CgSceneGraph/rotationskoerper.h CgUtils/ObjLoader.h CgSceneGraph/dreiecke.h CgSceneGraph/koordinatensystem.h CgEvents/objectopenevent.h CgSceneGraph/kugel.h CgSceneGraph/besterslidermoveevent.h CgSceneGraph/traegerklasse.h $(DISTDIR)/
+	$(COPY_FILE) --parents main.cpp CgQtViewer/CGQtGLRenderWidget.cpp CgQtViewer/CgQtGui.cpp CgBase/CgObservable.cpp CgEvents/CgMouseEvent.cpp CgQtViewer/CgQtMainApplication.cpp CgSceneGraph/CgSceneControl.cpp CgEvents/CgKeyEvent.cpp CgQtViewer/CgQtGlBufferObject.cpp CgQtViewer/CgTrackball.cpp CgEvents/CgWindowResizeEvent.cpp CgSceneGraph/meshfactory.cpp CgSceneGraph/Zylinder.cpp CgSceneGraph/kegel.cpp CgSceneGraph/Mypolyline.cpp CgSceneGraph/slidermoveevent.cpp CgSceneGraph/rotationskoerper.cpp CgUtils/ObjLoader.cpp CgSceneGraph/dreiecke.cpp CgSceneGraph/koordinatensystem.cpp CgEvents/objectopenevent.cpp CgSceneGraph/kugel.cpp CgSceneGraph/besterslidermoveevent.cpp CgSceneGraph/traegerklasse.cpp $(DISTDIR)/
 
 
 clean: compiler_clean 
@@ -398,15 +410,15 @@ compiler_moc_header_clean:
 	-$(DEL_FILE) moc_CgQtGLRenderWidget.cpp moc_CgQtGui.cpp moc_CgQtMainApplication.cpp
 moc_CgQtGLRenderWidget.cpp: CgBase/CgBaseRenderer.h \
 		CgQtViewer/CgQtGLRenderWidget.h
-	/usr/lib/x86_64-linux-gnu/qt5/bin/moc $(DEFINES) -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++-64 -I'/home/leoon/Schreibtisch/sem4/cg1/aufgaben/neu workpace/ueb1/ueb2' -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtOpenGL -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/5 -I/usr/include/x86_64-linux-gnu/c++/5 -I/usr/include/c++/5/backward -I/usr/lib/gcc/x86_64-linux-gnu/5/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include CgQtViewer/CgQtGLRenderWidget.h -o moc_CgQtGLRenderWidget.cpp
+	/usr/lib/x86_64-linux-gnu/qt5/bin/moc $(DEFINES) -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++-64 -I'/home/don/Schreibtisch/cg uebung/ueb1/ueb2' -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtOpenGL -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/5 -I/usr/include/x86_64-linux-gnu/c++/5 -I/usr/include/c++/5/backward -I/usr/lib/gcc/x86_64-linux-gnu/5/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include CgQtViewer/CgQtGLRenderWidget.h -o moc_CgQtGLRenderWidget.cpp
 
 moc_CgQtGui.cpp: CgBase/CgObservable.h \
 		CgBase/CgEnums.h \
 		CgQtViewer/CgQtGui.h
-	/usr/lib/x86_64-linux-gnu/qt5/bin/moc $(DEFINES) -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++-64 -I'/home/leoon/Schreibtisch/sem4/cg1/aufgaben/neu workpace/ueb1/ueb2' -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtOpenGL -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/5 -I/usr/include/x86_64-linux-gnu/c++/5 -I/usr/include/c++/5/backward -I/usr/lib/gcc/x86_64-linux-gnu/5/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include CgQtViewer/CgQtGui.h -o moc_CgQtGui.cpp
+	/usr/lib/x86_64-linux-gnu/qt5/bin/moc $(DEFINES) -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++-64 -I'/home/don/Schreibtisch/cg uebung/ueb1/ueb2' -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtOpenGL -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/5 -I/usr/include/x86_64-linux-gnu/c++/5 -I/usr/include/c++/5/backward -I/usr/lib/gcc/x86_64-linux-gnu/5/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include CgQtViewer/CgQtGui.h -o moc_CgQtGui.cpp
 
 moc_CgQtMainApplication.cpp: CgQtViewer/CgQtMainApplication.h
-	/usr/lib/x86_64-linux-gnu/qt5/bin/moc $(DEFINES) -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++-64 -I'/home/leoon/Schreibtisch/sem4/cg1/aufgaben/neu workpace/ueb1/ueb2' -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtOpenGL -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/5 -I/usr/include/x86_64-linux-gnu/c++/5 -I/usr/include/c++/5/backward -I/usr/lib/gcc/x86_64-linux-gnu/5/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include CgQtViewer/CgQtMainApplication.h -o moc_CgQtMainApplication.cpp
+	/usr/lib/x86_64-linux-gnu/qt5/bin/moc $(DEFINES) -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++-64 -I'/home/don/Schreibtisch/cg uebung/ueb1/ueb2' -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtOpenGL -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/5 -I/usr/include/x86_64-linux-gnu/c++/5 -I/usr/include/c++/5/backward -I/usr/lib/gcc/x86_64-linux-gnu/5/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include CgQtViewer/CgQtMainApplication.h -o moc_CgQtMainApplication.cpp
 
 compiler_moc_source_make_all:
 compiler_moc_source_clean:
@@ -613,6 +625,26 @@ objectopenevent.o: CgEvents/objectopenevent.cpp CgEvents/objectopenevent.h \
 		CgBase/CgBaseEvent.h \
 		CgBase/CgEnums.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o objectopenevent.o CgEvents/objectopenevent.cpp
+
+kugel.o: CgSceneGraph/kugel.cpp CgSceneGraph/kugel.h \
+		CgSceneGraph/rotationskoerper.h \
+		CgSceneGraph/Mypolyline.h \
+		CgBase/CgBasePolyline.h \
+		CgBase/CgBaseRenderableObject.h \
+		CgBase/CgEnums.h \
+		CgSceneGraph/meshfactory.h \
+		CgBase/CgBaseTriangleMesh.h \
+		CgSceneGraph/dreiecke.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o kugel.o CgSceneGraph/kugel.cpp
+
+besterslidermoveevent.o: CgSceneGraph/besterslidermoveevent.cpp CgSceneGraph/besterslidermoveevent.h \
+		CgSceneGraph/traegerklasse.h \
+		CgBase/CgBaseEvent.h \
+		CgBase/CgEnums.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o besterslidermoveevent.o CgSceneGraph/besterslidermoveevent.cpp
+
+traegerklasse.o: CgSceneGraph/traegerklasse.cpp CgSceneGraph/traegerklasse.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o traegerklasse.o CgSceneGraph/traegerklasse.cpp
 
 moc_CgQtGLRenderWidget.o: moc_CgQtGLRenderWidget.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_CgQtGLRenderWidget.o moc_CgQtGLRenderWidget.cpp

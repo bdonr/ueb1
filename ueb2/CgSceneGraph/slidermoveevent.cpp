@@ -12,7 +12,7 @@ SliderMoveEvent::SliderMoveEvent(enum Cg::EventType type, int refine):type(type)
 
 }
 
-Cg::EventType SliderMoveEvent::getType(){
+enum Cg::EventType SliderMoveEvent::getType(){
     return type;
 }
 
