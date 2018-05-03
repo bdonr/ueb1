@@ -12,6 +12,7 @@
 #include "kegel.h"
 #include <stdio.h>
 #include <string.h>
+#include <unistd.h>
 #include "CgUtils/ObjLoader.h"
 #include "../CgEvents/objectopenevent.h"
 
@@ -27,6 +28,7 @@ CgSceneControl::CgSceneControl() {
     y=0.0;
 
     poly = MeshFactory::createRotationKoerper(1);
+
     m_triangle.push_back(MeshFactory::createKegel(0,.0,0));
 
     //resetRender(100);
@@ -35,6 +37,7 @@ CgSceneControl::CgSceneControl() {
     m_current_transformation = glm::mat4(1.);
     m_proj_matrix = glm::mat4x4(glm::vec4(1.792591, 0.0, 0.0, 0.0), glm::vec4(0.0, 1.792591, 0.0, 0.0),
                                 glm::vec4(0.0, 0.0, -1.0002, -1.0), glm::vec4(0.0, 0.0, -0.020002, 0.0));
+
     /*
 m_proj_matrix = glm::mat4x4(glm::vec4(1.792591, 0.0, 0.0, 0.0), glm::vec4(0.0, 1.792591, 0.0, 0.0),
                 glm::vec4(0.0, 0.0, -1.0002, -1.0), glm::vec4(0.0, 0.0, -0.020002, 0.0));
@@ -49,10 +52,13 @@ CgSceneControl::~CgSceneControl() {
 void CgSceneControl::setRenderer(CgBaseRenderer *r) {
     m_renderer = r;
     m_renderer->setSceneControl(this);
-
+std::cout<<"test1"<<std::endl;
     if(changed==0){
+
         if(dreiecke!=NULL){
+
             this->m_renderer->init(dreiecke);
+                    std::cout<<"test2"<<std::endl;
         }
         if(poly!=NULL){
             if(poly->getPolyVec().size()>0){
@@ -103,6 +109,7 @@ void CgSceneControl::resetObject(){
 
 
 void CgSceneControl::renderObjects() {
+
     m_renderer->setProjectionMatrix(m_proj_matrix);
     m_renderer->setLookAtMatrix(
                 glm::mat4x4(glm::vec4(1.0, 0.0, 0.0, 0.0), glm::vec4(0.0, 1.0, 0.0, 0.0), glm::vec4(0.0, 0.0, 1.0, -1.0),
