@@ -25,7 +25,14 @@ public:
     void resetObject();
     void reset();
     int getChanged();
+    glm::mat4x4 rotationX(int winkelx);
+    glm::mat4x4 rotationY(int winkely);
+    glm::mat4x4 rotationZ(int winkelz);
+    glm::mat4x4 transform(glm::vec3 k);
+
+    glm::mat4x4 allgemineRotation(int x, int y, int z);
 private:
+    glm::mat4x4 old;
     std::vector <Dreiecke*> objecte;
     CgBaseRenderer* m_renderer;
     Dreiecke* dreiecke;
@@ -33,6 +40,7 @@ private:
     std::vector<CgBaseTriangleMesh*> m_triangle;
     glm::mat4 m_current_transformation;
     glm::mat4 m_proj_matrix;
+    MyPolyline* rotaAchse;
     float s;
     float x;
     float y;
@@ -41,6 +49,8 @@ private:
     std::vector<glm::vec3> dreickevertices;
     Koordinatensystem* koordinatensystem;
     std::vector<unsigned int> dreieckecords;
+
+
 
 
 
