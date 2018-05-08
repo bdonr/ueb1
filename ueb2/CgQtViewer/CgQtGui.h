@@ -74,6 +74,7 @@ public:
     void kegelSlider();
 
 
+
 protected:
     void keyPressEvent(QKeyEvent *event) Q_DECL_OVERRIDE;
 
@@ -124,6 +125,10 @@ private slots:
 
 
 
+    void kugelSlider();
+     void changeRefineKugel(int x);
+    void changeRadiusKugel(int x);
+    void changeHoeheKugel(int x);
     /* slots to catch events directly from renderer */
     void mouseEvent(QMouseEvent* event);
     void viewportChanged(int,int);
@@ -139,6 +144,7 @@ private slots:
     void  objectOpenSelect1(void);
     void  objectOpenSelect2(void);
     void  objectOpenSelect3(void);
+    void  objectOpenSelect4(void);
 
     // void pressButton                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           Cg::ObjectType);
 

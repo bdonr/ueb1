@@ -263,6 +263,40 @@ void CgQtGui::createOptionPanelExample1(QWidget* parent)
 
 
 
+    QLabel* lab10= new QLabel("Kugel Refine");
+    tab1_control->addWidget(lab10);
+
+    QSlider *kugelRefineSlider = createSlider();
+    tab1_control->addWidget(kugelRefineSlider);
+    kugelRefineSlider->setMinimum(3);
+    kugelRefineSlider->setMaximum(60);
+    kugelRefineSlider->setValue(20);
+    kugelRefineSlider->setTickInterval(1);
+    connect(kugelRefineSlider, SIGNAL(sliderMoved(int)), this, SLOT(changeRefineKugel(int)));
+
+    QLabel* lab11= new QLabel("Kugel Radius");
+    tab1_control->addWidget(lab11);
+
+    QSlider *kugelRadiusSlider = createSlider();
+    tab1_control->addWidget(kugelRadiusSlider);
+    kugelRadiusSlider->setMinimum(0);
+    kugelRadiusSlider->setMaximum(60);
+    kugelRadiusSlider->setValue(20);
+    kugelRadiusSlider->setTickInterval(1);
+    connect(kugelRadiusSlider, SIGNAL(sliderMoved(int)), this, SLOT(changeRadiusKugel(int)));
+
+    QLabel* lab12= new QLabel("Kugel Hoehe");
+    tab1_control->addWidget(lab12);
+
+    QSlider *kugelHoeheSlider = createSlider();
+    tab1_control->addWidget(kugelHoeheSlider);
+    kugelHoeheSlider->setMinimum(0);
+    kugelHoeheSlider->setMaximum(60);
+    kugelHoeheSlider->setValue(20);
+    kugelHoeheSlider->setTickInterval(1);
+    connect(kugelHoeheSlider, SIGNAL(sliderMoved(int)), this, SLOT(changeHoeheKugel(int)));
+
+
 
 
 
@@ -426,12 +460,15 @@ void CgQtGui::aufgabe3(QWidget* parent)
     connect(radiobutton2, SIGNAL(pressed()), this, SLOT(objectOpenSelect2()));
     QRadioButton* radiobutton3 = new QRadioButton( "&Porsche");
     connect(radiobutton3, SIGNAL(pressed()), this, SLOT(objectOpenSelect3()));
+    QRadioButton* radiobutton4 = new QRadioButton( "&Kugel");
+    connect(radiobutton4, SIGNAL(pressed()), this, SLOT(objectOpenSelect4()));
 
     radiobutton3->setChecked(true);
 
     myButtonGroup->addButton(radiobutton1,0);
     myButtonGroup->addButton(radiobutton2,1);
     myButtonGroup->addButton(radiobutton3,2);
+    myButtonGroup->addButton(radiobutton4,3);
 
 
 
@@ -439,6 +476,7 @@ void CgQtGui::aufgabe3(QWidget* parent)
     vbox->addWidget(radiobutton1);
     vbox->addWidget(radiobutton2);
     vbox->addWidget(radiobutton3);
+    vbox->addWidget(radiobutton4);
 
     vbox->addStretch(1);
     myGroupBox->setLayout(vbox);
@@ -701,6 +739,34 @@ void CgQtGui::changeRefineKegel(int x){
 
 }
 
+
+void CgQtGui::kugelSlider(){
+
+    CgBaseEvent* ding = new SliderMoveEvent(Cg::KugelChange, refine, hoehe, radius);
+    notifyObserver(ding);
+}
+
+void CgQtGui::changeRadiusKugel(int x){
+    this->radius=(x*0.05);
+    kugelSlider();
+
+}
+
+void CgQtGui::changeHoeheKugel(int x){
+    this->hoehe=(x*0.05);
+    std::cout<<" changehoehkugel "<<hoehe<<std::endl;
+    kugelSlider();
+
+}
+
+void CgQtGui::changeRefineKugel(int x){
+    this->refine=x;
+    kugelSlider();
+
+}
+
+
+
 void CgQtGui::changeRadiusZylinder(int x){
     this->radius=(x*0.05);
     zylinderSlider();
@@ -712,6 +778,7 @@ void CgQtGui::changeHoeheZylinder(int x){
     zylinderSlider();
 
 }
+
 
 void CgQtGui::changeRefineZylinder(int x){
     this->refine=x;
@@ -730,6 +797,12 @@ void  CgQtGui::objectOpenSelect2(void){
 
 void  CgQtGui::objectOpenSelect3(void){
     ObjectOpenEvent* ob = new ObjectOpenEvent(2);
+    notifyObserver(ob);
+}
+
+void CgQtGui::objectOpenSelect4()
+{
+    ObjectOpenEvent* ob = new ObjectOpenEvent(3);
     notifyObserver(ob);
 }
 

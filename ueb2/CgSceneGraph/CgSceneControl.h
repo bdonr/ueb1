@@ -8,6 +8,7 @@
 #include "CgBase/CgBaseTriangleMesh.h"
 #include "rotationskoerper.h"
 #include "koordinatensystem.h"
+#include "kugel.h"
 class CgBaseEvent;
 class CgBaseRenderer;
 class CgExampleTriangle;
@@ -29,10 +30,11 @@ public:
     glm::mat4x4 rotationY(int winkely);
     glm::mat4x4 rotationZ(int winkelz);
     glm::mat4x4 transform(glm::vec3 k);
-
+    glm::mat4x4 translatetoVectot(glm::vec3 k);
     glm::mat4x4 allgemineRotation(int x, int y, int z);
+    void resetRenderKugel(int refine, float hoehe, float radius);
 private:
-    glm::mat4x4 old;
+    glm::mat4 old;
     std::vector <Dreiecke*> objecte;
     CgBaseRenderer* m_renderer;
     Dreiecke* dreiecke;
@@ -46,6 +48,7 @@ private:
     float y;
     float z;
     int changed;
+    Kugel * kugel;
     std::vector<glm::vec3> dreickevertices;
     Koordinatensystem* koordinatensystem;
     std::vector<unsigned int> dreieckecords;

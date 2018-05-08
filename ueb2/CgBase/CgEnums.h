@@ -26,6 +26,8 @@ namespace Cg{
 
     // unused, may be changed to whatever
     ZylinderChange                  = 0x0001000,
+
+    KugelChange                     = 0x0003000,
     KegelChange                     = 0x0002000,
     RefineRota                       = 0x0004000,
     CgSomeSpecialEvent4             = 0x0008000,
@@ -383,6 +385,7 @@ namespace Cg{
     //the following are unused, feel free to change
     Zylinder        	=0x00000010,
     Kegel       		=0x00000020,
+    Kugel               =0x00000030,
     addKegelButton		=0x00000040,
     addZylinderButton		=0x00000080,
     addBothButton      =0x000000A0,

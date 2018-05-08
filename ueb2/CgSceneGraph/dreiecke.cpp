@@ -49,3 +49,4 @@ int Dreiecke::create(){
 
     return 1;
 }
+

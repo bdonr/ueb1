@@ -5,7 +5,9 @@
 #include "Mypolyline.h"
 #include "rotationskoerper.h"
 #include "dreiecke.h"
+#include "kugel.h"
 class RotationsKoerper;
+class Kugel;
 class MeshFactory
 {
 
@@ -19,5 +21,6 @@ public:
     static Dreiecke * createDreiecke(std::vector<glm::vec3>x,std::vector<unsigned int>k);
     MeshFactory();
 
+    static Kugel *createKugel(float radius, float hoehe, int refine);
 };
 #endif // MESHFACTORY_H

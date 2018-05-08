@@ -4,6 +4,7 @@
 #include "Mypolyline.h"
 #include "dreiecke.h"
 #include <iostream>
+
 int MeshFactory::all_id=1;
 MeshFactory::MeshFactory()
 {
@@ -28,6 +29,10 @@ return new RotationsKoerper(++all_id, refine);
 
 Dreiecke * MeshFactory::createDreiecke(std::vector<glm::vec3>x,std::vector<unsigned int>k){
     return new Dreiecke(++all_id,x,k);
+}
+
+Kugel * MeshFactory::createKugel(float radius, float hoehe, int refine){
+    return new Kugel(++all_id,radius,hoehe, refine);
 }
 
 

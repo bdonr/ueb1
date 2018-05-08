@@ -14,6 +14,7 @@ public:
     TraegerKlasse *getTraegerKlasse() const;
     void setTraegerKlasse(TraegerKlasse *value);
 
+
     // CgBaseEvent interface
 
     enum Cg::EventType getType();

@@ -52,6 +52,7 @@ void RotationsKoerper::drehe(){
         // std::cout<<"hallo"<<vectneu.size()<<std::endl;
         for(int i=0;i<vect.size();i++){
             vectneu.push_back(vectorMalMatrix(vect.at(i),matrix));
+            
             //vectneu.at(i)->fuelleAuf();
 
         }
