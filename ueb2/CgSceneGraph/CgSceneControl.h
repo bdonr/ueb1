@@ -30,6 +30,7 @@ public:
     glm::mat4x4 rotationY(int winkely);
     glm::mat4x4 rotationZ(int winkelz);
     glm::mat4x4 transform(glm::vec3 k);
+    glm::vec3 verschiebung;
     glm::mat4x4 translatetoVectot(glm::vec3 k);
     glm::mat4x4 allgemineRotation(int x, int y, int z);
     void resetRenderKugel(int refine, float hoehe, float radius);

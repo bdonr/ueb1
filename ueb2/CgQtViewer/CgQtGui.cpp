@@ -557,7 +557,7 @@ void CgQtGui::createOptionPanelExample5(QWidget* parent)
     connect(radiobutton13, SIGNAL(pressed()), this, SLOT(selectZ()));
 
     kkk = new QSlider(Qt::Horizontal);
-    kkk->setMaximum(360);
+    kkk->setMaximum(10);
     kkk->setValue(0);
     kkk->setTickInterval(1);
     kkk->setVisible(x);
@@ -565,13 +565,13 @@ void CgQtGui::createOptionPanelExample5(QWidget* parent)
 
 
     kkk1 = new QSlider(Qt::Horizontal);
-    kkk1->setMaximum(360);
+    kkk1->setMaximum(10);
     kkk1->setValue(0);
     kkk1->setTickInterval(1);
     kkk1->setVisible(y);
 
     kkk2 = new QSlider(Qt::Horizontal);
-    kkk2->setMaximum(360);
+    kkk2->setMaximum(10);
     kkk2->setValue(0);
     kkk2->setTickInterval(1);
     kkk2->setVisible(z);
