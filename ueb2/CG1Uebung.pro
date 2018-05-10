@@ -27,7 +27,10 @@ SOURCES += main.cpp \
     CgEvents/objectopenevent.cpp \
     CgSceneGraph/kugel.cpp \
     CgSceneGraph/besterslidermoveevent.cpp \
-    CgSceneGraph/traegerklasse.cpp
+    CgSceneGraph/traegerklasse.cpp \
+    CgSceneGraph/scenegraph.cpp \
+    CgSceneGraph/sceneentity.cpp \
+    CgSceneGraph/appearance.cpp
 
 
 HEADERS += \
@@ -64,4 +67,7 @@ CgUtils/ObjLoader.h \
     CgEvents/objectopenevent.h \
     CgSceneGraph/kugel.h \
     CgSceneGraph/besterslidermoveevent.h \
-    CgSceneGraph/traegerklasse.h
+    CgSceneGraph/traegerklasse.h \
+    CgSceneGraph/scenegraph.h \
+    CgSceneGraph/sceneentity.h \
+    CgSceneGraph/appearance.h

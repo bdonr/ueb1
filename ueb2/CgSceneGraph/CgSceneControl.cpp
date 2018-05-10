@@ -15,7 +15,8 @@
 #include "CgUtils/ObjLoader.h"
 #include "../CgEvents/objectopenevent.h"
 #include "besterslidermoveevent.h"
-
+#include "scenegraph.h"
+#include "sceneentity.h"
 // bla dingens
 CgSceneControl::CgSceneControl() {
     /* m_triangle.push_back(MeshFactory::createKegel());
@@ -31,7 +32,7 @@ CgSceneControl::CgSceneControl() {
     poly = MeshFactory::createRotationKoerper(1);
     m_triangle.push_back(MeshFactory::createKegel(0,.0,0));
     dreiecke=NULL;
-   // kugel=NULL;
+    // kugel=NULL;
     glm::vec3 b2 = glm::vec3(9.,1.,1.);
     glm::vec3 b1 = glm::vec3(0,0,0);
     std::vector<glm::vec3> st;
@@ -51,9 +52,30 @@ CgSceneControl::CgSceneControl() {
                              glm::vec4(0,1,0,0),
                              glm::vec4(0,0,1,0),
                              glm::vec4(0,0,0,1));
+    verschiebung=glm::vec3(0,0,0);
+    kugel=MeshFactory::createKugel(1,20,20);
+    SceneEntity * sc1 = new SceneEntity(kugel,Cg::Stern);
+    SceneEntity * sc2 = new SceneEntity(kugel,Cg::Erde);
+    SceneEntity * sc3 = new SceneEntity(kugel,Cg::Mond1);
+    SceneEntity * sc4 = new SceneEntity(kugel,Cg::Planet1);
+    SceneEntity * sc5 = new SceneEntity(kugel,Cg::Planet2);
+    SceneEntity * sc6 = new SceneEntity(kugel,Cg::Mond2);
 
-    kugel=MeshFactory::createKugel(1,10,10);
-   // m_renderer->init(kugel);
+
+    sc1->setTransformation(transform(glm::vec3(0,0,0),0,0,0,1));
+    sc2->setTransformation(transform(glm::vec3(4,1,0),0,0,0,.3));
+    sc3->setTransformation(transform(glm::vec3(6,2,0),0,0,0,.01));
+    sc4->setTransformation(transform(glm::vec3(8,2,0),0,0,0,.4));
+    sc5->setTransformation(transform(glm::vec3(10,2,0),0,0,0,.1));
+    sc5->setTransformation(transform(glm::vec3(11,2,0),0,0,0,.1));
+    sc1->addChildren(sc2);
+    sc2->addChildren(sc3);
+    sc1->addChildren(sc4);
+    sc1->addChildren(sc5);
+    sc5->addChildren(sc6);
+
+    sc = new Scenegraph(sc1);
+    // m_renderer->init(kugel);
     /*m_proj_matrix = glm::mat4x4(glm::vec4(1.792591, 0.0, 0.0, 0.0), glm::vec4(0.0, 1.792591, 0.0, 0.0),
                 glm::vec4(0.0, 0.0, -1.0002, -1.0), glm::vec4(0.0, 0.0, -0.020002, 0.0));
 */
@@ -71,8 +93,10 @@ void CgSceneControl::setRenderer(CgBaseRenderer *r) {
         m_renderer->init(koordinatensystem->getPolylines().at(i));
 
     }
+    //sc->render(m_renderer,sc->getSc());
+   // registerSceneGraph(m_renderer,sc->getSc());
 
-        m_renderer->init(kugel);
+    // m_renderer->init(kugel);
 
     if(!poly){
         if(!poly->getPolyVec().size()>0){
@@ -137,7 +161,7 @@ void CgSceneControl::renderObjects() {
     if(rotaAchse!=NULL){
         m_renderer->render(rotaAchse,m_current_transformation);
     }
-    m_renderer->render(kugel,old);
+    //m_renderer->render(kugel,old);
     if(poly){
         if(!poly->getKeisVec().empty())
             if(poly->getPolyVec().size()>0){
@@ -165,8 +189,9 @@ void CgSceneControl::renderObjects() {
             m_renderer->render(m_triangle.at(i),m_current_transformation);
         }
     }
+//    drawSceneGraph(m_renderer,sc->getSc());
 
-       // m_renderer->render(kugel,old);
+    // m_renderer->render(kugel,old);
 
     if(dreiecke){
         m_renderer->render(dreiecke,old);
@@ -175,6 +200,8 @@ void CgSceneControl::renderObjects() {
 
 
     m_renderer->redraw();
+    sc->render(m_renderer,sc->getSc());
+
 }
 void CgSceneControl::reset(){
     delete dreiecke;
@@ -192,9 +219,9 @@ int CgSceneControl::getChanged(){
 glm::mat4x4 CgSceneControl::rotationX(int winkelx)
 {
     glm::mat4x4(glm::vec4(1,0,0,0),
-                           glm::vec4(0,glm::cos(glm::radians(winkelx*1.0)),(-1)*glm::sin(glm::radians(winkelx*1.0)),0),
-                           glm::vec4(0,glm::sin(glm::radians(winkelx*1.0)),glm::cos(glm::radians(winkelx*1.0)),0),
-                           glm::vec4(0,0,0,1));
+                glm::vec4(0,glm::cos(glm::radians(winkelx*1.0)),(-1)*glm::sin(glm::radians(winkelx*1.0)),0),
+                glm::vec4(0,glm::sin(glm::radians(winkelx*1.0)),glm::cos(glm::radians(winkelx*1.0)),0),
+                glm::vec4(0,0,0,1));
 
 
     return glm::mat4x4(glm::vec4(1,0,0,0),
@@ -214,27 +241,77 @@ glm::mat4x4 CgSceneControl::rotationY(int winkely)
 glm::mat4x4 CgSceneControl::rotationZ(int winkelz)
 {
     return glm::mat4x4(glm::vec4(glm::cos(glm::radians(winkelz*1.0)),glm::sin(glm::radians(winkelz*1.0)),0,0),
-                           glm::vec4((-1)*glm::sin(glm::radians(winkelz*1.0)),glm::cos(glm::radians(winkelz*1.0)),0,0),
-                           glm::vec4(0,0,1,0),
-                           glm::vec4(0,0,0,1));
+                       glm::vec4((-1)*glm::sin(glm::radians(winkelz*1.0)),glm::cos(glm::radians(winkelz*1.0)),0,0),
+                       glm::vec4(0,0,1,0),
+                       glm::vec4(0,0,0,1));
 }
 
-glm::mat4x4 CgSceneControl::transform(glm::vec3 k)
+void CgSceneControl::registerSceneGraph(CgBaseRenderer *r, SceneEntity* e)
 {
-    return translatetoVectot(glm::vec3((-1)*k.x,(-1)*k.y,(-1)*k.z))*
-            rotationZ(-10)*
-            rotationY(-10)*
-            rotationZ(20)*
-            rotationY(10)*
-            rotationZ(10)*translatetoVectot(k);
+    if(e->getChildren().empty()){
+        r->init(e->getOb());
+    }
+    else{
+        for(int i=0;i<=e->getChildren().size()-1;i++){
+            std::cout<<"hi@"<<std::endl;
+            r->init(e->getChildren().at(i)->getOb());
+            if(!e->getChildren().at(i)->getChildren().empty()){
+                registerSceneGraph(r,e->getChildren().at(i));
+            }
+        }
+    }
 }
+
+void CgSceneControl::drawSceneGraph(CgBaseRenderer *r, SceneEntity *e)
+{
+
+    if(e->getChildren().empty()){
+          r->render(e->getOb(),e->getTransformation());
+    }
+    else{
+        for(int i=0;i<=e->getChildren().size()-1;i++){
+            //std::cout<<"hi!"<<std::endl;
+            r->render(e->getChildren().at(i)->getOb(),e->getChildren().at(i)->getTransformation());
+            if(!e->getChildren().at(i)->getChildren().empty()){
+                drawSceneGraph(r,e->getChildren().at(i));
+            }
+        }
+    }
+}
+
+glm::mat4x4 CgSceneControl::transform(glm::vec3 k,int winkely,int winkelz,int wunschwinkel,float skala)
+{
+    return
+            rotationZ(-winkelz)*
+            rotationY(-winkely)*
+            rotationZ(wunschwinkel)*
+            rotationY(winkely)*
+            rotationZ(winkelz)*translatetoVectot(k)*glm::mat4x4(         glm::vec4(skala,0,0,0),
+                                                                         glm::vec4(0,skala,0,0),
+                                                                         glm::vec4(0,0,skala,0),
+                                                                         glm::vec4(verschiebung.x,verschiebung.y,verschiebung.z,1));
+}
+
+glm::mat4x4 CgSceneControl::transform(glm::vec3 k,int winkely,int winkelz,int wunschwinkel)
+{
+    return translatetoVectot(k)*translatetoVectot(glm::vec3((-1)*k.x,(-1)*k.y,(-1)*k.z))*
+            rotationZ(-winkelz)*
+            rotationY(-winkely)*
+            rotationZ(wunschwinkel)*
+            rotationY(winkely)*
+            rotationZ(winkelz)*translatetoVectot(k)*glm::mat4x4(         glm::vec4(s,0,0,0),
+                                                                         glm::vec4(0,s,0,0),
+                                                                         glm::vec4(0,0,s,0),
+                                                                         glm::vec4(0,0,0,1));
+}
+
 
 glm::mat4x4 CgSceneControl::translatetoVectot(glm::vec3 k)
 {
     return glm::mat4x4( glm::vec4(1,0,0,0),
-                               glm::vec4(0,1,0,0),
-                               glm::vec4(0,0,1,0),
-                               glm::vec4(k.x,k.y,k.z,1));
+                        glm::vec4(0,1,0,0),
+                        glm::vec4(0,0,1,0),
+                        glm::vec4(k.x,k.y,k.z,1));
 }
 
 void CgSceneControl::handleEvent(CgBaseEvent *e) {
@@ -325,8 +402,8 @@ void CgSceneControl::handleEvent(CgBaseEvent *e) {
         }
 
         if(refine>3){
-            kugel = MeshFactory::createKugel(refine,hoehe,radius);
-            m_renderer->init(kugel);
+         //   kugel = MeshFactory::createKugel(refine,hoehe,radius);
+          //  m_renderer->init(kugel);
         }
 
     }
@@ -419,14 +496,18 @@ void CgSceneControl::handleEvent(CgBaseEvent *e) {
             s=s-0.02;
         }
 
-        old=glm::mat4x4(         glm::vec4(1,0,0,0),
-                                 glm::vec4(0,1,0,0),
-                                 glm::vec4(0,0,1,0),
-                                 glm::vec4((-1)*verschiebung.x,(-1)*verschiebung.y,(-1)*verschiebung.z,1)
-                                                    *glm::mat4x4(         glm::vec4(s,0,0,0),
-                                                                           glm::vec4(0,s,0,0),
-                                                                           glm::vec4(0,0,s,0),
-                                                                           glm::vec4(0,0,0,1)));}
+        old=m_current_transformation*
+                glm::mat4x4(         glm::vec4(s,0,0,0),
+                                     glm::vec4(0,s,0,0),
+                                     glm::vec4(0,0,s,0),
+                                     glm::vec4(verschiebung.x,verschiebung.y,verschiebung.z,1));
+        sc->getSc()->setTransformation(glm::mat4x4(          glm::vec4(s,0,0,0),
+                                                             glm::vec4(0,s,0,0),
+                                                             glm::vec4(0,0,s,0),
+                                                             glm::vec4(0,0,0,1)));
+
+
+    }
 
     if(((CgKeyEvent*)e)->key()==Cg::Key_Plus){
         if(s>0.9){
@@ -436,18 +517,16 @@ void CgSceneControl::handleEvent(CgBaseEvent *e) {
         }
 
 
-        old=glm::mat4x4(         glm::vec4(1,0,0,0),
-                                 glm::vec4(0,1,0,0),
-                                 glm::vec4(0,0,1,0),
-                                 glm::vec4((-1.)*verschiebung.x,(-1.)*verschiebung.y,(-1.)*verschiebung.z,1)
+        old=m_current_transformation*
+                glm::mat4x4(         glm::vec4(s,0,0,0),
+                                     glm::vec4(0,s,0,0),
+                                     glm::vec4(0,0,s,0),
+                                     glm::vec4(verschiebung.x,verschiebung.y,verschiebung.z,1));
 
-                                                     *glm::mat4x4(         glm::vec4(s,0,0,0),
-                                                                           glm::vec4(0,s,0,0),
-                                                                           glm::vec4(0,0,s,0),
-                                                                           glm::vec4(verschiebung.x,verschiebung.y,verschiebung.z,1))*glm::mat4x4(         glm::vec4(1,0,0,0),
-                                                                                                                    glm::vec4(0,1,0,0),
-                                                                                                                    glm::vec4(0,0,1,0),
-                                                                                                                    glm::vec4(verschiebung.x,verschiebung.y,verschiebung.z,1)));
+        sc->getSc()->setTransformation(glm::mat4x4(          glm::vec4(s,0,0,0),
+                                                             glm::vec4(0,s,0,0),
+                                                             glm::vec4(0,0,s,0),
+                                                             glm::vec4(0,0,0,1)));
     }
 
     if(e->getType()==Cg::CgChangeRota){
@@ -457,8 +536,8 @@ void CgSceneControl::handleEvent(CgBaseEvent *e) {
         float y =((bestersliderMoveEvent*)e)->getTraegerKlasse()->getIntvec().y/10;
         float z =((bestersliderMoveEvent*)e)->getTraegerKlasse()->getIntvec().z/10;
         verschiebung = glm::vec3(x,y,z);
-        old = transform(verschiebung);
-          x=true;
+        old = transform(verschiebung,10,20,30);
+        x=true;
     }
 
 
@@ -478,10 +557,10 @@ void CgSceneControl::handleEvent(CgBaseEvent *e) {
             loader.getPositionData(dreickevertices);
             loader.getFaceIndexData(dreieckecords);
             objecte.push_back(MeshFactory::createDreiecke(dreickevertices,dreieckecords));
-//            loader.load("../CgData/kugel.obj");
-//            loader.getPositionData(dreickevertices);
-//            loader.getFaceIndexData(dreieckecords);
-//            objecte.push_back(MeshFactory::createDreiecke(dreickevertices,dreieckecords));
+            //            loader.load("../CgData/kugel.obj");
+            //            loader.getPositionData(dreickevertices);
+            //            loader.getFaceIndexData(dreieckecords);
+            //            objecte.push_back(MeshFactory::createDreiecke(dreickevertices,dreieckecords));
         }
         dreiecke = objecte.at(((ObjectOpenEvent*) e)->getWahl());
         this->m_renderer->init(dreiecke);

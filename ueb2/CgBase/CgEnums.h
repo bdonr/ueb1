@@ -391,6 +391,18 @@ namespace Cg{
     addBothButton      =0x000000A0,
     SomeOtherType6		=0x00000100,
     SomeOtherType7	    =0x00000200,
+    Mond1               =0x10000100,
+    Mond2               =0x10001000,
+    Erde                =0x11100000,
+    Planet1             =0x11100001,
+    Planet2             =0x11100002,
+    Planet3             =0x11100004,
+    Planet4             =0x1110000f,
+    Mond3                =0x1110001f,
+    Mond4             =0x1110002f,
+    Mond5             =0x1110004f,
+    Mond6             =0x1110008f,
+    Stern             =0x1120008f
     }ObjectType;
 
 }

@@ -71,7 +71,10 @@ SOURCES       = ../ueb2/main.cpp \
 		../ueb2/CgEvents/objectopenevent.cpp \
 		../ueb2/CgSceneGraph/kugel.cpp \
 		../ueb2/CgSceneGraph/besterslidermoveevent.cpp \
-		../ueb2/CgSceneGraph/traegerklasse.cpp moc_CgQtGLRenderWidget.cpp \
+		../ueb2/CgSceneGraph/traegerklasse.cpp \
+		../ueb2/CgSceneGraph/scenegraph.cpp \
+		../ueb2/CgSceneGraph/sceneentity.cpp \
+		../ueb2/CgSceneGraph/appearance.cpp moc_CgQtGLRenderWidget.cpp \
 		moc_CgQtGui.cpp \
 		moc_CgQtMainApplication.cpp
 OBJECTS       = main.o \
@@ -98,6 +101,9 @@ OBJECTS       = main.o \
 		kugel.o \
 		besterslidermoveevent.o \
 		traegerklasse.o \
+		scenegraph.o \
+		sceneentity.o \
+		appearance.o \
 		moc_CgQtGLRenderWidget.o \
 		moc_CgQtGui.o \
 		moc_CgQtMainApplication.o
@@ -190,7 +196,10 @@ DIST          = /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
 		../ueb2/CgEvents/objectopenevent.h \
 		../ueb2/CgSceneGraph/kugel.h \
 		../ueb2/CgSceneGraph/besterslidermoveevent.h \
-		../ueb2/CgSceneGraph/traegerklasse.h ../ueb2/main.cpp \
+		../ueb2/CgSceneGraph/traegerklasse.h \
+		../ueb2/CgSceneGraph/scenegraph.h \
+		../ueb2/CgSceneGraph/sceneentity.h \
+		../ueb2/CgSceneGraph/appearance.h ../ueb2/main.cpp \
 		../ueb2/CgQtViewer/CGQtGLRenderWidget.cpp \
 		../ueb2/CgQtViewer/CgQtGui.cpp \
 		../ueb2/CgBase/CgObservable.cpp \
@@ -213,7 +222,10 @@ DIST          = /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
 		../ueb2/CgEvents/objectopenevent.cpp \
 		../ueb2/CgSceneGraph/kugel.cpp \
 		../ueb2/CgSceneGraph/besterslidermoveevent.cpp \
-		../ueb2/CgSceneGraph/traegerklasse.cpp
+		../ueb2/CgSceneGraph/traegerklasse.cpp \
+		../ueb2/CgSceneGraph/scenegraph.cpp \
+		../ueb2/CgSceneGraph/sceneentity.cpp \
+		../ueb2/CgSceneGraph/appearance.cpp
 QMAKE_TARGET  = uebung1
 DESTDIR       = #avoid trailing-slash linebreak
 TARGET        = uebung1
@@ -381,8 +393,8 @@ dist: distdir FORCE
 distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
-	$(COPY_FILE) --parents ../ueb2/CgBase/CgBaseRenderWindow.h ../ueb2/CgQtViewer/CgQtGLRenderWidget.h ../ueb2/CgQtViewer/CgQtGui.h ../ueb2/CgBase/CgObserver.h ../ueb2/CgBase/CgObservable.h ../ueb2/CgBase/CgBaseEvent.h ../ueb2/CgBase/CgEnums.h ../ueb2/CgEvents/CgMouseEvent.h ../ueb2/CgQtViewer/CgQtMainApplication.h ../ueb2/CgSceneGraph/CgSceneControl.h ../ueb2/CgEvents/CgKeyEvent.h ../ueb2/CgBase/CgBaseRenderer.h ../ueb2/CgBase/CgBaseRenderableObject.h ../ueb2/CgBase/CgBasePointCloud.h ../ueb2/CgBase/CgBaseTriangleMesh.h ../ueb2/CgBase/CgBasePolygonMesh.h ../ueb2/CgBase/CgBasePolyline.h ../ueb2/CgBase/CgBaseSceneControl.h ../ueb2/CgQtViewer/CgQtGlBufferObject.h ../ueb2/CgQtViewer/CgTrackball.h ../ueb2/CgEvents/CgWindowResizeEvent.h ../ueb2/CgSceneGraph/meshfactory.h ../ueb2/CgSceneGraph/Zylinder.h ../ueb2/CgSceneGraph/kegel.h ../ueb2/CgSceneGraph/Mypolyline.h ../ueb2/CgSceneGraph/slidermoveevent.h ../ueb2/CgSceneGraph/rotationskoerper.h ../ueb2/CgUtils/ObjLoader.h ../ueb2/CgSceneGraph/dreiecke.h ../ueb2/CgSceneGraph/koordinatensystem.h ../ueb2/CgEvents/objectopenevent.h ../ueb2/CgSceneGraph/kugel.h ../ueb2/CgSceneGraph/besterslidermoveevent.h ../ueb2/CgSceneGraph/traegerklasse.h $(DISTDIR)/
-	$(COPY_FILE) --parents ../ueb2/main.cpp ../ueb2/CgQtViewer/CGQtGLRenderWidget.cpp ../ueb2/CgQtViewer/CgQtGui.cpp ../ueb2/CgBase/CgObservable.cpp ../ueb2/CgEvents/CgMouseEvent.cpp ../ueb2/CgQtViewer/CgQtMainApplication.cpp ../ueb2/CgSceneGraph/CgSceneControl.cpp ../ueb2/CgEvents/CgKeyEvent.cpp ../ueb2/CgQtViewer/CgQtGlBufferObject.cpp ../ueb2/CgQtViewer/CgTrackball.cpp ../ueb2/CgEvents/CgWindowResizeEvent.cpp ../ueb2/CgSceneGraph/meshfactory.cpp ../ueb2/CgSceneGraph/Zylinder.cpp ../ueb2/CgSceneGraph/kegel.cpp ../ueb2/CgSceneGraph/Mypolyline.cpp ../ueb2/CgSceneGraph/slidermoveevent.cpp ../ueb2/CgSceneGraph/rotationskoerper.cpp ../ueb2/CgUtils/ObjLoader.cpp ../ueb2/CgSceneGraph/dreiecke.cpp ../ueb2/CgSceneGraph/koordinatensystem.cpp ../ueb2/CgEvents/objectopenevent.cpp ../ueb2/CgSceneGraph/kugel.cpp ../ueb2/CgSceneGraph/besterslidermoveevent.cpp ../ueb2/CgSceneGraph/traegerklasse.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents ../ueb2/CgBase/CgBaseRenderWindow.h ../ueb2/CgQtViewer/CgQtGLRenderWidget.h ../ueb2/CgQtViewer/CgQtGui.h ../ueb2/CgBase/CgObserver.h ../ueb2/CgBase/CgObservable.h ../ueb2/CgBase/CgBaseEvent.h ../ueb2/CgBase/CgEnums.h ../ueb2/CgEvents/CgMouseEvent.h ../ueb2/CgQtViewer/CgQtMainApplication.h ../ueb2/CgSceneGraph/CgSceneControl.h ../ueb2/CgEvents/CgKeyEvent.h ../ueb2/CgBase/CgBaseRenderer.h ../ueb2/CgBase/CgBaseRenderableObject.h ../ueb2/CgBase/CgBasePointCloud.h ../ueb2/CgBase/CgBaseTriangleMesh.h ../ueb2/CgBase/CgBasePolygonMesh.h ../ueb2/CgBase/CgBasePolyline.h ../ueb2/CgBase/CgBaseSceneControl.h ../ueb2/CgQtViewer/CgQtGlBufferObject.h ../ueb2/CgQtViewer/CgTrackball.h ../ueb2/CgEvents/CgWindowResizeEvent.h ../ueb2/CgSceneGraph/meshfactory.h ../ueb2/CgSceneGraph/Zylinder.h ../ueb2/CgSceneGraph/kegel.h ../ueb2/CgSceneGraph/Mypolyline.h ../ueb2/CgSceneGraph/slidermoveevent.h ../ueb2/CgSceneGraph/rotationskoerper.h ../ueb2/CgUtils/ObjLoader.h ../ueb2/CgSceneGraph/dreiecke.h ../ueb2/CgSceneGraph/koordinatensystem.h ../ueb2/CgEvents/objectopenevent.h ../ueb2/CgSceneGraph/kugel.h ../ueb2/CgSceneGraph/besterslidermoveevent.h ../ueb2/CgSceneGraph/traegerklasse.h ../ueb2/CgSceneGraph/scenegraph.h ../ueb2/CgSceneGraph/sceneentity.h ../ueb2/CgSceneGraph/appearance.h $(DISTDIR)/
+	$(COPY_FILE) --parents ../ueb2/main.cpp ../ueb2/CgQtViewer/CGQtGLRenderWidget.cpp ../ueb2/CgQtViewer/CgQtGui.cpp ../ueb2/CgBase/CgObservable.cpp ../ueb2/CgEvents/CgMouseEvent.cpp ../ueb2/CgQtViewer/CgQtMainApplication.cpp ../ueb2/CgSceneGraph/CgSceneControl.cpp ../ueb2/CgEvents/CgKeyEvent.cpp ../ueb2/CgQtViewer/CgQtGlBufferObject.cpp ../ueb2/CgQtViewer/CgTrackball.cpp ../ueb2/CgEvents/CgWindowResizeEvent.cpp ../ueb2/CgSceneGraph/meshfactory.cpp ../ueb2/CgSceneGraph/Zylinder.cpp ../ueb2/CgSceneGraph/kegel.cpp ../ueb2/CgSceneGraph/Mypolyline.cpp ../ueb2/CgSceneGraph/slidermoveevent.cpp ../ueb2/CgSceneGraph/rotationskoerper.cpp ../ueb2/CgUtils/ObjLoader.cpp ../ueb2/CgSceneGraph/dreiecke.cpp ../ueb2/CgSceneGraph/koordinatensystem.cpp ../ueb2/CgEvents/objectopenevent.cpp ../ueb2/CgSceneGraph/kugel.cpp ../ueb2/CgSceneGraph/besterslidermoveevent.cpp ../ueb2/CgSceneGraph/traegerklasse.cpp ../ueb2/CgSceneGraph/scenegraph.cpp ../ueb2/CgSceneGraph/sceneentity.cpp ../ueb2/CgSceneGraph/appearance.cpp $(DISTDIR)/
 
 
 clean: compiler_clean 
@@ -453,6 +465,7 @@ main.o: ../ueb2/main.cpp ../ueb2/CgQtViewer/CgQtMainApplication.h \
 		../ueb2/CgBase/CgBasePolyline.h \
 		../ueb2/CgSceneGraph/meshfactory.h \
 		../ueb2/CgSceneGraph/dreiecke.h \
+		../ueb2/CgSceneGraph/kugel.h \
 		../ueb2/CgSceneGraph/koordinatensystem.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o ../ueb2/main.cpp
 
@@ -488,6 +501,7 @@ CgQtGui.o: ../ueb2/CgQtViewer/CgQtGui.cpp ../ueb2/CgQtViewer/CgQtGLRenderWidget.
 		../ueb2/CgBase/CgBasePolyline.h \
 		../ueb2/CgSceneGraph/meshfactory.h \
 		../ueb2/CgSceneGraph/dreiecke.h \
+		../ueb2/CgSceneGraph/kugel.h \
 		../ueb2/CgSceneGraph/koordinatensystem.h \
 		../ueb2/CgSceneGraph/slidermoveevent.h \
 		../ueb2/CgEvents/objectopenevent.h \
@@ -524,6 +538,7 @@ CgSceneControl.o: ../ueb2/CgSceneGraph/CgSceneControl.cpp ../ueb2/CgSceneGraph/C
 		../ueb2/CgBase/CgBasePolyline.h \
 		../ueb2/CgSceneGraph/meshfactory.h \
 		../ueb2/CgSceneGraph/dreiecke.h \
+		../ueb2/CgSceneGraph/kugel.h \
 		../ueb2/CgSceneGraph/koordinatensystem.h \
 		../ueb2/CgEvents/CgMouseEvent.h \
 		../ueb2/CgEvents/CgKeyEvent.h \
@@ -535,7 +550,10 @@ CgSceneControl.o: ../ueb2/CgSceneGraph/CgSceneControl.cpp ../ueb2/CgSceneGraph/C
 		../ueb2/CgUtils/ObjLoader.h \
 		../ueb2/CgEvents/objectopenevent.h \
 		../ueb2/CgSceneGraph/besterslidermoveevent.h \
-		../ueb2/CgSceneGraph/traegerklasse.h
+		../ueb2/CgSceneGraph/traegerklasse.h \
+		../ueb2/CgSceneGraph/scenegraph.h \
+		../ueb2/CgSceneGraph/sceneentity.h \
+		../ueb2/CgSceneGraph/appearance.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o CgSceneControl.o ../ueb2/CgSceneGraph/CgSceneControl.cpp
 
 CgKeyEvent.o: ../ueb2/CgEvents/CgKeyEvent.cpp ../ueb2/CgEvents/CgKeyEvent.h \
@@ -568,6 +586,7 @@ meshfactory.o: ../ueb2/CgSceneGraph/meshfactory.cpp ../ueb2/CgSceneGraph/meshfac
 		../ueb2/CgSceneGraph/Mypolyline.h \
 		../ueb2/CgSceneGraph/rotationskoerper.h \
 		../ueb2/CgSceneGraph/dreiecke.h \
+		../ueb2/CgSceneGraph/kugel.h \
 		../ueb2/CgSceneGraph/Zylinder.h \
 		../ueb2/CgSceneGraph/kegel.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o meshfactory.o ../ueb2/CgSceneGraph/meshfactory.cpp
@@ -605,7 +624,8 @@ rotationskoerper.o: ../ueb2/CgSceneGraph/rotationskoerper.cpp ../ueb2/CgSceneGra
 		../ueb2/CgBase/CgEnums.h \
 		../ueb2/CgSceneGraph/meshfactory.h \
 		../ueb2/CgBase/CgBaseTriangleMesh.h \
-		../ueb2/CgSceneGraph/dreiecke.h
+		../ueb2/CgSceneGraph/dreiecke.h \
+		../ueb2/CgSceneGraph/kugel.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o rotationskoerper.o ../ueb2/CgSceneGraph/rotationskoerper.cpp
 
 ObjLoader.o: ../ueb2/CgUtils/ObjLoader.cpp ../ueb2/CgUtils/ObjLoader.h
@@ -625,7 +645,8 @@ koordinatensystem.o: ../ueb2/CgSceneGraph/koordinatensystem.cpp ../ueb2/CgSceneG
 		../ueb2/CgSceneGraph/meshfactory.h \
 		../ueb2/CgBase/CgBaseTriangleMesh.h \
 		../ueb2/CgSceneGraph/rotationskoerper.h \
-		../ueb2/CgSceneGraph/dreiecke.h
+		../ueb2/CgSceneGraph/dreiecke.h \
+		../ueb2/CgSceneGraph/kugel.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o koordinatensystem.o ../ueb2/CgSceneGraph/koordinatensystem.cpp
 
 objectopenevent.o: ../ueb2/CgEvents/objectopenevent.cpp ../ueb2/CgEvents/objectopenevent.h \
@@ -652,6 +673,22 @@ besterslidermoveevent.o: ../ueb2/CgSceneGraph/besterslidermoveevent.cpp ../ueb2/
 
 traegerklasse.o: ../ueb2/CgSceneGraph/traegerklasse.cpp ../ueb2/CgSceneGraph/traegerklasse.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o traegerklasse.o ../ueb2/CgSceneGraph/traegerklasse.cpp
+
+scenegraph.o: ../ueb2/CgSceneGraph/scenegraph.cpp ../ueb2/CgSceneGraph/scenegraph.h \
+		../ueb2/CgSceneGraph/sceneentity.h \
+		../ueb2/CgBase/CgBaseRenderableObject.h \
+		../ueb2/CgBase/CgEnums.h \
+		../ueb2/CgSceneGraph/appearance.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o scenegraph.o ../ueb2/CgSceneGraph/scenegraph.cpp
+
+sceneentity.o: ../ueb2/CgSceneGraph/sceneentity.cpp ../ueb2/CgSceneGraph/sceneentity.h \
+		../ueb2/CgBase/CgBaseRenderableObject.h \
+		../ueb2/CgBase/CgEnums.h \
+		../ueb2/CgSceneGraph/appearance.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o sceneentity.o ../ueb2/CgSceneGraph/sceneentity.cpp
+
+appearance.o: ../ueb2/CgSceneGraph/appearance.cpp ../ueb2/CgSceneGraph/appearance.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o appearance.o ../ueb2/CgSceneGraph/appearance.cpp
 
 moc_CgQtGLRenderWidget.o: moc_CgQtGLRenderWidget.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_CgQtGLRenderWidget.o moc_CgQtGLRenderWidget.cpp
