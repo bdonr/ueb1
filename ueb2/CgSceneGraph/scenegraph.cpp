@@ -26,15 +26,22 @@ void Scenegraph::setSc(SceneEntity *value)
 
 void Scenegraph::render(CgBaseRenderer *render,SceneEntity* sc)
 {
-
+    float o=0.0;
     counter++;
    int x=(counter/1000)%360;
+    o=o+.1;
+    if(o>=359){
+        o=0.1;
+       // x=0;
+    }
 
-
-    std::cout<<x<<std::endl;
+    if(x>=359){
+        x=0;
+    }
+    //sc->setAusrichtung();
     glm::mat4x4 ma= matrixstack.top()*sc->getTransformation();
     matrixstack.push(ma);
-    sc->transform(0,0,x,ma);
+    sc->rotate(0,o,o,ma);
     for(int i=0; i < sc->getChildren().size(); i++){
         std::cout<<"sada"<<std::endl;
         this->render(render,sc->getChildren().at(i));

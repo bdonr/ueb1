@@ -54,25 +54,19 @@ CgSceneControl::CgSceneControl() {
                              glm::vec4(0,0,0,1));
     verschiebung=glm::vec3(0,0,0);
     kugel=MeshFactory::createKugel(1,20,20);
-    SceneEntity * sc1 = new SceneEntity(kugel,Cg::Stern);
-    SceneEntity * sc2 = new SceneEntity(kugel,Cg::Erde);
-    SceneEntity * sc3 = new SceneEntity(kugel,Cg::Mond1);
-    SceneEntity * sc4 = new SceneEntity(kugel,Cg::Planet1);
-    SceneEntity * sc5 = new SceneEntity(kugel,Cg::Planet2);
-    SceneEntity * sc6 = new SceneEntity(kugel,Cg::Mond2);
+    SceneEntity * sc1 = new SceneEntity(kugel,Cg::Stern,glm::vec3(0,0,0));
+    SceneEntity * sc2 = new SceneEntity(kugel,Cg::Erde,glm::vec3(7,1,0));
+    SceneEntity * sc3 = new SceneEntity(kugel,Cg::Mond1,glm::vec3(1,1,0));
 
-
-    sc1->setTransformation(transform(glm::vec3(0,0,0),0,0,0,1));
-    sc2->setTransformation(transform(glm::vec3(4,1,0),0,0,0,.3));
-    sc3->setTransformation(transform(glm::vec3(6,2,0),0,0,0,.01));
-    sc4->setTransformation(transform(glm::vec3(8,2,0),0,0,0,.4));
-    sc5->setTransformation(transform(glm::vec3(10,2,0),0,0,0,.1));
-    sc5->setTransformation(transform(glm::vec3(11,2,0),0,0,0,.1));
+    SceneEntity * sc4 = new SceneEntity(kugel,Cg::Planet1,glm::vec3(12,0,0));
+    SceneEntity * sc5 = new SceneEntity(kugel,Cg::Planet2,glm::vec3(17,1,0));
+    SceneEntity * sc6 = new SceneEntity(kugel,Cg::Mond2,glm::vec3(2,5,0));
+    //sc5->setTransformation(transform((11,2,0),0,0,0,.1));
     sc1->addChildren(sc2);
-    sc2->addChildren(sc3);
     sc1->addChildren(sc4);
     sc1->addChildren(sc5);
-    sc5->addChildren(sc6);
+    sc2->addChildren(sc3);
+    sc4->addChildren(sc6);
 
     sc = new Scenegraph(sc1);
     // m_renderer->init(kugel);
@@ -279,8 +273,9 @@ void CgSceneControl::drawSceneGraph(CgBaseRenderer *r, SceneEntity *e)
     }
 }
 
-glm::mat4x4 CgSceneControl::transform(glm::vec3 k,int winkely,int winkelz,int wunschwinkel,float skala)
+glm::mat4x4 CgSceneControl::transform(glm::vec3 k,float winkely,float winkelz,float wunschwinkel,float skala)
 {
+
     return
             rotationZ(-winkelz)*
             rotationY(-winkely)*

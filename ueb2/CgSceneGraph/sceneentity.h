@@ -7,9 +7,13 @@
 class SceneEntity
 {
 private:
-    glm::mat4x4 rotationX(int winkelx);
-    glm::mat4x4 rotationY(int winkely);
-    glm::mat4x4 rotationZ(int winkelz);
+    glm::mat4x4 rotationY(float winkely);
+    glm::mat4x4 rotationX(float winkelx);
+    glm::mat4x4 rotationZ(float winkelz);
+    float winkely;
+    float winkelx;
+    float winkelz;
+    glm::vec3 ausrichtung;
     CgBaseRenderableObject*ob;
     std::vector<SceneEntity*> children;
     SceneEntity* parent;
@@ -20,7 +24,7 @@ private:
     enum Cg::ObjectType type;
 public:
     void calculateRota(int winkely, int winkelz, int wunschwinkel);
-    SceneEntity(CgBaseRenderableObject*ob,enum Cg::ObjectType type);
+    SceneEntity(CgBaseRenderableObject*ob,enum Cg::ObjectType type,glm::vec3 aus);
     CgBaseRenderableObject *getOb() const;
     void setOb(CgBaseRenderableObject *value);
     void addChildren(SceneEntity *value);
@@ -33,7 +37,12 @@ public:
     std::vector<SceneEntity*> getChildren() const;
     void draw();
     //void transform(int winkely, int winkelz, int wunschwinkel);
-    void transform(int winkely, int winkelz, int wunschwinkel, glm::mat4x4 matrix);
+  //  void transform();
+
+    void rotate(float winkel_y, float winkel_z, float wunschwinkel, glm::mat4x4 matrix);
+    glm::mat4x4 translatetoVectot();
+    void setAusrichtung();
+    glm::mat4x4 transform();
 };
 
 #endif // SCENEENTITY_H

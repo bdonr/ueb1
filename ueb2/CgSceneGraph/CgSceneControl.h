@@ -39,7 +39,7 @@ public:
     glm::mat4x4 allgemineRotation(int x, int y, int z);
     void resetRenderKugel(int refine, float hoehe, float radius);
     glm::mat4x4 transform(glm::vec3 k, int winkely, int winkelz, int wunschwinkel);
-    glm::mat4x4 transform(glm::vec3 k, int winkely, int winkelz, int wunschwinkel, float skala);
+    glm::mat4x4 transform(glm::vec3 k, float winkely, float winkelz, float wunschwinkel, float skala);
 private:
     glm::mat4 old;
     std::vector <Dreiecke*> objecte;
