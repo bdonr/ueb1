@@ -123,7 +123,7 @@ void SceneEntity::rotate(float winkely,float winkelz,float wunschwinkel,glm::mat
 {
 
     if(type==Cg::Stern){
-        std::cout<<"stern"<<std::endl;
+
         //wunschwinkel+=wunschwinkel/360;
         transformation*=
                 rotationZ(-this->winkelz)*

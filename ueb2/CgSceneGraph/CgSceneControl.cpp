@@ -25,6 +25,20 @@ CgSceneControl::CgSceneControl() {
     //  koordinatensystem = new Koordinatensystem();
     // changed=1;
     //koordinatensystem = new Koordinatensystem();
+
+
+    w = glm::vec3(0,0,-8);
+w =  glm::normalize(w);
+    v = glm::vec3(0,1,0);
+v = glm::normalize(v);
+    u = glm::cross(w,v);
+u = glm::normalize(u);
+
+
+
+    cam = new Kamera();
+    cam->setLookAt( glm::mat4x4(glm::vec4(3.0, 0.0, 0.0, 0.0), glm::vec4(0.0, 3.0, 0.0, 0.0), glm::vec4(0.0, 0.0, 3.0, -3.0),
+                                glm::vec4(0.0, 0.0, -3.0, 3.0)));
     ObjLoader loader;
     s=0.5;
     y=0.0;
@@ -147,8 +161,7 @@ void CgSceneControl::resetObject(){
 void CgSceneControl::renderObjects() {
     m_renderer->setProjectionMatrix(m_proj_matrix);
     m_renderer->setLookAtMatrix(
-                glm::mat4x4(glm::vec4(1.0, 0.0, 0.0, 0.0), glm::vec4(0.0, 1.0, 0.0, 0.0), glm::vec4(0.0, 0.0, 1.0, -1.0),
-                            glm::vec4(0.0, 0.0, -1.0, 1.0)));
+                cam->getLookAt());
     for(int i = 0; i<=koordinatensystem->getPolylines().size()-1;i++){
         m_renderer->render(koordinatensystem->getPolylines().at(i),m_current_transformation);
     }
@@ -524,6 +537,43 @@ void CgSceneControl::handleEvent(CgBaseEvent *e) {
                                                              glm::vec4(0,0,0,1)));
     }
 
+    if(((CgKeyEvent*)e)->key()==Cg::Key_A){
+
+
+        cam->setLookAt(glm::mat4(glm::vec4(u.x,u.y,u.z,0),
+                                  glm::vec4(v.x,v.y,v.z,0),
+                                  glm::vec4(w.x,w.y,w.z,0),
+                                  glm::vec4(0.0,0,0,1)));
+        w.y=w.y+1;
+        w.x=w.x+1;
+        w.z=w.z+1;
+        countA+=1;
+    }
+    if(((CgKeyEvent*)e)->key()==Cg::Key_D){
+        cam->setLookAt(glm::mat4x4(glm::vec4(0.1, 0.0, 0.0, 0.0),
+                                   glm::vec4(glm::sin(glm::radians(countD)), 0.1, glm::cos(glm::radians(countD)), 0.0),
+                                   glm::vec4(0.0, 0.0, 0.1, -0.1),
+                                   glm::vec4(0.0, 0.0, -glm::sin(glm::radians(countA)), 0.1)));
+        countA-=1;
+    }
+    if(((CgKeyEvent*)e)->key()==Cg::Key_W){
+        cam->setLookAt(glm::mat4x4(glm::vec4(0.1, 0.0, 0.0, 0.0),
+                                   glm::vec4(glm::sin(glm::radians(countD)), 0.1, 0.0, 0.0),
+                                   glm::vec4(0.0, 0.0, 0.1, -0.1),
+                                   glm::vec4(0.0, 0.0, -glm::sin(glm::radians(countA)), 0.1)));
+        countD+=1;
+    }
+    if(((CgKeyEvent*)e)->key()==Cg::Key_S){
+        cam->setLookAt(glm::mat4x4(glm::vec4(0.1, 0.0, 0.0, 0.0),
+                                   glm::vec4(glm::sin(glm::radians(countD)), 0.1, 0.0, 0.0),
+                                   glm::vec4(0.0, 0.0, 0.1, -0.1),
+                                   glm::vec4(0.0, 0.0, -glm::sin(glm::radians(countA)), 0.1)));
+        countD-=1;
+    }
+
+
+
+
     if(e->getType()==Cg::CgChangeRota){
         bool k=false;
         float x =((bestersliderMoveEvent*)e)->getTraegerKlasse()->getIntvec().x/10;
@@ -561,6 +611,7 @@ void CgSceneControl::handleEvent(CgBaseEvent *e) {
         this->m_renderer->init(dreiecke);
         this->m_renderer->redraw();
     }
+
 
     // an der Stelle an der ein Event abgearbeitet ist wird es auch gelöscht.
     delete e;

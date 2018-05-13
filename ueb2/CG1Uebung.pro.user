@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE QtCreatorProject>
-<!-- Written by QtCreator 3.5.1, 2018-05-12T19:12:49. -->
+<!-- Written by QtCreator 3.5.1, 2018-05-13T18:01:26. -->
 <qtcreator>
  <data>
   <variable>EnvironmentId</variable>
-  <value type="QByteArray">{ae271c29-0a8b-4bb3-9245-788e047057d2}</value>
+  <value type="QByteArray">{1c8dc8f8-dc98-43f2-80e8-604b52b34d70}</value>
  </data>
  <data>
   <variable>ProjectExplorer.Project.ActiveTarget</variable>
@@ -60,12 +60,12 @@
   <valuemap type="QVariantMap">
    <value type="QString" key="ProjectExplorer.ProjectConfiguration.DefaultDisplayName">Desktop</value>
    <value type="QString" key="ProjectExplorer.ProjectConfiguration.DisplayName">Desktop</value>
-   <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">{f19576c4-9801-4632-8bfc-40281596e3e4}</value>
+   <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">{fa21b3c0-6d17-41b0-9817-71be9350d2ba}</value>
    <value type="int" key="ProjectExplorer.Target.ActiveBuildConfiguration">1</value>
    <value type="int" key="ProjectExplorer.Target.ActiveDeployConfiguration">0</value>
    <value type="int" key="ProjectExplorer.Target.ActiveRunConfiguration">0</value>
    <valuemap type="QVariantMap" key="ProjectExplorer.Target.BuildConfiguration.0">
-    <value type="QString" key="ProjectExplorer.BuildConfiguration.BuildDirectory">/home/don/Schreibtisch/cg uebung/ueb1/afsdfd</value>
+    <value type="QString" key="ProjectExplorer.BuildConfiguration.BuildDirectory"></value>
     <valuemap type="QVariantMap" key="ProjectExplorer.BuildConfiguration.BuildStepList.0">
      <valuemap type="QVariantMap" key="ProjectExplorer.BuildStepList.Step.0">
       <value type="bool" key="ProjectExplorer.BuildStep.Enabled">true</value>
@@ -117,7 +117,7 @@
      <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">ProjectExplorer.BuildSteps.Clean</value>
     </valuemap>
     <value type="int" key="ProjectExplorer.BuildConfiguration.BuildStepListCount">2</value>
-    <value type="bool" key="ProjectExplorer.BuildConfiguration.ClearSystemEnvironment">true</value>
+    <value type="bool" key="ProjectExplorer.BuildConfiguration.ClearSystemEnvironment">false</value>
     <valuelist type="QVariantList" key="ProjectExplorer.BuildConfiguration.UserEnvironmentChanges"/>
     <value type="QString" key="ProjectExplorer.ProjectConfiguration.DefaultDisplayName">Release</value>
     <value type="QString" key="ProjectExplorer.ProjectConfiguration.DisplayName"></value>
@@ -126,7 +126,7 @@
     <value type="bool" key="Qt4ProjectManager.Qt4BuildConfiguration.UseShadowBuild">true</value>
    </valuemap>
    <valuemap type="QVariantMap" key="ProjectExplorer.Target.BuildConfiguration.1">
-    <value type="QString" key="ProjectExplorer.BuildConfiguration.BuildDirectory">/home/don/Schreibtisch/cg uebung/ueb1/build-CG1Uebung-Desktop-cgb</value>
+    <value type="QString" key="ProjectExplorer.BuildConfiguration.BuildDirectory">/home/leoon/Schreibtisch/sem4/cg1/aufgaben/neu workpace/ueb1/build-CG1Uebung-Desktop-test</value>
     <valuemap type="QVariantMap" key="ProjectExplorer.BuildConfiguration.BuildStepList.0">
      <valuemap type="QVariantMap" key="ProjectExplorer.BuildStepList.Step.0">
       <value type="bool" key="ProjectExplorer.BuildStep.Enabled">true</value>
@@ -180,7 +180,7 @@
     <value type="int" key="ProjectExplorer.BuildConfiguration.BuildStepListCount">2</value>
     <value type="bool" key="ProjectExplorer.BuildConfiguration.ClearSystemEnvironment">false</value>
     <valuelist type="QVariantList" key="ProjectExplorer.BuildConfiguration.UserEnvironmentChanges"/>
-    <value type="QString" key="ProjectExplorer.ProjectConfiguration.DefaultDisplayName">cgb</value>
+    <value type="QString" key="ProjectExplorer.ProjectConfiguration.DefaultDisplayName">test</value>
     <value type="QString" key="ProjectExplorer.ProjectConfiguration.DisplayName"></value>
     <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">Qt4ProjectManager.Qt4BuildConfiguration</value>
     <value type="int" key="Qt4ProjectManager.Qt4BuildConfiguration.BuildConfiguration">2</value>
@@ -189,20 +189,7 @@
    <value type="int" key="ProjectExplorer.Target.BuildConfigurationCount">2</value>
    <valuemap type="QVariantMap" key="ProjectExplorer.Target.DeployConfiguration.0">
     <valuemap type="QVariantMap" key="ProjectExplorer.BuildConfiguration.BuildStepList.0">
-     <valuemap type="QVariantMap" key="ProjectExplorer.BuildStepList.Step.0">
-      <value type="bool" key="ProjectExplorer.BuildStep.Enabled">true</value>
-      <value type="QString" key="ProjectExplorer.ProjectConfiguration.DefaultDisplayName">Make</value>
-      <value type="QString" key="ProjectExplorer.ProjectConfiguration.DisplayName"></value>
-      <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">Qt4ProjectManager.MakeStep</value>
-      <valuelist type="QVariantList" key="Qt4ProjectManager.MakeStep.AutomaticallyAddedMakeArguments">
-       <value type="QString">-w</value>
-       <value type="QString">-r</value>
-      </valuelist>
-      <value type="bool" key="Qt4ProjectManager.MakeStep.Clean">false</value>
-      <value type="QString" key="Qt4ProjectManager.MakeStep.MakeArguments"></value>
-      <value type="QString" key="Qt4ProjectManager.MakeStep.MakeCommand"></value>
-     </valuemap>
-     <value type="int" key="ProjectExplorer.BuildStepList.StepsCount">1</value>
+     <value type="int" key="ProjectExplorer.BuildStepList.StepsCount">0</value>
      <value type="QString" key="ProjectExplorer.ProjectConfiguration.DefaultDisplayName">Deployment</value>
      <value type="QString" key="ProjectExplorer.ProjectConfiguration.DisplayName"></value>
      <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">ProjectExplorer.BuildSteps.Deploy</value>
@@ -253,7 +240,7 @@
     <valuelist type="QVariantList" key="PE.EnvironmentAspect.Changes"/>
     <value type="QString" key="ProjectExplorer.ProjectConfiguration.DefaultDisplayName">CG1Uebung</value>
     <value type="QString" key="ProjectExplorer.ProjectConfiguration.DisplayName">CG1Uebung2</value>
-    <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">Qt4ProjectManager.Qt4RunConfiguration:/home/don/Schreibtisch/cg uebung/ueb1/ueb2/CG1Uebung.pro</value>
+    <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">Qt4ProjectManager.Qt4RunConfiguration:/home/leoon/Schreibtisch/sem4/cg1/aufgaben/neu workpace/ueb1/ueb2/CG1Uebung.pro</value>
     <value type="QString" key="Qt4ProjectManager.Qt4RunConfiguration.CommandLineArguments"></value>
     <value type="QString" key="Qt4ProjectManager.Qt4RunConfiguration.ProFile">CG1Uebung.pro</value>
     <value type="bool" key="Qt4ProjectManager.Qt4RunConfiguration.UseDyldImageSuffix">false</value>
@@ -263,8 +250,8 @@
     <value type="bool" key="RunConfiguration.UseCppDebugger">false</value>
     <value type="bool" key="RunConfiguration.UseCppDebuggerAuto">true</value>
     <value type="bool" key="RunConfiguration.UseMultiProcess">false</value>
-    <value type="bool" key="RunConfiguration.UseQmlDebugger">true</value>
-    <value type="bool" key="RunConfiguration.UseQmlDebuggerAuto">false</value>
+    <value type="bool" key="RunConfiguration.UseQmlDebugger">false</value>
+    <value type="bool" key="RunConfiguration.UseQmlDebuggerAuto">true</value>
    </valuemap>
    <value type="int" key="ProjectExplorer.Target.RunConfigurationCount">1</value>
   </valuemap>
