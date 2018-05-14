@@ -10,6 +10,7 @@
 #include "koordinatensystem.h"
 #include "kugel.h"
 #include "scenegraph.h"
+#include "kamera.h"
 class CgBaseEvent;
 class CgBaseRenderer;
 class CgExampleTriangle;
@@ -41,6 +42,12 @@ public:
     glm::mat4x4 transform(glm::vec3 k, int winkely, int winkelz, int wunschwinkel);
     glm::mat4x4 transform(glm::vec3 k, float winkely, float winkelz, float wunschwinkel, float skala);
 private:
+    glm::vec3 w;
+    glm::vec3 v;
+    glm::vec3 u;
+    float countD;
+    float countA;
+    Kamera* cam;
     glm::mat4 old;
     std::vector <Dreiecke*> objecte;
     CgBaseRenderer* m_renderer;

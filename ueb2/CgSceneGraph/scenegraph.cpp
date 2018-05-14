@@ -9,8 +9,13 @@ Scenegraph::Scenegraph(SceneEntity* sc):sc(sc){
                                  glm::vec4(0,1,0,0),
                                  glm::vec4(0,0,1,0),
                                  glm::vec4(0,0,0,1)));
+<<<<<<< HEAD
     counter=1;
    // std::cout<<matrixstack.top()<<std::endl;
+=======
+    counter=0;
+
+>>>>>>> 71d0d47c9c3de7af03dc2789d8d76f7797efe6cb
 
 }
 SceneEntity *Scenegraph::getSc() const
@@ -35,7 +40,7 @@ void Scenegraph::render(CgBaseRenderer *render,SceneEntity* sc)
     matrixstack.push(ma);
     sc->rotate(counter,counter,counter);
     for(int i=0; i < sc->getChildren().size(); i++){
-        std::cout<<"sada"<<std::endl;
+
         this->render(render,sc->getChildren().at(i));
 
     }

@@ -30,7 +30,8 @@ SOURCES += main.cpp \
     CgSceneGraph/traegerklasse.cpp \
     CgSceneGraph/scenegraph.cpp \
     CgSceneGraph/sceneentity.cpp \
-    CgSceneGraph/appearance.cpp
+    CgSceneGraph/appearance.cpp \
+    CgSceneGraph/kamera.cpp
 
 
 HEADERS += \
@@ -70,4 +71,5 @@ CgUtils/ObjLoader.h \
     CgSceneGraph/traegerklasse.h \
     CgSceneGraph/scenegraph.h \
     CgSceneGraph/sceneentity.h \
-    CgSceneGraph/appearance.h
+    CgSceneGraph/appearance.h \
+    CgSceneGraph/kamera.h
