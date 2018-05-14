@@ -55,18 +55,20 @@ CgSceneControl::CgSceneControl() {
     verschiebung=glm::vec3(0,0,0);
     kugel=MeshFactory::createKugel(1,20,20);
     SceneEntity * sc1 = new SceneEntity(kugel,Cg::Stern,glm::vec3(0,0,0));
-    SceneEntity * sc2 = new SceneEntity(kugel,Cg::Erde,glm::vec3(7,1,0));
-    SceneEntity * sc3 = new SceneEntity(kugel,Cg::Mond1,glm::vec3(1,1,0));
+    SceneEntity * sc2 = new SceneEntity(kugel,Cg::Erde,glm::vec3(7,0,0));
+    SceneEntity * sc3 = new SceneEntity(kugel,Cg::Mond1,glm::vec3(2,0,0));
 
     SceneEntity * sc4 = new SceneEntity(kugel,Cg::Planet1,glm::vec3(12,0,0));
-    SceneEntity * sc5 = new SceneEntity(kugel,Cg::Planet2,glm::vec3(17,1,0));
-    SceneEntity * sc6 = new SceneEntity(kugel,Cg::Mond2,glm::vec3(2,5,0));
+    SceneEntity * sc5 = new SceneEntity(kugel,Cg::Planet2,glm::vec3(17,0,0));
+    SceneEntity * sc6 = new SceneEntity(kugel,Cg::Mond2,glm::vec3(4,0,0));
+    SceneEntity * sc7 = new SceneEntity(kugel,Cg::Mond3,glm::vec3(2,0,0));
     //sc5->setTransformation(transform((11,2,0),0,0,0,.1));
     sc1->addChildren(sc2);
     sc1->addChildren(sc4);
     sc1->addChildren(sc5);
     sc2->addChildren(sc3);
     sc4->addChildren(sc6);
+    sc4->addChildren(sc7);
 
     sc = new Scenegraph(sc1);
     // m_renderer->init(kugel);

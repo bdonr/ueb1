@@ -39,7 +39,7 @@ public:
     //void transform(int winkely, int winkelz, int wunschwinkel);
   //  void transform();
 
-    void rotate(float winkel_y, float winkel_z, float wunschwinkel, glm::mat4x4 matrix);
+    void rotate(float winkel_y, float winkel_z, float wunschwinkel);
     glm::mat4x4 translatetoVectot();
     void setAusrichtung();
     glm::mat4x4 transform();

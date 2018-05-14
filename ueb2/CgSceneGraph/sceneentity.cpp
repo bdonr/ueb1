@@ -7,7 +7,7 @@ SceneEntity::SceneEntity(CgBaseRenderableObject* ob,enum Cg::ObjectType type,glm
 
     if(type==Cg::Stern){
 
-        skala=1;
+        skala=10;
         this->winkelx=0;
         this->winkely=0;
         this->winkelz=10;
@@ -17,9 +17,9 @@ SceneEntity::SceneEntity(CgBaseRenderableObject* ob,enum Cg::ObjectType type,glm
     if(type==Cg::Erde){
 
         skala=.5;
-        this->winkelx=0;
-        this->winkely=0;
-        this->winkelz=0;
+        this->winkelx=10;
+        this->winkely=110;
+        this->winkelz=30;
         this->transformation=transform();
     }
 
@@ -35,27 +35,35 @@ SceneEntity::SceneEntity(CgBaseRenderableObject* ob,enum Cg::ObjectType type,glm
         if(type==Cg::Planet1){
 
             skala=.2;
-            this->winkelx=10;
-            this->winkely=20;
-            this->winkelz=10;
+            this->winkelx=0;
+            this->winkely=0;
+            this->winkelz=0;
             this->transformation=transform();
         }
 
         if(type==Cg::Mond2){
 
             skala=.5;
-            this->winkelx=10;
-            this->winkely=20;
-            this->winkelz=10;
+            this->winkelx=0;
+            this->winkely=0;
+            this->winkelz=0;
+            this->transformation=transform();
+        }
+        if(type==Cg::Mond3){
+
+            skala=1;
+            this->winkelx=0;
+            this->winkely=0;
+            this->winkelz=0;
             this->transformation=transform();
         }
 
         if(type==Cg::Planet2){
 
             skala=1;
-            this->winkelx=10;
-            this->winkely=100;
-            this->winkelz=10;
+            this->winkelx=0;
+            this->winkely=0;
+            this->winkelz=0;
             this->transformation=transform();
         }
 
@@ -119,9 +127,12 @@ std::vector<SceneEntity *> SceneEntity::getChildren() const
 
 
 
-void SceneEntity::rotate(float winkely,float winkelz,float wunschwinkel,glm::mat4x4 matrix)
+void SceneEntity::rotate(float winkel_y,float winkel_z,float wunschwinkel)
 {
 
+    wunschwinkel=wunschwinkel/1000;
+    winkel_y=winkel_y/1000;
+    std::cout<<winkel_y<<std::endl;
     if(type==Cg::Stern){
         std::cout<<"stern"<<std::endl;
         //wunschwinkel+=wunschwinkel/360;
@@ -135,37 +146,51 @@ void SceneEntity::rotate(float winkely,float winkelz,float wunschwinkel,glm::mat
     }
     if(type!=Cg::Stern){
     if(type==Cg::Erde){
+        //this->winkely+=10;
         transformation*=
                 rotationZ(-this->winkelz)*
                 rotationY(-this->winkely)*
-                rotationZ(wunschwinkel)*
+                rotationZ(winkel_y*4100)*
                 rotationY(this->winkely)*
                 rotationZ(this->winkelz);
-
-        wunschwinkel=wunschwinkel/1.2;
-
+        wunschwinkel=wunschwinkel*20;
     }
 
 
     if(type==Cg::Mond1){
-
-
+        transformation=
+                rotationZ(-this->winkelz)*
+                rotationY(-this->winkely)*
+                rotationX(winkel_y*2000)*
+                rotationY(this->winkely)*
+                rotationZ(this->winkelz);
         wunschwinkel=wunschwinkel*28;
 
     }
 
     if(type==Cg::Mond2){
+        this->winkelx+=10;
+        transformation=
+                rotationZ(-this->winkelz)*
+                rotationY(-this->winkely)*
+                rotationZ(winkel_z*100)*
+                rotationY(this->winkely)*
+                rotationZ(this->winkelz);
         wunschwinkel=wunschwinkel*100;
+
+    }
+    if(type==Cg::Mond3){
+        wunschwinkel=wunschwinkel*(-10);
 
     }
 
     if(type==Cg::Planet1){
-        wunschwinkel=wunschwinkel*.1;
+        wunschwinkel=wunschwinkel*10;
     }
 
     if(type==Cg::Planet2){
-        wunschwinkel=wunschwinkel*(-10);
-        winkely=winkely*1.2;
+        wunschwinkel=wunschwinkel*(-20);
+        winkely=-winkel_y;
     }
 
     glm::mat3x3 matrixcoole = glm::mat3x3(glm::vec3(glm::cos(glm::radians(wunschwinkel)),(-1)*glm::sin(glm::radians(wunschwinkel)),0),

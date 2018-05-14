@@ -397,6 +397,7 @@ namespace Cg{
     Erde                =0x0000001b,
     Mond1               =0x0000001c,
     Mond2               =0x0000001d,
+    Mond3               =0x0000001e,
     }ObjectType;
 
 }
