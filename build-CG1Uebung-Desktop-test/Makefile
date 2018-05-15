@@ -33,7 +33,7 @@ MOVE          = mv -f
 TAR           = tar -cf
 COMPRESS      = gzip -9f
 DISTNAME      = uebung11.0.0
-DISTDIR = /home/leoon/Schreibtisch/sem4/cg1/aufgaben/neu\ workpace/ueb1/build-CG1Uebung-Desktop-test/.tmp/uebung11.0.0
+DISTDIR = /home/don/Schreibtisch/cg\ uebung/ueb1/build-CG1Uebung-Desktop-test/.tmp/uebung11.0.0
 LINK          = g++
 LFLAGS        = -m64
 LIBS          = $(SUBLIBS) -L/usr/X11R6/lib64 -lQt5OpenGL -lQt5Widgets -lQt5Gui -lQt5Core -lGL -lpthread 
@@ -426,16 +426,16 @@ compiler_moc_header_clean:
 	-$(DEL_FILE) moc_CgQtGLRenderWidget.cpp moc_CgQtGui.cpp moc_CgQtMainApplication.cpp
 moc_CgQtGLRenderWidget.cpp: ../ueb2/CgBase/CgBaseRenderer.h \
 		../ueb2/CgQtViewer/CgQtGLRenderWidget.h
-	/usr/lib/x86_64-linux-gnu/qt5/bin/moc $(DEFINES) -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++-64 -I'/home/leoon/Schreibtisch/sem4/cg1/aufgaben/neu workpace/ueb1/ueb2' -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtOpenGL -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I. -I/usr/include/c++/5 -I/usr/include/x86_64-linux-gnu/c++/5 -I/usr/include/c++/5/backward -I/usr/lib/gcc/x86_64-linux-gnu/5/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include ../ueb2/CgQtViewer/CgQtGLRenderWidget.h -o moc_CgQtGLRenderWidget.cpp
+	/usr/lib/x86_64-linux-gnu/qt5/bin/moc $(DEFINES) -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++-64 -I'/home/don/Schreibtisch/cg uebung/ueb1/ueb2' -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtOpenGL -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I. -I/usr/include/c++/5 -I/usr/include/x86_64-linux-gnu/c++/5 -I/usr/include/c++/5/backward -I/usr/lib/gcc/x86_64-linux-gnu/5/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include ../ueb2/CgQtViewer/CgQtGLRenderWidget.h -o moc_CgQtGLRenderWidget.cpp
 
 moc_CgQtGui.cpp: ../ueb2/CgBase/CgObservable.h \
 		../ueb2/CgBase/CgEnums.h \
 		../ueb2/CgSceneGraph/traegerklasse.h \
 		../ueb2/CgQtViewer/CgQtGui.h
-	/usr/lib/x86_64-linux-gnu/qt5/bin/moc $(DEFINES) -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++-64 -I'/home/leoon/Schreibtisch/sem4/cg1/aufgaben/neu workpace/ueb1/ueb2' -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtOpenGL -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I. -I/usr/include/c++/5 -I/usr/include/x86_64-linux-gnu/c++/5 -I/usr/include/c++/5/backward -I/usr/lib/gcc/x86_64-linux-gnu/5/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include ../ueb2/CgQtViewer/CgQtGui.h -o moc_CgQtGui.cpp
+	/usr/lib/x86_64-linux-gnu/qt5/bin/moc $(DEFINES) -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++-64 -I'/home/don/Schreibtisch/cg uebung/ueb1/ueb2' -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtOpenGL -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I. -I/usr/include/c++/5 -I/usr/include/x86_64-linux-gnu/c++/5 -I/usr/include/c++/5/backward -I/usr/lib/gcc/x86_64-linux-gnu/5/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include ../ueb2/CgQtViewer/CgQtGui.h -o moc_CgQtGui.cpp
 
 moc_CgQtMainApplication.cpp: ../ueb2/CgQtViewer/CgQtMainApplication.h
-	/usr/lib/x86_64-linux-gnu/qt5/bin/moc $(DEFINES) -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++-64 -I'/home/leoon/Schreibtisch/sem4/cg1/aufgaben/neu workpace/ueb1/ueb2' -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtOpenGL -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I. -I/usr/include/c++/5 -I/usr/include/x86_64-linux-gnu/c++/5 -I/usr/include/c++/5/backward -I/usr/lib/gcc/x86_64-linux-gnu/5/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include ../ueb2/CgQtViewer/CgQtMainApplication.h -o moc_CgQtMainApplication.cpp
+	/usr/lib/x86_64-linux-gnu/qt5/bin/moc $(DEFINES) -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++-64 -I'/home/don/Schreibtisch/cg uebung/ueb1/ueb2' -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtOpenGL -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I. -I/usr/include/c++/5 -I/usr/include/x86_64-linux-gnu/c++/5 -I/usr/include/c++/5/backward -I/usr/lib/gcc/x86_64-linux-gnu/5/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include ../ueb2/CgQtViewer/CgQtMainApplication.h -o moc_CgQtMainApplication.cpp
 
 compiler_moc_source_make_all:
 compiler_moc_source_clean:
@@ -473,7 +473,8 @@ main.o: ../ueb2/main.cpp ../ueb2/CgQtViewer/CgQtMainApplication.h \
 		../ueb2/CgSceneGraph/koordinatensystem.h \
 		../ueb2/CgSceneGraph/scenegraph.h \
 		../ueb2/CgSceneGraph/sceneentity.h \
-		../ueb2/CgSceneGraph/appearance.h
+		../ueb2/CgSceneGraph/appearance.h \
+		../ueb2/CgSceneGraph/kamera.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o ../ueb2/main.cpp
 
 CGQtGLRenderWidget.o: ../ueb2/CgQtViewer/CGQtGLRenderWidget.cpp ../ueb2/CgQtViewer/CgQtGLRenderWidget.h \
@@ -513,6 +514,7 @@ CgQtGui.o: ../ueb2/CgQtViewer/CgQtGui.cpp ../ueb2/CgQtViewer/CgQtGLRenderWidget.
 		../ueb2/CgSceneGraph/scenegraph.h \
 		../ueb2/CgSceneGraph/sceneentity.h \
 		../ueb2/CgSceneGraph/appearance.h \
+		../ueb2/CgSceneGraph/kamera.h \
 		../ueb2/CgSceneGraph/slidermoveevent.h \
 		../ueb2/CgEvents/objectopenevent.h \
 		../ueb2/CgSceneGraph/besterslidermoveevent.h
@@ -554,6 +556,7 @@ CgSceneControl.o: ../ueb2/CgSceneGraph/CgSceneControl.cpp ../ueb2/CgSceneGraph/C
 		../ueb2/CgSceneGraph/sceneentity.h \
 		../ueb2/CgSceneGraph/appearance.h \
 		../ueb2/CgBase/CgBaseRenderer.h \
+		../ueb2/CgSceneGraph/kamera.h \
 		../ueb2/CgEvents/CgMouseEvent.h \
 		../ueb2/CgEvents/CgKeyEvent.h \
 		../ueb2/CgEvents/CgWindowResizeEvent.h \

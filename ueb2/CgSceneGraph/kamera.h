@@ -17,6 +17,9 @@ public:
     void setProjection(const glm::mat4 &value);
     glm::vec2 getFenster() const;
     void setFenster(const glm::vec2 &value);
+    glm::mat4 frustrum(float left, float right, float bottom,float top, float near, float far);
+    glm::mat4 perspective(float alpha, float aspect,float near, float far);
+
 };
 
 #endif // KAMERA_H

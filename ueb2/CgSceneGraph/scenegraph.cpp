@@ -9,13 +9,8 @@ Scenegraph::Scenegraph(SceneEntity* sc):sc(sc){
                                  glm::vec4(0,1,0,0),
                                  glm::vec4(0,0,1,0),
                                  glm::vec4(0,0,0,1)));
-<<<<<<< HEAD
-    counter=1;
-   // std::cout<<matrixstack.top()<<std::endl;
-=======
-    counter=0;
 
->>>>>>> 71d0d47c9c3de7af03dc2789d8d76f7797efe6cb
+    counter=0;
 
 }
 SceneEntity *Scenegraph::getSc() const

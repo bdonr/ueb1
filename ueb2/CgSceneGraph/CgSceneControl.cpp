@@ -25,20 +25,38 @@ CgSceneControl::CgSceneControl() {
     //  koordinatensystem = new Koordinatensystem();
     // changed=1;
     //koordinatensystem = new Koordinatensystem();
-
-
-    w = glm::vec3(0,0,-8);
-w =  glm::normalize(w);
-    v = glm::vec3(0,1,0);
-v = glm::normalize(v);
-    u = glm::cross(w,v);
-u = glm::normalize(u);
-
-
+    countD=0.0;
+    countQ=0.0;
+    countA=0.0;
+    s=1;
 
     cam = new Kamera();
-    cam->setLookAt( glm::mat4x4(glm::vec4(3.0, 0.0, 0.0, 0.0), glm::vec4(0.0, 3.0, 0.0, 0.0), glm::vec4(0.0, 0.0, 3.0, -3.0),
-                                glm::vec4(0.0, 0.0, -3.0, 3.0)));
+
+    countA=-5;
+    eye = glm::vec3(0,0,-1.0);
+
+    glm::vec3 center(0,0,0);
+
+    v = glm::vec3(0,1,0);
+    v = glm::normalize(v);
+
+    glm::vec3 h(center-eye);
+    w= glm::normalize(h);
+
+    u = glm::cross(v,w);
+    u = glm::normalize(u);
+
+
+    glm::mat4 look = glm::mat4(glm::vec4(1,0,0,0),
+                               glm::vec4(0,1,0,0),
+                               glm::vec4(0,0,1,0),
+                               glm::vec4(0,0,0,1));
+
+    cam->setLookAt(look);
+  //  cam->setProjection(cam->perspective(100,eye.x,eye.y,eye.z));
+
+
+
     ObjLoader loader;
     s=0.5;
     y=0.0;
@@ -55,7 +73,7 @@ u = glm::normalize(u);
     //std::ofstream("../CgData/kugel.obj");
 
 
-    rotaAchse = MeshFactory::createMyPolyline(glm::vec3(220,9,200),st);
+   // rotaAchse = MeshFactory::createMyPolyline(glm::vec3(220,9,200),st);
     //resetRender(100);
 
     m_current_transformation = glm::mat4(1.);
@@ -128,10 +146,8 @@ void CgSceneControl::setRenderer(CgBaseRenderer *r) {
 
         }
 
-    }       if(rotaAchse){
-        std::cout<<"huhu"<<std::endl;
-        m_renderer->init(rotaAchse);
     }
+
 
 
 
@@ -161,15 +177,13 @@ void CgSceneControl::resetObject(){
 
 
 void CgSceneControl::renderObjects() {
-    m_renderer->setProjectionMatrix(m_proj_matrix);
+    m_renderer->setProjectionMatrix(cam->getProjection());
     m_renderer->setLookAtMatrix(
                 cam->getLookAt());
     for(int i = 0; i<=koordinatensystem->getPolylines().size()-1;i++){
         m_renderer->render(koordinatensystem->getPolylines().at(i),m_current_transformation);
     }
-    if(rotaAchse!=NULL){
-        m_renderer->render(rotaAchse,m_current_transformation);
-    }
+
     //m_renderer->render(kugel,old);
     if(poly){
         if(!poly->getKeisVec().empty())
@@ -526,7 +540,7 @@ void CgSceneControl::handleEvent(CgBaseEvent *e) {
             s=s+0.02;
         }
 
-
+        std::cout<<"s"<<s<<""<<std::endl;
         old=m_current_transformation*
                 glm::mat4x4(         glm::vec4(s,0,0,0),
                                      glm::vec4(0,s,0,0),
@@ -538,43 +552,92 @@ void CgSceneControl::handleEvent(CgBaseEvent *e) {
                                                              glm::vec4(0,0,s,0),
                                                              glm::vec4(0,0,0,1)));
     }
-
-    if(((CgKeyEvent*)e)->key()==Cg::Key_A){
-
-
-        cam->setLookAt(glm::mat4(glm::vec4(u.x,u.y,u.z,0),
-                                  glm::vec4(v.x,v.y,v.z,0),
-                                  glm::vec4(w.x,w.y,w.z,0),
-                                  glm::vec4(0.0,0,0,1)));
-        w.y=w.y+1;
-        w.x=w.x+1;
-        w.z=w.z+1;
-        countA+=1;
-    }
     if(((CgKeyEvent*)e)->key()==Cg::Key_D){
-        cam->setLookAt(glm::mat4x4(glm::vec4(0.1, 0.0, 0.0, 0.0),
-                                   glm::vec4(glm::sin(glm::radians(countD)), 0.1, glm::cos(glm::radians(countD)), 0.0),
-                                   glm::vec4(0.0, 0.0, 0.1, -0.1),
-                                   glm::vec4(0.0, 0.0, -glm::sin(glm::radians(countA)), 0.1)));
-        countA-=1;
-    }
-    if(((CgKeyEvent*)e)->key()==Cg::Key_W){
-        cam->setLookAt(glm::mat4x4(glm::vec4(0.1, 0.0, 0.0, 0.0),
-                                   glm::vec4(glm::sin(glm::radians(countD)), 0.1, 0.0, 0.0),
-                                   glm::vec4(0.0, 0.0, 0.1, -0.1),
-                                   glm::vec4(0.0, 0.0, -glm::sin(glm::radians(countA)), 0.1)));
-        countD+=1;
-    }
-    if(((CgKeyEvent*)e)->key()==Cg::Key_S){
-        cam->setLookAt(glm::mat4x4(glm::vec4(0.1, 0.0, 0.0, 0.0),
-                                   glm::vec4(glm::sin(glm::radians(countD)), 0.1, 0.0, 0.0),
-                                   glm::vec4(0.0, 0.0, 0.1, -0.1),
-                                   glm::vec4(0.0, 0.0, -glm::sin(glm::radians(countA)), 0.1)));
-        countD-=1;
-    }
+
+        if(countA<=0){
+            countA=0.0;
+        }
+        glm::vec3 center(0,0,0);
+
+        v = glm::vec3(0,1,0);
+        v = glm::normalize(v);
+        eye = glm::vec3(-glm::sin(glm::radians(countA)),0,glm::cos(glm::radians(countA)));
+        glm::vec3 h(center-eye);
+        w= glm::normalize(h);
+        u = glm::cross(v,w);
+        u = glm::normalize(u);
+        std::cout<<countA<<std::endl;
+
+        glm::mat4 look = glm::mat4(glm::vec4(u.x,v.x,w.x,0),
+                                   glm::vec4(u.y,v.y,w.y,0),
+                                   glm::vec4(u.z,v.z,w.z,0),
+                                   glm::vec4(0,0,0,1));
+
+        cam->setLookAt(look);
+  //     cam->setProjection(cam->perspective(45,eye.x,eye.y,eye.z));
+
+       // cam->setLookAt();
+
+        countA+=1.0;
+}
+    if(((CgKeyEvent*)e)->key()==Cg::Key_A){
+        if(countA<=0){
+            countA=0.0;
+        }
+        glm::vec3 center(0,0,0);
+
+        v = glm::vec3(0,1,0);
+        v = glm::normalize(v);
+        eye = glm::vec3(-glm::sin(glm::radians(countA)),0,glm::cos(glm::radians(countA)));
+        glm::vec3 h(center-eye);
+        w= glm::normalize(h);
+        u = glm::cross(v,w);
+        u = glm::normalize(u);
+        std::cout<<countA<<std::endl;
+
+        glm::mat4 look = glm::mat4(glm::vec4(u.x,v.x,w.x,0),
+                                   glm::vec4(u.y,v.y,w.y,0),
+                                   glm::vec4(u.z,v.z,w.z,0),
+                                   glm::vec4(0,0,0,1));
+
+        cam->setLookAt(look);
+  //     cam->setProjection(cam->perspective(45,eye.x,eye.y,eye.z));
+
+       // cam->setLookAt();
 
 
+        countA-=1.0;
+    }
 
+    if(((CgKeyEvent*)e)->key()==Cg::Key_Q){
+
+
+//        if(countQ>360){
+//            countQ=360;
+//        }
+        glm::vec3 center=glm::vec3(glm::cos(glm::radians(countQ)),glm::sin(glm::radians(countQ)),0);
+
+        v = glm::vec3(0,1,0);
+        v = glm::normalize(v);
+       // eye = glm::vec3(eye.x,eye.y+countQ,eye.z);
+        glm::vec3 h(center-eye);
+        w= glm::normalize(h);
+        u = glm::cross(v,w);
+        u = glm::normalize(u);
+       std::cout<<countQ<<std::endl;
+
+        glm::mat4 look = glm::mat4(glm::vec4(u.x,v.x,w.x,0),
+                                   glm::vec4(u.y,v.y,w.y,0),
+                                   glm::vec4(u.z,v.z,w.z,0),
+                                   glm::vec4(0,0,0,1));
+
+        cam->setLookAt(look);
+      // cam->setProjection(cam->perspective(100,100,3,3));
+
+       // cam->setLookAt();
+
+        countQ+=1;
+}
 
     if(e->getType()==Cg::CgChangeRota){
         bool k=false;
@@ -632,3 +695,4 @@ glm::mat4x4 rotationX(int x){
 
 //glm::mat4x4 CgSceneControl::rotation(int x, int y, int z)
 
+//

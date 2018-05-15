@@ -132,7 +132,6 @@ void SceneEntity::rotate(float winkel_y,float winkel_z,float wunschwinkel)
 
     wunschwinkel=wunschwinkel/1000;
     winkel_y=winkel_y/1000;
-    std::cout<<winkel_y<<std::endl;
     if(type==Cg::Stern){
 
         //wunschwinkel+=wunschwinkel/360;

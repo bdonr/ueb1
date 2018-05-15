@@ -45,8 +45,10 @@ private:
     glm::vec3 w;
     glm::vec3 v;
     glm::vec3 u;
+    glm::vec3 eye;
     float countD;
     float countA;
+    float countQ;
     Kamera* cam;
     glm::mat4 old;
     std::vector <Dreiecke*> objecte;
@@ -57,6 +59,7 @@ private:
     glm::mat4 m_current_transformation;
     glm::mat4 m_proj_matrix;
     MyPolyline* rotaAchse;
+
     float s;
     float x;
     float y;
