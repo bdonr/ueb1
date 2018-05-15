@@ -615,7 +615,7 @@ void CgSceneControl::handleEvent(CgBaseEvent *e) {
 //        if(countQ>360){
 //            countQ=360;
 //        }
-        glm::vec3 center=glm::vec3(glm::cos(glm::radians(countQ)),glm::sin(glm::radians(countQ)),0);
+        glm::vec3 center=glm::vec3(0,0,0);
 
         v = glm::vec3(0,1,0);
         v = glm::normalize(v);
@@ -626,10 +626,10 @@ void CgSceneControl::handleEvent(CgBaseEvent *e) {
         u = glm::normalize(u);
        std::cout<<countQ<<std::endl;
 
-        glm::mat4 look = glm::mat4(glm::vec4(u.x,v.x,w.x,0),
+        glm::mat4 look = cam->getLookAt()*glm::mat4(glm::vec4(u.x,v.x,w.x,0),
                                    glm::vec4(u.y,v.y,w.y,0),
                                    glm::vec4(u.z,v.z,w.z,0),
-                                   glm::vec4(0,0,0,1));
+                                   glm::vec4(-glm::sin(glm::radians(eye.x-countQ)),0,0,1));
 
         cam->setLookAt(look);
       // cam->setProjection(cam->perspective(100,100,3,3));
@@ -637,6 +637,36 @@ void CgSceneControl::handleEvent(CgBaseEvent *e) {
        // cam->setLookAt();
 
         countQ+=1;
+}
+
+    if(((CgKeyEvent*)e)->key()==Cg::Key_E){
+
+
+//        if(countQ>360){
+//            countQ=360;
+//        }
+        glm::vec3 center=glm::vec3(0,0,0);
+
+        v = glm::vec3(0,1,0);
+        v = glm::normalize(v);
+       // eye = glm::vec3(eye.x,eye.y+countQ,eye.z);
+        glm::vec3 h(center-eye);
+        w= glm::normalize(h);
+        u = glm::cross(v,w);
+        u = glm::normalize(u);
+       std::cout<<countQ<<std::endl;
+
+        glm::mat4 look = cam->getLookAt()*glm::inverse(glm::mat4(glm::vec4(u.x,v.x,w.x,0),
+                                   glm::vec4(u.y,v.y,w.y,0),
+                                   glm::vec4(u.z,v.z,w.z,0),
+                                   glm::vec4(-glm::sin(glm::radians(eye.x-countQ)),0,0,1)));
+
+        cam->setLookAt(look);
+      // cam->setProjection(cam->perspective(100,100,3,3));
+
+       // cam->setLookAt();
+
+        countQ-=1;
 }
 
     if(e->getType()==Cg::CgChangeRota){
