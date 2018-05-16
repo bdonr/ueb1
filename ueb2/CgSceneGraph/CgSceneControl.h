@@ -46,9 +46,15 @@ private:
     glm::vec3 v;
     glm::vec3 u;
     glm::vec3 eye;
-    float countD;
+
+    float countW;
     float countA;
+    float countS;
+    float countD;
     float countQ;
+    float countE;
+
+
     Kamera* cam;
     glm::mat4 old;
     std::vector <Dreiecke*> objecte;
