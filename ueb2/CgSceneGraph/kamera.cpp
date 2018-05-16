@@ -133,9 +133,10 @@ void Kamera::towardMINUS(float x)
                       glm::vec4(s.z,h.z,f.z,0),
                       glm::vec4(-dot(s,eye),-dot(h,eye),dot(f,eye),1));
 }
-void Kamera::rotatePlus(float x ){
-
-    center+=glm::vec3(-glm::sin(glm::radians(x)),0,glm::cos(glm::radians(x)));
+void Kamera::rotatePlus(){
+    countQ+=.5;
+    center=glm::vec3(glm::sin(glm::radians(countQ)),0,-glm::cos(glm::radians(countQ)));
+    std::cout<<center.x<<std::endl;
     //eye +=glm::vec3(0,0,1);
     v = glm::vec3(0,1,0);
     //center +=glm::vec3(1,0,0);
@@ -151,8 +152,24 @@ void Kamera::rotatePlus(float x ){
 
 
 }
-void Kamera::rotateMinus(float x){
-    center-=glm::vec3(glm::sin(glm::radians(center.x+x)),glm::cos(glm::radians(center.y+x)),0);
+void Kamera::rotateMinus(){
+countQ-=.5;
+    center=glm::vec3(glm::sin(glm::radians(countQ)),0,-glm::cos(glm::radians(countQ)));
+   std::cout<<center.x<<std::endl;
+    //eye +=glm::vec3(0,0,1);
+    v = glm::vec3(0,1,0);
+    //center +=glm::vec3(1,0,0);
+
+    glm::vec3 f= glm::normalize(center-eye); //f
+    glm::vec3 s = glm::normalize(glm::cross(f,v));
+    glm::vec3 h = glm::cross(s,f);
+
+    lookAt= glm::mat4(glm::vec4(s.x,h.x,-f.x,0),
+                      glm::vec4(s.y,h.y,-f.y,0),
+                      glm::vec4(s.z,h.z,f.z,0),
+                      glm::vec4(-dot(s,eye),-dot(h,eye),dot(f,eye),1));
+
+
 }
 
 
@@ -167,7 +184,7 @@ Kamera::Kamera()
 //    tvec3<T, P> const f(normalize(center - eye));
  //   tvec3<T, P> const s(normalize(cross(f, up)));
   //  tvec3<T, P> const u(cross(s, f));
-
+    countQ = 0;
     eye = glm::vec3(0,0,1.0);
     v = glm::vec3(0,1,0);
     center =glm::vec3(0,0,0);

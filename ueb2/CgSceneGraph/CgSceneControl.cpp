@@ -35,7 +35,7 @@ CgSceneControl::CgSceneControl() {
 
     cam = new Kamera();
 
-  //  cam->setProjection(cam->perspective(100,eye.x,eye.y,eye.z));
+    //  cam->setProjection(cam->perspective(100,eye.x,eye.y,eye.z));
 
 
 
@@ -58,7 +58,7 @@ CgSceneControl::CgSceneControl() {
     //std::ofstream("../CgData/kugel.obj");
 
 
-   // rotaAchse = MeshFactory::createMyPolyline(glm::vec3(220,9,200),st);
+    // rotaAchse = MeshFactory::createMyPolyline(glm::vec3(220,9,200),st);
     //resetRender(100);
 
     m_current_transformation = glm::mat4(1.);
@@ -105,7 +105,7 @@ void CgSceneControl::setRenderer(CgBaseRenderer *r) {
 
     }
     //sc->render(m_renderer,sc->getSc());
-   // registerSceneGraph(m_renderer,sc->getSc());
+    // registerSceneGraph(m_renderer,sc->getSc());
 
     // m_renderer->init(kugel);
 
@@ -194,7 +194,7 @@ void CgSceneControl::renderObjects() {
             m_renderer->render(m_triangle.at(i),m_current_transformation);
         }
     }
-//    drawSceneGraph(m_renderer,sc->getSc());
+    //    drawSceneGraph(m_renderer,sc->getSc());
 
     // m_renderer->render(kugel,old);
 
@@ -271,7 +271,7 @@ void CgSceneControl::drawSceneGraph(CgBaseRenderer *r, SceneEntity *e)
 {
 
     if(e->getChildren().empty()){
-          r->render(e->getOb(),e->getTransformation());
+        r->render(e->getOb(),e->getTransformation());
     }
     else{
         for(int i=0;i<=e->getChildren().size()-1;i++){
@@ -408,8 +408,8 @@ void CgSceneControl::handleEvent(CgBaseEvent *e) {
         }
 
         if(refine>3){
-         //   kugel = MeshFactory::createKugel(refine,hoehe,radius);
-          //  m_renderer->init(kugel);
+            //   kugel = MeshFactory::createKugel(refine,hoehe,radius);
+            //  m_renderer->init(kugel);
         }
 
     }
@@ -537,7 +537,7 @@ void CgSceneControl::handleEvent(CgBaseEvent *e) {
     if(((CgKeyEvent*)e)->key()==Cg::Key_D){
         countA+=.1;
         cam->strafePLUS(countA);
-}
+    }
     if(((CgKeyEvent*)e)->key()==Cg::Key_A){
 
         countA-=.1;
@@ -548,22 +548,22 @@ void CgSceneControl::handleEvent(CgBaseEvent *e) {
     if(((CgKeyEvent*)e)->key()==Cg::Key_W){
         countW+=.1;
         cam->towardPLUS(countW);
-}
+    }
 
     if(((CgKeyEvent*)e)->key()==Cg::Key_S){
         countW-=.1;
         cam->towardMINUS((-1)*countW);
 
     }
-        if(((CgKeyEvent*)e)->key()==Cg::Key_U){
+    if(((CgKeyEvent*)e)->key()==Cg::Key_U){
 
-            cam->rotateMinus(.1);
+        cam->rotateMinus();
 
-        }
-            if(((CgKeyEvent*)e)->key()==Cg::Key_I){
+    }
+    if(((CgKeyEvent*)e)->key()==Cg::Key_I){
 
-                cam->rotatePlus(.1);
-}
+        cam->rotatePlus();
+    }
 
 
 

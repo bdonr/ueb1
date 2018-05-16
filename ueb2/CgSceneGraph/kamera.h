@@ -15,6 +15,7 @@ private:
     glm::vec3 u;
     glm::vec3 w;
     glm::vec3 center;
+    float countQ;
 public:
     Kamera();
     glm::mat4 getLookAt() const;
@@ -34,8 +35,8 @@ public:
 
     glm::mat4 calculateNew();
     //void rotate();
-    void rotatePlus(float x);
-    void rotateMinus(float x);
+    void rotatePlus();
+    void rotateMinus();
 };
 
 #endif // KAMERA_H
