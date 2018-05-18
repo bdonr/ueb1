@@ -41,7 +41,14 @@ public:
     void resetRenderKugel(int refine, float hoehe, float radius);
     glm::mat4x4 transform(glm::vec3 k, int winkely, int winkelz, int wunschwinkel);
     glm::mat4x4 transform(glm::vec3 k, float winkely, float winkelz, float wunschwinkel, float skala);
+    void tab1constructor();
+    void tab2constructor();
+    void tab3constructor();
+    void tab4constructor();
+    void tab5constructor();
+    void resetAll();
 private:
+    int tab;
     glm::vec3 w;
     glm::vec3 v;
     glm::vec3 u;
@@ -78,9 +85,7 @@ private:
     std::vector<unsigned int> dreieckecords;
     Scenegraph* sc;
 
-
-
-
+    void renew();
 };
 
 #endif // CGSCENECONTROL_H

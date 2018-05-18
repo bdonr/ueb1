@@ -15,7 +15,7 @@
 #include "CgUtils/ObjLoader.h"
 #include "../CgEvents/objectopenevent.h"
 #include "besterslidermoveevent.h"
-#include "scenegraph.h"cam->getProjection()
+#include "scenegraph.h"
 #include "sceneentity.h"
 // bla dingens
 CgSceneControl::CgSceneControl() {
@@ -25,6 +25,7 @@ CgSceneControl::CgSceneControl() {
     //  koordinatensystem = new Koordinatensystem();
     // changed=1;
     //koordinatensystem = new Koordinatensystem();
+    tab=0;
     countW=0.0;
     countA=0.0;
     countS=0.0;
@@ -43,8 +44,11 @@ CgSceneControl::CgSceneControl() {
     s=0.5;
     y=0.0;
     koordinatensystem=new Koordinatensystem();
+    //rotationkörper
     poly = MeshFactory::createRotationKoerper(1);
+    //kegel, zlinder
     m_triangle.push_back(MeshFactory::createKegel(0,.0,0));
+    //figuren
     dreiecke=NULL;
     // kugel=NULL;
     glm::vec3 b2 = glm::vec3(9.,1.,1.);
@@ -70,6 +74,7 @@ CgSceneControl::CgSceneControl() {
                              glm::vec4(0,0,1,0),
                              glm::vec4(0,0,0,1));
     verschiebung=glm::vec3(0,0,0);
+    //sonnensystem
     kugel=MeshFactory::createKugel(1,20,20);
     SceneEntity * sc1 = new SceneEntity(kugel,Cg::Stern,glm::vec3(0,0,0));
     SceneEntity * sc2 = new SceneEntity(kugel,Cg::Erde,glm::vec3(7,0,0));
@@ -258,7 +263,6 @@ void CgSceneControl::registerSceneGraph(CgBaseRenderer *r, SceneEntity* e)
     }
     else{
         for(int i=0;i<=e->getChildren().size()-1;i++){
-            std::cout<<"hi@"<<std::endl;
             r->init(e->getChildren().at(i)->getOb());
             if(!e->getChildren().at(i)->getChildren().empty()){
                 registerSceneGraph(r,e->getChildren().at(i));
@@ -275,7 +279,6 @@ void CgSceneControl::drawSceneGraph(CgBaseRenderer *r, SceneEntity *e)
     }
     else{
         for(int i=0;i<=e->getChildren().size()-1;i++){
-            //std::cout<<"hi!"<<std::endl;
             r->render(e->getChildren().at(i)->getOb(),e->getChildren().at(i)->getTransformation());
             if(!e->getChildren().at(i)->getChildren().empty()){
                 drawSceneGraph(r,e->getChildren().at(i));
@@ -401,8 +404,6 @@ void CgSceneControl::handleEvent(CgBaseEvent *e) {
         int refine= ((SliderMoveEvent*)e)->getRefine();
         float radius= ((SliderMoveEvent*)e)->getRadius();
         float hoehe= ((SliderMoveEvent*)e)->getHoehe();
-        std::cout<<"hi"<<std::endl;
-
         if(refine<=3){
             this->reset();
         }
@@ -570,7 +571,6 @@ void CgSceneControl::handleEvent(CgBaseEvent *e) {
     if(e->getType()==Cg::CgChangeRota){
         bool k=false;
         float x =((bestersliderMoveEvent*)e)->getTraegerKlasse()->getIntvec().x/10;
-        std::cout<<x<<"xoxoxoxoxoxox"<<std::endl;
         float y =((bestersliderMoveEvent*)e)->getTraegerKlasse()->getIntvec().y/10;
         float z =((bestersliderMoveEvent*)e)->getTraegerKlasse()->getIntvec().z/10;
         verschiebung = glm::vec3(x,y,z);
@@ -604,17 +604,50 @@ void CgSceneControl::handleEvent(CgBaseEvent *e) {
         this->m_renderer->init(dreiecke);
         this->m_renderer->redraw();
     }
+    if(e->getType()==Cg::TabChange){
+        tab =((bestersliderMoveEvent*)e)->getTraegerKlasse()->getTab();
+        resetAll();
+        if(tab==0)tab1constructor();
+        if(tab==1)tab2constructor();
+        if(tab==2)tab3constructor();
+        if(tab==3)tab4constructor();
+        if(tab==4)tab5constructor();
+}
 
 
     // an der Stelle an der ein Event abgearbeitet ist wird es auch gelöscht.
     delete e;
 
 }
+void CgSceneControl::tab1constructor(){
+//würfel
+    std::cout<<"würfel"<<std::endl;
+}
+void CgSceneControl::tab2constructor(){
+// zylinder, kegel, rota körper
+    std::cout<<"kegel zylinder"<<std::endl;
+}
+void CgSceneControl::tab3constructor(){
+//figuren
+    std::cout<<"tyra porsche"<<std::endl;
+}
+void CgSceneControl::tab4constructor(){
+//sonnesystem
+    std::cout<<"sonnensystem"<<std::endl;
+}
+void CgSceneControl::tab5constructor(){
 
+}
+void CgSceneControl::resetAll(){
+
+}
 glm::mat4x4 CgSceneControl::allgemineRotation(int x, int y, int z){
     float x1=x*1.;
     float y1=y*1.;
     float z1=z*1.0;
+}
+void CgSceneControl::renew(){
+
 }
 
 glm::mat4x4 rotationX(int x){

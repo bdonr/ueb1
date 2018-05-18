@@ -7,7 +7,8 @@
 class bestersliderMoveEvent : public CgBaseEvent
 {
 
-private: TraegerKlasse *traegerKlasse;
+private:
+    TraegerKlasse *traegerKlasse;
     enum Cg::EventType type;
 public:
     bestersliderMoveEvent(enum Cg::EventType type,TraegerKlasse *traegerKlasse);

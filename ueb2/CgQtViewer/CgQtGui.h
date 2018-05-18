@@ -75,6 +75,7 @@ public:
 
 
 
+
 protected:
     void keyPressEvent(QKeyEvent *event) Q_DECL_OVERRIDE;
 
@@ -167,7 +168,7 @@ private slots:
     void changeY(int y);
     void changeZ(int z);
 
-
+    void tabChange(int i);
 };
 
 #endif

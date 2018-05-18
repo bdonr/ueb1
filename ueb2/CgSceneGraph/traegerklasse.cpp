@@ -13,6 +13,16 @@ void TraegerKlasse::setIntvec(const glm::vec3 &value)
     intvec = value;
 }
 
+int TraegerKlasse::getTab() const
+{
+    return tab;
+}
+
+void TraegerKlasse::setTab(int value)
+{
+    tab = value;
+}
+
 TraegerKlasse::TraegerKlasse()
 {
     intvec=glm::vec3(0,0,0);
