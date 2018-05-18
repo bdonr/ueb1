@@ -54,13 +54,15 @@ CgQtGui::CgQtGui(CgQtMainApplication *mw)
 
     QWidget* opt4 = new QWidget;
     createOptionPanelExample5(opt4);
-
+//    connect(opt4, SIGNAL(objectNameChanged(QString)), this, SLOT(tabChange(QString)));
+//    opt4->addAction(tabChange());
 
     QTabWidget* m_tabs = new QTabWidget();
     m_tabs->addTab(opt2,"&Aufgabe 1");
     m_tabs->addTab(opt,"&Aufgabe 2");
     m_tabs->addTab(opt3,"&Aufagbe 3");
     m_tabs->addTab(opt4,"&Aufagbe 4");
+    connect(m_tabs,SIGNAL(tabBarClicked(int)),this,SLOT(tabChange(int)));
 
     container->addWidget(m_tabs);
 
@@ -870,3 +872,8 @@ void CgQtGui::changeZ(int z)
     traegerklasse->setZ(z);
     notifyObserver(new bestersliderMoveEvent(Cg::CgChangeRota,traegerklasse));
 }
+void CgQtGui::tabChange(int i){
+    traegerklasse->setTab(i);
+    notifyObserver(new bestersliderMoveEvent(Cg::TabChange,traegerklasse));
+}
+

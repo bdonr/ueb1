@@ -6,6 +6,7 @@ class TraegerKlasse
 {
 
 private: glm::vec3 intvec;
+    int tab;
 public:
     TraegerKlasse();
     void setX(int x);
@@ -14,6 +15,8 @@ public:
 
     glm::vec3 getIntvec() const;
     void setIntvec(const glm::vec3 &value);
+    int getTab() const;
+    void setTab(int value);
 };
 
 #endif // TRAEGERKLASSE_H
