@@ -19,8 +19,8 @@
 
 QT_BEGIN_MOC_NAMESPACE
 struct qt_meta_stringdata_CgQtGui_t {
-    QByteArrayData data[39];
-    char stringdata0[549];
+    QByteArrayData data[41];
+    char stringdata0[561];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -67,7 +67,9 @@ QT_MOC_LITERAL(34, 521, 7), // "changeX"
 QT_MOC_LITERAL(35, 529, 7), // "changeY"
 QT_MOC_LITERAL(36, 537, 1), // "y"
 QT_MOC_LITERAL(37, 539, 7), // "changeZ"
-QT_MOC_LITERAL(38, 547, 1) // "z"
+QT_MOC_LITERAL(38, 547, 1), // "z"
+QT_MOC_LITERAL(39, 549, 9), // "tabChange"
+QT_MOC_LITERAL(40, 559, 1) // "i"
 
     },
     "CgQtGui\0kugelSlider\0\0changeRefineKugel\0"
@@ -85,7 +87,7 @@ QT_MOC_LITERAL(38, 547, 1) // "z"
     "changeRefineRota\0selectY\0selectX\0"
     "selectZ\0changeVisibleX\0changeVisibleY\0"
     "changeVisibleZ\0changeX\0changeY\0y\0"
-    "changeZ\0z"
+    "changeZ\0z\0tabChange\0i"
 };
 #undef QT_MOC_LITERAL
 
@@ -95,7 +97,7 @@ static const uint qt_meta_data_CgQtGui[] = {
        7,       // revision
        0,       // classname
        0,    0, // classinfo
-      32,   14, // methods
+      33,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -103,38 +105,39 @@ static const uint qt_meta_data_CgQtGui[] = {
        0,       // signalCount
 
  // slots: name, argc, parameters, tag, flags
-       1,    0,  174,    2, 0x08 /* Private */,
-       3,    1,  175,    2, 0x08 /* Private */,
-       5,    1,  178,    2, 0x08 /* Private */,
-       6,    1,  181,    2, 0x08 /* Private */,
-       7,    1,  184,    2, 0x08 /* Private */,
-      10,    2,  187,    2, 0x08 /* Private */,
-      11,    0,  192,    2, 0x08 /* Private */,
-      12,    0,  193,    2, 0x08 /* Private */,
-      13,    0,  194,    2, 0x08 /* Private */,
-      14,    0,  195,    2, 0x08 /* Private */,
-      15,    0,  196,    2, 0x08 /* Private */,
-      16,    1,  197,    2, 0x08 /* Private */,
-      17,    0,  200,    2, 0x08 /* Private */,
-      18,    0,  201,    2, 0x08 /* Private */,
-      19,    0,  202,    2, 0x08 /* Private */,
-      20,    0,  203,    2, 0x08 /* Private */,
-      21,    1,  204,    2, 0x08 /* Private */,
-      22,    1,  207,    2, 0x08 /* Private */,
-      23,    1,  210,    2, 0x08 /* Private */,
-      24,    1,  213,    2, 0x08 /* Private */,
-      25,    1,  216,    2, 0x08 /* Private */,
-      26,    1,  219,    2, 0x08 /* Private */,
-      27,    1,  222,    2, 0x08 /* Private */,
-      28,    0,  225,    2, 0x08 /* Private */,
-      29,    0,  226,    2, 0x08 /* Private */,
-      30,    0,  227,    2, 0x08 /* Private */,
-      31,    0,  228,    2, 0x08 /* Private */,
-      32,    0,  229,    2, 0x08 /* Private */,
-      33,    0,  230,    2, 0x08 /* Private */,
-      34,    1,  231,    2, 0x08 /* Private */,
-      35,    1,  234,    2, 0x08 /* Private */,
-      37,    1,  237,    2, 0x08 /* Private */,
+       1,    0,  179,    2, 0x08 /* Private */,
+       3,    1,  180,    2, 0x08 /* Private */,
+       5,    1,  183,    2, 0x08 /* Private */,
+       6,    1,  186,    2, 0x08 /* Private */,
+       7,    1,  189,    2, 0x08 /* Private */,
+      10,    2,  192,    2, 0x08 /* Private */,
+      11,    0,  197,    2, 0x08 /* Private */,
+      12,    0,  198,    2, 0x08 /* Private */,
+      13,    0,  199,    2, 0x08 /* Private */,
+      14,    0,  200,    2, 0x08 /* Private */,
+      15,    0,  201,    2, 0x08 /* Private */,
+      16,    1,  202,    2, 0x08 /* Private */,
+      17,    0,  205,    2, 0x08 /* Private */,
+      18,    0,  206,    2, 0x08 /* Private */,
+      19,    0,  207,    2, 0x08 /* Private */,
+      20,    0,  208,    2, 0x08 /* Private */,
+      21,    1,  209,    2, 0x08 /* Private */,
+      22,    1,  212,    2, 0x08 /* Private */,
+      23,    1,  215,    2, 0x08 /* Private */,
+      24,    1,  218,    2, 0x08 /* Private */,
+      25,    1,  221,    2, 0x08 /* Private */,
+      26,    1,  224,    2, 0x08 /* Private */,
+      27,    1,  227,    2, 0x08 /* Private */,
+      28,    0,  230,    2, 0x08 /* Private */,
+      29,    0,  231,    2, 0x08 /* Private */,
+      30,    0,  232,    2, 0x08 /* Private */,
+      31,    0,  233,    2, 0x08 /* Private */,
+      32,    0,  234,    2, 0x08 /* Private */,
+      33,    0,  235,    2, 0x08 /* Private */,
+      34,    1,  236,    2, 0x08 /* Private */,
+      35,    1,  239,    2, 0x08 /* Private */,
+      37,    1,  242,    2, 0x08 /* Private */,
+      39,    1,  245,    2, 0x08 /* Private */,
 
  // slots: parameters
     QMetaType::Void,
@@ -169,6 +172,7 @@ static const uint qt_meta_data_CgQtGui[] = {
     QMetaType::Void, QMetaType::Int,    4,
     QMetaType::Void, QMetaType::Int,   36,
     QMetaType::Void, QMetaType::Int,   38,
+    QMetaType::Void, QMetaType::Int,   40,
 
        0        // eod
 };
@@ -211,6 +215,7 @@ void CgQtGui::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, voi
         case 29: _t->changeX((*reinterpret_cast< int(*)>(_a[1]))); break;
         case 30: _t->changeY((*reinterpret_cast< int(*)>(_a[1]))); break;
         case 31: _t->changeZ((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 32: _t->tabChange((*reinterpret_cast< int(*)>(_a[1]))); break;
         default: ;
         }
     }
@@ -243,13 +248,13 @@ int CgQtGui::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 32)
+        if (_id < 33)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 32;
+        _id -= 33;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 32)
+        if (_id < 33)
             *reinterpret_cast<int*>(_a[0]) = -1;
-        _id -= 32;
+        _id -= 33;
     }
     return _id;
 }

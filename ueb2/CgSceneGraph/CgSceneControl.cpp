@@ -39,7 +39,7 @@ CgSceneControl::CgSceneControl() {
     //  cam->setProjection(cam->perspective(100,eye.x,eye.y,eye.z));
 
 
-
+    wuerfel=NULL;
     ObjLoader loader;
     s=0.5;
     y=0.0;
@@ -172,6 +172,13 @@ void CgSceneControl::renderObjects() {
     }
 
     //m_renderer->render(kugel,old);
+
+    if(wuerfel){
+        m_renderer->render(wuerfel,old);
+        for(int i =0; i<wuerfel->getGeraden().size();i++){
+            m_renderer->render(wuerfel->getGeraden().at(i),old);
+        }
+    }
     if(poly){
         if(!poly->getKeisVec().empty())
             if(poly->getPolyVec().size()>0){
@@ -209,8 +216,9 @@ void CgSceneControl::renderObjects() {
 
 
 
-
+    if(sc){
     sc->render(m_renderer,sc->getSc());
+    }
     m_renderer->redraw();
 }
 void CgSceneControl::reset(){
@@ -328,8 +336,8 @@ void CgSceneControl::handleEvent(CgBaseEvent *e) {
     // die Enums sind so gebaut, dass man alle Arten von MausEvents über CgEvent::CgMouseEvent abprüfen kann,
     // siehe dazu die CgEvent enums im CgEnums.h
     if (e->getType() & Cg::CgMouseEvent) {
-        CgMouseEvent *ev = (CgMouseEvent *) e;
-
+        std::cout<<((CgMouseEvent *) e)->getLocalPos().x<<std::endl;
+        std::cout<<((CgMouseEvent *) e)->getLocalPos().y<<std::endl;
         // hier kommt jetzt die Abarbeitung des Events hin...
     }
 
@@ -420,6 +428,7 @@ void CgSceneControl::handleEvent(CgBaseEvent *e) {
         if(refine<=3){
             delete this->poly;
             poly =NULL;
+
             changed=0;
         }
         else{
@@ -484,13 +493,13 @@ void CgSceneControl::handleEvent(CgBaseEvent *e) {
         else{  old=glm::mat4x4(         glm::vec4(1,0,0,0),
                                         glm::vec4(0,1,0,0),
                                         glm::vec4(0,0,1,0),
-                                        glm::vec4(-4,0,0,1))*glm::mat4x4(         glm::vec4(s,0,0,0),
+                                        glm::vec4(z,0,0,1))*glm::mat4x4(         glm::vec4(s,0,0,0),
                                                                                   glm::vec4(0,s,0,0),
                                                                                   glm::vec4(0,0,s,0),
                                                                                   glm::vec4(0,0,0,1))*glm::mat4x4(         glm::vec4(1,0,0,0),
                                                                                                                            glm::vec4(0,1,0,0),
                                                                                                                            glm::vec4(0,0,1,0),
-                                                                                                                           glm::vec4(4,0,0,1));
+                                                                                                                           glm::vec4(-z,0,0,1));
             z=z+0.5;
         }
 
@@ -508,10 +517,12 @@ void CgSceneControl::handleEvent(CgBaseEvent *e) {
                                      glm::vec4(0,s,0,0),
                                      glm::vec4(0,0,s,0),
                                      glm::vec4(verschiebung.x,verschiebung.y,verschiebung.z,1));
+        if(sc){
         sc->getSc()->setTransformation(glm::mat4x4(          glm::vec4(s,0,0,0),
                                                              glm::vec4(0,s,0,0),
                                                              glm::vec4(0,0,s,0),
                                                              glm::vec4(0,0,0,1)));
+        }
 
 
     }
@@ -530,10 +541,12 @@ void CgSceneControl::handleEvent(CgBaseEvent *e) {
                                      glm::vec4(0,0,s,0),
                                      glm::vec4(verschiebung.x,verschiebung.y,verschiebung.z,1));
 
+        if(sc){
         sc->getSc()->setTransformation(glm::mat4x4(          glm::vec4(s,0,0,0),
                                                              glm::vec4(0,s,0,0),
                                                              glm::vec4(0,0,s,0),
                                                              glm::vec4(0,0,0,1)));
+        }
     }
     if(((CgKeyEvent*)e)->key()==Cg::Key_D){
         countA+=.1;
@@ -621,6 +634,14 @@ void CgSceneControl::handleEvent(CgBaseEvent *e) {
 }
 void CgSceneControl::tab1constructor(){
 //würfel
+    resetAll();
+      wuerfel = MeshFactory::createWuerfel();
+      m_renderer->init(wuerfel);
+      if(wuerfel){
+          for(int i =0; i<wuerfel->getGeraden().size();i++){
+              m_renderer->init(wuerfel->getGeraden().at(i));
+          }
+      }
     std::cout<<"würfel"<<std::endl;
 }
 void CgSceneControl::tab2constructor(){
@@ -639,7 +660,11 @@ void CgSceneControl::tab5constructor(){
 
 }
 void CgSceneControl::resetAll(){
-
+    delete sc;
+    sc=NULL;
+   delete dreiecke;
+    dreiecke=NULL;
+   m_triangle.clear();
 }
 glm::mat4x4 CgSceneControl::allgemineRotation(int x, int y, int z){
     float x1=x*1.;

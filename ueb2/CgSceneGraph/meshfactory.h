@@ -6,17 +6,21 @@
 #include "rotationskoerper.h"
 #include "dreiecke.h"
 #include "kugel.h"
+#include "wuerfel.h"
 class RotationsKoerper;
 class Kugel;
+class Wuerfel;
 class MeshFactory
 {
 
 private: int id;
     static int all_id;
 public:
+    static Wuerfel* createWuerfel();
     static CgBaseTriangleMesh* createZylinder(int refine,float hoehe,float radius);
     static CgBaseTriangleMesh* createKegel(int refine,float hoehe,float radius);
     static MyPolyline* createMyPolyline(glm::vec3 color,std::vector<glm::vec3> x);
+
     static RotationsKoerper* createRotationKoerper(int refine);
     static Dreiecke * createDreiecke(std::vector<glm::vec3>x,std::vector<unsigned int>k);
     MeshFactory();

@@ -31,7 +31,8 @@ SOURCES += main.cpp \
     CgSceneGraph/scenegraph.cpp \
     CgSceneGraph/sceneentity.cpp \
     CgSceneGraph/appearance.cpp \
-    CgSceneGraph/kamera.cpp
+    CgSceneGraph/kamera.cpp \
+    CgSceneGraph/wuerfel.cpp
 
 
 HEADERS += \
@@ -72,4 +73,5 @@ CgUtils/ObjLoader.h \
     CgSceneGraph/scenegraph.h \
     CgSceneGraph/sceneentity.h \
     CgSceneGraph/appearance.h \
-    CgSceneGraph/kamera.h
+    CgSceneGraph/kamera.h \
+    CgSceneGraph/wuerfel.h

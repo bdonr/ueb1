@@ -14,6 +14,7 @@
 class CgBaseEvent;
 class CgBaseRenderer;
 class CgExampleTriangle;
+class Wuerfel;
 
 class CgSceneControl : public CgObserver, public CgBaseSceneControl
 {
@@ -72,7 +73,7 @@ private:
     glm::mat4 m_current_transformation;
     glm::mat4 m_proj_matrix;
     MyPolyline* rotaAchse;
-
+    Wuerfel* wuerfel;
     float s;
     float x;
     float y;

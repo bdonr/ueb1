@@ -10,6 +10,11 @@ MeshFactory::MeshFactory()
 {
 
 }
+Wuerfel *MeshFactory::createWuerfel()
+{
+    return  new Wuerfel(++all_id);
+}
+
 CgBaseTriangleMesh* MeshFactory::createZylinder(int refine,float hoehe,float radius){
     return (CgBaseTriangleMesh*) new Zylinder(++all_id,radius,hoehe,refine);
 

@@ -22,6 +22,12 @@ public:
     friend std::ostream& operator <<(std::ostream& os, const CgMouseEvent& e);
 
 
+    glm::vec2 getWindowPos() const;
+    void setWindowPos(const glm::vec2 &windowPos);
+
+    glm::vec2 getLocalPos() const;
+    void setLocalPos(const glm::vec2 &localPos);
+
 private:
 
     Cg::EventType m_type;
