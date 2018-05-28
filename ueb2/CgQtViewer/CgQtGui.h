@@ -105,17 +105,21 @@ private:
 
 
     /* example for usage of qt gui elements, feel free to add what you like */
-    void createOptionPanelExample1(QWidget* panel);
+    void aufgabe2(QWidget* panel);
     void createOptionPanelExample2(QWidget* panel);
-    void createOptionPanelExample3(QWidget* panel);
+    void aufgabe1(QWidget* panel);
     void aufgabe3(QWidget* panel);
-    void createOptionPanelExample5(QWidget* panel);
+    void aufgabe4(QWidget* panel);
     QButtonGroup* myButtonGroup;
     QCheckBox* myCheckBox1;
     QSpinBox* mySpinBox1;
     QSlider * kkk;
     QSlider * kkk1;
     QSlider * kkk2;
+    int blau;
+    int rot;
+    int gruen;
+    std::vector<int> farbe;
     bool x;
     bool y;
     bool z;
@@ -124,6 +128,10 @@ private:
 
 private slots:
 
+
+    void changeRot(int x);
+    void changeBlau(int x);
+    void changeGruen(int x);
 
 
     void kugelSlider();

@@ -10,7 +10,7 @@ class Wuerfel : public CgBaseTriangleMesh
 
 
 public:
-     Wuerfel(int id);
+     Wuerfel(int id,glm::vec3 colors);
     Cg::ObjectType getType() const;
     unsigned int getID() const;
 

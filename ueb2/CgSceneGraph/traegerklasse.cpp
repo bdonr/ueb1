@@ -23,9 +23,19 @@ void TraegerKlasse::setTab(int value)
     tab = value;
 }
 
+std::vector<int> TraegerKlasse::getX() const
+{
+    return x;
+}
+
 TraegerKlasse::TraegerKlasse()
 {
     intvec=glm::vec3(0,0,0);
+}
+
+TraegerKlasse::TraegerKlasse(std::vector<int> k)
+{
+    this->x=k;
 }
 
 void TraegerKlasse::setX(int x)

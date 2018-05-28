@@ -1,7 +1,7 @@
 #include "wuerfel.h"
 #include <iostream>
 
-Wuerfel::Wuerfel(int id):id(id),type(Cg::TriangleMesh)
+Wuerfel::Wuerfel(int id,glm::vec3 colors):id(id),type(Cg::TriangleMesh)
 {
 
         vertices.push_back(glm::vec3(-1,-1,-1));
@@ -82,9 +82,10 @@ Wuerfel::Wuerfel(int id):id(id),type(Cg::TriangleMesh)
         std::vector<glm::vec3> x;
         x.push_back(schwerpunkte.at(i));
         x.push_back(faceNormals.at(i)+schwerpunkte.at(i));
-        geraden.push_back(MeshFactory::createMyPolyline(glm::vec3(0,0,255),x));
+        geraden.push_back(MeshFactory::createMyPolyline(colors,x));
     }
 }
+
 
 Cg::ObjectType Wuerfel::getType() const
 {
@@ -164,7 +165,7 @@ void Wuerfel::berechneNormale()
 
 std::vector<MyPolyline *> Wuerfel::getGeraden() const
 {
-    std::cout<<"ä"<<geraden.size()<<"ä"<<std::endl;
+
     return geraden;
 }
 

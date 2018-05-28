@@ -34,6 +34,13 @@ CgQtGui::CgQtGui(CgQtMainApplication *mw)
     : m_mainWindow(mw),radius(0.0),hoehe(0.0),refine(0)
 {
 
+    blau=0;
+    rot=0;
+    gruen=0;
+
+    farbe.push_back(rot);
+    farbe.push_back(gruen);
+    farbe.push_back(gruen);
     m_glRenderWidget = new CgQtGLRenderWidget;
     traegerklasse=new TraegerKlasse();
     connect(m_glRenderWidget, SIGNAL(mouseEvent(QMouseEvent*)), this, SLOT(mouseEvent(QMouseEvent*)));
@@ -44,16 +51,16 @@ CgQtGui::CgQtGui(CgQtMainApplication *mw)
     QHBoxLayout *container = new QHBoxLayout;
 
     QWidget *opt = new QWidget;
-    createOptionPanelExample1(opt);
+    aufgabe2(opt);
 
     QWidget *opt2 = new QWidget;
-    createOptionPanelExample3(opt2);
+    aufgabe1(opt2);
 
     QWidget* opt3 = new QWidget;
     aufgabe3(opt3);
 
     QWidget* opt4 = new QWidget;
-    createOptionPanelExample5(opt4);
+    aufgabe4(opt4);
 //    connect(opt4, SIGNAL(objectNameChanged(QString)), this, SLOT(tabChange(QString)));
 //    opt4->addAction(tabChange());
 
@@ -157,7 +164,7 @@ QSlider *CgQtGui::createSlider(int r,int size,int max,int min,int steps)
 }
 
 
-void CgQtGui::createOptionPanelExample1(QWidget* parent)
+void CgQtGui::aufgabe2(QWidget* parent)
 {
     QVBoxLayout *tab1_control = new QVBoxLayout();
 
@@ -389,7 +396,7 @@ void CgQtGui::createOptionPanelExample2(QWidget* parent)
 
 }
 
-void CgQtGui::createOptionPanelExample3(QWidget* parent)
+void CgQtGui::aufgabe1(QWidget* parent)
 {
     QVBoxLayout *tab3_control = new QVBoxLayout();
 
@@ -414,7 +421,8 @@ void CgQtGui::createOptionPanelExample3(QWidget* parent)
     wuerfelRot->setMaximum(255);
     wuerfelRot->setValue(20);
     wuerfelRot->setTickInterval(4);
-    //connect(zylinderHoeheSlider, SIGNAL(sliderMoved(int)), this, SLOT(ÄNDERE FARBE));
+     connect(wuerfelRot, SIGNAL(sliderMoved(int)), this, SLOT(changeRot(int)));
+
 
     QLabel* lab3= new QLabel("Gruen");
     tab3_control->addWidget(lab3);
@@ -425,6 +433,7 @@ void CgQtGui::createOptionPanelExample3(QWidget* parent)
     wuerfelGruen->setMaximum(255);
     wuerfelGruen->setValue(20);
     wuerfelGruen->setTickInterval(4);
+    connect(wuerfelGruen, SIGNAL(sliderMoved(int)), this, SLOT(changeGruen(int)));
     //connect(zylinderRadiusSlider, SIGNAL(sliderMoved(int)), this, SLOT(ÄNDERE FARBE));
 
     QLabel* lab4= new QLabel("Blau");
@@ -435,6 +444,7 @@ void CgQtGui::createOptionPanelExample3(QWidget* parent)
     wuerfelBlau->setMaximum(255);
     wuerfelBlau->setValue(20);
     wuerfelBlau->setTickInterval(4);
+    connect(wuerfelBlau, SIGNAL(sliderMoved(int)), this, SLOT(changeBlau(int)));
     //connect(zylinderRefineSlider, SIGNAL(sliderMoved(int)), this, SLOT(ÄNDERE FARBE));
 
 
@@ -539,7 +549,7 @@ void CgQtGui::aufgabe3(QWidget* parent)
 
 }
 
-void CgQtGui::createOptionPanelExample5(QWidget* parent)
+void CgQtGui::aufgabe4(QWidget* parent)
 {
     QVBoxLayout *tab5_control = new QVBoxLayout();
     //---------------------------------------------------------------------------------------
@@ -611,6 +621,35 @@ void CgQtGui::createOptionPanelExample5(QWidget* parent)
     tab5_control->addLayout(subBox);
 //    tab5_control->addLayout(subBox2);
     parent->setLayout(tab5_control);
+}
+
+void CgQtGui::changeRot(int x)
+{
+    rot=x;
+    std::cout<<x<<std::endl;
+    farbe.at(0)=rot;
+    TraegerKlasse* k = new TraegerKlasse(farbe);
+    bestersliderMoveEvent* o = new bestersliderMoveEvent(Cg::CgChangeColor,k);
+    notifyObserver(o);
+}
+
+void CgQtGui::changeBlau(int x)
+{
+
+    blau=x;
+    farbe.at(2)=blau;
+    TraegerKlasse* k = new TraegerKlasse(farbe);
+    bestersliderMoveEvent* o = new bestersliderMoveEvent(Cg::CgChangeColor,k);
+    notifyObserver(o);
+}
+
+void CgQtGui::changeGruen(int x)
+{
+    gruen=x;
+    farbe.at(1)=gruen;
+    TraegerKlasse* k = new TraegerKlasse(farbe);
+    bestersliderMoveEvent* o = new bestersliderMoveEvent(Cg::CgChangeColor,k);
+    notifyObserver(o);
 }
 
 
@@ -873,6 +912,7 @@ void CgQtGui::changeZ(int z)
     notifyObserver(new bestersliderMoveEvent(Cg::CgChangeRota,traegerklasse));
 }
 void CgQtGui::tabChange(int i){
+    traegerklasse = new TraegerKlasse();
     traegerklasse->setTab(i);
     notifyObserver(new bestersliderMoveEvent(Cg::TabChange,traegerklasse));
 }

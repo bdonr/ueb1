@@ -174,7 +174,7 @@ void CgSceneControl::renderObjects() {
     //m_renderer->render(kugel,old);
 
     if(wuerfel){
-        m_renderer->render(wuerfel,old);
+        m_renderer->render(wuerfel,old );
         for(int i =0; i<wuerfel->getGeraden().size();i++){
             m_renderer->render(wuerfel->getGeraden().at(i),old);
         }
@@ -336,8 +336,8 @@ void CgSceneControl::handleEvent(CgBaseEvent *e) {
     // die Enums sind so gebaut, dass man alle Arten von MausEvents über CgEvent::CgMouseEvent abprüfen kann,
     // siehe dazu die CgEvent enums im CgEnums.h
     if (e->getType() & Cg::CgMouseEvent) {
-        std::cout<<((CgMouseEvent *) e)->getLocalPos().x<<std::endl;
-        std::cout<<((CgMouseEvent *) e)->getLocalPos().y<<std::endl;
+        std::cout<<"6: "<<((CgMouseEvent *) e)->getLocalPos().x<<std::endl;
+        std::cout<<"7: "<<((CgMouseEvent *) e)->getLocalPos().y<<std::endl;
         // hier kommt jetzt die Abarbeitung des Events hin...
     }
 
@@ -347,18 +347,28 @@ void CgSceneControl::handleEvent(CgBaseEvent *e) {
 
     if (e->getType() & Cg::CgKeyEvent) {
         CgKeyEvent *ev = (CgKeyEvent *) e;
-        std::cout << *ev << std::endl;
+        std::cout <<"1: "<< *ev << std::endl;
 
         // hier kommt jetzt die Abarbeitung des Events hin...
     }
 
     if (e->getType() & Cg::WindowResizeEvent) {
         CgWindowResizeEvent *ev = (CgWindowResizeEvent *) e;
-        std::cout << *ev << std::endl;
+        std::cout <<"2: "<< *ev << std::endl;
         m_proj_matrix = glm::perspective(45.0f, (float) (ev->w()) / ev->h(), 0.01f, 100.0f);
 
     }
     //(int refine,float hoehe,float radius)
+    if (e->getType() & Cg::CgChangeColor){
+        glm::vec3 colors;
+        colors.x = ((bestersliderMoveEvent*) e)->getTraegerKlasse()->getX().at(0);
+        colors.y = ((bestersliderMoveEvent*) e)->getTraegerKlasse()->getX().at(1);
+        colors.z = ((bestersliderMoveEvent*) e)->getTraegerKlasse()->getX().at(2);
+        delete wuerfel;
+        wuerfel=NULL;
+        wuerfel = MeshFactory::createWuerfel(colors);
+    }
+
     if (e->getType() & Cg::KegelChange){
 
         int refine= ((SliderMoveEvent*)e)->getRefine();
@@ -534,7 +544,7 @@ void CgSceneControl::handleEvent(CgBaseEvent *e) {
             s=s+0.02;
         }
 
-        std::cout<<"s"<<s<<""<<std::endl;
+        std::cout<<"3: "<<"s"<<s<<""<<std::endl;
         old=m_current_transformation*
                 glm::mat4x4(         glm::vec4(s,0,0,0),
                                      glm::vec4(0,s,0,0),
@@ -618,14 +628,13 @@ void CgSceneControl::handleEvent(CgBaseEvent *e) {
         this->m_renderer->redraw();
     }
     if(e->getType()==Cg::TabChange){
-        tab =((bestersliderMoveEvent*)e)->getTraegerKlasse()->getTab();
-        resetAll();
-        if(tab==0)tab1constructor();
-        if(tab==1)tab2constructor();
-        if(tab==2)tab3constructor();
-        if(tab==3)tab4constructor();
-        if(tab==4)tab5constructor();
-}
+        int x =((bestersliderMoveEvent*)e)->getTraegerKlasse()->getTab();
+        if(x==0)tab1constructor();
+        if(x==1)tab2constructor();
+        if(x==2)tab3constructor();
+        if(x==3)tab4constructor();
+        if(x==4)tab5constructor();
+    }
 
 
     // an der Stelle an der ein Event abgearbeitet ist wird es auch gelöscht.
@@ -635,14 +644,21 @@ void CgSceneControl::handleEvent(CgBaseEvent *e) {
 void CgSceneControl::tab1constructor(){
 //würfel
     resetAll();
-      wuerfel = MeshFactory::createWuerfel();
+    glm::vec3 y(255,0,0);
+      wuerfel = MeshFactory::createWuerfel(y);
       m_renderer->init(wuerfel);
       if(wuerfel){
           for(int i =0; i<wuerfel->getGeraden().size();i++){
               m_renderer->init(wuerfel->getGeraden().at(i));
           }
       }
-    std::cout<<"würfel"<<std::endl;
+
+      if(wuerfel){
+          for(int i =0; i<wuerfel->getGeraden().size();i++){
+              m_renderer->render(wuerfel->getGeraden().at(i),m_current_transformation);
+          }
+      }
+    std::cout<<"4: "<<"würfel"<<std::endl;
 }
 void CgSceneControl::tab2constructor(){
 // zylinder, kegel, rota körper
@@ -665,6 +681,9 @@ void CgSceneControl::resetAll(){
    delete dreiecke;
     dreiecke=NULL;
    m_triangle.clear();
+   wuerfel=NULL;
+   delete wuerfel;
+
 }
 glm::mat4x4 CgSceneControl::allgemineRotation(int x, int y, int z){
     float x1=x*1.;

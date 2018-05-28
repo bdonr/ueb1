@@ -16,7 +16,7 @@ class MeshFactory
 private: int id;
     static int all_id;
 public:
-    static Wuerfel* createWuerfel();
+    static Wuerfel* createWuerfel(glm::vec3 colors);
     static CgBaseTriangleMesh* createZylinder(int refine,float hoehe,float radius);
     static CgBaseTriangleMesh* createKegel(int refine,float hoehe,float radius);
     static MyPolyline* createMyPolyline(glm::vec3 color,std::vector<glm::vec3> x);

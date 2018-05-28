@@ -10,9 +10,9 @@ MeshFactory::MeshFactory()
 {
 
 }
-Wuerfel *MeshFactory::createWuerfel()
+Wuerfel *MeshFactory::createWuerfel(glm::vec3 colors)
 {
-    return  new Wuerfel(++all_id);
+    return new Wuerfel(++all_id,colors);
 }
 
 CgBaseTriangleMesh* MeshFactory::createZylinder(int refine,float hoehe,float radius){
