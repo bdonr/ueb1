@@ -19,14 +19,14 @@ SOURCES += main.cpp \
     CgClass/Zylinder.cpp \
     CgClass/kegel.cpp \
     CgClass/Mypolyline.cpp \
-    CgClass/slidermoveevent.cpp \
+    CgEvents/slidermoveevent.cpp \
     CgClass/rotationskoerper.cpp \
     CgUtils/ObjLoader.cpp \
     CgSceneGraph/dreiecke.cpp \
     CgClass/koordinatensystem.cpp \
     CgEvents/objectopenevent.cpp \
     CgClass/kugel.cpp \
-    CgClass/besterslidermoveevent.cpp \
+    CgEvents/besterslidermoveevent.cpp \
     CgClass/traegerklasse.cpp \
     CgClass/scenegraph.cpp \
     CgClass/sceneentity.cpp \
@@ -61,14 +61,14 @@ HEADERS += \
     CgClass/Zylinder.h \
     CgClass/kegel.h \
     CgClass/Mypolyline.h \
-    CgClass/slidermoveevent.h \
+    CgEvents/slidermoveevent.h \
     CgClass/rotationskoerper.h \
 CgUtils/ObjLoader.h \
     CgClass/dreiecke.h \
     CgClass/koordinatensystem.h \
     CgEvents/objectopenevent.h \
     CgClass/kugel.h \
-    CgClass/besterslidermoveevent.h \
+    CgEvents/besterslidermoveevent.h \
     CgClass/traegerklasse.h \
     CgClass/scenegraph.h \
     CgClass/sceneentity.h \

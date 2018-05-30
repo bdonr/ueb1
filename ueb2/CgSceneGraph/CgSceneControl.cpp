@@ -77,7 +77,7 @@ CgSceneControl::CgSceneControl() {
     //rotationkörper
     rotationbody = MeshFactory::createRotationKoerper(1);
     //kegel, zlinder
-    m_triangle.push_back(MeshFactory::createKegel(0,.0,0));
+    zylinderOderKegel.push_back(MeshFactory::createKegel(0,.0,0));
     //figuren
     dreiecke=NULL;
     // kugel=NULL;
@@ -160,8 +160,8 @@ void CgSceneControl::resetRenderKegel(int refine,float hoehe,float radius){
 }
 void CgSceneControl::pushpop(CgBaseTriangleMesh* x)
 {
-    this->m_triangle.pop_back();
-    this->m_triangle.push_back(x);
+    this->zylinderOderKegel.pop_back();
+    this->zylinderOderKegel.push_back(x);
 }
 
 void CgSceneControl::resetRenderZylinder(int refine,float hoehe,float radius){
@@ -225,9 +225,9 @@ void CgSceneControl::renderCoords()
 
 void CgSceneControl::renderTriangle()
 {
-    if(m_triangle.size()>0){
-        for(int i =0;i<=m_triangle.size()-1;i++){
-            m_renderer->render(m_triangle.at(i),m_current_transformation);
+    if(zylinderOderKegel.size()>0){
+        for(int i =0;i<=zylinderOderKegel.size()-1;i++){
+            m_renderer->render(zylinderOderKegel.at(i),m_current_transformation);
         }
     }
 }
@@ -260,7 +260,7 @@ void CgSceneControl::reset(){
     dreiecke=NULL;
     delete rotationbody;
     rotationbody=NULL;
-    m_triangle.clear();
+    zylinderOderKegel.clear();
     //objecte.clear();
     changed=1;
 }
@@ -389,14 +389,14 @@ void CgSceneControl::changeKegel(CgBaseEvent *e)
 
         if(changed==1 && refine>3){
             changed=0;
-            this->m_triangle.push_back(MeshFactory::createKegel(refine,hoehe,radius));
+            this->zylinderOderKegel.push_back(MeshFactory::createKegel(refine,hoehe,radius));
 
         }
         if(changed==0 && refine>3){
-            if(m_triangle.size()>0){
-                for(int i = 0; i<=m_triangle.size()-1;i++){
+            if(zylinderOderKegel.size()>0){
+                for(int i = 0; i<=zylinderOderKegel.size()-1;i++){
                     resetRenderKegel(refine,hoehe,radius);
-                    m_renderer->init(m_triangle.at(i));
+                    m_renderer->init(zylinderOderKegel.at(i));
                 }
             }
         }
@@ -416,14 +416,14 @@ void CgSceneControl::changeZylinder(CgBaseEvent *e)
 
         if(changed==1 && refine>3){
             changed=0;
-            this->m_triangle.push_back(MeshFactory::createZylinder(refine,hoehe,radius));
+            this->zylinderOderKegel.push_back(MeshFactory::createZylinder(refine,hoehe,radius));
 
         }
         if(changed==0 && refine>3){
-            if(m_triangle.size()>0){
-                for(int i = 0; i<=m_triangle.size()-1;i++){
+            if(zylinderOderKegel.size()>0){
+                for(int i = 0; i<=zylinderOderKegel.size()-1;i++){
                     resetRenderZylinder(refine,hoehe,radius);
-                    m_renderer->init(m_triangle.at(i));
+                    m_renderer->init(zylinderOderKegel.at(i));
                 }
             }
         }
@@ -643,7 +643,7 @@ void CgSceneControl::handleKeyEvents(CgBaseEvent *e)
     }
 }
 
-void CgSceneControl::changeROta(CgBaseEvent *e)
+void CgSceneControl::changeRota(CgBaseEvent *e)
 {
     if(e->getType()==Cg::CgChangeRota){
         bool k=false;
@@ -666,7 +666,19 @@ void CgSceneControl::windowresize(CgBaseEvent *e)
     }
 }
 
-void CgSceneControl::selectTab(CgBaseEvent *e)
+void CgSceneControl::changePage(CgBaseEvent *e)
+{
+    if(e->getType()==Cg::TabChange){
+        page =((bestersliderMoveEvent*)e)->getTraegerKlasse()->getTab();
+    }std::cout<<page<<std::endl;
+    if(page==0)page1();
+    if(page==1)page2();
+    if(page==2)page3();
+    if(page==3)page4();
+    if(page==4)page5();
+}
+
+void CgSceneControl::loadObject(CgBaseEvent *e)
 {
     if(e->getType()==Cg::CgChangeWahl){
 
@@ -692,14 +704,7 @@ void CgSceneControl::selectTab(CgBaseEvent *e)
         dreiecke = objecte.at(((ObjectOpenEvent*) e)->getWahl());
         this->m_renderer->init(dreiecke);
         this->m_renderer->redraw();
-        if(e->getType()==Cg::TabChange){
-            int x =((bestersliderMoveEvent*)e)->getTraegerKlasse()->getTab();
-        }
-        if(x==0)page1();
-        if(x==1)page2();
-        if(x==2)page3();
-        if(x==3)page4();
-        if(x==4)page5();
+
     }
 }
 
@@ -724,7 +729,7 @@ void CgSceneControl::handleEvent(CgBaseEvent *e) {
 
         // hier kommt jetzt die Abarbeitung des Events hin...
     }
-
+    changePage(e);
     windowresize(e);
     //(int refine,float hoehe,float radius)
     changeColorCube(e);
@@ -732,8 +737,8 @@ void CgSceneControl::handleEvent(CgBaseEvent *e) {
     changeZylinder(e);
     changeKugel(e);
     changeRefineRota(e);
-    changeROta(e);
-    selectTab(e);
+    changeRota(e);
+    loadObject(e);
 
 
     // an der Stelle an der ein Event abgearbeitet ist wird es auch gelöscht.
@@ -743,15 +748,9 @@ void CgSceneControl::handleEvent(CgBaseEvent *e) {
 void CgSceneControl::page1(){
     //würfel
     resetAll();
-    glm::vec3 y(255,0,0);
-    wuerfel = MeshFactory::createWuerfel(y);
-    m_renderer->init(wuerfel);
-    renderWurfel();
-    std::cout<<"4: "<<"würfel"<<std::endl;
 }
 void CgSceneControl::page2(){
-    // zylinder, kegel, rota körper
-    std::cout<<"kegel zylinder"<<std::endl;
+    resetAll();
 }
 void CgSceneControl::page3(){
     //figuren
@@ -769,7 +768,7 @@ void CgSceneControl::resetAll(){
     sc=NULL;
     delete dreiecke;
     dreiecke=NULL;
-    m_triangle.clear();
+    zylinderOderKegel.clear();
     wuerfel=NULL;
     delete wuerfel;
 

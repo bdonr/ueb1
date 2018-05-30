@@ -77,6 +77,8 @@ public:
 
 
 
+    void init();
+
 protected:
     void keyPressEvent(QKeyEvent *event) Q_DECL_OVERRIDE;
 
@@ -106,11 +108,11 @@ private:
 
 
     /* example for usage of qt gui elements, feel free to add what you like */
-    void aufgabe2(QWidget* panel);
+    void page2(QWidget* panel);
     void createOptionPanelExample2(QWidget* panel);
     void page1(QWidget* panel);
-    void page2(QWidget* panel);
     void page3(QWidget* panel);
+    void page4(QWidget* panel);
     QButtonGroup* myButtonGroup;
     QCheckBox* myCheckBox1;
     QSpinBox* mySpinBox1;
@@ -135,6 +137,8 @@ private slots:
     /* slots to catch events directly from renderer */
     void mouseEvent(QMouseEvent* event);
     void viewportChanged(int,int);
+void tabChange(int x);
+    void changeRefineKegel(int x);
 
 };
 
