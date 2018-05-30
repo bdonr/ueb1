@@ -93,13 +93,13 @@ public:
 
     void handleKeyI(CgBaseEvent *e);
 
-    void changeROta(CgBaseEvent *e);
+    void changeRota(CgBaseEvent *e);
 
     void pushpop(CgBaseTriangleMesh* x);
     
     void windowresize(CgBaseEvent *e);
 
-    void selectTab(CgBaseEvent *e);
+    void loadObject(CgBaseEvent *e);
 
     void renderCoords();
     
@@ -204,6 +204,8 @@ public:
     Scenegraph *getSc() const;
     void setSc(Scenegraph *value);
 
+    void changePage(CgBaseEvent *e);
+
 private:
     int tab;
     glm::vec3 w;
@@ -225,7 +227,7 @@ private:
     CgBaseRenderer* m_renderer;
     Dreiecke* dreiecke;
     RotationsKoerper* rotationbody;
-    std::vector<CgBaseTriangleMesh*> m_triangle;
+    std::vector<CgBaseTriangleMesh*> zylinderOderKegel;
     glm::mat4 m_current_transformation;
     glm::mat4 m_proj_matrix;
     MyPolyline* rotaAchse;
@@ -234,6 +236,7 @@ private:
     float x;
     float y;
     float z;
+    int page;
     int changed;
 
     Kugel * kugel;

@@ -1,9 +1,9 @@
 #ifndef BESTERSLIDERMOVEEVENT_H
 #define BESTERSLIDERMOVEEVENT_H
 
-#include "traegerklasse.h"
 #include "CgBase/CgBaseEvent.h"
 #include "CgBase/CgEnums.h"
+#include "CgClass/traegerklasse.h"
 class bestersliderMoveEvent : public CgBaseEvent
 {
 

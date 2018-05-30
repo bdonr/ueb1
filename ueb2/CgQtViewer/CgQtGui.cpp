@@ -7,6 +7,8 @@
 #include "../CgEvents/CgKeyEvent.h"
 #include "../CgEvents/CgWindowResizeEvent.h"
 #include "../CgSceneGraph/CgSceneControl.h"
+#include "CgEvents/besterslidermoveevent.h"
+#include "CgClass/traegerklasse.h"
 #include <QSlider>
 #include <QVBoxLayout>
 #include <QHBoxLayout>
@@ -28,10 +30,8 @@
 
 
 
-CgQtGui::CgQtGui(CgQtMainApplication *mw)
-    : m_mainWindow(mw),radius(0.0),hoehe(0.0),refine(0)
+void CgQtGui::init()
 {
-
     color = glm::vec3(0,0,0);
     m_glRenderWidget = new CgQtGLRenderWidget;
 
@@ -43,16 +43,16 @@ CgQtGui::CgQtGui(CgQtMainApplication *mw)
     QHBoxLayout *container = new QHBoxLayout;
 
     QWidget *opt = new QWidget;
-    aufgabe2(opt);
+    page2(opt);
 
     QWidget *opt2 = new QWidget;
     page1(opt2);
 
     QWidget* opt3 = new QWidget;
-    page2(opt3);
+    page3(opt3);
 
     QWidget* opt4 = new QWidget;
-    page3(opt4);
+    page4(opt4);
 //    connect(opt4, SIGNAL(objectNameChanged(QString)), this, SLOT(tabChange(QString)));
 //    opt4->addAction(tabChange());
 
@@ -129,6 +129,13 @@ CgQtGui::CgQtGui(CgQtMainApplication *mw)
 
 
     m_mainWindow->setMenuBar(m_menuBar);
+}
+
+CgQtGui::CgQtGui(CgQtMainApplication *mw)
+    : m_mainWindow(mw),radius(0.0),hoehe(0.0),refine(0)
+{
+
+    init();
 
 }
 
@@ -156,12 +163,9 @@ QSlider *CgQtGui::createSlider(int r,int size,int max,int min,int steps)
 }
 
 
-void CgQtGui::aufgabe2(QWidget* parent)
+void CgQtGui::page2(QWidget* parent)
 {
     QVBoxLayout *tab1_control = new QVBoxLayout();
-
-
-
     QPushButton* myButton2 = new QPushButton("Zeige Polyline");
     tab1_control->addWidget(myButton2);
     connect(myButton2, SIGNAL( clicked() ), this, SLOT(slotMyButton1Pressed()) );
@@ -296,97 +300,10 @@ void CgQtGui::aufgabe2(QWidget* parent)
     kugelHoeheSlider->setValue(20);
     kugelHoeheSlider->setTickInterval(1);
     connect(kugelHoeheSlider, SIGNAL(sliderMoved(int)), this, SLOT(changeHoeheKugel(int)));
-
-
-
-
-
     parent->setLayout(tab1_control);
 
 }
 
-void CgQtGui::createOptionPanelExample2(QWidget* parent)
-{
-
-
-    QVBoxLayout *tab2_control = new QVBoxLayout();
-    QHBoxLayout *subBox = new QHBoxLayout();
-
-    /*Example for using a label */
-
-    QLabel *options_label = new QLabel("Options");
-    tab2_control->addWidget(options_label);
-    options_label->setAlignment(Qt::AlignCenter);
-
-
-    /*Example for using a spinbox */
-
-    mySpinBox1 = new QSpinBox();
-    tab2_control->addWidget(mySpinBox1);
-    mySpinBox1->setMinimum(1);
-    mySpinBox1->setMaximum(50);
-    mySpinBox1->setValue(3);
-    // mySpinBox1->setSuffix("   suffix");
-    // mySpinBox1->setPrefix("Prefix:  ");
-    connect(mySpinBox1, SIGNAL(valueChanged(int) ), this, SLOT(slotMySpinBox1Changed()) );
-    tab2_control->addWidget(mySpinBox1);
-
-    /*Example for using a checkbox */
-
-    myCheckBox1 = new QCheckBox("enable Option 1");
-    myCheckBox1->setCheckable(true);
-    myCheckBox1->setChecked(false);
-    connect(myCheckBox1, SIGNAL( clicked() ), this, SLOT(slotMyCheckBox1Changed()) );
-    tab2_control->addWidget(myCheckBox1);
-
-
-    /*Example for using a button */
-
-    QPushButton* myButton1 = new QPushButton("&drueck mich");
-    tab2_control->addWidget(myButton1);
-
-    connect(myButton1, SIGNAL( clicked() ), this, SLOT(slotMyButton1Pressed()) );
-
-    /*Example for using a button group */
-
-    QGroupBox* myGroupBox = new QGroupBox("Radiobutton Group Example ");
-
-    myButtonGroup = new QButtonGroup(subBox);
-    myButtonGroup->setExclusive(true);
-
-    QRadioButton* radiobutton1 = new QRadioButton( "&Option1");
-    QRadioButton* radiobutton2 = new QRadioButton( "&Option2");
-    QRadioButton* radiobutton3 = new QRadioButton( "&Option3");
-    QRadioButton* radiobutton4 = new QRadioButton( "&Option4");
-    QRadioButton* radiobutton5 = new QRadioButton( "&Option5");
-    QRadioButton* radiobutton6 = new QRadioButton( "&Option6");
-
-    radiobutton2->setChecked(true);
-
-    myButtonGroup->addButton(radiobutton1,0);
-    myButtonGroup->addButton(radiobutton2,1);
-    myButtonGroup->addButton(radiobutton3,2);
-    myButtonGroup->addButton(radiobutton4,3);
-    myButtonGroup->addButton(radiobutton5,4);
-    myButtonGroup->addButton(radiobutton6,5);
-
-
-    QVBoxLayout *vbox = new QVBoxLayout;
-    vbox->addWidget(radiobutton1);
-    vbox->addWidget(radiobutton2);
-    vbox->addWidget(radiobutton3);
-    vbox->addWidget(radiobutton4);
-    vbox->addWidget(radiobutton5);
-    vbox->addWidget(radiobutton6);
-    vbox->addStretch(1);
-    myGroupBox->setLayout(vbox);
-    subBox->addWidget(myGroupBox);
-    tab2_control->addLayout(subBox);
-
-    connect(myButtonGroup, SIGNAL( buttonClicked(int) ), this, SLOT( slotButtonGroupSelectionChanged() ) );
-    parent->setLayout(tab2_control);
-
-}
 
 void CgQtGui::page1(QWidget* parent)
 {
@@ -444,7 +361,7 @@ void CgQtGui::page1(QWidget* parent)
 
 
 }
-void CgQtGui::page2(QWidget* parent)
+void CgQtGui::page3(QWidget* parent)
 {
     //tab4_control-->subBox-->myGroupBox-->vbox-->addWidget(radioButton123)    myButtonGroup-->addButton(addButton)
 
@@ -541,7 +458,7 @@ void CgQtGui::page2(QWidget* parent)
 
 }
 
-void CgQtGui::page3(QWidget* parent)
+void CgQtGui::page4(QWidget* parent)
 {
     QVBoxLayout *tab5_control = new QVBoxLayout();
     //---------------------------------------------------------------------------------------
@@ -681,6 +598,20 @@ void CgQtGui::viewportChanged(int w, int h)
 {
     CgBaseEvent* e = new CgWindowResizeEvent(Cg::WindowResizeEvent,w,h);
     notifyObserver(e);
+}
+
+void CgQtGui::tabChange(int x)
+{
+    TraegerKlasse* tr = new TraegerKlasse();
+    tr->setTab(x);
+    bestersliderMoveEvent* bsl = new bestersliderMoveEvent(Cg::TabChange,tr);
+    notifyObserver(bsl);
+}
+
+void CgQtGui::changeRefineKegel(int x)
+{
+
+
 }
 
 
