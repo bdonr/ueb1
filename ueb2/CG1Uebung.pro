@@ -15,24 +15,24 @@ SOURCES += main.cpp \
     CgQtViewer/CgQtGlBufferObject.cpp \
     CgQtViewer/CgTrackball.cpp \
     CgEvents/CgWindowResizeEvent.cpp \
-    CgSceneGraph/meshfactory.cpp \
-    CgSceneGraph/Zylinder.cpp \
-    CgSceneGraph/kegel.cpp \
-    CgSceneGraph/Mypolyline.cpp \
-    CgSceneGraph/slidermoveevent.cpp \
-    CgSceneGraph/rotationskoerper.cpp \
+    CgClass/meshfactory.cpp \
+    CgClass/Zylinder.cpp \
+    CgClass/kegel.cpp \
+    CgClass/Mypolyline.cpp \
+    CgClass/slidermoveevent.cpp \
+    CgClass/rotationskoerper.cpp \
     CgUtils/ObjLoader.cpp \
     CgSceneGraph/dreiecke.cpp \
-    CgSceneGraph/koordinatensystem.cpp \
+    CgClass/koordinatensystem.cpp \
     CgEvents/objectopenevent.cpp \
-    CgSceneGraph/kugel.cpp \
-    CgSceneGraph/besterslidermoveevent.cpp \
-    CgSceneGraph/traegerklasse.cpp \
-    CgSceneGraph/scenegraph.cpp \
-    CgSceneGraph/sceneentity.cpp \
-    CgSceneGraph/appearance.cpp \
-    CgSceneGraph/kamera.cpp \
-    CgSceneGraph/wuerfel.cpp
+    CgClass/kugel.cpp \
+    CgClass/besterslidermoveevent.cpp \
+    CgClass/traegerklasse.cpp \
+    CgClass/scenegraph.cpp \
+    CgClass/sceneentity.cpp \
+    CgClass/appearance.cpp \
+    CgClass/kamera.cpp \
+    CgClass/wuerfel.cpp
 
 
 HEADERS += \
@@ -57,21 +57,21 @@ HEADERS += \
     CgQtViewer/CgQtGlBufferObject.h \
     CgQtViewer/CgTrackball.h \
     CgEvents/CgWindowResizeEvent.h \
-    CgSceneGraph/meshfactory.h \
-    CgSceneGraph/Zylinder.h \
-    CgSceneGraph/kegel.h \
-    CgSceneGraph/Mypolyline.h \
-    CgSceneGraph/slidermoveevent.h \
-    CgSceneGraph/rotationskoerper.h \
+    CgClass/meshfactory.h \
+    CgClass/Zylinder.h \
+    CgClass/kegel.h \
+    CgClass/Mypolyline.h \
+    CgClass/slidermoveevent.h \
+    CgClass/rotationskoerper.h \
 CgUtils/ObjLoader.h \
-    CgSceneGraph/dreiecke.h \
-    CgSceneGraph/koordinatensystem.h \
+    CgClass/dreiecke.h \
+    CgClass/koordinatensystem.h \
     CgEvents/objectopenevent.h \
-    CgSceneGraph/kugel.h \
-    CgSceneGraph/besterslidermoveevent.h \
-    CgSceneGraph/traegerklasse.h \
-    CgSceneGraph/scenegraph.h \
-    CgSceneGraph/sceneentity.h \
-    CgSceneGraph/appearance.h \
-    CgSceneGraph/kamera.h \
-    CgSceneGraph/wuerfel.h
+    CgClass/kugel.h \
+    CgClass/besterslidermoveevent.h \
+    CgClass/traegerklasse.h \
+    CgClass/scenegraph.h \
+    CgClass/sceneentity.h \
+    CgClass/appearance.h \
+    CgClass/kamera.h \
+    CgClass/wuerfel.h

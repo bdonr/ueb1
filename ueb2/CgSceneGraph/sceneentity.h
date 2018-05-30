@@ -14,7 +14,7 @@ private:
     float winkelx;
     float winkelz;
     glm::vec3 ausrichtung;
-    CgBaseRenderableObject*ob;
+    CgBaseTriangleMesh*ob;
     std::vector<SceneEntity*> children;
     SceneEntity* parent;
     glm::mat4 transformation;
@@ -24,9 +24,9 @@ private:
     enum Cg::ObjectType type;
 public:
     void calculateRota(int winkely, int winkelz, int wunschwinkel);
-    SceneEntity(CgBaseRenderableObject*ob,enum Cg::ObjectType type,glm::vec3 aus);
-    CgBaseRenderableObject *getOb() const;
-    void setOb(CgBaseRenderableObject *value);
+    SceneEntity(CgBaseTriangleMesh*ob,enum Cg::ObjectType type,glm::vec3 aus);
+    CgBaseTriangleMesh *getOb() const;
+    void setOb(CgBaseTriangleMesh *value);
     void addChildren(SceneEntity *value);
     SceneEntity *getParent() const;
     void setParent(SceneEntity *value);

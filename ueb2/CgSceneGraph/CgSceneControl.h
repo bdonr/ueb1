@@ -5,7 +5,6 @@
 #include "CgBase/CgBaseSceneControl.h"
 #include <glm/glm.hpp>
 #include <CgBase/CgBaseTriangleMesh.h>
-#include "CgBase/CgBaseTriangleMesh.h"
 #include "rotationskoerper.h"
 #include "koordinatensystem.h"
 #include "kugel.h"
@@ -14,6 +13,7 @@
 class CgBaseEvent;
 class CgBaseRenderer;
 class CgExampleTriangle;
+class CgBaseTriangleMesh;
 class Wuerfel;
 
 class CgSceneControl : public CgObserver, public CgBaseSceneControl
@@ -38,16 +38,172 @@ public:
 
     glm::vec3 verschiebung;
     glm::mat4x4 translatetoVectot(glm::vec3 k);
-    glm::mat4x4 allgemineRotation(int x, int y, int z);
+    glm::mat4x4 overallRotation(int x, int y, int z);
     void resetRenderKugel(int refine, float hoehe, float radius);
     glm::mat4x4 transform(glm::vec3 k, int winkely, int winkelz, int wunschwinkel);
     glm::mat4x4 transform(glm::vec3 k, float winkely, float winkelz, float wunschwinkel, float skala);
-    void tab1constructor();
-    void tab2constructor();
-    void tab3constructor();
-    void tab4constructor();
-    void tab5constructor();
+    void page1();
+    void page2();
+    void page3();
+    void page4();
+    void page5();
     void resetAll();
+    void calculateNewTransformation(glm::vec3 verschiebung);
+    void renderRotationsBody();
+
+    void createScene();
+
+    void createStandartMatrix();
+
+    void initRotationBody();
+
+    void renderWurfel();
+
+    void changeColorCube(CgBaseEvent *e);
+
+    void changeKegel(CgBaseEvent *e);
+
+    void changeZylinder(CgBaseEvent *e);
+
+    void changeKugel(CgBaseEvent *e);
+
+    void changeRefineRota(CgBaseEvent *e);
+
+    void handleKeyEvents(CgBaseEvent *e);
+
+    void handleKeyY(CgBaseEvent *e);
+
+    void handleKeyX(CgBaseEvent *e);
+
+    void handleKeyZ(CgBaseEvent *e);
+
+    void handleKeyMinus(CgBaseEvent *e);
+
+    void handleKeyPlus(CgBaseEvent *e);
+
+    void handleKeyD(CgBaseEvent *e);
+
+    void handleKeyA(CgBaseEvent *e);
+
+    void handleKeyW(CgBaseEvent *e);
+
+    void handleKeyS(CgBaseEvent *e);
+
+    void handleKeyU(CgBaseEvent *e);
+
+    void handleKeyI(CgBaseEvent *e);
+
+    void changeROta(CgBaseEvent *e);
+
+    void pushpop(CgBaseTriangleMesh* x);
+    
+    void windowresize(CgBaseEvent *e);
+
+    void selectTab(CgBaseEvent *e);
+
+    void renderCoords();
+    
+    void renderTriangle();
+    
+    void renderDreiecke();
+
+    void openPage(CgBaseEvent *e);
+
+    void scale();
+
+    float getCountW() const;
+    void setCountW(float value);
+
+    float getCountA() const;
+    void setCountA(float value);
+
+    float getCountS() const;
+    void setCountS(float value);
+
+    float getCountD() const;
+    void setCountD(float value);
+
+    float getCountQ() const;
+    void setCountQ(float value);
+
+    float getCountE() const;
+    void setCountE(float value);
+
+    glm::vec3 getW() const;
+    void setW(const glm::vec3 &value);
+
+    glm::vec3 getV() const;
+    void setV(const glm::vec3 &value);
+
+    glm::vec3 getU() const;
+    void setU(const glm::vec3 &value);
+
+    glm::vec3 getEye() const;
+    void setEye(const glm::vec3 &value);
+
+    Kamera *getCam() const;
+    void setCam(Kamera *value);
+
+    glm::mat4 getOld() const;
+    void setOld(const glm::mat4 &value);
+
+    std::vector<Dreiecke *> getObjecte() const;
+    void setObjecte(const std::vector<Dreiecke *> &value);
+
+    CgBaseRenderer *getRenderer() const;
+
+    Dreiecke *getDreiecke() const;
+    void setDreiecke(Dreiecke *value);
+
+    RotationsKoerper *getRotationbody() const;
+    void setRotationbody(RotationsKoerper *value);
+
+    std::vector<CgBaseTriangleMesh *> getTriangle() const;
+    void setTriangle(const std::vector<CgBaseTriangleMesh *> &triangle);
+
+    glm::mat4 getProj_matrix() const;
+    void setProj_matrix(const glm::mat4 &proj_matrix);
+
+    glm::mat4 getCurrent_transformation() const;
+    void setCurrent_transformation(const glm::mat4 &current_transformation);
+
+    MyPolyline *getRotaAchse() const;
+    void setRotaAchse(MyPolyline *value);
+
+    Wuerfel *getWuerfel() const;
+    void setWuerfel(Wuerfel *value);
+
+    Kugel *getKugel() const;
+    void setKugel(Kugel *value);
+
+    std::vector<glm::vec3> getDreickevertices() const;
+    void setDreickevertices(const std::vector<glm::vec3> &value);
+
+    Koordinatensystem *getKoordinatensystem() const;
+    void setKoordinatensystem(Koordinatensystem *value);
+
+    std::vector<unsigned int> getDreieckecords() const;
+    void setDreieckecords(const std::vector<unsigned int> &value);
+
+    float getS() const;
+    void setS(float value);
+
+    float getX() const;
+    void setX(float value);
+
+    float getY() const;
+    void setY(float value);
+
+    float getZ() const;
+    void setZ(float value);
+
+    void setChanged(int value);
+
+    void checkKey(CgBaseEvent *e);
+
+    Scenegraph *getSc() const;
+    void setSc(Scenegraph *value);
+
 private:
     int tab;
     glm::vec3 w;
@@ -68,7 +224,7 @@ private:
     std::vector <Dreiecke*> objecte;
     CgBaseRenderer* m_renderer;
     Dreiecke* dreiecke;
-    RotationsKoerper* poly;
+    RotationsKoerper* rotationbody;
     std::vector<CgBaseTriangleMesh*> m_triangle;
     glm::mat4 m_current_transformation;
     glm::mat4 m_proj_matrix;

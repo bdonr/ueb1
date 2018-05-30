@@ -4,8 +4,7 @@
 
 #include <vector>
 #include <glm/glm.hpp>
-#include "../CgBase/CgBaseRenderableObject.h"
-#include "CgBaseRenderableObject.h"
+#include "CgBase/CgBaseRenderableObject.h"
 
 class CgBaseTriangleMesh : public CgBaseRenderableObject
 {

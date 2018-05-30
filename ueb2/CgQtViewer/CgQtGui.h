@@ -44,7 +44,7 @@
 #include <QWidget>
 #include "../CgBase/CgObservable.h"
 #include "../CgBase/CgEnums.h"
-#include "CgSceneGraph/traegerklasse.h"
+#include <glm/glm.hpp>
 
 QT_BEGIN_NAMESPACE
 class QSlider;
@@ -73,6 +73,7 @@ public:
     void zylinderSlider();
     void kegelSlider();
 
+    void kugelSlider();
 
 
 
@@ -107,34 +108,27 @@ private:
     /* example for usage of qt gui elements, feel free to add what you like */
     void aufgabe2(QWidget* panel);
     void createOptionPanelExample2(QWidget* panel);
-    void aufgabe1(QWidget* panel);
-    void aufgabe3(QWidget* panel);
-    void aufgabe4(QWidget* panel);
+    void page1(QWidget* panel);
+    void page2(QWidget* panel);
+    void page3(QWidget* panel);
     QButtonGroup* myButtonGroup;
     QCheckBox* myCheckBox1;
     QSpinBox* mySpinBox1;
-    QSlider * kkk;
-    QSlider * kkk1;
-    QSlider * kkk2;
-    int blau;
-    int rot;
-    int gruen;
-    std::vector<int> farbe;
-    bool x;
-    bool y;
-    bool z;
-    TraegerKlasse *traegerklasse;
+    QSlider * sl_changeRotaX;
+    QSlider * sl_change_RotaY;
+    QSlider * sl_change_RotaZ;
+
+
+    QSlider * sl_change_Red;
+    QSlider * sl_change_Green;
+    QSlider * sl_change_Blue;
+    glm::vec3 color;
+
 
 
 private slots:
+    void changeColor(void);
 
-
-    void changeRot(int x);
-    void changeBlau(int x);
-    void changeGruen(int x);
-
-
-    void kugelSlider();
      void changeRefineKugel(int x);
     void changeRadiusKugel(int x);
     void changeHoeheKugel(int x);
@@ -142,41 +136,6 @@ private slots:
     void mouseEvent(QMouseEvent* event);
     void viewportChanged(int,int);
 
-    /* slots example qt gui elements */
-    void slotMySpinBox1Changed();
-    void slotMyCheckBox1Changed();
-    void slotMyButton1Pressed();
-    void slotButtonGroupSelectionChanged();
-    void slotLoadMeshFile();
-    void sliderMove(int x);
-
-    void  objectOpenSelect1(void);
-    void  objectOpenSelect2(void);
-    void  objectOpenSelect3(void);
-    void  objectOpenSelect4(void);
-
-    // void pressButton                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           Cg::ObjectType);
-
-    void changeRadiusKegel(int x);
-    void changeHoeheKegel(int x);
-    void changeRefineKegel(int x);
-    void changeRadiusZylinder(int x);
-    void changeHoeheZylinder(int x);
-    void changeRefineZylinder(int x);
-    void changeRefineRota(int x);
-
-    void  selectY(void);
-    void  selectX(void);
-    void  selectZ(void);
-    void  changeVisibleX(void);
-    void  changeVisibleY(void);
-    void  changeVisibleZ(void);
-
-    void changeX(int x);
-    void changeY(int y);
-    void changeZ(int z);
-
-    void tabChange(int i);
 };
 
 #endif

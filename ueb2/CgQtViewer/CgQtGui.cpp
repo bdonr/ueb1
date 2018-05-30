@@ -7,7 +7,6 @@
 #include "../CgEvents/CgKeyEvent.h"
 #include "../CgEvents/CgWindowResizeEvent.h"
 #include "../CgSceneGraph/CgSceneControl.h"
-#include "../CgSceneGraph/slidermoveevent.h"
 #include <QSlider>
 #include <QVBoxLayout>
 #include <QHBoxLayout>
@@ -26,23 +25,16 @@
 #include <QMenuBar>
 #include <QActionGroup>
 #include <iostream>
-#include "../CgEvents/objectopenevent.h"
-#include "CgSceneGraph/besterslidermoveevent.h"
+
 
 
 CgQtGui::CgQtGui(CgQtMainApplication *mw)
     : m_mainWindow(mw),radius(0.0),hoehe(0.0),refine(0)
 {
 
-    blau=0;
-    rot=0;
-    gruen=0;
-
-    farbe.push_back(rot);
-    farbe.push_back(gruen);
-    farbe.push_back(gruen);
+    color = glm::vec3(0,0,0);
     m_glRenderWidget = new CgQtGLRenderWidget;
-    traegerklasse=new TraegerKlasse();
+
     connect(m_glRenderWidget, SIGNAL(mouseEvent(QMouseEvent*)), this, SLOT(mouseEvent(QMouseEvent*)));
     connect(m_glRenderWidget, SIGNAL(viewportChanged(int,int)), this, SLOT(viewportChanged(int,int)));
     //  connect(m_glRenderWidget, SIGNAL(valueChanged(int)), this, SLOT(sliderMove(int)));
@@ -54,13 +46,13 @@ CgQtGui::CgQtGui(CgQtMainApplication *mw)
     aufgabe2(opt);
 
     QWidget *opt2 = new QWidget;
-    aufgabe1(opt2);
+    page1(opt2);
 
     QWidget* opt3 = new QWidget;
-    aufgabe3(opt3);
+    page2(opt3);
 
     QWidget* opt4 = new QWidget;
-    aufgabe4(opt4);
+    page3(opt4);
 //    connect(opt4, SIGNAL(objectNameChanged(QString)), this, SLOT(tabChange(QString)));
 //    opt4->addAction(tabChange());
 
@@ -396,7 +388,7 @@ void CgQtGui::createOptionPanelExample2(QWidget* parent)
 
 }
 
-void CgQtGui::aufgabe1(QWidget* parent)
+void CgQtGui::page1(QWidget* parent)
 {
     QVBoxLayout *tab3_control = new QVBoxLayout();
 
@@ -415,36 +407,36 @@ void CgQtGui::aufgabe1(QWidget* parent)
     QLabel* lab2= new QLabel("Rot");
     tab3_control->addWidget(lab2);
 
-    QSlider *wuerfelRot = createSlider();
-    tab3_control->addWidget(wuerfelRot);
-    wuerfelRot->setMinimum(0);
-    wuerfelRot->setMaximum(255);
-    wuerfelRot->setValue(20);
-    wuerfelRot->setTickInterval(4);
-     connect(wuerfelRot, SIGNAL(sliderMoved(int)), this, SLOT(changeRot(int)));
+    sl_change_Red  = createSlider();
+    tab3_control->addWidget(sl_change_Red);
+    sl_change_Red->setMinimum(0);
+    sl_change_Red->setMaximum(255);
+    sl_change_Red->setValue(20);
+    sl_change_Red->setTickInterval(4);
+     connect(sl_change_Red, SIGNAL(sliderMoved(int)), this, SLOT(changeColor()));
 
 
     QLabel* lab3= new QLabel("Gruen");
     tab3_control->addWidget(lab3);
 
-    QSlider *wuerfelGruen = createSlider();
-    tab3_control->addWidget(wuerfelGruen);
-    wuerfelGruen->setMinimum(0);
-    wuerfelGruen->setMaximum(255);
-    wuerfelGruen->setValue(20);
-    wuerfelGruen->setTickInterval(4);
-    connect(wuerfelGruen, SIGNAL(sliderMoved(int)), this, SLOT(changeGruen(int)));
+    sl_change_Green = createSlider();
+    tab3_control->addWidget(sl_change_Green);
+    sl_change_Green->setMinimum(0);
+    sl_change_Green->setMaximum(255);
+    sl_change_Green->setValue(20);
+    sl_change_Green->setTickInterval(4);
+    connect(sl_change_Green, SIGNAL(sliderMoved(int)), this, SLOT(changeColor()));
     //connect(zylinderRadiusSlider, SIGNAL(sliderMoved(int)), this, SLOT(ÄNDERE FARBE));
 
     QLabel* lab4= new QLabel("Blau");
     tab3_control->addWidget(lab4);
-    QSlider *wuerfelBlau = createSlider();
-    tab3_control->addWidget(wuerfelBlau);
-    wuerfelBlau->setMinimum(3);
-    wuerfelBlau->setMaximum(255);
-    wuerfelBlau->setValue(20);
-    wuerfelBlau->setTickInterval(4);
-    connect(wuerfelBlau, SIGNAL(sliderMoved(int)), this, SLOT(changeBlau(int)));
+    sl_change_Blue = createSlider();
+    tab3_control->addWidget(sl_change_Blue);
+    sl_change_Blue->setMinimum(3);
+    sl_change_Blue->setMaximum(255);
+    sl_change_Blue->setValue(20);
+    sl_change_Blue->setTickInterval(4);
+    connect(sl_change_Blue, SIGNAL(sliderMoved(int)), this, SLOT(changeColor()));
     //connect(zylinderRefineSlider, SIGNAL(sliderMoved(int)), this, SLOT(ÄNDERE FARBE));
 
 
@@ -452,7 +444,7 @@ void CgQtGui::aufgabe1(QWidget* parent)
 
 
 }
-void CgQtGui::aufgabe3(QWidget* parent)
+void CgQtGui::page2(QWidget* parent)
 {
     //tab4_control-->subBox-->myGroupBox-->vbox-->addWidget(radioButton123)    myButtonGroup-->addButton(addButton)
 
@@ -549,7 +541,7 @@ void CgQtGui::aufgabe3(QWidget* parent)
 
 }
 
-void CgQtGui::aufgabe4(QWidget* parent)
+void CgQtGui::page3(QWidget* parent)
 {
     QVBoxLayout *tab5_control = new QVBoxLayout();
     //---------------------------------------------------------------------------------------
@@ -568,25 +560,25 @@ void CgQtGui::aufgabe4(QWidget* parent)
     QRadioButton* radiobutton13 = new QRadioButton( "&Z");
     connect(radiobutton13, SIGNAL(pressed()), this, SLOT(selectZ()));
 
-    kkk = new QSlider(Qt::Horizontal);
-    kkk->setMaximum(10);
-    kkk->setValue(0);
-    kkk->setTickInterval(1);
-    kkk->setVisible(x);
+    sl_changeRotaX = new QSlider(Qt::Horizontal);
+    sl_changeRotaX->setMaximum(10);
+    sl_changeRotaX->setValue(0);
+    sl_changeRotaX->setTickInterval(1);
+    //sl_changeRotaX->setVisible(x);
 
 
 
-    kkk1 = new QSlider(Qt::Horizontal);
-    kkk1->setMaximum(10);
-    kkk1->setValue(0);
-    kkk1->setTickInterval(1);
-    kkk1->setVisible(y);
+    sl_change_RotaY = new QSlider(Qt::Horizontal);
+    sl_change_RotaY->setMaximum(10);
+    sl_change_RotaY->setValue(0);
+    sl_change_RotaY->setTickInterval(1);
+    //sl_change_RotaY->setVisible(y);
 
-    kkk2 = new QSlider(Qt::Horizontal);
-    kkk2->setMaximum(10);
-    kkk2->setValue(0);
-    kkk2->setTickInterval(1);
-    kkk2->setVisible(z);
+    sl_change_RotaZ = new QSlider(Qt::Horizontal);
+    sl_change_RotaZ->setMaximum(10);
+    sl_change_RotaZ->setValue(0);
+    sl_change_RotaZ->setTickInterval(1);
+    //sl_change_RotaZ->setVisible(z);
 
 
 
@@ -598,17 +590,17 @@ void CgQtGui::aufgabe4(QWidget* parent)
     myButtonGroup->addButton(radiobutton12,1);
     myButtonGroup->addButton(radiobutton13,2);
 
-    connect(kkk,SIGNAL(sliderMoved(int)),this,SLOT(changeX(int)));
-    connect(kkk1,SIGNAL(sliderMoved(int)),this,SLOT(changeY(int)));
-    connect(kkk2,SIGNAL(sliderMoved(int)),this,SLOT(changeZ(int)));
+    connect(sl_changeRotaX,SIGNAL(sliderMoved(int)),this,SLOT(changeX(int)));
+    connect(sl_change_RotaY,SIGNAL(sliderMoved(int)),this,SLOT(changeY(int)));
+    connect(sl_change_RotaZ,SIGNAL(sliderMoved(int)),this,SLOT(changeZ(int)));
 
     QVBoxLayout *vbox = new QVBoxLayout;
     vbox->addWidget(radiobutton11);
-    vbox->addWidget(kkk);
+    vbox->addWidget(sl_changeRotaX);
     vbox->addWidget(radiobutton12);
-    vbox->addWidget(kkk1);
+    vbox->addWidget(sl_change_RotaY);
     vbox->addWidget(radiobutton13);
-    vbox->addWidget(kkk2);
+    vbox->addWidget(sl_change_RotaZ);
 
     vbox->addStretch(1);
 
@@ -623,73 +615,27 @@ void CgQtGui::aufgabe4(QWidget* parent)
     parent->setLayout(tab5_control);
 }
 
-void CgQtGui::changeRot(int x)
+void CgQtGui::changeColor()
 {
-    rot=x;
-    std::cout<<x<<std::endl;
-    farbe.at(0)=rot;
-    TraegerKlasse* k = new TraegerKlasse(farbe);
-    bestersliderMoveEvent* o = new bestersliderMoveEvent(Cg::CgChangeColor,k);
-    notifyObserver(o);
+    std::cout<<sl_change_Blue->value()<<std::endl;
 }
 
-void CgQtGui::changeBlau(int x)
-{
-
-    blau=x;
-    farbe.at(2)=blau;
-    TraegerKlasse* k = new TraegerKlasse(farbe);
-    bestersliderMoveEvent* o = new bestersliderMoveEvent(Cg::CgChangeColor,k);
-    notifyObserver(o);
-}
-
-void CgQtGui::changeGruen(int x)
-{
-    gruen=x;
-    farbe.at(1)=gruen;
-    TraegerKlasse* k = new TraegerKlasse(farbe);
-    bestersliderMoveEvent* o = new bestersliderMoveEvent(Cg::CgChangeColor,k);
-    notifyObserver(o);
-}
-
-
-void CgQtGui::slotButtonGroupSelectionChanged()
+void CgQtGui::changeRefineKugel(int x)
 {
 
 }
 
-void CgQtGui::slotMySpinBox1Changed()
+void CgQtGui::changeRadiusKugel(int x)
 {
 
 }
 
-void CgQtGui::sliderMove(int x){
-    std::cout<<x<<"    "<<std::endl;
-
-
-
-}
-
-void CgQtGui::slotMyCheckBox1Changed()
+void CgQtGui::changeHoeheKugel(int x)
 {
-    std::cout<<"bla ding tralala"<<std::endl;
-}
-
-
-void CgQtGui::slotLoadMeshFile()
-{
-    std::cout << "load Mesh file callback reached, but not implemented..." << std::endl;
-    // Hier FileChooser öffnen, datei selektieren
-    // und dann neuen Event implementieren, der das an den Controller schickt.
-    // dort wird dann die Datei tatsächliche geöffnet und ein entsprechendes Mesh Objekt angelegt
-    // im View(GUI) passiert nichts außer festellung DASS geladen werden soll und welche Datei und zu welchem Zweck (Mesh)
-}
-
-void CgQtGui::slotMyButton1Pressed()
-{
-    std::cout << "button 1 pressed " << std::endl;
 
 }
+
+
 
 
 void CgQtGui::mouseEvent(QMouseEvent* event)
@@ -744,176 +690,11 @@ CgBaseRenderer* CgQtGui::getRenderer()
 }
 
 
-void CgQtGui::zylinderSlider(){
-    CgBaseEvent* ding = new SliderMoveEvent(Cg::ZylinderChange, refine, hoehe, radius);
-    notifyObserver(ding);
-
-}
-
-void CgQtGui::changeRefineRota(int x){
-    CgBaseEvent* ding = new SliderMoveEvent(Cg::RefineRota, x);
-    notifyObserver(ding);
-
-}
-
-void CgQtGui::kegelSlider(){
-    CgBaseEvent* ding = new SliderMoveEvent(Cg::KegelChange, refine, hoehe, radius);
-    notifyObserver(ding);
-}
-
-void CgQtGui::changeRadiusKegel(int x){
-    this->radius=(x*0.05);
-    kegelSlider();
-
-}
-
-void CgQtGui::changeHoeheKegel(int x){
-    this->hoehe=(x*0.05);
-    std::cout<<" changehoehkegel "<<hoehe<<std::endl;
-    kegelSlider();
-
-}
-
-void CgQtGui::changeRefineKegel(int x){
-    this->refine=x;
-    kegelSlider();
-
-}
-
-
-void CgQtGui::kugelSlider(){
-
-    CgBaseEvent* ding = new SliderMoveEvent(Cg::KugelChange, refine, hoehe, radius);
-    notifyObserver(ding);
-}
-
-void CgQtGui::changeRadiusKugel(int x){
-    this->radius=(x*0.05);
-    kugelSlider();
-
-}
-
-void CgQtGui::changeHoeheKugel(int x){
-    this->hoehe=(x*0.05);
-    std::cout<<" changehoehkugel "<<hoehe<<std::endl;
-    kugelSlider();
-
-}
-
-void CgQtGui::changeRefineKugel(int x){
-    this->refine=x;
-    kugelSlider();
-
-}
 
 
 
-void CgQtGui::changeRadiusZylinder(int x){
-    this->radius=(x*0.05);
-    zylinderSlider();
 
-}
+void changeColor(void){
 
-void CgQtGui::changeHoeheZylinder(int x){
-    this->hoehe=(x*0.05);
-    zylinderSlider();
-
-}
-
-
-void CgQtGui::changeRefineZylinder(int x){
-    this->refine=x;
-    zylinderSlider();
-
-}
-
-void  CgQtGui::objectOpenSelect1(void){
-    ObjectOpenEvent* ob = new ObjectOpenEvent(0);
-    notifyObserver(ob);
-}
-void  CgQtGui::objectOpenSelect2(void){
-    ObjectOpenEvent* ob = new ObjectOpenEvent(1);
-    notifyObserver(ob);
-}
-
-void  CgQtGui::objectOpenSelect3(void){
-    ObjectOpenEvent* ob = new ObjectOpenEvent(2);
-    notifyObserver(ob);
-}
-
-void CgQtGui::objectOpenSelect4()
-{
-    ObjectOpenEvent* ob = new ObjectOpenEvent(3);
-    notifyObserver(ob);
-}
-
-void  CgQtGui::selectY(void){
-    if(y){
-        y=false;
-        std::cout<<"y unchecked"<<std::endl;
-    }
-    else{
-        y=true;
-        std::cout<<"y checked"<<std::endl;
-    }
-}
-
-void  CgQtGui::selectX(void){
-    if(x){
-        x=false;
-        std::cout<<"x unchecked"<<std::endl;
-    }
-    else{
-        x=true;
-        std::cout<<"x checked"<<std::endl;
-    }
-}
-
-void  CgQtGui::selectZ(void){
-    if(z){
-        z=false;
-        std::cout<<"z unchecked"<<std::endl;
-    }
-    else{
-        z=true;
-        std::cout<<"z checked"<<std::endl;
-    }
-}
-
-void CgQtGui::changeVisibleX(void){
-    kkk->setVisible(x);
-
-}
-void CgQtGui::changeVisibleY(void){
-    kkk1->setVisible(y);
-
-}
-void CgQtGui::changeVisibleZ(void){
-    kkk2->setVisible(z);
-
-}
-
-void CgQtGui::changeX(int x)
-{
-
-    traegerklasse->setX(x);
-    notifyObserver(new bestersliderMoveEvent(Cg::CgChangeRota,traegerklasse));
-}
-
-void CgQtGui::changeY(int y)
-{
-    traegerklasse->setY(y);
-    notifyObserver(new bestersliderMoveEvent(Cg::CgChangeRota,traegerklasse));
-}
-
-void CgQtGui::changeZ(int z)
-{
-    traegerklasse->setZ(z);
-    notifyObserver(new bestersliderMoveEvent(Cg::CgChangeRota,traegerklasse));
-}
-void CgQtGui::tabChange(int i){
-    traegerklasse = new TraegerKlasse();
-    traegerklasse->setTab(i);
-    notifyObserver(new bestersliderMoveEvent(Cg::TabChange,traegerklasse));
 }
 
