@@ -29,9 +29,31 @@
 #include <iostream>
 
 
+//Höhe slider definieren, funktionalität inkludieren
+//normalen von rota-körper und kegel und zylinder anzeigen "taste", FUNKTIONALITÄT
+//                    merke MyPolyline hat den lane riesenfeld algo !!!!
+//aufgabe 4.c
+//aufgbae 6.c ?
+//aufgabe 7.b taste X, koordinaten system PFEILE
+//aufgabe 7.c verscheibung des obejktes als GUI
+//aufgabe 8.b vergleich der rotamatritzen, BUTTON
+//aufgabe 10 refactorn
+//aufgabe 13 EVENTUEL
+//aufgabe 14 EVENTUEL
+
+
+
+
+
+
 
 void CgQtGui::init()
 {
+    std::vector<int> abc;
+    abc.push_back(0);
+    abc.push_back(0);
+    abc.push_back(0);
+    traeger = new TraegerKlasse(abc);
     color = glm::vec3(0,0,0);
     m_glRenderWidget = new CgQtGLRenderWidget;
 
@@ -203,103 +225,69 @@ void CgQtGui::page2(QWidget* parent)
     QLabel* lab1= new QLabel("Zylinder Hoehe");
     tab1_control->addWidget(lab1);
 
-    QSlider *zylinderHoeheSlider = createSlider();
-    tab1_control->addWidget(zylinderHoeheSlider);
-    zylinderHoeheSlider->setMinimum(0);
-    zylinderHoeheSlider->setMaximum(60);
-    zylinderHoeheSlider->setValue(20);
-    zylinderHoeheSlider->setTickInterval(1);
-    connect(zylinderHoeheSlider, SIGNAL(sliderMoved(int)), this, SLOT(changeHoeheZylinder(int)));
+    sl_zylinder_hoehe = createSlider();
+    tab1_control->addWidget(sl_zylinder_hoehe);
+    sl_zylinder_hoehe->setMinimum(0);
+    sl_zylinder_hoehe->setMaximum(60);
+    sl_zylinder_hoehe->setValue(20);
+    sl_zylinder_hoehe->setTickInterval(1);
+    connect(sl_zylinder_hoehe, SIGNAL(sliderReleased()), this, SLOT(changeZylinder()));
 
     QLabel* lab2= new QLabel("Zylinder Radius");
     tab1_control->addWidget(lab2);
 
-    QSlider *zylinderRadiusSlider = createSlider();
-    tab1_control->addWidget(zylinderRadiusSlider);
-    zylinderRadiusSlider->setMinimum(0);
-    zylinderRadiusSlider->setMaximum(60);
-    zylinderRadiusSlider->setValue(20);
-    zylinderRadiusSlider->setTickInterval(1);
-    connect(zylinderRadiusSlider, SIGNAL(sliderMoved(int)), this, SLOT(changeRadiusZylinder(int)));
+    sl_zylinder_radius = createSlider();
+    tab1_control->addWidget(sl_zylinder_radius);
+    sl_zylinder_radius->setMinimum(0);
+    sl_zylinder_radius->setMaximum(60);
+    sl_zylinder_radius->setValue(20);
+    sl_zylinder_radius->setTickInterval(1);
+    connect(sl_zylinder_radius, SIGNAL(sliderReleased()), this, SLOT(changeZylinder()));
 
     QLabel* lab3= new QLabel("Zylinder Refine");
     tab1_control->addWidget(lab3);
 
-    QSlider *zylinderRefineSlider = createSlider();
-    tab1_control->addWidget(zylinderRefineSlider);
-    zylinderRefineSlider->setMinimum(1);
-    zylinderRefineSlider->setMaximum(60);
-    zylinderRefineSlider->setValue(20);
-    zylinderRefineSlider->setTickInterval(1);
-    connect(zylinderRefineSlider, SIGNAL(sliderMoved(int)), this, SLOT(changeRefineZylinder(int)));
+    sl_zylinder_refine = createSlider();
+    tab1_control->addWidget(sl_zylinder_refine);
+    sl_zylinder_refine->setMinimum(1);
+    sl_zylinder_refine->setMaximum(60);
+    sl_zylinder_refine->setValue(20);
+    sl_zylinder_refine->setTickInterval(1);
+    connect(sl_zylinder_refine, SIGNAL(sliderReleased()), this, SLOT(changeZylinder()));
 
     QLabel* lab4= new QLabel("Kegel Refine");
     tab1_control->addWidget(lab4);
 
-    QSlider *kegelRefineSlider = createSlider();
-    tab1_control->addWidget(kegelRefineSlider);
-    kegelRefineSlider->setMinimum(3);
-    kegelRefineSlider->setMaximum(60);
-    kegelRefineSlider->setValue(20);
-    kegelRefineSlider->setTickInterval(1);
-    connect(kegelRefineSlider, SIGNAL(sliderMoved(int)), this, SLOT(changeRefineKegel(int)));
+    sl_kegel_refine = createSlider();
+    tab1_control->addWidget(sl_kegel_refine);
+    sl_kegel_refine->setMinimum(3);
+    sl_kegel_refine->setMaximum(60);
+    sl_kegel_refine->setValue(20);
+    sl_kegel_refine->setTickInterval(1);
+    connect(sl_kegel_refine, SIGNAL(sliderReleased()), this, SLOT(changeKegel()));
 
     QLabel* lab5= new QLabel("Kegel Radius");
     tab1_control->addWidget(lab5);
 
-    QSlider *kegelRadiusSlider = createSlider();
-    tab1_control->addWidget(kegelRadiusSlider);
-    kegelRadiusSlider->setMinimum(0);
-    kegelRadiusSlider->setMaximum(60);
-    kegelRadiusSlider->setValue(20);
-    kegelRadiusSlider->setTickInterval(1);
-    connect(kegelRadiusSlider, SIGNAL(sliderMoved(int)), this, SLOT(changeRadiusKegel(int)));
+    sl_kegel_radius = createSlider();
+    tab1_control->addWidget(sl_kegel_radius);
+    sl_kegel_radius->setMinimum(0);
+    sl_kegel_radius->setMaximum(60);
+    sl_kegel_radius->setValue(20);
+    sl_kegel_radius->setTickInterval(1);
+    connect(sl_kegel_radius, SIGNAL(sliderReleased()), this, SLOT(changeKegel()));
 
     QLabel* lab6= new QLabel("Kegel Hoehe");
     tab1_control->addWidget(lab6);
 
-    QSlider *kegelHoeheSlider = createSlider();
-    tab1_control->addWidget(kegelHoeheSlider);
-    kegelHoeheSlider->setMinimum(0);
-    kegelHoeheSlider->setMaximum(60);
-    kegelHoeheSlider->setValue(20);
-    kegelHoeheSlider->setTickInterval(1);
-    connect(kegelHoeheSlider, SIGNAL(sliderMoved(int)), this, SLOT(changeHoeheKegel(int)));
+    sl_kegel_hoehe = createSlider();
+    tab1_control->addWidget(sl_kegel_hoehe);
+    sl_kegel_hoehe->setMinimum(0);
+    sl_kegel_hoehe->setMaximum(60);
+    sl_kegel_hoehe->setValue(20);
+    sl_kegel_hoehe->setTickInterval(1);
+    connect(sl_kegel_hoehe, SIGNAL(sliderReleased()), this, SLOT(changeKegel()));
 
-
-
-    QLabel* lab10= new QLabel("Kugel Refine");
-    tab1_control->addWidget(lab10);
-
-    QSlider *kugelRefineSlider = createSlider();
-    tab1_control->addWidget(kugelRefineSlider);
-    kugelRefineSlider->setMinimum(3);
-    kugelRefineSlider->setMaximum(60);
-    kugelRefineSlider->setValue(20);
-    kugelRefineSlider->setTickInterval(1);
-    connect(kugelRefineSlider, SIGNAL(sliderMoved(int)), this, SLOT(changeRefineKugel(int)));
-
-    QLabel* lab11= new QLabel("Kugel Radius");
-    tab1_control->addWidget(lab11);
-
-    QSlider *kugelRadiusSlider = createSlider();
-    tab1_control->addWidget(kugelRadiusSlider);
-    kugelRadiusSlider->setMinimum(0);
-    kugelRadiusSlider->setMaximum(60);
-    kugelRadiusSlider->setValue(20);
-    kugelRadiusSlider->setTickInterval(1);
-    connect(kugelRadiusSlider, SIGNAL(sliderMoved(int)), this, SLOT(changeRadiusKugel(int)));
-
-    QLabel* lab12= new QLabel("Kugel Hoehe");
-    tab1_control->addWidget(lab12);
-
-    QSlider *kugelHoeheSlider = createSlider();
-    tab1_control->addWidget(kugelHoeheSlider);
-    kugelHoeheSlider->setMinimum(0);
-    kugelHoeheSlider->setMaximum(60);
-    kugelHoeheSlider->setValue(20);
-    kugelHoeheSlider->setTickInterval(1);
-    connect(kugelHoeheSlider, SIGNAL(sliderMoved(int)), this, SLOT(changeHoeheKugel(int)));
     parent->setLayout(tab1_control);
 
 }
@@ -330,7 +318,7 @@ void CgQtGui::page1(QWidget* parent)
     sl_change_Red->setMaximum(255);
     sl_change_Red->setValue(20);
     sl_change_Red->setTickInterval(4);
-     connect(sl_change_Red, SIGNAL(sliderMoved(int)), this, SLOT(changeColor()));
+     connect(sl_change_Red, SIGNAL(sliderReleased()), this, SLOT(changeColor()));
 
 
     QLabel* lab3= new QLabel("Gruen");
@@ -342,8 +330,7 @@ void CgQtGui::page1(QWidget* parent)
     sl_change_Green->setMaximum(255);
     sl_change_Green->setValue(20);
     sl_change_Green->setTickInterval(4);
-    connect(sl_change_Green, SIGNAL(sliderMoved(int)), this, SLOT(changeColor()));
-    //connect(zylinderRadiusSlider, SIGNAL(sliderMoved(int)), this, SLOT(ÄNDERE FARBE));
+    connect(sl_change_Green, SIGNAL(sliderReleased()), this, SLOT(changeColor()));
 
     QLabel* lab4= new QLabel("Blau");
     tab3_control->addWidget(lab4);
@@ -353,8 +340,7 @@ void CgQtGui::page1(QWidget* parent)
     sl_change_Blue->setMaximum(255);
     sl_change_Blue->setValue(20);
     sl_change_Blue->setTickInterval(4);
-    connect(sl_change_Blue, SIGNAL(sliderMoved(int)), this, SLOT(changeColor()));
-    //connect(zylinderRefineSlider, SIGNAL(sliderMoved(int)), this, SLOT(ÄNDERE FARBE));
+    connect(sl_change_Blue, SIGNAL(sliderReleased()), this, SLOT(changeColor()));
 
 
     parent->setLayout(tab3_control);
@@ -532,25 +518,46 @@ void CgQtGui::page4(QWidget* parent)
     parent->setLayout(tab5_control);
 }
 
+void CgQtGui::changeRotaKoerper()
+{
+
+}
+
 void CgQtGui::changeColor()
 {
     std::cout<<sl_change_Blue->value()<<std::endl;
+    traeger->setDreiDVector(glm::vec3(sl_change_Red->value(),sl_change_Green->value(),sl_change_Blue->value()));
+    notifyObserver(new bestersliderMoveEvent(Cg::KegelChange,traeger));
 }
 
-void CgQtGui::changeRefineKugel(int x)
+void CgQtGui::changeKegel()
 {
-
+    std::cout<<sl_kegel_hoehe->value()<<" "<<sl_kegel_radius->value()<<" "<<sl_kegel_refine->value()<<std::endl;
+    traeger->setDreiDVector(glm::vec3(sl_kegel_hoehe->value(),sl_kegel_radius->value(),sl_kegel_refine->value()));
+    notifyObserver(new bestersliderMoveEvent(Cg::KegelChange,traeger));
 }
 
-void CgQtGui::changeRadiusKugel(int x)
+void CgQtGui::changeZylinder()
 {
-
+    std::cout<<sl_zylinder_hoehe->value()<<" "<<sl_zylinder_radius->value()<<" "<<sl_zylinder_refine->value()<<std::endl;
+    traeger->setDreiDVector(glm::vec3(sl_zylinder_hoehe->value(),sl_zylinder_radius->value(),sl_zylinder_refine->value()));
+    notifyObserver(new bestersliderMoveEvent(Cg::ZylinderChange,traeger));
 }
 
-void CgQtGui::changeHoeheKugel(int x)
-{
+//void CgQtGui::changeRefineKugel(int x)
+//{
 
-}
+//}
+
+//void CgQtGui::changeRadiusKugel(int x)
+//{
+
+//}
+
+//void CgQtGui::changeHoeheKugel(int x)
+//{
+
+//}
 
 
 

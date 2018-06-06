@@ -28,6 +28,16 @@ std::vector<int> TraegerKlasse::getX() const
     return x;
 }
 
+glm::vec3 TraegerKlasse::getDreiDVector() const
+{
+    return dreiDVector;
+}
+
+void TraegerKlasse::setDreiDVector(const glm::vec3 &value)
+{
+    dreiDVector = value;
+}
+
 TraegerKlasse::TraegerKlasse()
 {
     intvec=glm::vec3(0,0,0);
@@ -36,6 +46,11 @@ TraegerKlasse::TraegerKlasse()
 TraegerKlasse::TraegerKlasse(std::vector<int> k)
 {
     this->x=k;
+}
+
+TraegerKlasse::TraegerKlasse(glm::vec3 dreiDVector)
+{
+    this->dreiDVector= dreiDVector;
 }
 
 void TraegerKlasse::setX(int x)

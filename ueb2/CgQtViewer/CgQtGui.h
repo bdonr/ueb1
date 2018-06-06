@@ -45,6 +45,7 @@
 #include "../CgBase/CgObservable.h"
 #include "../CgBase/CgEnums.h"
 #include <glm/glm.hpp>
+#include "CgClass/traegerklasse.h"
 
 QT_BEGIN_NAMESPACE
 class QSlider;
@@ -113,9 +114,17 @@ private:
     void page1(QWidget* panel);
     void page3(QWidget* panel);
     void page4(QWidget* panel);
+    TraegerKlasse* traeger;
     QButtonGroup* myButtonGroup;
     QCheckBox* myCheckBox1;
     QSpinBox* mySpinBox1;
+    QSlider* sl_zylinder_hoehe;
+    QSlider* sl_zylinder_radius;
+    QSlider* sl_zylinder_refine;
+
+    QSlider* sl_kegel_hoehe;
+    QSlider* sl_kegel_radius;
+    QSlider* sl_kegel_refine;
     QSlider * sl_changeRotaX;
     QSlider * sl_change_RotaY;
     QSlider * sl_change_RotaZ;
@@ -129,11 +138,14 @@ private:
 
 
 private slots:
+    void changeRotaKoerper();
     void changeColor(void);
 
-     void changeRefineKugel(int x);
-    void changeRadiusKugel(int x);
-    void changeHoeheKugel(int x);
+//     void changeRefineKugel(int x);
+//    void changeRadiusKugel(int x);
+//    void changeHoeheKugel(int x);
+    void changeKegel();
+    void changeZylinder();
     /* slots to catch events directly from renderer */
     void mouseEvent(QMouseEvent* event);
     void viewportChanged(int,int);

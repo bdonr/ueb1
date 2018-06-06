@@ -11,7 +11,7 @@ RotationsKoerper::RotationsKoerper(MyPolyline* poly, int refine):poly(poly), ref
 
 RotationsKoerper::RotationsKoerper(int id, int refine):refine(refine), id(id)
 {
-    drehe();
+    erstelleKugel();
 }
 
 std::vector <MyPolyline*> RotationsKoerper::getPolyVec(){
@@ -25,7 +25,7 @@ std::vector<MyPolyline*> RotationsKoerper::getNormale(){
     return this->normale;
 }
 
-void RotationsKoerper::drehe(){
+void RotationsKoerper::erstelleKugel(){
     int count = 0;
     float y = 0;
 
@@ -65,6 +65,10 @@ void RotationsKoerper::drehe(){
         count++;
     }
     zieheLinieZwischenZweiNachBarSegmenten();
+
+}
+
+void RotationsKoerper::erstelleRotationsKoerper(){
 
 }
 

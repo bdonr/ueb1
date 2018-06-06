@@ -20,11 +20,12 @@ public:
     RotationsKoerper(MyPolyline*, int);
     RotationsKoerper(int id, int refine);
 
-    void drehe();
+    void erstelleKugel();
     void zieheLinieZwischenZweiNachBarSegmenten();
     glm::vec3 mittelPunkt(glm::vec3 a,glm::vec3 b, glm::vec3 c);
 
     glm::vec3 normalen(glm::vec3 a,glm::vec3 b, glm::vec3 c,glm::vec3 mittelpunkt);
+    void erstelleRotationsKoerper();
 };
 
 #endif // ROTATIONSKOERPER_H

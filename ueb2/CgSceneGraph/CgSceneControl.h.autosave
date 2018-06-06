@@ -237,7 +237,7 @@ private:
     float z;
     int page;
     int changed;
-
+    TraegerKlasse* traeger;
     Kugel * kugel;
     std::vector<glm::vec3> dreickevertices;
     Koordinatensystem* koordinatensystem;
