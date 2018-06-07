@@ -32,7 +32,8 @@ namespace Cg{
     CgSomeSpecialEvent4             = 0x0008000,
     CgEventGroup1                   = 0x000f000,
     CgChangeRota                    = 0x0f00000,
-    CgChangeColor                       =0x0aaaaaa0
+    CgChangeColor                   = 0x0aaaaa0,
+    CgZeigeNormalePage2             = 0x0ababa0,
     // feel free to add whatever you like
     }EventType;
 

@@ -20,7 +20,7 @@
 QT_BEGIN_MOC_NAMESPACE
 struct qt_meta_stringdata_CgQtGui_t {
     QByteArrayData data[13];
-    char stringdata0[142];
+    char stringdata0[150];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -33,21 +33,21 @@ QT_MOC_LITERAL(0, 0, 7), // "CgQtGui"
 QT_MOC_LITERAL(1, 8, 17), // "changeRotaKoerper"
 QT_MOC_LITERAL(2, 26, 0), // ""
 QT_MOC_LITERAL(3, 27, 11), // "changeColor"
-QT_MOC_LITERAL(4, 39, 11), // "changeKegel"
-QT_MOC_LITERAL(5, 51, 14), // "changeZylinder"
-QT_MOC_LITERAL(6, 66, 10), // "mouseEvent"
-QT_MOC_LITERAL(7, 77, 12), // "QMouseEvent*"
-QT_MOC_LITERAL(8, 90, 5), // "event"
-QT_MOC_LITERAL(9, 96, 15), // "viewportChanged"
-QT_MOC_LITERAL(10, 112, 9), // "tabChange"
-QT_MOC_LITERAL(11, 122, 1), // "x"
-QT_MOC_LITERAL(12, 124, 17) // "changeRefineKegel"
+QT_MOC_LITERAL(4, 39, 25), // "zeige_normale_taste_page2"
+QT_MOC_LITERAL(5, 65, 11), // "changeKegel"
+QT_MOC_LITERAL(6, 77, 14), // "changeZylinder"
+QT_MOC_LITERAL(7, 92, 10), // "mouseEvent"
+QT_MOC_LITERAL(8, 103, 12), // "QMouseEvent*"
+QT_MOC_LITERAL(9, 116, 5), // "event"
+QT_MOC_LITERAL(10, 122, 15), // "viewportChanged"
+QT_MOC_LITERAL(11, 138, 9), // "tabChange"
+QT_MOC_LITERAL(12, 148, 1) // "x"
 
     },
     "CgQtGui\0changeRotaKoerper\0\0changeColor\0"
-    "changeKegel\0changeZylinder\0mouseEvent\0"
-    "QMouseEvent*\0event\0viewportChanged\0"
-    "tabChange\0x\0changeRefineKegel"
+    "zeige_normale_taste_page2\0changeKegel\0"
+    "changeZylinder\0mouseEvent\0QMouseEvent*\0"
+    "event\0viewportChanged\0tabChange\0x"
 };
 #undef QT_MOC_LITERAL
 
@@ -69,20 +69,20 @@ static const uint qt_meta_data_CgQtGui[] = {
        3,    0,   55,    2, 0x08 /* Private */,
        4,    0,   56,    2, 0x08 /* Private */,
        5,    0,   57,    2, 0x08 /* Private */,
-       6,    1,   58,    2, 0x08 /* Private */,
-       9,    2,   61,    2, 0x08 /* Private */,
-      10,    1,   66,    2, 0x08 /* Private */,
-      12,    1,   69,    2, 0x08 /* Private */,
+       6,    0,   58,    2, 0x08 /* Private */,
+       7,    1,   59,    2, 0x08 /* Private */,
+      10,    2,   62,    2, 0x08 /* Private */,
+      11,    1,   67,    2, 0x08 /* Private */,
 
  // slots: parameters
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
-    QMetaType::Void, 0x80000000 | 7,    8,
+    QMetaType::Void,
+    QMetaType::Void, 0x80000000 | 8,    9,
     QMetaType::Void, QMetaType::Int, QMetaType::Int,    2,    2,
-    QMetaType::Void, QMetaType::Int,   11,
-    QMetaType::Void, QMetaType::Int,   11,
+    QMetaType::Void, QMetaType::Int,   12,
 
        0        // eod
 };
@@ -95,12 +95,12 @@ void CgQtGui::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, voi
         switch (_id) {
         case 0: _t->changeRotaKoerper(); break;
         case 1: _t->changeColor(); break;
-        case 2: _t->changeKegel(); break;
-        case 3: _t->changeZylinder(); break;
-        case 4: _t->mouseEvent((*reinterpret_cast< QMouseEvent*(*)>(_a[1]))); break;
-        case 5: _t->viewportChanged((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2]))); break;
-        case 6: _t->tabChange((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 7: _t->changeRefineKegel((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 2: _t->zeige_normale_taste_page2(); break;
+        case 3: _t->changeKegel(); break;
+        case 4: _t->changeZylinder(); break;
+        case 5: _t->mouseEvent((*reinterpret_cast< QMouseEvent*(*)>(_a[1]))); break;
+        case 6: _t->viewportChanged((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2]))); break;
+        case 7: _t->tabChange((*reinterpret_cast< int(*)>(_a[1]))); break;
         default: ;
         }
     }

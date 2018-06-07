@@ -178,7 +178,7 @@ QSlider *CgQtGui::createSlider(int r,int size,int max,int min,int steps)
     slider->setRange(min, max );
     slider->setSingleStep(1);
     slider->setPageStep(1);
-    slider->setTickInterval(1);
+    slider->setTickInterval(steps);
     slider->setTickPosition(QSlider::TicksRight);
     return slider;
 
@@ -190,29 +190,29 @@ void CgQtGui::page2(QWidget* parent)
     QVBoxLayout *tab1_control = new QVBoxLayout();
     QPushButton* myButton2 = new QPushButton("Zeige Polyline");
     tab1_control->addWidget(myButton2);
-    connect(myButton2, SIGNAL( clicked() ), this, SLOT(slotMyButton1Pressed()) );
+    connect(myButton2, SIGNAL( clicked() ), this, SLOT(slotMyButton1Pressed()));
 
     QLabel* lab7= new QLabel("RotationsKörper Refine");
     tab1_control->addWidget(lab7);
 
-    QSlider *RotationsSlider = createSlider();
-    tab1_control->addWidget(RotationsSlider);
-    RotationsSlider->setMinimum(3);
-    RotationsSlider->setMaximum(60);
-    RotationsSlider->setValue(20);
-    RotationsSlider->setTickInterval(1);
-    connect(RotationsSlider, SIGNAL(sliderMoved(int)), this, SLOT(changeRefineRota(int)));
+    sl_rota_refine = createSlider();
+    tab1_control->addWidget(sl_rota_refine);
+    sl_rota_refine->setMinimum(3);
+    sl_rota_refine->setMaximum(60);
+    sl_rota_refine->setValue(20);
+    sl_rota_refine->setTickInterval(1);
+    connect(sl_rota_refine, SIGNAL(sliderReleased()), this, SLOT(changeRotaKoerper()));
 
     QLabel* lab8= new QLabel("RotationsKörper Hoehe");
     tab1_control->addWidget(lab8);
 
-    QSlider *HoeheSlider = createSlider();
-    tab1_control->addWidget(HoeheSlider);
-    HoeheSlider->setMinimum(1);
-    HoeheSlider->setMaximum(60);
-    HoeheSlider->setValue(20);
-    HoeheSlider->setTickInterval(1);
-    //  connect(RotationsSlider, SIGNAL(sliderMoved(int)), this, SLOT(changeHoeheZylinder(int)));
+    sl_rota_hoehe = createSlider();
+    tab1_control->addWidget(sl_rota_hoehe);
+    sl_rota_hoehe->setMinimum(1);
+    sl_rota_hoehe->setMaximum(60);
+    sl_rota_hoehe->setValue(20);
+    sl_rota_hoehe->setTickInterval(1);
+    connect(sl_rota_hoehe, SIGNAL(sliderReleased()), this, SLOT(changeRotaKoerper()));
 
 
     QLabel* lab9= new QLabel("----------------------------------------------------------------------------------");
@@ -220,7 +220,7 @@ void CgQtGui::page2(QWidget* parent)
 
     QPushButton* myButton1 = new QPushButton("Zeige Normale");
     tab1_control->addWidget(myButton1);
-    connect(myButton1, SIGNAL( clicked() ), this, SLOT(slotMyButton1Pressed()) );
+    connect(myButton1, SIGNAL( clicked() ), this, SLOT(zeige_normale_taste_page2()));
 
     QLabel* lab1= new QLabel("Zylinder Hoehe");
     tab1_control->addWidget(lab1);
@@ -520,44 +520,44 @@ void CgQtGui::page4(QWidget* parent)
 
 void CgQtGui::changeRotaKoerper()
 {
-
+    traeger->setDreiDVector(glm::vec3(sl_rota_refine->value(),sl_rota_hoehe->value(),0));
+    notifyObserver(new bestersliderMoveEvent(Cg::CgChangeRota,traeger));
 }
 
 void CgQtGui::changeColor()
 {
-    std::cout<<sl_change_Blue->value()<<std::endl;
+    std::cout<<"farbe "<<sl_change_Blue->value()<<std::endl;
     traeger->setDreiDVector(glm::vec3(sl_change_Red->value(),sl_change_Green->value(),sl_change_Blue->value()));
     notifyObserver(new bestersliderMoveEvent(Cg::KegelChange,traeger));
 }
 
+void CgQtGui::zeige_normale_taste_page2()
+{
+    if(zeige_normale_anAus==0){
+        zeige_normale_anAus=1;
+        traeger->setZeige_normale(1);
+        notifyObserver(new bestersliderMoveEvent(Cg::CgZeigeNormalePage2,traeger));
+    }else{
+        zeige_normale_anAus=0;
+        traeger->setZeige_normale(0);
+        notifyObserver(new bestersliderMoveEvent(Cg::CgZeigeNormalePage2,traeger));
+    }
+    std::cout<<"zeige nornmale "<<zeige_normale_anAus<<std::endl;
+}
+
 void CgQtGui::changeKegel()
 {
-    std::cout<<sl_kegel_hoehe->value()<<" "<<sl_kegel_radius->value()<<" "<<sl_kegel_refine->value()<<std::endl;
+    std::cout<<"kegel "<<sl_kegel_hoehe->value()<<" "<<sl_kegel_radius->value()<<" "<<sl_kegel_refine->value()<<std::endl;
     traeger->setDreiDVector(glm::vec3(sl_kegel_hoehe->value(),sl_kegel_radius->value(),sl_kegel_refine->value()));
     notifyObserver(new bestersliderMoveEvent(Cg::KegelChange,traeger));
 }
 
 void CgQtGui::changeZylinder()
 {
-    std::cout<<sl_zylinder_hoehe->value()<<" "<<sl_zylinder_radius->value()<<" "<<sl_zylinder_refine->value()<<std::endl;
+    std::cout<<"zylinder "<<sl_zylinder_hoehe->value()<<" "<<sl_zylinder_radius->value()<<" "<<sl_zylinder_refine->value()<<std::endl;
     traeger->setDreiDVector(glm::vec3(sl_zylinder_hoehe->value(),sl_zylinder_radius->value(),sl_zylinder_refine->value()));
     notifyObserver(new bestersliderMoveEvent(Cg::ZylinderChange,traeger));
 }
-
-//void CgQtGui::changeRefineKugel(int x)
-//{
-
-//}
-
-//void CgQtGui::changeRadiusKugel(int x)
-//{
-
-//}
-
-//void CgQtGui::changeHoeheKugel(int x)
-//{
-
-//}
 
 
 
@@ -613,12 +613,6 @@ void CgQtGui::tabChange(int x)
     tr->setTab(x);
     bestersliderMoveEvent* bsl = new bestersliderMoveEvent(Cg::TabChange,tr);
     notifyObserver(bsl);
-}
-
-void CgQtGui::changeRefineKegel(int x)
-{
-
-
 }
 
 
