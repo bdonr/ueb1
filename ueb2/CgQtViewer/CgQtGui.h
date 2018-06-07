@@ -118,13 +118,19 @@ private:
     QButtonGroup* myButtonGroup;
     QCheckBox* myCheckBox1;
     QSpinBox* mySpinBox1;
+    int zeige_normale_anAus;
+
     QSlider* sl_zylinder_hoehe;
     QSlider* sl_zylinder_radius;
     QSlider* sl_zylinder_refine;
 
+    QSlider* sl_rota_refine;
+    QSlider* sl_rota_hoehe;
+
     QSlider* sl_kegel_hoehe;
     QSlider* sl_kegel_radius;
     QSlider* sl_kegel_refine;
+
     QSlider * sl_changeRotaX;
     QSlider * sl_change_RotaY;
     QSlider * sl_change_RotaZ;
@@ -133,6 +139,7 @@ private:
     QSlider * sl_change_Red;
     QSlider * sl_change_Green;
     QSlider * sl_change_Blue;
+
     glm::vec3 color;
 
 
@@ -140,17 +147,13 @@ private:
 private slots:
     void changeRotaKoerper();
     void changeColor(void);
-
-//     void changeRefineKugel(int x);
-//    void changeRadiusKugel(int x);
-//    void changeHoeheKugel(int x);
+    void zeige_normale_taste_page2();
     void changeKegel();
     void changeZylinder();
     /* slots to catch events directly from renderer */
     void mouseEvent(QMouseEvent* event);
     void viewportChanged(int,int);
 void tabChange(int x);
-    void changeRefineKegel(int x);
 
 };
 

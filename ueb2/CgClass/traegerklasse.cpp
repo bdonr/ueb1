@@ -38,6 +38,16 @@ void TraegerKlasse::setDreiDVector(const glm::vec3 &value)
     dreiDVector = value;
 }
 
+int TraegerKlasse::getZeige_normale() const
+{
+    return zeige_normale;
+}
+
+void TraegerKlasse::setZeige_normale(int value)
+{
+    zeige_normale = value;
+}
+
 TraegerKlasse::TraegerKlasse()
 {
     intvec=glm::vec3(0,0,0);

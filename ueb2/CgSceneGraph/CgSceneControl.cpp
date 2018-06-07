@@ -361,12 +361,11 @@ void CgSceneControl::changeKegel(CgBaseEvent *e)
 {
     if (e->getType() & Cg::KegelChange){
 
-        TraegerKlasse* t = ((bestersliderMoveEvent*) e)->getTraegerKlasse();
-        glm::vec3 bladings = t->getDreiDVector();
+        traeger = ((bestersliderMoveEvent*) e)->getTraegerKlasse();
 
-        float hoehe = bladings.x;
-        float radius = bladings.y;
-        float refine = bladings.z;
+        float hoehe = traeger->getDreiDVector().x;
+        float radius = traeger->getDreiDVector().y;
+        float refine = traeger->getDreiDVector().z;
 
         std::cout<<"scene control" << hoehe<<" "<<radius<<" "<<refine<<std::endl;
         if(refine<=3){
@@ -607,6 +606,8 @@ void CgSceneControl::handleKeyEvents(CgBaseEvent *e)
         break;
     case Cg::Key_I:handleKeyI(e);
         break;
+    default:
+        break;
     }
 }
 
@@ -637,12 +638,13 @@ void CgSceneControl::changePage(CgBaseEvent *e)
 {
     if(e->getType()==Cg::TabChange){
         page =((bestersliderMoveEvent*)e)->getTraegerKlasse()->getTab();
-    }std::cout<<page<<std::endl;
-    if(page==0)page1();
-    if(page==1)page2();
-    if(page==2)page3();
-    if(page==3)page4();
-    if(page==4)page5();
+        std::cout<<"page "<<page<<std::endl;
+        if(page==0)page1();
+        if(page==1)page2();
+        if(page==2)page3();
+        if(page==3)page4();
+        if(page==4)page5();
+    }
 }
 
 void CgSceneControl::loadObject(CgBaseEvent *e)
@@ -689,7 +691,7 @@ void CgSceneControl::handleEvent(CgBaseEvent *e) {
     // siehe dazu die CgEvent eolynums im CgEnums.h
     // momentan werden nur KeyPressEvents gefangen.
 
-    if (e->getType() & Cg::CgKeyEvent) {
+    if (e->getType() == Cg::CgKeyEvent) {
         CgKeyEvent *ev = (CgKeyEvent *) e;
         std::cout <<"1: "<< *ev << std::endl;
         handleKeyEvents(ev);
