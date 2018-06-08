@@ -29,20 +29,20 @@
 #include <iostream>
 
 
-//Höhe slider definieren, funktionalität inkludieren
-//normalen von rota-körper und kegel und zylinder anzeigen "taste", FUNKTIONALITÄT
+//Höhe slider definieren, funktionalität inkludieren-------------------------------------CHECK
+//normalen von rota-körper und kegel und zylinder anzeigen "taste", FUNKTIONALITÄT-------CHECK
 //                    merke MyPolyline hat den lane riesenfeld algo !!!!
 //aufgabe 4.c
 //aufgbae 6.c ?
 //aufgabe 7.b taste X, koordinaten system PFEILE
-//aufgabe 7.c verscheibung des obejktes als GUI
+//aufgabe 7.c verscheibung des obejktes als GUI ----------------------------------------CHECK
 //aufgabe 8.b vergleich der rotamatritzen, BUTTON
 //aufgabe 10 refactorn
 //aufgabe 13 EVENTUEL
 //aufgabe 14 EVENTUEL
 
 
-
+//problem mit zylinder und kegel in zeile 410 laut debuger, noch mal nachsehen.
 
 
 
@@ -390,25 +390,24 @@ void CgQtGui::page3(QWidget* parent)
     subBox->addWidget(myGroupBox);
     tab4_control->addLayout(subBox);
     //----------------------------------------------------------------------------------------
-    QGroupBox* mySpinnerBox = new QGroupBox("figur drehen ");
-    QHBoxLayout* SBox = new QHBoxLayout;
-    mySpinnerBox->setLayout(SBox);
+//    QGroupBox* mySpinnerBox = new QGroupBox("figur drehen ");
+//    QVBoxLayout* SBox = new QVBoxLayout;
+//    mySpinnerBox->setLayout(SBox);
 
     QVBoxLayout *subSBox = new QVBoxLayout();
-    subSBox->addWidget(mySpinnerBox);
+//    subSBox->addWidget(mySpinnerBox);
     tab4_control->addLayout(subSBox);
 
 
     QLabel* lab2= new QLabel("drehung X achse");
-    subSBox->addWidget(lab2);
+    subBox->addWidget(lab2);
 
     QSpinBox* spin1 = new QSpinBox();
     tab4_control->addWidget(spin1);
+    spin1->setMinimumHeight(25);
     spin1->setMinimum(1);
     spin1->setMaximum(50);
     spin1->setValue(1);
-    // spin1->setSuffix("   suffix");
-    // mySpinBox1->setPrefix("Prefix:  ");
     connect( spin1, SIGNAL(valueChanged(int) ), this, SLOT(slotMySpinBox1Changed()) );
     subSBox->addWidget(spin1);
 
@@ -420,8 +419,6 @@ void CgQtGui::page3(QWidget* parent)
     spin2->setMinimum(1);
     spin2->setMaximum(50);
     spin2->setValue(1);
-    // spin1->setSuffix("   suffix");
-    // mySpinBox1->setPrefix("Prefix:  ");
     connect( spin2, SIGNAL(valueChanged(int) ), this, SLOT(slotMySpinBox1Changed()) );
     subSBox->addWidget(spin2);
 
@@ -433,11 +430,52 @@ void CgQtGui::page3(QWidget* parent)
     spin3->setMinimum(1);
     spin3->setMaximum(50);
     spin3->setValue(1);
-    // spin1->setSuffix("   suffix");
-    // mySpinBox1->setPrefix("Prefix:  ");
     connect( spin3, SIGNAL(valueChanged(int) ), this, SLOT(slotMySpinBox1Changed()) );
     subSBox->addWidget(spin3);
 
+//------------------------------------------------------------------------------------------
+//    QGroupBox* mySpinnerBox2 = new QGroupBox("figur bewegen ");
+//    QHBoxLayout* SBox2 = new QHBoxLayout;
+//    mySpinnerBox2->setLayout(SBox2);
+
+   // QVBoxLayout *subSBox2 = new QVBoxLayout();
+//    subSBox2->addWidget(mySpinnerBox2);
+   // tab4_control->addLayout(subSBox2);
+
+
+    QLabel* lab22= new QLabel("bewegung X achse");
+    subSBox->addWidget(lab22);
+
+    QSpinBox* spin12 = new QSpinBox();
+    tab4_control->addWidget(spin12);
+    spin12->setMinimum(1);
+    spin12->setMaximum(50);
+    spin12->setValue(1);
+    connect( spin12, SIGNAL(valueChanged(int) ), this, SLOT(slotMySpinBox1Changed()) );
+    subSBox->addWidget(spin12);
+
+    QLabel* lab32= new QLabel("bewegung Y achse");
+    subSBox->addWidget(lab32);
+
+    QSpinBox* spin22 = new QSpinBox();
+    tab4_control->addWidget(spin22);
+    spin22->setMinimum(1);
+    spin22->setMaximum(50);
+    spin22->setValue(1);
+    connect( spin22, SIGNAL(valueChanged(int) ), this, SLOT(slotMySpinBox1Changed()) );
+    subSBox->addWidget(spin22);
+
+    QLabel* lab42= new QLabel("bewegung Z achse");
+    subSBox->addWidget(lab42);
+
+    QSpinBox* spin32 = new QSpinBox();
+    tab4_control->addWidget(spin32);
+    spin32->setMinimum(1);
+    spin32->setMaximum(50);
+    spin32->setValue(1);
+    connect( spin32, SIGNAL(valueChanged(int) ), this, SLOT(slotMySpinBox1Changed()) );
+    subSBox->addWidget(spin32);
+//-----------------------------------------------------------------------------------------
     QLabel* lab1= new QLabel("zoom mit +/- \n drehen mit y/x/z");
     tab4_control->addWidget(lab1);
     parent->setLayout(tab4_control);
@@ -526,9 +564,9 @@ void CgQtGui::changeRotaKoerper()
 
 void CgQtGui::changeColor()
 {
-    std::cout<<"farbe "<<sl_change_Blue->value()<<std::endl;
+    std::cout<<"farbe "<<sl_change_Red->value()<<sl_change_Green->value()<<sl_change_Blue->value()<<std::endl;
     traeger->setDreiDVector(glm::vec3(sl_change_Red->value(),sl_change_Green->value(),sl_change_Blue->value()));
-    notifyObserver(new bestersliderMoveEvent(Cg::KegelChange,traeger));
+    notifyObserver(new bestersliderMoveEvent(Cg::CgChangeColor,traeger));
 }
 
 void CgQtGui::zeige_normale_taste_page2()

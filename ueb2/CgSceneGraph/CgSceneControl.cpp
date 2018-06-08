@@ -21,6 +21,7 @@
 // bla dingens
 void CgSceneControl::createScene()
 {
+
     kugel=MeshFactory::createKugel(1,20,20);
     SceneEntity * sc1 = new SceneEntity(kugel,Cg::Stern,glm::vec3(0,0,0));
     SceneEntity * sc2 = new SceneEntity(kugel,Cg::Erde,glm::vec3(7,0,0));
@@ -349,7 +350,7 @@ glm::mat4x4 CgSceneControl::translatetoVectot(glm::vec3 k)
 
 void CgSceneControl::changeColorCube(CgBaseEvent *e)
 {
-    if (e->getType() & Cg::CgChangeColor){
+    if (e->getType() == Cg::CgChangeColor){
         glm::vec3 colors=((bestersliderMoveEvent*) e)->getTraegerKlasse()->getDreiDVector();
         delete wuerfel;
         wuerfel=NULL;
@@ -359,7 +360,7 @@ void CgSceneControl::changeColorCube(CgBaseEvent *e)
 
 void CgSceneControl::changeKegel(CgBaseEvent *e)
 {
-    if (e->getType() & Cg::KegelChange){
+    if (e->getType() == Cg::KegelChange){
 
         traeger = ((bestersliderMoveEvent*) e)->getTraegerKlasse();
 
@@ -367,7 +368,7 @@ void CgSceneControl::changeKegel(CgBaseEvent *e)
         float radius = traeger->getDreiDVector().y;
         float refine = traeger->getDreiDVector().z;
 
-        std::cout<<"scene control" << hoehe<<" "<<radius<<" "<<refine<<std::endl;
+        std::cout<<"change kegel" << hoehe<<" "<<radius<<" "<<refine<<std::endl;
         if(refine<=3){
             this->reset();
         }
@@ -626,7 +627,7 @@ void CgSceneControl::changeRota(CgBaseEvent *e)
 
 void CgSceneControl::windowresize(CgBaseEvent *e)
 {
-    if (e->getType() & Cg::WindowResizeEvent) {
+    if (e->getType() == Cg::WindowResizeEvent) {
         CgWindowResizeEvent *ev = (CgWindowResizeEvent *) e;
         std::cout <<"2: "<< *ev << std::endl;
         m_proj_matrix = glm::perspective(45.0f, (float) (ev->w()) / ev->h(), 0.01f, 100.0f);
@@ -636,6 +637,7 @@ void CgSceneControl::windowresize(CgBaseEvent *e)
 
 void CgSceneControl::changePage(CgBaseEvent *e)
 {
+
     if(e->getType()==Cg::TabChange){
         page =((bestersliderMoveEvent*)e)->getTraegerKlasse()->getTab();
         std::cout<<"page "<<page<<std::endl;
@@ -681,7 +683,7 @@ void CgSceneControl::handleEvent(CgBaseEvent *e) {
 
     // die Enums sind so gebaut, dass man alle Arten von MausEvents über CgEvent::CgMouseEvent abprüfen kann,
     // siehe dazu die CgEvent enums im CgEnums.h
-    if (e->getType() & Cg::CgMouseEvent) {
+    if (e->getType() == Cg::CgMouseEvent) {
         std::cout<<"6: "<<((CgMouseEvent *) e)->getLocalPos().x<<std::endl;
         std::cout<<"7: "<<((CgMouseEvent *) e)->getLocalPos().y<<std::endl;
         // hier kommt jetzt die Abarbeitung des Events hin...
