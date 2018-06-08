@@ -434,6 +434,7 @@ moc_CgQtGLRenderWidget.cpp: ../ueb2/CgBase/CgBaseRenderer.h \
 
 moc_CgQtGui.cpp: ../ueb2/CgBase/CgObservable.h \
 		../ueb2/CgBase/CgEnums.h \
+		../ueb2/CgClass/traegerklasse.h \
 		../ueb2/CgQtViewer/CgQtGui.h
 	/usr/lib/x86_64-linux-gnu/qt5/bin/moc $(DEFINES) -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++-64 -I'/home/don/Schreibtisch/cg uebung/ueb1/ueb2' -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtOpenGL -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I. -I/usr/include/c++/5 -I/usr/include/x86_64-linux-gnu/c++/5 -I/usr/include/c++/5/backward -I/usr/lib/gcc/x86_64-linux-gnu/5/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include ../ueb2/CgQtViewer/CgQtGui.h -o moc_CgQtGui.cpp
 
@@ -460,6 +461,7 @@ main.o: ../ueb2/main.cpp ../ueb2/CgQtViewer/CgQtMainApplication.h \
 		../ueb2/CgQtViewer/CgQtGui.h \
 		../ueb2/CgBase/CgObservable.h \
 		../ueb2/CgBase/CgEnums.h \
+		../ueb2/CgClass/traegerklasse.h \
 		../ueb2/CgSceneGraph/CgSceneControl.h \
 		../ueb2/CgBase/CgObserver.h \
 		../ueb2/CgBase/CgBaseEvent.h \
@@ -496,6 +498,7 @@ CgQtGui.o: ../ueb2/CgQtViewer/CgQtGui.cpp ../ueb2/CgQtViewer/CgQtGLRenderWidget.
 		../ueb2/CgQtViewer/CgQtGui.h \
 		../ueb2/CgBase/CgObservable.h \
 		../ueb2/CgBase/CgEnums.h \
+		../ueb2/CgClass/traegerklasse.h \
 		../ueb2/CgQtViewer/CgQtMainApplication.h \
 		../ueb2/CgEvents/CgMouseEvent.h \
 		../ueb2/CgBase/CgBaseEvent.h \
@@ -518,8 +521,7 @@ CgQtGui.o: ../ueb2/CgQtViewer/CgQtGui.cpp ../ueb2/CgQtViewer/CgQtGLRenderWidget.
 		../ueb2/CgSceneGraph/sceneentity.h \
 		../ueb2/CgSceneGraph/appearance.h \
 		../ueb2/CgSceneGraph/kamera.h \
-		../ueb2/CgEvents/besterslidermoveevent.h \
-		../ueb2/CgClass/traegerklasse.h
+		../ueb2/CgEvents/besterslidermoveevent.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o CgQtGui.o ../ueb2/CgQtViewer/CgQtGui.cpp
 
 CgObservable.o: ../ueb2/CgBase/CgObservable.cpp ../ueb2/CgBase/CgObservable.h \
@@ -536,7 +538,8 @@ CgMouseEvent.o: ../ueb2/CgEvents/CgMouseEvent.cpp ../ueb2/CgEvents/CgMouseEvent.
 CgQtMainApplication.o: ../ueb2/CgQtViewer/CgQtMainApplication.cpp ../ueb2/CgQtViewer/CgQtMainApplication.h \
 		../ueb2/CgQtViewer/CgQtGui.h \
 		../ueb2/CgBase/CgObservable.h \
-		../ueb2/CgBase/CgEnums.h
+		../ueb2/CgBase/CgEnums.h \
+		../ueb2/CgClass/traegerklasse.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o CgQtMainApplication.o ../ueb2/CgQtViewer/CgQtMainApplication.cpp
 
 CgSceneControl.o: ../ueb2/CgSceneGraph/CgSceneControl.cpp ../ueb2/CgSceneGraph/meshfactory.h \

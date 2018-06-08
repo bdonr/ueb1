@@ -374,14 +374,15 @@ void CgSceneControl::changeKegel(CgBaseEvent *e)
         }
 
         if(refine>3){
-           if(zylinderOderKegel.size()==0){
-               zylinderOderKegel.push_back(MeshFactory::createKegel(refine,hoehe,radius));
-           }
-                for(int i = 0; i<=zylinderOderKegel.size()-1;i++){
-                    //resetRenderKegel(refine,hoehe,radius);
-                    m_renderer->init(zylinderOderKegel.at(i));
-                    m_renderer->render(zylinderOderKegel.at(i),m_current_transformation);
-                }
+
+            zylinderOderKegel.clear();
+            zylinderOderKegel.push_back(MeshFactory::createKegel(refine,hoehe,radius));
+
+            for(int i = 0; i<=zylinderOderKegel.size()-1;i++){
+                //resetRenderKegel(refine,hoehe,radius);
+                m_renderer->init(zylinderOderKegel.at(i));
+                m_renderer->render(zylinderOderKegel.at(i),old);
+            }
 
         }
     }
@@ -389,28 +390,27 @@ void CgSceneControl::changeKegel(CgBaseEvent *e)
 
 void CgSceneControl::changeZylinder(CgBaseEvent *e)
 {
-    if(e->getType() & Cg::ZylinderChange){
-        int refine= ((SliderMoveEvent*)e)->getRefine();
-        float radius= ((SliderMoveEvent*)e)->getRadius();
-        float hoehe= ((SliderMoveEvent*)e)->getHoehe();
+    if(e->getType() == Cg::ZylinderChange){
+        traeger = ((bestersliderMoveEvent*) e)->getTraegerKlasse();
+
+        float hoehe = traeger->getDreiDVector().x;
+        float radius = traeger->getDreiDVector().y;
+        float refine = traeger->getDreiDVector().z;
 
         if(refine<=3){
             this->reset();
         }
 
-        if(changed==1 && refine>3){
-            changed=0;
-            this->zylinderOderKegel.push_back(MeshFactory::createZylinder(refine,hoehe,radius));
+        zylinderOderKegel.clear();
+        zylinderOderKegel.push_back(MeshFactory::createZylinder(refine,hoehe,radius));
 
+        for(int i = 0; i<=zylinderOderKegel.size()-1;i++){
+            //resetRenderKegel(refine,hoehe,radius);
+            m_renderer->init(zylinderOderKegel.at(i));
+            m_renderer->render(zylinderOderKegel.at(i),old);
         }
-        if(changed==0 && refine>3){
 
-                for(int i = 0; i<=zylinderOderKegel.size()-1;i++){
-                    resetRenderZylinder(refine,hoehe,radius);
-                    m_renderer->init(zylinderOderKegel.at(i));
-                }
 
-        }
     }
 }
 
@@ -708,6 +708,7 @@ void CgSceneControl::handleEvent(CgBaseEvent *e) {
     changeZylinder(e);
     changeRefineRota(e);
     changeRota(e);
+    handleKeyEvents(e);
     loadObject(e);
 
 
