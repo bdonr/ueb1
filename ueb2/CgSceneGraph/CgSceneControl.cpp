@@ -74,6 +74,7 @@ CgSceneControl::CgSceneControl() {
     ObjLoader loader;
     s=0.5;
     y=0.0;
+    kugel=NULL;
     koordinatensystem=new Koordinatensystem();
     //rotationkörper
     rotationbody = MeshFactory::createRotationKoerper(1);
@@ -242,13 +243,29 @@ void CgSceneControl::renderObjects() {
     m_renderer->redraw();
 }
 void CgSceneControl::reset(){
-    delete dreiecke;
-    dreiecke=NULL;
-    delete rotationbody;
-    rotationbody=NULL;
+    if(dreiecke!=NULL){delete dreiecke;
+        dreiecke=NULL;}
+    if(rotationbody!=NULL){
+        delete rotationbody;
+        rotationbody=NULL;
+    }
     zylinderOderKegel.clear();
     //objecte.clear();
     changed=1;
+    shownormals=false;
+    if(sc!=NULL){
+        delete sc;
+        sc=NULL;
+    }
+    if(wuerfel!=NULL){
+        delete wuerfel;
+        wuerfel=NULL;
+    }
+    if(kugel!=NULL){
+        delete kugel;
+        kugel=NULL;
+    }
+
 }
 int CgSceneControl::getChanged(){
     return changed;
@@ -350,7 +367,9 @@ glm::mat4x4 CgSceneControl::translatetoVectot(glm::vec3 k)
 
 void CgSceneControl::changeColorCube(CgBaseEvent *e)
 {
+
     if (e->getType() == Cg::CgChangeColor){
+        reset();
         glm::vec3 colors=((bestersliderMoveEvent*) e)->getTraegerKlasse()->getDreiDVector();
         delete wuerfel;
         wuerfel=NULL;
@@ -361,7 +380,7 @@ void CgSceneControl::changeColorCube(CgBaseEvent *e)
 void CgSceneControl::changeKegel(CgBaseEvent *e)
 {
     if (e->getType() == Cg::KegelChange){
-
+        reset();
         traeger = ((bestersliderMoveEvent*) e)->getTraegerKlasse();
 
         float hoehe = traeger->getDreiDVector().x;
@@ -369,41 +388,28 @@ void CgSceneControl::changeKegel(CgBaseEvent *e)
         float refine = traeger->getDreiDVector().z;
 
         std::cout<<"change kegel" << hoehe<<" "<<radius<<" "<<refine<<std::endl;
-        if(refine<=3){
-            this->reset();
+        zylinderOderKegel.push_back(MeshFactory::createKegel(refine,hoehe,radius));
+
+        for(int i = 0; i<=zylinderOderKegel.size()-1;i++){
+            //resetRenderKegel(refine,hoehe,radius);
+            m_renderer->init(zylinderOderKegel.at(i));
+            m_renderer->render(zylinderOderKegel.at(i),old);
         }
 
-        if(refine>3){
 
-            zylinderOderKegel.clear();
-            zylinderOderKegel.push_back(MeshFactory::createKegel(refine,hoehe,radius));
-
-            for(int i = 0; i<=zylinderOderKegel.size()-1;i++){
-                //resetRenderKegel(refine,hoehe,radius);
-                m_renderer->init(zylinderOderKegel.at(i));
-                m_renderer->render(zylinderOderKegel.at(i),old);
-            }
-
-        }
     }
 }
 
 void CgSceneControl::changeZylinder(CgBaseEvent *e)
 {
     if(e->getType() == Cg::ZylinderChange){
+        reset();
         traeger = ((bestersliderMoveEvent*) e)->getTraegerKlasse();
 
         float hoehe = traeger->getDreiDVector().x;
         float radius = traeger->getDreiDVector().y;
         float refine = traeger->getDreiDVector().z;
-
-        if(refine<=3){
-            this->reset();
-        }
-
-        zylinderOderKegel.clear();
         zylinderOderKegel.push_back(MeshFactory::createZylinder(refine,hoehe,radius));
-
         for(int i = 0; i<=zylinderOderKegel.size()-1;i++){
             //resetRenderKegel(refine,hoehe,radius);
             m_renderer->init(zylinderOderKegel.at(i));
@@ -718,11 +724,11 @@ void CgSceneControl::handleEvent(CgBaseEvent *e) {
 }
 void CgSceneControl::page1(){
     //würfel
-    resetAll();
+    reset();
 
 }
 void CgSceneControl::page2(){
-    resetAll();
+    reset();
 }
 void CgSceneControl::page3(){
     //figuren

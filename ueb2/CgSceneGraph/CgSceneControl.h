@@ -218,7 +218,7 @@ private:
     float countD;
     float countQ;
     float countE;
-
+    bool shownormals;
 
     Kamera* cam;
     glm::mat4 old;
