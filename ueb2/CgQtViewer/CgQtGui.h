@@ -131,7 +131,7 @@ private:
     QSlider* sl_kegel_radius;
     QSlider* sl_kegel_refine;
 
-    QSlider * sl_changeRotaX;
+    QSlider * sl_change_RotaX;
     QSlider * sl_change_RotaY;
     QSlider * sl_change_RotaZ;
 
@@ -163,6 +163,9 @@ private slots:
     void mouseEvent(QMouseEvent* event);
     void viewportChanged(int,int);
     void tabChange(int x);
+
+    void selectX();
+    void selectSlider(QSlider &sl);
 
 };
 

@@ -497,47 +497,35 @@ void CgQtGui::page4(QWidget* parent)
     QRadioButton* radiobutton11 = new QRadioButton( "&X");
     connect(radiobutton11, SIGNAL(pressed()), this, SLOT(selectX()));
     QRadioButton* radiobutton12 = new QRadioButton( "&Y");
-    connect(radiobutton12, SIGNAL(pressed()), this, SLOT(selectY()));
+    connect(radiobutton12, SIGNAL(pressed()), this, SLOT(selectSlider(sl_change_RotaY)));
     QRadioButton* radiobutton13 = new QRadioButton( "&Z");
-    connect(radiobutton13, SIGNAL(pressed()), this, SLOT(selectZ()));
+    connect(radiobutton13, SIGNAL(pressed()), this, SLOT(selectSlider(sl_change_RotaZ)));
 
-    sl_changeRotaX = new QSlider(Qt::Horizontal);
-    sl_changeRotaX->setMaximum(10);
-    sl_changeRotaX->setValue(0);
-    sl_changeRotaX->setTickInterval(1);
-    //sl_changeRotaX->setVisible(x);
-
-
+    sl_change_RotaX = new QSlider(Qt::Horizontal);
+    sl_change_RotaX->setMaximum(10);
+    sl_change_RotaX->setValue(0);
+    sl_change_RotaX->setTickInterval(1);
+    sl_change_RotaX->setVisible(false);
 
     sl_change_RotaY = new QSlider(Qt::Horizontal);
     sl_change_RotaY->setMaximum(10);
     sl_change_RotaY->setValue(0);
     sl_change_RotaY->setTickInterval(1);
-    //sl_change_RotaY->setVisible(y);
+    sl_change_RotaY->setVisible(false);
 
     sl_change_RotaZ = new QSlider(Qt::Horizontal);
     sl_change_RotaZ->setMaximum(10);
     sl_change_RotaZ->setValue(0);
     sl_change_RotaZ->setTickInterval(1);
-    //sl_change_RotaZ->setVisible(z);
-
-
-
-    connect(radiobutton11, SIGNAL(pressed()), this, SLOT(changeVisibleX()));
-    connect(radiobutton12, SIGNAL(pressed()), this, SLOT(changeVisibleY()));
-    connect(radiobutton13, SIGNAL(pressed()), this, SLOT(changeVisibleZ()));
+    sl_change_RotaZ->setVisible(false);
 
     myButtonGroup->addButton(radiobutton11,0);
     myButtonGroup->addButton(radiobutton12,1);
     myButtonGroup->addButton(radiobutton13,2);
 
-    connect(sl_changeRotaX,SIGNAL(sliderMoved(int)),this,SLOT(changeX(int)));
-    connect(sl_change_RotaY,SIGNAL(sliderMoved(int)),this,SLOT(changeY(int)));
-    connect(sl_change_RotaZ,SIGNAL(sliderMoved(int)),this,SLOT(changeZ(int)));
-
     QVBoxLayout *vbox = new QVBoxLayout;
     vbox->addWidget(radiobutton11);
-    vbox->addWidget(sl_changeRotaX);
+    vbox->addWidget(sl_change_RotaX);
     vbox->addWidget(radiobutton12);
     vbox->addWidget(sl_change_RotaY);
     vbox->addWidget(radiobutton13);
@@ -546,13 +534,8 @@ void CgQtGui::page4(QWidget* parent)
     vbox->addStretch(1);
 
     myGroupBox->setLayout(vbox);
-    // subBox->addWidget(rotationsSlider);
     subBox->addWidget(myGroupBox);
-//    subBox2->addWidget(kkk);
-//    subBox2->addWidget(kkk1);
-//    subBox2->addWidget(kkk2);
     tab5_control->addLayout(subBox);
-//    tab5_control->addLayout(subBox2);
     parent->setLayout(tab5_control);
 }
 
@@ -666,6 +649,24 @@ void CgQtGui::tabChange(int x)
     tr->setTab(x);
     bestersliderMoveEvent* bsl = new bestersliderMoveEvent(Cg::TabChange,tr);
     notifyObserver(bsl);
+}
+
+void CgQtGui::selectX()
+{
+    if(!sl_change_RotaX->isVisible()){
+        sl_change_RotaX->setVisible(true);
+    }else{
+        sl_change_RotaX->setVisible(false);
+    }
+}
+
+void CgQtGui::selectSlider(QSlider &sl)
+{
+    if(!sl.isVisible()){
+        sl.setVisible(true);
+    }else{
+        sl.setVisible(false);
+    }
 }
 
 
