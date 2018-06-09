@@ -68,6 +68,7 @@ void Zylinder::setNormalsberechnen(bool value)
     triangleIndices.clear();
     vertexNormals.clear();
     faceColors.clear();
+    geraden.clear();
     create();
 }
 

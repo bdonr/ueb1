@@ -38,15 +38,12 @@ void MyPolyline::setColor(const glm::vec3 x){
     this->color=x;
 }
 
-void MyPolyline::fuelleAuf(){
+void MyPolyline::LaneAlgo(){
     int mitte = this->vertices.size() / 2;
     int ende = this->vertices.size();
-    std::cout<<"mitte"<<mitte<<"ende"<<ende<<std::endl;
     this->vertices.resize(ende+ende);
-    std::cout<<this->vertices.size()<<std::endl;
     int neuende = this->vertices.size()-1;
     for(int i=ende-1;i>=0;i--){
-        std::cout<<"i"<<i<<"neuende"<<neuende<<std::endl;
         this->vertices.at(neuende) = this->vertices.at(i);
         this->vertices.at(neuende-1)=this->vertices.at(i);
         neuende=neuende-2;

@@ -9,9 +9,9 @@ RotationsKoerper::RotationsKoerper(MyPolyline* poly, int refine):poly(poly), ref
 
 }
 
-RotationsKoerper::RotationsKoerper(int id, int refine):refine(refine), id(id)
+RotationsKoerper::RotationsKoerper(int id, int refine,int hoehe):refine(refine), id(id),hoehe(hoehe)
 {
-    erstelleKugel();
+    drehe();
 }
 
 std::vector <MyPolyline*> RotationsKoerper::getPolyVec(){
@@ -37,9 +37,9 @@ void RotationsKoerper::erstelleKugel(){
     for(float i=0.0; i<=180.;i=i+20.){
         std::cout<<i<<std::endl;
         // std::cout<<"hallo"<<vectneu.size()<<std::endl;
-            vect.push_back(glm::vec3(glm::sin(glm::radians(i)),glm::cos(glm::radians(i)),0));
+        vect.push_back(glm::vec3(glm::sin(glm::radians(i)),glm::cos(glm::radians(i)),0));
         //    std::cout<<glm::cos(i)<<","<<glm::sin(i)<<"i"<<i<<std::endl;
-            //vectneu.at(i)->fuelleAuf();
+        //vectneu.at(i)->fuelleAuf();
     }
 
     for( float y = 0.0;y<360.0+360.0/refine;y=y+(360.0/refine))
@@ -52,7 +52,7 @@ void RotationsKoerper::erstelleKugel(){
         // std::cout<<"hallo"<<vectneu.size()<<std::endl;
         for(int i=0;i<vect.size();i++){
             vectneu.push_back(vectorMalMatrix(vect.at(i),matrix));
-            
+
             //vectneu.at(i)->fuelleAuf();
 
         }
@@ -135,6 +135,36 @@ glm::vec3 RotationsKoerper::normalen(glm::vec3 a,glm::vec3 b, glm::vec3 c,glm::v
     k.y=k.y+mittelpunkt.y;
     k.z=k.z+mittelpunkt.z;
     return k;
+}
+
+void RotationsKoerper::drehe(){
+    int count = 0;
+    std::vector<glm::vec3> vect;
+    vect.push_back(glm::vec3(0,.0,0));
+    vect.push_back(glm::vec3(.65,.25,0));
+    vect.push_back(glm::vec3(1,.0,0));
+
+    vect.push_back(glm::vec3(.3,.0,0));
+
+    for( float y = 0.0;y<360.0+360.0/refine;y=y+(360.0/refine))
+    {
+        std::vector<glm::vec3> matrix;
+        matrix.push_back(glm::vec3(1,0,0));
+        matrix.push_back(glm::vec3(0,glm::cos(glm::radians(y)),(-1)*glm::sin(glm::radians(y))));
+        matrix.push_back(glm::vec3(0,glm::sin(glm::radians(y)),glm::cos(glm::radians(y))));
+        std::vector<glm::vec3> vectneu;
+        for(int i=0;i<vect.size();i++){
+            vectneu.push_back(vectorMalMatrix(vect.at(i),matrix));
+        }
+        polyVec.push_back(MeshFactory::createMyPolyline(glm::vec3(255,0,0),vectneu));
+        count++;
+    }
+
+
+
+
+    zieheLinieZwischenZweiNachBarSegmenten();
+
 }
 
 

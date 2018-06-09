@@ -619,7 +619,12 @@ kegel.o: ../ueb2/CgClass/kegel.cpp ../ueb2/CgClass/kegel.h \
 		../ueb2/CgBase/CgBaseRenderableObject.h \
 		../ueb2/CgBase/CgEnums.h \
 		../ueb2/CgBase/CgBasePolyline.h \
-		../ueb2/CgClass/Mypolyline.h
+		../ueb2/CgClass/Mypolyline.h \
+		../ueb2/CgClass/meshfactory.h \
+		../ueb2/CgClass/rotationskoerper.h \
+		../ueb2/CgClass/dreiecke.h \
+		../ueb2/CgClass/kugel.h \
+		../ueb2/CgClass/wuerfel.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o kegel.o ../ueb2/CgClass/kegel.cpp
 
 Mypolyline.o: ../ueb2/CgClass/Mypolyline.cpp ../ueb2/CgClass/Mypolyline.h \

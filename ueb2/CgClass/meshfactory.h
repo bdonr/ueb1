@@ -24,7 +24,7 @@ public:
     static Kegel* createKegel(int refine,float hoehe,float radius,bool berechnenormale);
     static MyPolyline* createMyPolyline(glm::vec3 color,std::vector<glm::vec3> x);
 
-    static RotationsKoerper* createRotationKoerper(int refine);
+    static RotationsKoerper* createRotationKoerper(int refine,int hoehe);
     static Dreiecke * createDreiecke(std::vector<glm::vec3>x,std::vector<unsigned int>k);
     static Kugel *createKugel(float radius, float hoehe, int refine);
 };

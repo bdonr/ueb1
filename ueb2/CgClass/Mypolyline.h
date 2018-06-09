@@ -19,7 +19,7 @@ public:
     glm::vec3 getColor() const;
     unsigned int getLineWidth() const;
     void rechne();
-    void fuelleAuf();
+    void LaneAlgo();
 
     void rechneVierPunkteSchema();
 

@@ -80,7 +80,7 @@ CgSceneControl::CgSceneControl() {
     kegel=NULL;
     koordinatensystem=new Koordinatensystem();
     //rotationkörper
-    rotationbody = MeshFactory::createRotationKoerper(1);
+    rotationbody = NULL;
     //kegel, zlinder
     //figuren
     dreiecke=NULL;
@@ -101,7 +101,7 @@ CgSceneControl::~CgSceneControl() {
 
 void CgSceneControl::initRotationBody()
 {
-    if(!rotationbody){
+    if(rotationbody!=NULL){
         if(!rotationbody->getPolyVec().size()>0){
             for(int i = 0; i<rotationbody->getPolyVec().size()-1;i++){
                 m_renderer->init(rotationbody->getPolyVec().at(i));
@@ -438,37 +438,14 @@ void CgSceneControl::changeZylinder(CgBaseEvent *e)
 
 void CgSceneControl::changeRefineRota(CgBaseEvent *e)
 {
-    if(e->getType() == Cg::RefineRota){
+    if(e->getType() == Cg::CgChangeRota){
 
-        int refine= ((SliderMoveEvent*)e)->getRefine();
-        if(refine<=3){
-            delete this->rotationbody;
-            rotationbody =NULL;
-
-            changed=0;
-        }
-        else{
-            delete rotationbody;
-            rotationbody=NULL;
-            this->rotationbody = MeshFactory::createRotationKoerper(refine);
-            if(rotationbody->getKeisVec().size()>0){
-                for(int i = 0; i<rotationbody->getKeisVec().size();i++){
-                    m_renderer->init(rotationbody->getKeisVec().at(i));
-
-                }
-            }
-            if(rotationbody->getNormale().size()>0){
-                for(int i = 0; i<rotationbody->getNormale().size();i++){
-                    m_renderer->init(rotationbody->getNormale().at(i));
-                }
-            }
-            if(rotationbody->getPolyVec().size()>0){
-                for(int i = 0; i<rotationbody->getPolyVec().size();i++){
-                    m_renderer->init(rotationbody->getPolyVec().at(i));
-                }
-            }
-
-        }
+        int refine= ((bestersliderMoveEvent*)e)->getTraegerKlasse()->getDreiDVector().x;
+        int hoehe= ((bestersliderMoveEvent*)e)->getTraegerKlasse()->getDreiDVector().y;
+        std::cout<<hoehe<<" "<<refine<<std::endl;
+        rotationbody= MeshFactory::createRotationKoerper(refine,hoehe);
+        initRotationBody();
+        renderRotationsBody();
 
     }
 }
