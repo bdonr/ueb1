@@ -56,6 +56,21 @@ void Zylinder::setGeraden(const std::vector<MyPolyline *> &value)
     geraden = value;
 }
 
+bool Zylinder::getNormalsberechnen() const
+{
+    return normalsberechnen;
+}
+
+void Zylinder::setNormalsberechnen(bool value)
+{
+    normalsberechnen = value;
+    vertices.clear();
+    triangleIndices.clear();
+    vertexNormals.clear();
+    faceColors.clear();
+    create();
+}
+
 int Zylinder::create(){
     /*0*/   vertices.push_back(glm::vec3(0,0,0));
     /*1*/    vertices.push_back(glm::vec3(0,0,hoehe));

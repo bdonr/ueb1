@@ -24,12 +24,12 @@ private:
     std::vector<glm::vec3> faceColors;
     std::vector<MyPolyline*> geraden;
     std::vector<glm::vec3> schwerpunkte;
-    bool shownormals;
+    bool normalsberechnen;
     void erstelleRechtEck(glm::vec3 p1, glm::vec3 p2, glm::vec3 p3, int count);
 public:
     int create();
     Kegel();
-    Kegel(int id,float radius, float hoehe,int refine,bool shownormals);
+    Kegel(int id,float radius, float hoehe,int refine,bool normalsberechnen);
     void setType(enum Cg::ObjectType x);
 
     // CgBaseRenderableObject interface
@@ -58,6 +58,8 @@ public:
     void berechneSchwerPunkte();
     void berechneNormale();
     glm::vec3 normalen(glm::vec3 a, glm::vec3 b, glm::vec3 c, glm::vec3 mittelpunkt);
+    bool getNormalsberechnen() const;
+    void setNormalsberechnen(bool value);
 };
 
 #endif // KEGEL_H

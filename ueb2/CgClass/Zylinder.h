@@ -51,6 +51,8 @@ public:
     void berechneSchwerPunkte();
     void berechneNormale();
     glm::vec3 normalen(glm::vec3 a, glm::vec3 b, glm::vec3 c, glm::vec3 mittelpunkt);
+    bool getNormalsberechnen() const;
+    void setNormalsberechnen(bool value);
 };
 
 #endif // Zylinder_H

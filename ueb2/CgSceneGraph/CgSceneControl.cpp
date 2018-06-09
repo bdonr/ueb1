@@ -711,8 +711,16 @@ void CgSceneControl::handleEvent(CgBaseEvent *e) {
         // hier kommt jetzt die Abarbeitung des Events hin...
     }
     if(e->getType()== Cg::CgZeigeNormalePage2){
-        //reset();
-        this->shownormals=!shownormals;
+        shownormals=!shownormals;
+        if(kegel!=NULL){
+            kegel->setNormalsberechnen(shownormals);
+            initKegel();
+        }
+        if(zylinder!=NULL){
+            zylinder->setNormalsberechnen(shownormals);
+            initZylinder();
+
+        }
         std::cout<<shownormals<<"sadasd"<<std::endl;
     }
 

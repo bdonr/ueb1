@@ -2,7 +2,7 @@
 #include <iostream>
 
 Kegel::Kegel(int id,float radius,float hoehe, int refine,bool shownormals):id(id),radius(radius),hoehe(hoehe),refine(refine),
-    shownormals(shownormals),type(Cg::TriangleMesh)
+    normalsberechnen(normalsberechnen),type(Cg::TriangleMesh)
 {
 create();
 }
@@ -73,6 +73,21 @@ void Kegel::setSchwerpunkte(const std::vector<glm::vec3> &value)
     schwerpunkte = value;
 }
 
+bool Kegel::getNormalsberechnen() const
+{
+    return normalsberechnen;
+}
+
+void Kegel::setNormalsberechnen(bool value)
+{
+    normalsberechnen = value;
+    vertices.clear();
+    triangleIndices.clear();
+    vertexNormals.clear();
+    faceColors.clear();
+     create();
+}
+
 int Kegel::create(){
     /*0*/   vertices.push_back(glm::vec3(0,0,0));
     /*1*/    vertices.push_back(glm::vec3(0,0,hoehe));
@@ -99,7 +114,7 @@ int Kegel::create(){
         triangleIndices.push_back(1);
 
     }
-    if(shownormals){
+    if(normalsberechnen){
         berechneSchwerPunkte();
         berechneNormale();
         for(int i =0;i<faceNormals.size();i++){
