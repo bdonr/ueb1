@@ -1,18 +1,14 @@
 #include "koordinatensystem.h"
 #include "meshfactory.h"
-Koordinatensystem::Koordinatensystem()
+Koordinatensystem::Koordinatensystem(CgBaseRenderer *render,glm::mat4x4 x)
 {
-    pfeile.push_back(new Pfeil());
-    pfeile.push_back(new Pfeil());
-    pfeile.push_back(new Pfeil());
+    this->render=render;
+    this->translation=x;
+    pfeile.push_back(new Pfeil(render));
+    pfeile.push_back(new Pfeil(render));
+    pfeile.push_back(new Pfeil(render));
 }
 
-void Koordinatensystem::render(CgBaseRenderer *render)
-{
-        pfeile.at(0)->render(render,rotationX());
-        pfeile.at(1)->render(render,rotationY());
-        pfeile.at(2)->render(render,rotationZ());
-}
 
 std::vector<Pfeil *> Koordinatensystem::getPfeile() const
 {
@@ -24,28 +20,47 @@ void Koordinatensystem::setPfeile(const std::vector<Pfeil *> &value)
     pfeile = value;
 }
 
+glm::mat4x4 Koordinatensystem::getTranslation() const
+{
+    return translation;
+}
+
+void Koordinatensystem::setTranslation(const glm::mat4x4 &value)
+{
+    translation = value;
+}
+
 glm::mat4x4 Koordinatensystem::rotationX()
 {
 
 
     return glm::mat4x4(glm::vec4(1,0,0,0),
-                       glm::vec4(0,glm::cos(glm::radians(90)),glm::sin(glm::radians(90)),0),
-                       glm::vec4(0,(-1)*glm::sin(glm::radians(90)),glm::cos(glm::radians(90)),0),
+                       glm::vec4(0,glm::cos(glm::radians(180)),glm::sin(glm::radians(180)),0),
+                       glm::vec4(0,(-1)*glm::sin(glm::radians(180)),glm::cos(glm::radians(180)),0),
                        glm::vec4(0,0,0,1));
 }
 
 glm::mat4x4 Koordinatensystem::rotationY()
 {
-    return glm::mat4x4(glm::vec4(glm::cos(glm::radians(90)),0,(-1)*glm::sin(glm::radians(90)),0),
+    return glm::mat4x4(glm::vec4(glm::cos(glm::radians(180)),0,(-1)*glm::sin(glm::radians(180)),0),
                        glm::vec4(0,1,0,0),
-                       glm::vec4(glm::sin(glm::radians(90)),0,glm::cos(glm::radians(90)),0),
+                       glm::vec4(glm::sin(glm::radians(180)),0,glm::cos(glm::radians(180)),0),
                        glm::vec4(0,0,0,1));
 }
 
 glm::mat4x4 Koordinatensystem::rotationZ()
 {
-    return glm::mat4x4(glm::vec4(glm::cos(glm::radians(90)),glm::sin(glm::radians(90)),0,0),
-                       glm::vec4((-1)*glm::sin(glm::radians(90)),glm::cos(glm::radians(90)),0,0),
+    return glm::mat4x4(glm::vec4(glm::cos(glm::radians(180)),glm::sin(glm::radians(180)),0,0),
+                       glm::vec4((-1)*glm::sin(glm::radians(180)),glm::cos(glm::radians(180)),0,0),
                        glm::vec4(0,0,1,0),
                        glm::vec4(0,0,0,1));
+}
+
+
+void Koordinatensystem::renderO()
+{
+
+    pfeile.at(0)->renderO(getTranslation()*rotationX());
+    pfeile.at(1)->renderO(getTranslation()*rotationY());
+    pfeile.at(2)->renderO(getTranslation()*rotationZ());
 }

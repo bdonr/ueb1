@@ -10,14 +10,16 @@ class Pfeil
 private: Kegel* kegel;
     Zylinder* zylinder;
     glm::mat4x4 transform(int i);
+    CgBaseRenderer *render;
 public:
-    Pfeil();
+    Pfeil(CgBaseRenderer *render);
     Kegel *getKegel() const;
     void setKegel(Kegel *value);
     Zylinder *getZylinder() const;
     void setZylinder(Zylinder *value);
-    void render(CgBaseRenderer *render,glm::mat4x4);
+
     glm::mat4 transformation;
+    void renderO(glm::mat4x4 p);
 };
 
 #endif // PFEIL_H

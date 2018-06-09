@@ -78,7 +78,7 @@ CgSceneControl::CgSceneControl() {
     kugel=NULL;
     zylinder=NULL;
     kegel=NULL;
-    koordinatensystem=new Koordinatensystem();
+
     //rotationkörper
     rotationbody = NULL;
     //kegel, zlinder
@@ -182,7 +182,8 @@ void CgSceneControl::renderWurfel()
 
 void CgSceneControl::renderCoords()
 {
-    koordinatensystem->render(m_renderer);
+    koordinatensystem=new Koordinatensystem(m_renderer,old);
+    koordinatensystem->renderO();
 }
 
 

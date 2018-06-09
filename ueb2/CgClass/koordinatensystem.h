@@ -10,15 +10,18 @@ class Koordinatensystem
 
 private:
     std::vector<Pfeil*> pfeile;
-
+    CgBaseRenderer *render;
+    glm::mat4x4 translation;
     glm::mat4x4 rotationX();
     glm::mat4x4 rotationY();
     glm::mat4x4 rotationZ();
 public:
-    Koordinatensystem();
-    void render(CgBaseRenderer *render);
+    Koordinatensystem(CgBaseRenderer *render, glm::mat4x4 x);
+    void renderO();
     std::vector<Pfeil *> getPfeile() const;
     void setPfeile(const std::vector<Pfeil *> &value);
+    glm::mat4x4 getTranslation() const;
+    void setTranslation(const glm::mat4x4 &value);
 };
 
 #endif // KOORDINATENSYSTEM_H
