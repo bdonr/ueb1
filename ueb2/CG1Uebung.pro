@@ -32,7 +32,8 @@ SOURCES += main.cpp \
     CgClass/appearance.cpp \
     CgClass/kamera.cpp \
     CgClass/wuerfel.cpp \
-    CgClass/dreiecke.cpp
+    CgClass/dreiecke.cpp \
+    CgClass/pfeil.cpp
 
 
 HEADERS += \
@@ -74,4 +75,5 @@ CgUtils/ObjLoader.h \
     CgClass/sceneentity.h \
     CgClass/appearance.h \
     CgClass/kamera.h \
-    CgClass/wuerfel.h
+    CgClass/wuerfel.h \
+    CgClass/pfeil.h

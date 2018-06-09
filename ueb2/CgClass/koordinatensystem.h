@@ -3,15 +3,16 @@
 
 #include <vector>
 #include "Mypolyline.h"
+#include "pfeil.h"
 class Koordinatensystem
 {
 
 private:
-    std::vector<MyPolyline*> polylines;
+    std::vector<Pfeil*> polylines;
 
 public:
     Koordinatensystem();
-    std::vector<MyPolyline*> getPolylines();
+    std::vector<Pfeil*> getPolylines();
 };
 
 #endif // KOORDINATENSYSTEM_H
