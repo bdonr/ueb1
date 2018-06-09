@@ -92,6 +92,7 @@ CgSceneControl::CgSceneControl() {
     createStandartMatrix();
     verschiebung=glm::vec3(0,0,0);
 
+
 }
 
 CgSceneControl::~CgSceneControl() {
@@ -125,10 +126,7 @@ void CgSceneControl::initRotationBody()
 void CgSceneControl::setRenderer(CgBaseRenderer *r) {
     m_renderer = r;
     m_renderer->setSceneControl(this);
-    for(int i = 0; i<koordinatensystem->getPolylines().size();i++){
-        m_renderer->init(koordinatensystem->getPolylines().at(i)->getKegel());
-        m_renderer->init(koordinatensystem->getPolylines().at(i)->getZylinder());
-    }
+
     //sc->render(m_renderer,sc->getSc());
     // registerSceneGraph(m_renderer,sc->getSc());
 
@@ -184,10 +182,7 @@ void CgSceneControl::renderWurfel()
 
 void CgSceneControl::renderCoords()
 {
-    for(int i = 0; i<koordinatensystem->getPolylines().size();i++){
-        m_renderer->render(koordinatensystem->getPolylines().at(i)->getKegel(),m_current_transformation);
-        m_renderer->render(koordinatensystem->getPolylines().at(i)->getZylinder(),m_current_transformation);
-    }
+    koordinatensystem->render(m_renderer);
 }
 
 
