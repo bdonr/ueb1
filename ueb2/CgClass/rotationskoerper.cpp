@@ -98,6 +98,7 @@ void RotationsKoerper::zieheLinieZwischenZweiNachBarSegmenten(){
             this->kreisVec.push_back(MeshFactory::createMyPolyline(glm::vec3(255,0,255),y));
             std::vector<glm::vec3> k;
             glm::vec3 mittelpunkt=mittelPunkt(a,b,c);
+
             k.push_back(mittelpunkt);
             k.push_back(normalen(a,b,c,mittelpunkt));
 

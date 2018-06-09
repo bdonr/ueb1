@@ -1,3 +1,0 @@
-/home/don/Schreibtisch/cg uebung/ueb1/ueb2/cmake-build-debug/CMakeFiles/rebuild_cache.dir
-/home/don/Schreibtisch/cg uebung/ueb1/ueb2/cmake-build-debug/CMakeFiles/edit_cache.dir
-/home/don/Schreibtisch/cg uebung/ueb1/ueb2/cmake-build-debug/CMakeFiles/ueb2.dir
