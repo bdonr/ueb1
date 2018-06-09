@@ -182,7 +182,7 @@ void CgSceneControl::renderWurfel()
 
 void CgSceneControl::renderCoords()
 {
-    koordinatensystem=new Koordinatensystem(m_renderer,old);
+    koordinatensystem=new Koordinatensystem(m_renderer,m_current_transformation);
     koordinatensystem->renderO();
 }
 
@@ -449,7 +449,7 @@ void CgSceneControl::changeRefineRota(CgBaseEvent *e)
 
 void CgSceneControl::handleKeyY(CgBaseEvent *e)
 {
-    m_current_transformation=m_current_transformation*rotationY(y);
+    old=old*rotationY(y);
     if(y==3){
         y=0;
     }
@@ -463,7 +463,7 @@ void CgSceneControl::handleKeyY(CgBaseEvent *e)
 void CgSceneControl::handleKeyX(CgBaseEvent *e)
 {
 
-    m_current_transformation=m_current_transformation*rotationX(x);
+    old=old*rotationX(x);
     if(x==3){
         x=0;
     }
@@ -476,7 +476,7 @@ void CgSceneControl::handleKeyX(CgBaseEvent *e)
 
 void CgSceneControl::handleKeyZ(CgBaseEvent *e)
 {
-    m_current_transformation=m_current_transformation*rotationZ(z);
+    old=old*rotationZ(z);
     if(z==3){
         z=0;
     }
@@ -485,16 +485,7 @@ void CgSceneControl::handleKeyZ(CgBaseEvent *e)
     //0 1 0 0
     //0 0 1 0
     //0 0 0 1
-    else{  old=glm::mat4x4(         glm::vec4(1,0,0,0),
-                                    glm::vec4(0,1,0,0),
-                                    glm::vec4(0,0,1,0),
-                                    glm::vec4(z,0,0,1))*glm::mat4x4(         glm::vec4(s,0,0,0),
-                                                                             glm::vec4(0,s,0,0),
-                                                                             glm::vec4(0,0,s,0),
-                                                                             glm::vec4(0,0,0,1))*glm::mat4x4(         glm::vec4(1,0,0,0),
-                                                                                                                      glm::vec4(0,1,0,0),
-                                                                                                                      glm::vec4(0,0,1,0),
-                                                                                                                      glm::vec4(-z,0,0,1));
+   else{
         z=z+0.5;
     }
 
@@ -583,7 +574,9 @@ void CgSceneControl::handleKeyI(CgBaseEvent *e)
 void CgSceneControl::handleKeyEvents(CgBaseEvent *e)
 {
     switch(((CgKeyEvent*)e)->key()){
-    case Cg::Key_Y:handleKeyX(e);
+    case Cg::Key_Y:handleKeyY(e);
+        break;
+    case Cg::Key_X:handleKeyX(e);
         break;
     case Cg::Key_Z:handleKeyZ(e);
         break;
