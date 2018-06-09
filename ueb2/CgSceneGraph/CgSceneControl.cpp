@@ -417,7 +417,7 @@ void CgSceneControl::changeZylinder(CgBaseEvent *e)
 
 void CgSceneControl::changeRefineRota(CgBaseEvent *e)
 {
-    if(e->getType() & Cg::RefineRota){
+    if(e->getType() == Cg::RefineRota){
         int refine= ((SliderMoveEvent*)e)->getRefine();
         if(refine<=3){
             delete this->rotationbody;

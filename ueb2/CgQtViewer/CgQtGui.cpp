@@ -497,33 +497,44 @@ void CgQtGui::page4(QWidget* parent)
     QRadioButton* radiobutton11 = new QRadioButton( "&X");
     connect(radiobutton11, SIGNAL(pressed()), this, SLOT(selectX()));
     QRadioButton* radiobutton12 = new QRadioButton( "&Y");
-    connect(radiobutton12, SIGNAL(pressed()), this, SLOT(selectSlider(sl_change_RotaY)));
+    connect(radiobutton12, SIGNAL(pressed()), this, SLOT(selectY()));
     QRadioButton* radiobutton13 = new QRadioButton( "&Z");
-    connect(radiobutton13, SIGNAL(pressed()), this, SLOT(selectSlider(sl_change_RotaZ)));
+    connect(radiobutton13, SIGNAL(pressed()), this, SLOT(selectZ()));
 
     sl_change_RotaX = new QSlider(Qt::Horizontal);
     sl_change_RotaX->setMaximum(10);
     sl_change_RotaX->setValue(0);
     sl_change_RotaX->setTickInterval(1);
     sl_change_RotaX->setVisible(false);
+    connect(sl_change_RotaX, SIGNAL(sliderReleased()), this, SLOT(changeRotationPlanet()));
 
     sl_change_RotaY = new QSlider(Qt::Horizontal);
     sl_change_RotaY->setMaximum(10);
     sl_change_RotaY->setValue(0);
     sl_change_RotaY->setTickInterval(1);
     sl_change_RotaY->setVisible(false);
+    connect(sl_change_RotaY, SIGNAL(sliderReleased()), this, SLOT(changeRotationPlanet()));
 
     sl_change_RotaZ = new QSlider(Qt::Horizontal);
     sl_change_RotaZ->setMaximum(10);
     sl_change_RotaZ->setValue(0);
     sl_change_RotaZ->setTickInterval(1);
     sl_change_RotaZ->setVisible(false);
+    connect(sl_change_RotaZ, SIGNAL(sliderReleased()), this, SLOT(changeRotationPlanet()));
 
     myButtonGroup->addButton(radiobutton11,0);
     myButtonGroup->addButton(radiobutton12,1);
     myButtonGroup->addButton(radiobutton13,2);
 
+    QPushButton* myButton1 = new QPushButton("Vergleiche Matritzen");
+    connect(myButton1, SIGNAL(clicked()), this, SLOT(matrizenCheck()));
+
+    QLabel* lab1= new QLabel("Matritzen unchecked");
+
+
     QVBoxLayout *vbox = new QVBoxLayout;
+    vbox->addWidget(myButton1);
+    vbox->addWidget(lab1);
     vbox->addWidget(radiobutton11);
     vbox->addWidget(sl_change_RotaX);
     vbox->addWidget(radiobutton12);
@@ -660,27 +671,50 @@ void CgQtGui::selectX()
     }
 }
 
-void CgQtGui::selectSlider(QSlider &sl)
+void CgQtGui::selectY()
 {
-    if(!sl.isVisible()){
-        sl.setVisible(true);
+    if(!sl_change_RotaY->isVisible()){
+        sl_change_RotaY->setVisible(true);
     }else{
-        sl.setVisible(false);
+        sl_change_RotaY->setVisible(false);
     }
 }
 
+void CgQtGui::selectZ()
+{
+    if(!sl_change_RotaZ->isVisible()){
+        sl_change_RotaZ->setVisible(true);
+    }else{
+        sl_change_RotaZ->setVisible(false);
+    }
+}
+
+void CgQtGui::matrizenCheck()
+{
+    std::cout<<" checke matritzen"<<std::endl;
+    traeger = new TraegerKlasse();
+    notifyObserver(new bestersliderMoveEvent(Cg::CgMatritzeChecken,traeger));
+}
+
+void CgQtGui::changeRotationPlanet()
+{
+    std::cout<<"change rota page4   "<<sl_change_RotaX->value()<<" "<<sl_change_RotaY->value()<<" "<<sl_change_RotaZ->value()<<std::endl;
+    traeger->setDreiDVector(glm::vec3(sl_change_RotaX->value(),sl_change_RotaY->value(),sl_change_RotaZ->value()));
+    notifyObserver(new bestersliderMoveEvent(Cg::CgChangeRotationPlaneten,traeger));
+}
+
+/*
+void CgQtGui::selectSlider(QSlider* sl)
+{
+    if(!sl->isVisible()){
+        sl->setVisible(true);
+    }else{
+        sl->setVisible(false);
+    }
+}
+*/
 
 CgBaseRenderer* CgQtGui::getRenderer()
 {
     return m_glRenderWidget;
 }
-
-
-
-
-
-
-void changeColor(void){
-
-}
-

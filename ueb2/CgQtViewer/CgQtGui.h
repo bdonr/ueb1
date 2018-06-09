@@ -165,7 +165,11 @@ private slots:
     void tabChange(int x);
 
     void selectX();
-    void selectSlider(QSlider &sl);
+    void selectY();
+    void selectZ();
+    void matrizenCheck();
+    void changeRotationPlanet();
+  //  void selectSlider(QSlider* sl);
 
 };
 
