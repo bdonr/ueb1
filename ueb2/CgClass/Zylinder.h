@@ -1,7 +1,9 @@
 #ifndef Zylinder_H
 #define Zylinder_H
 #include <CgBase/CgBaseTriangleMesh.h>
-
+#include <vector>
+#include "CgClass/Mypolyline.h"
+#include "CgClass/meshfactory.h"
 class Zylinder: public CgBaseTriangleMesh
 {
 
@@ -12,6 +14,7 @@ private:
     float radius;
     float hoehe;
     int refine;
+    bool normalsberechnen;
     // CgBaseTriangleMesh interface
     std::vector<glm::vec3> vertices;
     std::vector<glm::vec3> vertexNormals;
@@ -20,11 +23,13 @@ private:
     std::vector<unsigned int> triangleIndices;
     std::vector<glm::vec3> faceNormals;
     std::vector<glm::vec3> faceColors;
+    std::vector<MyPolyline*> geraden;
+    std::vector<glm::vec3> schwerpunkte;
     int create();
     void erstelleRechtEck(glm::vec3 p1, glm::vec3 p2, glm::vec3 p3, int count);
 public:
     Zylinder();
-    Zylinder(int id,float radius, float hoehe,int refine);
+    Zylinder(int id,float radius, float hoehe,int refine,bool normalsberechnen);
 
     // CgBaseRenderableObject interface
     enum Cg::ObjectType getType() const;
@@ -41,7 +46,11 @@ public:
     const std::vector<glm::vec3> &getFaceColors() const;
     void setRefine(int wert);
     void setHoehe(float wert);
-
+    std::vector<MyPolyline *> getGeraden() const;
+    void setGeraden(const std::vector<MyPolyline *> &value);
+    void berechneSchwerPunkte();
+    void berechneNormale();
+    glm::vec3 normalen(glm::vec3 a, glm::vec3 b, glm::vec3 c, glm::vec3 mittelpunkt);
 };
 
 #endif // Zylinder_H

@@ -4,19 +4,19 @@
 #include "CgEvents/CgKeyEvent.h"
 #include "CgEvents/CgWindowResizeEvent.h"
 #include "CgBase/CgBaseRenderer.h"
-#include "slidermoveevent.h"
+#include "CgEvents/slidermoveevent.h"
 #include <iostream>
 #include <glm/gtc/matrix_transform.hpp>
-#include "meshfactory.h"
-#include "Zylinder.h"
-#include "kegel.h"
+#include "CgClass/meshfactory.h"
+#include "CgClass/Zylinder.h"
+#include "CgClass/kegel.h"
 #include <stdio.h>
 #include <string.h>
 #include "CgUtils/ObjLoader.h"
-#include "../CgEvents/objectopenevent.h"
-#include "besterslidermoveevent.h"
-#include "scenegraph.h"
-#include "sceneentity.h"
+#include "CgEvents/objectopenevent.h"
+#include "CgEvents/besterslidermoveevent.h"
+#include "CgClass/scenegraph.h"
+#include "CgClass/sceneentity.h"
 
 // bla dingens
 void CgSceneControl::createScene()
@@ -71,15 +71,17 @@ CgSceneControl::CgSceneControl() {
 
     sc=NULL;
     wuerfel=NULL;
+    shownormals=false;
     ObjLoader loader;
     s=0.5;
     y=0.0;
     kugel=NULL;
+    zylinder=NULL;
+    kegel=NULL;
     koordinatensystem=new Koordinatensystem();
     //rotationkörper
     rotationbody = MeshFactory::createRotationKoerper(1);
     //kegel, zlinder
-    zylinderOderKegel.push_back(MeshFactory::createKegel(0,.0,0));
     //figuren
     dreiecke=NULL;
 
@@ -138,27 +140,6 @@ void CgSceneControl::setRenderer(CgBaseRenderer *r) {
 
 
 }
-void CgSceneControl::resetRenderKegel(int refine,float hoehe,float radius){
-
-    Kegel* x = (Kegel*)MeshFactory::createKegel(refine,hoehe,radius);
-    pushpop(x);
-}
-void CgSceneControl::pushpop(CgBaseTriangleMesh* x)
-{
-    this->zylinderOderKegel.pop_back();
-    this->zylinderOderKegel.push_back(x);
-}
-
-void CgSceneControl::resetRenderZylinder(int refine,float hoehe,float radius){
-
-    Zylinder* x = (Zylinder*)MeshFactory::createZylinder(refine,hoehe,radius);
-    pushpop(x);
-}
-void CgSceneControl::resetRenderKugel(int refine,float hoehe,float radius){
-
-    Kugel* x = (Kugel*)MeshFactory::createZylinder(refine,hoehe,radius);
-    pushpop(x);
-}
 void CgSceneControl::resetObject(){
     delete dreiecke;
     this->dreiecke=(Dreiecke*) MeshFactory::createDreiecke(dreickevertices,dreieckecords);
@@ -208,14 +189,6 @@ void CgSceneControl::renderCoords()
     }
 }
 
-void CgSceneControl::renderTriangle()
-{
-    if(zylinderOderKegel.size()>0){
-        for(int i =0;i<=zylinderOderKegel.size()-1;i++){
-            m_renderer->render(zylinderOderKegel.at(i),m_current_transformation);
-        }
-    }
-}
 
 void CgSceneControl::renderDreiecke()
 {
@@ -230,9 +203,9 @@ void CgSceneControl::renderObjects() {
     renderCoords();
     renderWurfel();
     renderRotationsBody();
-    renderTriangle();
     renderDreiecke();
-
+    renderKegel();
+    renderZylinder();
 
 
 
@@ -249,10 +222,8 @@ void CgSceneControl::reset(){
         delete rotationbody;
         rotationbody=NULL;
     }
-    zylinderOderKegel.clear();
     //objecte.clear();
     changed=1;
-    shownormals=false;
     if(sc!=NULL){
         delete sc;
         sc=NULL;
@@ -264,6 +235,14 @@ void CgSceneControl::reset(){
     if(kugel!=NULL){
         delete kugel;
         kugel=NULL;
+    }
+    if(zylinder!=NULL){
+        delete zylinder;
+        zylinder=NULL;
+    }
+    if(kegel!=NULL){
+        delete zylinder;
+        zylinder=NULL;
     }
 
 }
@@ -377,6 +356,27 @@ void CgSceneControl::changeColorCube(CgBaseEvent *e)
     }
 }
 
+void CgSceneControl::renderKegel()
+{
+    if(kegel){
+        m_renderer->render(kegel,old);
+        for(int i=0;i< kegel->getGeraden().size();i++){
+            m_renderer->init(kegel->getGeraden().at(i));
+            m_renderer->render(kegel->getGeraden().at(i),old);
+        }
+    }
+}
+
+void CgSceneControl::initKegel()
+{
+    if(kegel){
+        m_renderer->init(kegel);
+        for(int j=0; j<kegel->getGeraden().size();j++){
+            m_renderer->init(kegel->getGeraden().at(j));
+        }
+    }
+}
+
 void CgSceneControl::changeKegel(CgBaseEvent *e)
 {
     if (e->getType() == Cg::KegelChange){
@@ -386,17 +386,34 @@ void CgSceneControl::changeKegel(CgBaseEvent *e)
         float hoehe = traeger->getDreiDVector().x;
         float radius = traeger->getDreiDVector().y;
         float refine = traeger->getDreiDVector().z;
+        kegel = MeshFactory::createKegel(refine,hoehe,radius,shownormals);
 
-        std::cout<<"change kegel" << hoehe<<" "<<radius<<" "<<refine<<std::endl;
-        zylinderOderKegel.push_back(MeshFactory::createKegel(refine,hoehe,radius));
 
-        for(int i = 0; i<=zylinderOderKegel.size()-1;i++){
-            //resetRenderKegel(refine,hoehe,radius);
-            m_renderer->init(zylinderOderKegel.at(i));
-            m_renderer->render(zylinderOderKegel.at(i),old);
+        //resetRenderKegel(refine,hoehe,radius);
+        initKegel();
+    }
+}
+
+void CgSceneControl::renderZylinder()
+{
+    if(zylinder){
+        m_renderer->render(zylinder,old);
+        if(!zylinder->getGeraden().empty()){
+            for(int j=0; j<zylinder->getGeraden().size()-1;j++){
+                m_renderer->render(zylinder->getGeraden().at(j),old);
+            }
         }
+    }
+}
 
-
+void CgSceneControl::initZylinder()
+{
+    if(zylinder!=NULL){
+        m_renderer->init(zylinder);
+        if(!zylinder->getGeraden().empty())
+            for(int j=0; j<zylinder->getGeraden().size()-1;j++){
+                m_renderer->init(zylinder->getGeraden().at(j));
+            }
     }
 }
 
@@ -409,21 +426,20 @@ void CgSceneControl::changeZylinder(CgBaseEvent *e)
         float hoehe = traeger->getDreiDVector().x;
         float radius = traeger->getDreiDVector().y;
         float refine = traeger->getDreiDVector().z;
-        zylinderOderKegel.push_back(MeshFactory::createZylinder(refine,hoehe,radius));
-        for(int i = 0; i<=zylinderOderKegel.size()-1;i++){
-            //resetRenderKegel(refine,hoehe,radius);
-            m_renderer->init(zylinderOderKegel.at(i));
-            m_renderer->render(zylinderOderKegel.at(i),old);
-        }
-
-
+        zylinder = MeshFactory::createZylinder(refine,hoehe,radius,shownormals);
+        //resetRenderKegel(refine,hoehe,radius);
+        initZylinder();
     }
+
+
+
 }
 
 
 void CgSceneControl::changeRefineRota(CgBaseEvent *e)
 {
-    if(e->getType() & Cg::RefineRota){
+    if(e->getType() == Cg::RefineRota){
+        reset();
         int refine= ((SliderMoveEvent*)e)->getRefine();
         if(refine<=3){
             delete this->rotationbody;
@@ -694,6 +710,11 @@ void CgSceneControl::handleEvent(CgBaseEvent *e) {
         std::cout<<"7: "<<((CgMouseEvent *) e)->getLocalPos().y<<std::endl;
         // hier kommt jetzt die Abarbeitung des Events hin...
     }
+    if(e->getType()== Cg::CgZeigeNormalePage2){
+        //reset();
+        this->shownormals=!shownormals;
+        std::cout<<shownormals<<"sadasd"<<std::endl;
+    }
 
     // die Enums sind so gebaut, dass man alle Arten von KeyEvents über CgEvent::CgKeyEvent abprüfen kann,
     // siehe dazu die CgEvent eolynums im CgEnums.h
@@ -746,7 +767,6 @@ void CgSceneControl::resetAll(){
     sc=NULL;
     delete dreiecke;
     dreiecke=NULL;
-    zylinderOderKegel.clear();
     wuerfel=NULL;
     delete wuerfel;
 

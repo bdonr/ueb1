@@ -2,6 +2,8 @@
 #define KEGEL_H
 #include <CgBase/CgBaseTriangleMesh.h>
 #include <CgBase/CgBasePolyline.h>
+#include "CgClass/Mypolyline.h"
+#include "CgClass/meshfactory.h"
 class Kegel: public CgBaseTriangleMesh
 {
 private:
@@ -20,12 +22,14 @@ private:
     std::vector<unsigned int> triangleIndices;
     std::vector<glm::vec3> faceNormals;
     std::vector<glm::vec3> faceColors;
-
+    std::vector<MyPolyline*> geraden;
+    std::vector<glm::vec3> schwerpunkte;
+    bool shownormals;
     void erstelleRechtEck(glm::vec3 p1, glm::vec3 p2, glm::vec3 p3, int count);
 public:
     int create();
     Kegel();
-    Kegel(int id,float radius, float hoehe,int refine);
+    Kegel(int id,float radius, float hoehe,int refine,bool shownormals);
     void setType(enum Cg::ObjectType x);
 
     // CgBaseRenderableObject interface
@@ -46,6 +50,14 @@ public:
     const std::vector<unsigned int> &getTriangleIndices() const;
     const std::vector<glm::vec3> &getFaceNormals() const;
     const std::vector<glm::vec3> &getFaceColors() const;
+    void berechneNormaleInSchwerpunkt();
+    std::vector<MyPolyline *> getGeraden() const;
+    void setGeraden(const std::vector<MyPolyline *> &value);
+    std::vector<glm::vec3> getSchwerpunkte() const;
+    void setSchwerpunkte(const std::vector<glm::vec3> &value);
+    void berechneSchwerPunkte();
+    void berechneNormale();
+    glm::vec3 normalen(glm::vec3 a, glm::vec3 b, glm::vec3 c, glm::vec3 mittelpunkt);
 };
 
 #endif // KEGEL_H

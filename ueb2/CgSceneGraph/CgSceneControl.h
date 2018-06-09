@@ -5,17 +5,19 @@
 #include "CgBase/CgBaseSceneControl.h"
 #include <glm/glm.hpp>
 #include <CgBase/CgBaseTriangleMesh.h>
-#include "rotationskoerper.h"
-#include "koordinatensystem.h"
-#include "kugel.h"
-#include "scenegraph.h"
-#include "kamera.h"
+#include "CgClass/rotationskoerper.h"
+#include "CgClass/koordinatensystem.h"
+#include "CgClass/kugel.h"
+#include "CgClass/scenegraph.h"
+#include "CgClass/kamera.h"
 #include "CgClass/traegerklasse.h"
 class CgBaseEvent;
 class CgBaseRenderer;
 class CgExampleTriangle;
 class CgBaseTriangleMesh;
 class Wuerfel;
+class Zylinder;
+class Kegel;
 
 class CgSceneControl : public CgObserver, public CgBaseSceneControl
 {
@@ -205,6 +207,14 @@ public:
 
     void changePage(CgBaseEvent *e);
 
+    void renderZylinder();
+
+    void renderKegel();
+
+    void initZylinder();
+
+    void initKegel();
+
 private:
     int tab;
     glm::vec3 w;
@@ -226,7 +236,9 @@ private:
     CgBaseRenderer* m_renderer;
     Dreiecke* dreiecke;
     RotationsKoerper* rotationbody;
-    std::vector<CgBaseTriangleMesh*> zylinderOderKegel;
+    //std::vector<CgBaseTriangleMesh*> zylinderOderKegel;
+    Kegel* kegel;
+    Zylinder* zylinder;
     glm::mat4 m_current_transformation;
     glm::mat4 m_proj_matrix;
     MyPolyline* rotaAchse;
