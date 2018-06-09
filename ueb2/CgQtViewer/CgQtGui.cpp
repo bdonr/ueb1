@@ -402,36 +402,36 @@ void CgQtGui::page3(QWidget* parent)
     QLabel* lab2= new QLabel("drehung X achse");
     subBox->addWidget(lab2);
 
-    QSpinBox* spin1 = new QSpinBox();
-    tab4_control->addWidget(spin1);
-    spin1->setMinimumHeight(25);
-    spin1->setMinimum(1);
-    spin1->setMaximum(50);
-    spin1->setValue(1);
-    connect( spin1, SIGNAL(valueChanged(int) ), this, SLOT(slotMySpinBox1Changed()) );
-    subSBox->addWidget(spin1);
+    obj_rotate_X = new QSpinBox();
+    tab4_control->addWidget(obj_rotate_X);
+    obj_rotate_X->setMinimumHeight(25);
+    obj_rotate_X->setMinimum(1);
+    obj_rotate_X->setMaximum(50);
+    obj_rotate_X->setValue(1);
+    connect( obj_rotate_X, SIGNAL(editingFinished()), this, SLOT(changeRotationsObject()));
+    subSBox->addWidget(obj_rotate_X);
 
     QLabel* lab3= new QLabel("drehung Y achse");
     subSBox->addWidget(lab3);
 
-    QSpinBox* spin2 = new QSpinBox();
-    tab4_control->addWidget(spin2);
-    spin2->setMinimum(1);
-    spin2->setMaximum(50);
-    spin2->setValue(1);
-    connect( spin2, SIGNAL(valueChanged(int) ), this, SLOT(slotMySpinBox1Changed()) );
-    subSBox->addWidget(spin2);
+    obj_rotate_Y = new QSpinBox();
+    tab4_control->addWidget(obj_rotate_Y);
+    obj_rotate_Y->setMinimum(1);
+    obj_rotate_Y->setMaximum(50);
+    obj_rotate_Y->setValue(1);
+    connect( obj_rotate_Y, SIGNAL(editingFinished()), this, SLOT(changeRotationsObject()));
+    subSBox->addWidget(obj_rotate_Y);
 
     QLabel* lab4= new QLabel("drehung Z achse");
     subSBox->addWidget(lab4);
 
-    QSpinBox* spin3 = new QSpinBox();
-    tab4_control->addWidget(spin3);
-    spin3->setMinimum(1);
-    spin3->setMaximum(50);
-    spin3->setValue(1);
-    connect( spin3, SIGNAL(valueChanged(int) ), this, SLOT(slotMySpinBox1Changed()) );
-    subSBox->addWidget(spin3);
+    obj_rotate_Z = new QSpinBox();
+    tab4_control->addWidget(obj_rotate_Z);
+    obj_rotate_Z->setMinimum(1);
+    obj_rotate_Z->setMaximum(50);
+    obj_rotate_Z->setValue(1);
+    connect( obj_rotate_Z, SIGNAL(editingFinished()), this, SLOT(changeRotationsObject()));
+    subSBox->addWidget(obj_rotate_Z);
 
 //------------------------------------------------------------------------------------------
 //    QGroupBox* mySpinnerBox2 = new QGroupBox("figur bewegen ");
@@ -446,35 +446,35 @@ void CgQtGui::page3(QWidget* parent)
     QLabel* lab22= new QLabel("bewegung X achse");
     subSBox->addWidget(lab22);
 
-    QSpinBox* spin12 = new QSpinBox();
-    tab4_control->addWidget(spin12);
-    spin12->setMinimum(1);
-    spin12->setMaximum(50);
-    spin12->setValue(1);
-    connect( spin12, SIGNAL(valueChanged(int) ), this, SLOT(slotMySpinBox1Changed()) );
-    subSBox->addWidget(spin12);
+    obj_translate_X = new QSpinBox();
+    tab4_control->addWidget(obj_translate_X);
+    obj_translate_X->setMinimum(1);
+    obj_translate_X->setMaximum(50);
+    obj_translate_X->setValue(1);
+    connect( obj_translate_X, SIGNAL(editingFinished()), this, SLOT(changeTranslateObject()));
+    subSBox->addWidget(obj_translate_X);
 
     QLabel* lab32= new QLabel("bewegung Y achse");
     subSBox->addWidget(lab32);
 
-    QSpinBox* spin22 = new QSpinBox();
-    tab4_control->addWidget(spin22);
-    spin22->setMinimum(1);
-    spin22->setMaximum(50);
-    spin22->setValue(1);
-    connect( spin22, SIGNAL(valueChanged(int) ), this, SLOT(slotMySpinBox1Changed()) );
-    subSBox->addWidget(spin22);
+    obj_translate_Y = new QSpinBox();
+    tab4_control->addWidget(obj_translate_Y);
+    obj_translate_Y->setMinimum(1);
+    obj_translate_Y->setMaximum(50);
+    obj_translate_Y->setValue(1);
+    connect( obj_translate_Y, SIGNAL(editingFinished()), this, SLOT(changeTranslateObject()));
+    subSBox->addWidget(obj_translate_Y);
 
     QLabel* lab42= new QLabel("bewegung Z achse");
     subSBox->addWidget(lab42);
 
-    QSpinBox* spin32 = new QSpinBox();
-    tab4_control->addWidget(spin32);
-    spin32->setMinimum(1);
-    spin32->setMaximum(50);
-    spin32->setValue(1);
-    connect( spin32, SIGNAL(valueChanged(int) ), this, SLOT(slotMySpinBox1Changed()) );
-    subSBox->addWidget(spin32);
+    obj_translate_Z = new QSpinBox();
+    tab4_control->addWidget(obj_translate_Z);
+    obj_translate_Z->setMinimum(1);
+    obj_translate_Z->setMaximum(50);
+    obj_translate_Z->setValue(1);
+    connect( obj_translate_Z, SIGNAL(editingFinished()), this, SLOT(changeTranslateObject()));
+    subSBox->addWidget(obj_translate_Z);
 //-----------------------------------------------------------------------------------------
     QLabel* lab1= new QLabel("zoom mit +/- \n drehen mit y/x/z");
     tab4_control->addWidget(lab1);
@@ -501,43 +501,42 @@ void CgQtGui::page4(QWidget* parent)
     QRadioButton* radiobutton13 = new QRadioButton( "&Z");
     connect(radiobutton13, SIGNAL(pressed()), this, SLOT(selectZ()));
 
-    sl_changeRotaX = new QSlider(Qt::Horizontal);
-    sl_changeRotaX->setMaximum(10);
-    sl_changeRotaX->setValue(0);
-    sl_changeRotaX->setTickInterval(1);
-    //sl_changeRotaX->setVisible(x);
-
-
+    sl_change_RotaX = new QSlider(Qt::Horizontal);
+    sl_change_RotaX->setMaximum(10);
+    sl_change_RotaX->setValue(0);
+    sl_change_RotaX->setTickInterval(1);
+    sl_change_RotaX->setVisible(false);
+    connect(sl_change_RotaX, SIGNAL(sliderReleased()), this, SLOT(changeRotationPlanet()));
 
     sl_change_RotaY = new QSlider(Qt::Horizontal);
     sl_change_RotaY->setMaximum(10);
     sl_change_RotaY->setValue(0);
     sl_change_RotaY->setTickInterval(1);
-    //sl_change_RotaY->setVisible(y);
+    sl_change_RotaY->setVisible(false);
+    connect(sl_change_RotaY, SIGNAL(sliderReleased()), this, SLOT(changeRotationPlanet()));
 
     sl_change_RotaZ = new QSlider(Qt::Horizontal);
     sl_change_RotaZ->setMaximum(10);
     sl_change_RotaZ->setValue(0);
     sl_change_RotaZ->setTickInterval(1);
-    //sl_change_RotaZ->setVisible(z);
-
-
-
-    connect(radiobutton11, SIGNAL(pressed()), this, SLOT(changeVisibleX()));
-    connect(radiobutton12, SIGNAL(pressed()), this, SLOT(changeVisibleY()));
-    connect(radiobutton13, SIGNAL(pressed()), this, SLOT(changeVisibleZ()));
+    sl_change_RotaZ->setVisible(false);
+    connect(sl_change_RotaZ, SIGNAL(sliderReleased()), this, SLOT(changeRotationPlanet()));
 
     myButtonGroup->addButton(radiobutton11,0);
     myButtonGroup->addButton(radiobutton12,1);
     myButtonGroup->addButton(radiobutton13,2);
 
-    connect(sl_changeRotaX,SIGNAL(sliderMoved(int)),this,SLOT(changeX(int)));
-    connect(sl_change_RotaY,SIGNAL(sliderMoved(int)),this,SLOT(changeY(int)));
-    connect(sl_change_RotaZ,SIGNAL(sliderMoved(int)),this,SLOT(changeZ(int)));
+    QPushButton* myButton1 = new QPushButton("Vergleiche Matritzen");
+    connect(myButton1, SIGNAL(clicked()), this, SLOT(matrizenCheck()));
+
+    QLabel* lab1= new QLabel("Matritzen unchecked");
+
 
     QVBoxLayout *vbox = new QVBoxLayout;
+    vbox->addWidget(myButton1);
+    vbox->addWidget(lab1);
     vbox->addWidget(radiobutton11);
-    vbox->addWidget(sl_changeRotaX);
+    vbox->addWidget(sl_change_RotaX);
     vbox->addWidget(radiobutton12);
     vbox->addWidget(sl_change_RotaY);
     vbox->addWidget(radiobutton13);
@@ -546,18 +545,28 @@ void CgQtGui::page4(QWidget* parent)
     vbox->addStretch(1);
 
     myGroupBox->setLayout(vbox);
-    // subBox->addWidget(rotationsSlider);
     subBox->addWidget(myGroupBox);
-//    subBox2->addWidget(kkk);
-//    subBox2->addWidget(kkk1);
-//    subBox2->addWidget(kkk2);
     tab5_control->addLayout(subBox);
-//    tab5_control->addLayout(subBox2);
     parent->setLayout(tab5_control);
+}
+
+void CgQtGui::changeRotationObject()
+{
+    std::cout<<"rotate obj "<<obj_rotate_X->value()<<" "<<obj_rotate_Y->value()<<" "<<obj_rotate_Z->value()<<std::endl;
+    traeger->setDreiDVector(glm::vec3(obj_rotate_X->value(),obj_rotate_Y->value(),obj_rotate_Z->value()));
+    notifyObserver(new bestersliderMoveEvent(Cg::CgObjRotate,traeger));
+}
+
+void CgQtGui::changeTranslateObject()
+{
+    std::cout<<"translate obj "<<obj_translate_X->value()<<" "<<obj_translate_Y->value()<<" "<<obj_translate_Z->value()<<std::endl;
+    traeger->setDreiDVector(glm::vec3(obj_translate_X->value(),obj_translate_Y->value(),obj_translate_Z->value()));
+    notifyObserver(new bestersliderMoveEvent(Cg::CgObjTranslate,traeger));
 }
 
 void CgQtGui::changeRotaKoerper()
 {
+    std::cout<<"rotationskörper: "<<sl_rota_refine->value()<<" "<<sl_rota_hoehe->value()<<std::endl;
     traeger->setDreiDVector(glm::vec3(sl_rota_refine->value(),sl_rota_hoehe->value(),0));
     notifyObserver(new bestersliderMoveEvent(Cg::CgChangeRota,traeger));
 }
@@ -653,18 +662,59 @@ void CgQtGui::tabChange(int x)
     notifyObserver(bsl);
 }
 
+void CgQtGui::selectX()
+{
+    if(!sl_change_RotaX->isVisible()){
+        sl_change_RotaX->setVisible(true);
+    }else{
+        sl_change_RotaX->setVisible(false);
+    }
+}
+
+void CgQtGui::selectY()
+{
+    if(!sl_change_RotaY->isVisible()){
+        sl_change_RotaY->setVisible(true);
+    }else{
+        sl_change_RotaY->setVisible(false);
+    }
+}
+
+void CgQtGui::selectZ()
+{
+    if(!sl_change_RotaZ->isVisible()){
+        sl_change_RotaZ->setVisible(true);
+    }else{
+        sl_change_RotaZ->setVisible(false);
+    }
+}
+
+void CgQtGui::matrizenCheck()
+{
+    std::cout<<" checke matritzen"<<std::endl;
+    traeger = new TraegerKlasse();
+    notifyObserver(new bestersliderMoveEvent(Cg::CgMatritzeChecken,traeger));
+}
+
+void CgQtGui::changeRotationPlanet()
+{
+    std::cout<<"change rota page4   "<<sl_change_RotaX->value()<<" "<<sl_change_RotaY->value()<<" "<<sl_change_RotaZ->value()<<std::endl;
+    traeger->setDreiDVector(glm::vec3(sl_change_RotaX->value(),sl_change_RotaY->value(),sl_change_RotaZ->value()));
+    notifyObserver(new bestersliderMoveEvent(Cg::CgChangeRotationPlaneten,traeger));
+}
+
+/*
+void CgQtGui::selectSlider(QSlider* sl)
+{
+    if(!sl->isVisible()){
+        sl->setVisible(true);
+    }else{
+        sl->setVisible(false);
+    }
+}
+*/
 
 CgBaseRenderer* CgQtGui::getRenderer()
 {
     return m_glRenderWidget;
 }
-
-
-
-
-
-
-void changeColor(void){
-
-}
-

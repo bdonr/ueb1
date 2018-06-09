@@ -131,10 +131,17 @@ private:
     QSlider* sl_kegel_radius;
     QSlider* sl_kegel_refine;
 
-    QSlider * sl_changeRotaX;
+    QSlider * sl_change_RotaX;
     QSlider * sl_change_RotaY;
     QSlider * sl_change_RotaZ;
 
+    QSpinBox* obj_rotate_X;
+    QSpinBox* obj_rotate_Y;
+    QSpinBox* obj_rotate_Z;
+
+    QSpinBox* obj_translate_X;
+    QSpinBox* obj_translate_Y;
+    QSpinBox* obj_translate_Z;
 
     QSlider * sl_change_Red;
     QSlider * sl_change_Green;
@@ -145,6 +152,8 @@ private:
 
 
 private slots:
+    void changeRotationObject();
+    void changeTranslateObject();
     void changeRotaKoerper();
     void changeColor(void);
     void zeige_normale_taste_page2();
@@ -153,7 +162,14 @@ private slots:
     /* slots to catch events directly from renderer */
     void mouseEvent(QMouseEvent* event);
     void viewportChanged(int,int);
-void tabChange(int x);
+    void tabChange(int x);
+
+    void selectX();
+    void selectY();
+    void selectZ();
+    void matrizenCheck();
+    void changeRotationPlanet();
+  //  void selectSlider(QSlider* sl);
 
 };
 
