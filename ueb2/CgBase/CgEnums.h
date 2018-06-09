@@ -33,6 +33,7 @@ namespace Cg{
     CgEventGroup1                   = 0x000f000,
     CgChangeRota                    = 0x0f00000,
     CgChangeColor                   = 0x0aaaaa0,
+
     CgZeigeNormalePage2             = 0x0ababa0,
     CgObjRotate                     = 0x1460000,
     CgObjTranslate                  = 0x2578000,

@@ -22,7 +22,6 @@ SOURCES += main.cpp \
     CgEvents/slidermoveevent.cpp \
     CgClass/rotationskoerper.cpp \
     CgUtils/ObjLoader.cpp \
-    CgSceneGraph/dreiecke.cpp \
     CgClass/koordinatensystem.cpp \
     CgEvents/objectopenevent.cpp \
     CgClass/kugel.cpp \
@@ -32,7 +31,8 @@ SOURCES += main.cpp \
     CgClass/sceneentity.cpp \
     CgClass/appearance.cpp \
     CgClass/kamera.cpp \
-    CgClass/wuerfel.cpp
+    CgClass/wuerfel.cpp \
+    CgClass/dreiecke.cpp
 
 
 HEADERS += \

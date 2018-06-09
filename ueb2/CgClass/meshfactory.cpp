@@ -1,26 +1,29 @@
-#include "meshfactory.h"
-#include "Zylinder.h"
-#include "kegel.h"
-#include "Mypolyline.h"
-#include "dreiecke.h"
+#include "CgClass/meshfactory.h"
+#include "CgClass/Zylinder.h"
+#include "CgClass/kegel.h"
+#include "CgClass/Mypolyline.h"
+#include "CgClass/dreiecke.h"
 #include <iostream>
 
-int MeshFactory::all_id=1;
+
+
 MeshFactory::MeshFactory()
 {
 
 }
+int MeshFactory::all_id=1;
+
 Wuerfel *MeshFactory::createWuerfel(glm::vec3 colors)
 {
     return new Wuerfel(++all_id,colors);
 }
 
-CgBaseTriangleMesh* MeshFactory::createZylinder(int refine,float hoehe,float radius){
-    return (CgBaseTriangleMesh*) new Zylinder(++all_id,radius,hoehe,refine);
+Zylinder* MeshFactory::createZylinder(int refine,float hoehe,float radius,bool berechnenormale){
+    return new Zylinder(++all_id,radius,hoehe,refine,berechnenormale);
 
 }
-CgBaseTriangleMesh* MeshFactory::createKegel(int refine,float hoehe,float radius){
-    return (CgBaseTriangleMesh*) new Kegel(++all_id,radius,hoehe,refine);
+Kegel* MeshFactory::createKegel(int refine,float hoehe,float radius,bool berechnenormale){
+    return new Kegel(++all_id,radius,hoehe,refine,berechnenormale);
 }
 
 MyPolyline* MeshFactory::createMyPolyline(glm::vec3 color,std::vector<glm::vec3> x){
@@ -39,5 +42,6 @@ Dreiecke * MeshFactory::createDreiecke(std::vector<glm::vec3>x,std::vector<unsig
 Kugel * MeshFactory::createKugel(float radius, float hoehe, int refine){
     return new Kugel(++all_id,radius,hoehe, refine);
 }
+
 
 
