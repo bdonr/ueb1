@@ -1,6 +1,6 @@
 #include "dreiecke.h"
 
-Dreiecke::Dreiecke()
+Dreiecke::Dreiecke(): type(Cg::TriangleMesh)
 {
 
 }

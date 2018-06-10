@@ -19,8 +19,8 @@
 
 QT_BEGIN_MOC_NAMESPACE
 struct qt_meta_stringdata_CgQtGui_t {
-    QByteArrayData data[23];
-    char stringdata0[307];
+    QByteArrayData data[26];
+    char stringdata0[354];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -51,7 +51,10 @@ QT_MOC_LITERAL(18, 248, 7), // "selectX"
 QT_MOC_LITERAL(19, 256, 7), // "selectY"
 QT_MOC_LITERAL(20, 264, 7), // "selectZ"
 QT_MOC_LITERAL(21, 272, 13), // "matrizenCheck"
-QT_MOC_LITERAL(22, 286, 20) // "changeRotationPlanet"
+QT_MOC_LITERAL(22, 286, 20), // "changeRotationPlanet"
+QT_MOC_LITERAL(23, 307, 14), // "objectOpenHase"
+QT_MOC_LITERAL(24, 322, 14), // "objectOpenTyra"
+QT_MOC_LITERAL(25, 337, 16) // "objectOpenPorshe"
 
     },
     "CgQtGui\0changeRotationObject\0\0"
@@ -62,7 +65,8 @@ QT_MOC_LITERAL(22, 286, 20) // "changeRotationPlanet"
     "changeZylinder\0mouseEvent\0QMouseEvent*\0"
     "event\0viewportChanged\0tabChange\0x\0"
     "selectX\0selectY\0selectZ\0matrizenCheck\0"
-    "changeRotationPlanet"
+    "changeRotationPlanet\0objectOpenHase\0"
+    "objectOpenTyra\0objectOpenPorshe"
 };
 #undef QT_MOC_LITERAL
 
@@ -72,7 +76,7 @@ static const uint qt_meta_data_CgQtGui[] = {
        7,       // revision
        0,       // classname
        0,    0, // classinfo
-      18,   14, // methods
+      21,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -80,24 +84,27 @@ static const uint qt_meta_data_CgQtGui[] = {
        0,       // signalCount
 
  // slots: name, argc, parameters, tag, flags
-       1,    0,  104,    2, 0x08 /* Private */,
-       3,    0,  105,    2, 0x08 /* Private */,
-       4,    0,  106,    2, 0x08 /* Private */,
-       5,    0,  107,    2, 0x08 /* Private */,
-       6,    0,  108,    2, 0x08 /* Private */,
-       7,    0,  109,    2, 0x08 /* Private */,
-       8,    0,  110,    2, 0x08 /* Private */,
-       9,    0,  111,    2, 0x08 /* Private */,
-      10,    0,  112,    2, 0x08 /* Private */,
-      11,    0,  113,    2, 0x08 /* Private */,
-      12,    1,  114,    2, 0x08 /* Private */,
-      15,    2,  117,    2, 0x08 /* Private */,
-      16,    1,  122,    2, 0x08 /* Private */,
-      18,    0,  125,    2, 0x08 /* Private */,
-      19,    0,  126,    2, 0x08 /* Private */,
-      20,    0,  127,    2, 0x08 /* Private */,
-      21,    0,  128,    2, 0x08 /* Private */,
-      22,    0,  129,    2, 0x08 /* Private */,
+       1,    0,  119,    2, 0x08 /* Private */,
+       3,    0,  120,    2, 0x08 /* Private */,
+       4,    0,  121,    2, 0x08 /* Private */,
+       5,    0,  122,    2, 0x08 /* Private */,
+       6,    0,  123,    2, 0x08 /* Private */,
+       7,    0,  124,    2, 0x08 /* Private */,
+       8,    0,  125,    2, 0x08 /* Private */,
+       9,    0,  126,    2, 0x08 /* Private */,
+      10,    0,  127,    2, 0x08 /* Private */,
+      11,    0,  128,    2, 0x08 /* Private */,
+      12,    1,  129,    2, 0x08 /* Private */,
+      15,    2,  132,    2, 0x08 /* Private */,
+      16,    1,  137,    2, 0x08 /* Private */,
+      18,    0,  140,    2, 0x08 /* Private */,
+      19,    0,  141,    2, 0x08 /* Private */,
+      20,    0,  142,    2, 0x08 /* Private */,
+      21,    0,  143,    2, 0x08 /* Private */,
+      22,    0,  144,    2, 0x08 /* Private */,
+      23,    0,  145,    2, 0x08 /* Private */,
+      24,    0,  146,    2, 0x08 /* Private */,
+      25,    0,  147,    2, 0x08 /* Private */,
 
  // slots: parameters
     QMetaType::Void,
@@ -113,6 +120,9 @@ static const uint qt_meta_data_CgQtGui[] = {
     QMetaType::Void, 0x80000000 | 13,   14,
     QMetaType::Void, QMetaType::Int, QMetaType::Int,    2,    2,
     QMetaType::Void, QMetaType::Int,   17,
+    QMetaType::Void,
+    QMetaType::Void,
+    QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
@@ -146,6 +156,9 @@ void CgQtGui::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, voi
         case 15: _t->selectZ(); break;
         case 16: _t->matrizenCheck(); break;
         case 17: _t->changeRotationPlanet(); break;
+        case 18: _t->objectOpenHase(); break;
+        case 19: _t->objectOpenTyra(); break;
+        case 20: _t->objectOpenPorshe(); break;
         default: ;
         }
     }
@@ -178,13 +191,13 @@ int CgQtGui::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 18)
+        if (_id < 21)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 18;
+        _id -= 21;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 18)
+        if (_id < 21)
             *reinterpret_cast<int*>(_a[0]) = -1;
-        _id -= 18;
+        _id -= 21;
     }
     return _id;
 }

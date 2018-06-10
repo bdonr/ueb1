@@ -643,28 +643,32 @@ void CgSceneControl::changePage(CgBaseEvent *e)
 
 void CgSceneControl::loadObject(CgBaseEvent *e)
 {
-    if(e->getType()==Cg::CgChangeWahl){
 
+    if(e->getType()==Cg::CgChangeWahl){
+dreiecke = new Dreiecke();
+std::cout<<"obejct"<<((bestersliderMoveEvent*)e)->getTraegerKlasse()->getAn_aus()<<std::endl;
         if(objecte.empty()){
             ObjLoader loader;
-            loader.load("../CgData/bunny.obj");
-            loader.getPositionData(dreickevertices);
-            loader.getFaceIndexData(dreieckecords);
-            objecte.push_back(MeshFactory::createDreiecke(dreickevertices,dreieckecords));
-            loader.load("../CgData/tyra.obj");
-            loader.getPositionData(dreickevertices);
-            loader.getFaceIndexData(dreieckecords);
-            objecte.push_back(MeshFactory::createDreiecke(dreickevertices,dreieckecords));
-            loader.load("../CgData/porsche.obj");
-            loader.getPositionData(dreickevertices);
-            loader.getFaceIndexData(dreieckecords);
-            objecte.push_back(MeshFactory::createDreiecke(dreickevertices,dreieckecords));
+                loader.load("../CgData/bunny.obj");
+                loader.getPositionData(dreickevertices);
+                loader.getFaceIndexData(dreieckecords);
+                objecte.push_back(MeshFactory::createDreiecke(dreickevertices,dreieckecords));
+                loader.load("../CgData/tyra.obj");
+                loader.getPositionData(dreickevertices);
+                loader.getFaceIndexData(dreieckecords);
+                objecte.push_back(MeshFactory::createDreiecke(dreickevertices,dreieckecords));
+                loader.load("../CgData/porsche.obj");
+                loader.getPositionData(dreickevertices);
+                loader.getFaceIndexData(dreieckecords);
+                objecte.push_back(MeshFactory::createDreiecke(dreickevertices,dreieckecords));
+
             //            loader.load("../CgData/kugel.obj");
             //            loader.getPositionData(dreickevertices);
             //            loader.getFaceIndexData(dreieckecords);
             //            objecte.push_back(MeshFactory::createDreiecke(dreickevertices,dreieckecords));
         }
-        dreiecke = objecte.at(((ObjectOpenEvent*) e)->getWahl());
+        dreiecke = objecte.at(((bestersliderMoveEvent*)e)->getTraegerKlasse()->getAn_aus());
+     //   dreiecke = objecte.at(((ObjectOpenEvent*) e)->getWahl());
         this->m_renderer->init(dreiecke);
         this->m_renderer->redraw();
 
