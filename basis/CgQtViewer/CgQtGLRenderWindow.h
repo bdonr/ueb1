@@ -4,7 +4,7 @@
 #include "CgBase/CgBaseRenderWindow.h"
 #include <GL/gl.h>
 #include <QGLFunctions>
-
+#include <glm/glm.hpp>
 class CgQtGLRenderWindow: public CgBaseRenderWindow, public QGLWidget, public QGLFunctions
 {
     Q_OBJECT

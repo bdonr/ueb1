@@ -43,6 +43,9 @@
 
 #include <QWidget>
 #include "../CgBase/CgObservable.h"
+#include "../CgBase/CgEnums.h"
+#include <glm/glm.hpp>
+#include "CgClass/traegerklasse.h"
 
 QT_BEGIN_NAMESPACE
 class QSlider;
@@ -68,15 +71,22 @@ class CgQtGui : public QWidget,public CgObservable
 public:
     CgQtGui(CgQtMainApplication *mw);
     CgBaseRenderer* getRenderer();
+    void zylinderSlider();
+    void kegelSlider();
 
+    void kugelSlider();
+
+
+
+    void init();
 
 protected:
     void keyPressEvent(QKeyEvent *event) Q_DECL_OVERRIDE;
 
 
 private:
+    QSlider *createSlider(int r, int size, int max, int min, int steps);
     QSlider *createSlider();
-
     // parts of the view
     CgQtGLRenderWidget*    m_glRenderWidget;
     CgQtMainApplication*        m_mainWindow;
@@ -86,7 +96,9 @@ private:
     QMenuBar *             m_menuBar;
 
     CgQtGuiEventHandler*   m_event_handler;
-
+    float radius;
+    float hoehe;
+    int refine;
 
 
     QWidget*               m_option_panel_ex1;
@@ -97,33 +109,67 @@ private:
 
 
     /* example for usage of qt gui elements, feel free to add what you like */
-    void createOptionPanelExample1(QWidget* panel);
+    void page2(QWidget* panel);
     void createOptionPanelExample2(QWidget* panel);
+    void page1(QWidget* panel);
+    void page3(QWidget* panel);
+    void page4(QWidget* panel);
+    TraegerKlasse* traeger;
     QButtonGroup* myButtonGroup;
     QCheckBox* myCheckBox1;
     QSpinBox* mySpinBox1;
+    int zeige_normale_anAus;
+
+    QSlider* sl_zylinder_hoehe;
+    QSlider* sl_zylinder_radius;
+    QSlider* sl_zylinder_refine;
+
+    QSlider* sl_rota_refine;
+    QSlider* sl_rota_hoehe;
+
+    QSlider* sl_kegel_hoehe;
+    QSlider* sl_kegel_radius;
+    QSlider* sl_kegel_refine;
+
+    QSlider * sl_change_RotaX;
+    QSlider * sl_change_RotaY;
+    QSlider * sl_change_RotaZ;
+
+    QSpinBox* obj_rotate_X;
+    QSpinBox* obj_rotate_Y;
+    QSpinBox* obj_rotate_Z;
+
+    QSpinBox* obj_translate_X;
+    QSpinBox* obj_translate_Y;
+    QSpinBox* obj_translate_Z;
+
+    QSlider * sl_change_Red;
+    QSlider * sl_change_Green;
+    QSlider * sl_change_Blue;
+
+    glm::vec3 color;
+
 
 
 private slots:
-
-
-
+    void changeRotationObject();
+    void changeTranslateObject();
+    void changeRotaKoerper();
+    void changeColor(void);
+    void zeige_normale_taste_page2();
+    void changeKegel();
+    void changeZylinder();
     /* slots to catch events directly from renderer */
     void mouseEvent(QMouseEvent* event);
     void viewportChanged(int,int);
+    void tabChange(int x);
 
-    /* slots example qt gui elements */
-    void slotMySpinBox1Changed();
-    void slotMyCheckBox1Changed();
-    void slotMyButton1Pressed();
-    void slotButtonGroupSelectionChanged();
-    void slotLoadMeshFile();
-    void sliderMove(int x);
-
-
-
-
-
+    void selectX();
+    void selectY();
+    void selectZ();
+    void matrizenCheck();
+    void changeRotationPlanet();
+  //  void selectSlider(QSlider* sl);
 
 };
 
