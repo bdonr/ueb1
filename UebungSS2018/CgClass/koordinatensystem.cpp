@@ -4,9 +4,11 @@ Koordinatensystem::Koordinatensystem(CgBaseRenderer *render,glm::mat4x4 x)
 {
     this->render=render;
     this->translation=x;
-    pfeile.push_back(new Pfeil(render));
-    pfeile.push_back(new Pfeil(render));
-    pfeile.push_back(new Pfeil(render));
+    //m_renderer->setUniformValue("ka",glm::vec4(1.,1.,1.,1.));
+
+    pfeile.push_back(new Pfeil(render,new Appearance("red",glm::vec3(233,1.,1.))));
+    pfeile.push_back(new Pfeil(render,new Appearance("green",glm::vec3(3.,.3,.3))));
+    pfeile.push_back(new Pfeil(render,new Appearance("blue",glm::vec3(1.,.5,.5))));
 }
 
 

@@ -22,22 +22,22 @@ void Pfeil::setZylinder(Zylinder *value)
 
 void Pfeil::renderO(glm::mat4x4 p)
 {
-    std::cout<< "pfeil"<<std::endl;
-        render->setUniformValue("mycolor",glm::vec4(1.,1.,1.,1.));
+    render->setUniformValue(appear->getText(),appear->getColor());
     render->render(this->getZylinder(),p);
-    render->setUniformValue("mycolor",glm::vec4(1.,1.,1.,1.));
-    render->render(this->getKegel(),transform(1));
+    render->setUniformValue(appear->getText(),appear->getColor());
+    render->render(this->getKegel(),transform());
 }
 
-Pfeil::Pfeil(CgBaseRenderer *render)
+Pfeil::Pfeil(CgBaseRenderer *render,Appearance* appear)
 {
+    this->appear=appear;
     this->render = render;
     zylinder = MeshFactory::createZylinder(100,100,.0001,false);
     kegel = MeshFactory::createKegel(100,100,.0001,false);
     render->init(this->getKegel());
     render->init(this->getZylinder());
 }
-glm::mat4x4 Pfeil::transform(int i){
+glm::mat4x4 Pfeil::transform(){
     return glm::mat4x4( glm::vec4(0.01,0,0,0),
                         glm::vec4(0,0.01,0,0),
                         glm::vec4(0,0,.01,0),

@@ -5,6 +5,7 @@
 #include "Mypolyline.h"
 #include "pfeil.h"
 #include "CgBase/CgBaseRenderer.h"
+#include "CgClass/appearance.h"
 class Koordinatensystem
 {
 

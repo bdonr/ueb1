@@ -5,14 +5,16 @@
 #include "CgBase/CgBaseRenderer.h"
 #include "glm/glm.hpp"
 #include "iostream"
+#include "CgClass/appearance.h"
 class Pfeil
 {
 private: Kegel* kegel;
     Zylinder* zylinder;
-    glm::mat4x4 transform(int i);
+    glm::mat4x4 transform();
     CgBaseRenderer *render;
+    Appearance* appear;
 public:
-    Pfeil(CgBaseRenderer *render);
+    Pfeil(CgBaseRenderer *render,Appearance* appear);
     Kegel *getKegel() const;
     void setKegel(Kegel *value);
     Zylinder *getZylinder() const;
