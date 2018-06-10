@@ -124,6 +124,7 @@ private:
     QSlider* sl_zylinder_radius;
     QSlider* sl_zylinder_refine;
 
+    QSlider* sl_rota_lane_refine;
     QSlider* sl_rota_refine;
     QSlider* sl_rota_hoehe;
 
@@ -155,7 +156,10 @@ private slots:
     void changeRotationObject();
     void changeTranslateObject();
     void changeRotaKoerper();
+    void laneRotaChange();
     void changeColor(void);
+    void ZeigePolylineButton();
+    void ResetPolylineButton();
     void zeige_normale_taste_page2();
     void changeKegel();
     void changeZylinder();
