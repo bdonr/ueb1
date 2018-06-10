@@ -1,5 +1,7 @@
 QT       += core gui opengl widgets
 
+QT       += core gui opengl widgets
+
 TEMPLATE = app
 
 TARGET = uebung1
@@ -12,10 +14,30 @@ SOURCES += main.cpp \
     CgQtViewer/CgQtMainApplication.cpp \
     CgSceneGraph/CgSceneControl.cpp \
     CgEvents/CgKeyEvent.cpp \
-    CgSceneGraph/CgExampleTriangle.cpp \
     CgQtViewer/CgQtGlBufferObject.cpp \
     CgQtViewer/CgTrackball.cpp \
-    CgEvents/CgWindowResizeEvent.cpp
+    CgEvents/CgWindowResizeEvent.cpp \
+    CgClass/meshfactory.cpp \
+    CgClass/Zylinder.cpp \
+    CgClass/kegel.cpp \
+    CgClass/Mypolyline.cpp \
+    CgEvents/slidermoveevent.cpp \
+    CgClass/rotationskoerper.cpp \
+    CgUtils/ObjLoader.cpp \
+    CgClass/koordinatensystem.cpp \
+    CgEvents/objectopenevent.cpp \
+    CgClass/kugel.cpp \
+    CgEvents/besterslidermoveevent.cpp \
+    CgClass/traegerklasse.cpp \
+    CgClass/scenegraph.cpp \
+    CgClass/sceneentity.cpp \
+    CgClass/appearance.cpp \
+    CgClass/kamera.cpp \
+    CgClass/wuerfel.cpp \
+    CgClass/dreiecke.cpp \
+    CgClass/pfeil.cpp \
+    CgQtViewer/CgQtGLRenderWindow.cpp
+
 
 HEADERS += \
     CgBase/CgBaseRenderWindow.h \
@@ -31,7 +53,6 @@ HEADERS += \
     CgEvents/CgKeyEvent.h \
     CgBase/CgBaseRenderer.h \
     CgBase/CgBaseRenderableObject.h \
-    CgSceneGraph/CgExampleTriangle.h \
     CgBase/CgBasePointCloud.h \
     CgBase/CgBaseTriangleMesh.h \
     CgBase/CgBasePolygonMesh.h \
@@ -39,5 +60,24 @@ HEADERS += \
     CgBase/CgBaseSceneControl.h \
     CgQtViewer/CgQtGlBufferObject.h \
     CgQtViewer/CgTrackball.h \
-    CgEvents/CgWindowResizeEvent.h
-
+    CgEvents/CgWindowResizeEvent.h \
+    CgClass/meshfactory.h \
+    CgClass/Zylinder.h \
+    CgClass/kegel.h \
+    CgClass/Mypolyline.h \
+    CgEvents/slidermoveevent.h \
+    CgClass/rotationskoerper.h \
+    CgUtils/ObjLoader.h \
+    CgClass/dreiecke.h \
+    CgClass/koordinatensystem.h \
+    CgEvents/objectopenevent.h \
+    CgClass/kugel.h \
+    CgEvents/besterslidermoveevent.h \
+    CgClass/traegerklasse.h \
+    CgClass/scenegraph.h \
+    CgClass/sceneentity.h \
+    CgClass/appearance.h \
+    CgClass/kamera.h \
+    CgClass/wuerfel.h \
+    CgClass/pfeil.h \
+    CgQtViewer/CgQtGLRenderWindow.h
