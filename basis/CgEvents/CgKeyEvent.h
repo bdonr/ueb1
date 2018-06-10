@@ -10,6 +10,7 @@ class CgKeyEvent : public CgBaseEvent
 {
 
 public:
+    //CgKeyEvent(const CgBaseEvent& c);
 
     CgKeyEvent();
     CgKeyEvent(Cg::EventType type,Cg::Key key,Cg::KeyboardModifiers mod, std::string text);
