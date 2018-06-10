@@ -62,7 +62,7 @@ glm::mat4x4 Koordinatensystem::rotationZ()
 void Koordinatensystem::renderO()
 {
 
-    pfeile.at(0)->renderO(getTranslation()*rotationX());
-    pfeile.at(1)->renderO(getTranslation()*rotationY());
-    pfeile.at(2)->renderO(getTranslation()*rotationZ());
+    pfeile.at(0)->render(getTranslation()*rotationX());
+    pfeile.at(1)->render(getTranslation()*rotationY());
+    pfeile.at(2)->render(getTranslation()*rotationZ());
 }

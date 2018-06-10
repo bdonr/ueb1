@@ -11,6 +11,7 @@
 #include "CgClass/scenegraph.h"
 #include "CgClass/kamera.h"
 #include "CgClass/traegerklasse.h"
+#include "CgClass/pfeil.h"
 class CgBaseEvent;
 class CgBaseRenderer;
 class CgExampleTriangle;
@@ -229,7 +230,7 @@ private:
     float countQ;
     float countE;
     bool shownormals;
-
+    Pfeil* pfeil;
     Kamera* cam;
     glm::mat4 old;
     std::vector <Dreiecke*> objecte;

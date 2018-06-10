@@ -186,6 +186,7 @@ void CgSceneControl::renderWurfel()
 
 void CgSceneControl::renderCoords()
 {
+
     koordinatensystem=new Koordinatensystem(m_renderer,m_current_transformation);
     koordinatensystem->renderO();
 }
@@ -207,6 +208,8 @@ void CgSceneControl::renderObjects() {
     renderDreiecke();
     renderKegel();
     renderZylinder();
+    pfeil = new Pfeil(m_renderer,new Appearance("mycolor",glm::vec4(1,0,2,1)),old);
+    pfeil->render();
 
     if(sc){
         sc->render(m_renderer,sc->getSc());
