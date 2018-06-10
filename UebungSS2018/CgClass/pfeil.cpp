@@ -22,9 +22,9 @@ void Pfeil::setZylinder(Zylinder *value)
 
 void Pfeil::renderO(glm::mat4x4 p)
 {
-    render->setUniformValue(appear->getText(),appear->getColor());
+    render->setUniformValue("mycolor",appear->getVierDcolor());
     render->render(this->getZylinder(),p);
-    render->setUniformValue(appear->getText(),appear->getColor());
+    render->setUniformValue("mycolor",appear->getVierDcolor());
     render->render(this->getKegel(),transform());
 }
 

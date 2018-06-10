@@ -126,7 +126,7 @@ void CgSceneControl::initRotationBody()
 void CgSceneControl::setRenderer(CgBaseRenderer *r) {
     m_renderer = r;
     m_renderer->setSceneControl(this);
-    m_renderer->setUniformValue("ka",glm::vec3(1.,1.,1.));
+    m_renderer->setUniformValue("mycolor",glm::vec4(1.,1.,1.,1.));
 
     //sc->render(m_renderer,sc->getSc());
     // registerSceneGraph(m_renderer,sc->getSc());
@@ -151,14 +151,14 @@ void CgSceneControl::renderRotationsBody()
         if(!rotationbody->getKeisVec().empty())
             if(rotationbody->getPolyVec().size()>0){
                 for(unsigned int i = 0; i<rotationbody->getPolyVec().size()-1;i++){
-                    m_renderer->setUniformValue("ka",glm::vec4(1.,1.,1.,1.));
+                    m_renderer->setUniformValue("mycolor",glm::vec4(1.,1.,1.,1.));
                     m_renderer->render(rotationbody->getPolyVec().at(i),old);
                 }
             }
         if(!rotationbody->getKeisVec().empty()){
             if(rotationbody->getKeisVec().size()>1){
                 for(unsigned int i = 0; i<=rotationbody->getKeisVec().size()-2;i++){
-                    m_renderer->setUniformValue("ka",glm::vec3(1.,1.,1.));
+                    m_renderer->setUniformValue("mycolor",glm::vec3(1.,1.,1.));
                     m_renderer->render(rotationbody->getKeisVec().at(i),old);
                 }
             }
@@ -166,7 +166,7 @@ void CgSceneControl::renderRotationsBody()
         if(!rotationbody->getNormale().empty()){
             if(rotationbody->getNormale().size()>0){
                 for(unsigned int i = 0; i<=rotationbody->getNormale().size()-1;i++){
-                    m_renderer->setUniformValue("asda",glm::vec3(255.,2.,3.));
+                    m_renderer->setUniformValue("mycolor",glm::vec3(255.,2.,3.));
                     m_renderer->render(rotationbody->getNormale().at(i),old);
                 }
             }
@@ -362,10 +362,10 @@ void CgSceneControl::renderKegel()
     if(kegel){
         m_renderer->render(kegel,old);
         for(unsigned int i=0;i< kegel->getGeraden().size();i++){
-            m_renderer->setUniformValue("1232wwe",glm::vec4(255.,45.0,3.,1.));
+            m_renderer->setUniformValue("mycolor",glm::vec4(255.,45.0,3.,1.));
 
             m_renderer->init(kegel->getGeraden().at(i));
-            m_renderer->setUniformValue("asad",glm::vec4(0.,222.,3.,1.));
+            m_renderer->setUniformValue("mycolor",glm::vec4(0.,222.,3.,1.));
             m_renderer->render(kegel->getGeraden().at(i),old);
         }
     }
@@ -376,7 +376,7 @@ void CgSceneControl::initKegel()
     if(kegel){
         m_renderer->init(kegel);
         for(unsigned int j=0; j<kegel->getGeraden().size();j++){
-            m_renderer->setUniformValue("haus",glm::vec3(0,45.0,3.));
+            m_renderer->setUniformValue("mycolor",glm::vec3(0,45.0,3.));
             m_renderer->init(kegel->getGeraden().at(j));
         }
     }
@@ -405,7 +405,7 @@ void CgSceneControl::renderZylinder()
         m_renderer->render(zylinder,old);
         if(!zylinder->getGeraden().empty()){
             for(unsigned int j=0; j<zylinder->getGeraden().size();j++){
-                m_renderer->setUniformValue("asad",glm::vec4(0.,222.,3.,1.));
+                m_renderer->setUniformValue("mycolor",glm::vec4(0.,222.,3.,1.));
 
                 m_renderer->render(zylinder->getGeraden().at(j),old);
             }
@@ -419,7 +419,7 @@ void CgSceneControl::initZylinder()
         m_renderer->init(zylinder);
         if(!zylinder->getGeraden().empty())
             for(unsigned int j=0; j<zylinder->getGeraden().size()-1;j++){
-                m_renderer->setUniformValue("fsdfsd",glm::vec4(0.,222.,3.,1.));
+                m_renderer->setUniformValue("mycolor",glm::vec4(0.,222.,3.,1.));
 
                 m_renderer->init(zylinder->getGeraden().at(j));
             }
