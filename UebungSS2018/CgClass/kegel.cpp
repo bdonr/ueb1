@@ -1,8 +1,8 @@
 #include "kegel.h"
 #include <iostream>
 
-Kegel::Kegel(int id,float radius,float hoehe, int refine,bool shownormals):id(id),radius(radius),hoehe(hoehe),refine(refine),
-    normalsberechnen(normalsberechnen),type(Cg::TriangleMesh)
+Kegel::Kegel(int id,float radius,float hoehe, int refine,bool normalsberechnen):type(Cg::TriangleMesh),id(id),radius(radius),hoehe(hoehe),refine(refine),
+    normalsberechnen(normalsberechnen)
 {
 create();
 }
@@ -89,7 +89,7 @@ void Kegel::setNormalsberechnen(bool value)
      create();
 }
 
-int Kegel::create(){
+void Kegel::create(){
     /*0*/   vertices.push_back(glm::vec3(0,0,0));
     /*1*/    vertices.push_back(glm::vec3(0,0,hoehe));
     for( float x = 0.0;x<360.0+360.0/refine;x=x+(360.0/refine))
@@ -118,20 +118,18 @@ int Kegel::create(){
     if(normalsberechnen){
         berechneSchwerPunkte();
         berechneNormale();
-        for(int i =0;i<faceNormals.size();i++){
+        for(unsigned int i =0;i<faceNormals.size();i++){
             std::vector<glm::vec3> x;
             x.push_back(schwerpunkte.at(i));
             x.push_back(glm::normalize(faceNormals.at(i))+schwerpunkte.at(i));
             geraden.push_back(MeshFactory::createMyPolyline(glm::vec3(244,44,44),x));
         }
-        std::cout<<triangleIndices.size()<<" "<<d<<std::endl;
     }
-
 }
 
 void Kegel::berechneSchwerPunkte()
 {
-    for(int i =0;i<triangleIndices.size();i=i+3){
+    for(unsigned int i =0;i<triangleIndices.size();i=i+3){
         if(triangleIndices.at(i)<vertices.size()
                 && triangleIndices.at(i+1)<vertices.size()
                 && triangleIndices.at(i+2)<vertices.size()){
@@ -149,7 +147,7 @@ void Kegel::berechneSchwerPunkte()
 void Kegel::berechneNormale()
 {
     int d=0;
-    for(int i =0;i<triangleIndices.size();i=i+3){
+    for(unsigned int i =0;i<triangleIndices.size();i=i+3){
 
         if(triangleIndices.at(i+2)<vertices.size()
                 && triangleIndices.at(i)<vertices.size()

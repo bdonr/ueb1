@@ -27,7 +27,7 @@ private:
     bool normalsberechnen;
     void erstelleRechtEck(glm::vec3 p1, glm::vec3 p2, glm::vec3 p3, int count);
 public:
-    int create();
+    void create();
     Kegel();
     Kegel(int id,float radius, float hoehe,int refine,bool normalsberechnen);
     void setType(enum Cg::ObjectType x);

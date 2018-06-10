@@ -25,11 +25,11 @@ private:
     std::vector<glm::vec3> faceColors;
     std::vector<MyPolyline*> geraden;
     std::vector<glm::vec3> schwerpunkte;
-    int create();
+    void create();
     void erstelleRechtEck(glm::vec3 p1, glm::vec3 p2, glm::vec3 p3, int count);
 public:
     Zylinder();
-    Zylinder(int id,float radius, float hoehe,int refine,bool normalsberechnen);
+    Zylinder(unsigned int id,float radius, float hoehe,int refine,bool normalsberechnen);
 
     // CgBaseRenderableObject interface
     enum Cg::ObjectType getType() const;

@@ -1,13 +1,9 @@
 #include "Zylinder.h"
 #include <iostream>
 #include <stdlib.h>
-/*        for(float y=x-(3600/refine);y<x;y=y+(3600/refine)){
-            std::cout<<"y.x"<<vertices.at(0).x<<"y.y"<<vertices.at(1).y<<"y.z"<<vertices.at(1).z<<std::endl;
 
-        }*/
-
-Zylinder::Zylinder(int id,float radius,float hoehe, int refine,bool normalsberechnen):id(id),radius(radius),hoehe(hoehe),refine(refine)
-  ,normalsberechnen(normalsberechnen),type(Cg::TriangleMesh){
+Zylinder::Zylinder(unsigned int id,float radius,float hoehe, int refine,bool normalsberechnen):type(Cg::TriangleMesh),id(id),radius(radius),hoehe(hoehe),refine(refine)
+  ,normalsberechnen(normalsberechnen){
     create();
 
 }
@@ -72,7 +68,7 @@ void Zylinder::setNormalsberechnen(bool value)
     create();
 }
 
-int Zylinder::create(){
+void Zylinder::create(){
     /*0*/   vertices.push_back(glm::vec3(0,0,0));
     /*1*/    vertices.push_back(glm::vec3(0,0,hoehe));
     for( float x = 0.0;x<360.0+360.0/refine;x=x+(360.0/refine))
@@ -114,13 +110,12 @@ int Zylinder::create(){
     if(normalsberechnen){
         berechneSchwerPunkte();
         berechneNormale();
-        for(int i =0;i<faceNormals.size();i++){
+        for(unsigned int i =0;i<faceNormals.size();i++){
             std::vector<glm::vec3> x;
             x.push_back(schwerpunkte.at(i));
             x.push_back(glm::normalize(faceNormals.at(i))+schwerpunkte.at(i));
             geraden.push_back(MeshFactory::createMyPolyline(glm::vec3(244,44,44),x));
         }
-        std::cout<<triangleIndices.size()<<" "<<d<<std::endl;
     }
 
 }
@@ -136,7 +131,7 @@ void Zylinder::setHoehe(float wert){
 
 void Zylinder::berechneSchwerPunkte()
 {
-    for(int i =0;i<triangleIndices.size();i=i+3){
+    for(unsigned int i =0;i<triangleIndices.size();i=i+3){
         if(triangleIndices.at(i)<vertices.size()
                 && triangleIndices.at(i+1)<vertices.size()
                 && triangleIndices.at(i+2)<vertices.size()){
@@ -154,7 +149,7 @@ void Zylinder::berechneSchwerPunkte()
 void Zylinder::berechneNormale()
 {
     int d=0;
-    for(int i =0;i<triangleIndices.size();i=i+3){
+    for(unsigned int i =0;i<triangleIndices.size();i=i+3){
 
         if(triangleIndices.at(i+2)<vertices.size()
                 && triangleIndices.at(i)<vertices.size()

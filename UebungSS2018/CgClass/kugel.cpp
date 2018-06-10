@@ -61,7 +61,7 @@ int Kugel::create(){
 
     this->vertexColors.push_back(glm::vec3(255,0,0));
     this->faceColors.push_back(glm::vec3(255,23,23));
-    std::cout<<"refine:"<<refine<<std::endl;
+
             float ky=360.0/hoehe;
             float kx=180.0/refine;
             float y = 360.0;
@@ -90,52 +90,10 @@ int Kugel::create(){
                         triangleIndices.push_back(vertices.size()-3);
                         triangleIndices.push_back(vertices.size()-1);
                     }
-
-
-
-
-
                 }
-
-
-         /*       std::cout<<"hier!!"<<k<<std::endl;
-                triangleIndices.push_back(vertices.size()-2);
-                triangleIndices.push_back(vertices.size()-3);
-                triangleIndices.push_back(vertices.size()-k);
-
-                triangleIndices.push_back(vertices.size()-k);
-                triangleIndices.push_back(vertices.size()-3);
-                triangleIndices.push_back(vertices.size()-1);
-*/
                 y=360.0;
-
                 x=x-kx;
-
-
             }
-            /*
-    while(x<360.0+360.0/refine)
-    {
-        for(float y=ky; y<180.0;y=y+ky){
-                vertices.push_back(glm::vec3(radius*glm::sin(glm::radians(x))*glm::cos(glm::radians(y)),radius*glm::sin(glm::radians(x))*glm::sin(glm::radians(y)),radius*glm::cos(glm::radians(x))));
-                x=x+kx;
-                vertices.push_back(glm::vec3(radius*glm::sin(glm::radians(x))*glm::cos(glm::radians(y)),radius*glm::sin(glm::radians(x))*glm::sin(glm::radians(y)),radius*glm::cos(glm::radians(x))));
-                x=x-kx;
-                triangleIndices.push_back(vertices.size()-4);
-                triangleIndices.push_back(vertices.size()-3);
-                triangleIndices.push_back(vertices.size()-2);
-
-                triangleIndices.push_back(vertices.size()-2);
-                triangleIndices.push_back(vertices.size()-3);
-                triangleIndices.push_back(vertices.size()-1);
-
-            }
-
-            x=x+kx;
-
-        }
-        */
-
 }
 
 

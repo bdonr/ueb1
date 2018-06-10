@@ -6,8 +6,14 @@
 
 class MyPolyline : public CgBasePolyline
 {
+private:
+    glm::vec3 color;
+    enum Cg::ObjectType type;
+    unsigned int id;
+    unsigned int width;
+    std::vector<glm::vec3> vertices;
 public:
-    MyPolyline(int id,glm::vec3 color,std::vector<glm::vec3> x);
+    MyPolyline(unsigned int id,glm::vec3 color,std::vector<glm::vec3> x);
 
     Cg::ObjectType getType() const;
     unsigned int getID() const;
@@ -25,12 +31,7 @@ public:
 
     MyPolyline();
     ~MyPolyline();
-private:
-    glm::vec3 color;
-    enum Cg::ObjectType type;
-    int id;
-    unsigned int width;
-    std::vector<glm::vec3> vertices;
+
 };
 
 #endif // MYPOLYLINE_H

@@ -208,9 +208,6 @@ void CgSceneControl::renderObjects() {
     renderKegel();
     renderZylinder();
 
-
-
-
     if(sc){
         sc->render(m_renderer,sc->getSc());
     }
@@ -451,7 +448,6 @@ void CgSceneControl::changeRefineRota(CgBaseEvent *e)
 
         unsigned int refine= ((bestersliderMoveEvent*)e)->getTraegerKlasse()->getDreiDVector().x;
         unsigned int hoehe= ((bestersliderMoveEvent*)e)->getTraegerKlasse()->getDreiDVector().y;
-        std::cout<<hoehe<<" "<<refine<<std::endl;
         rotationbody= MeshFactory::createRotationKoerper(refine,hoehe);
         initRotationBody();
         renderRotationsBody();
@@ -535,7 +531,7 @@ void CgSceneControl::handleKeyPlus()
         s=s+0.02;
     }
 
-    std::cout<<"3: "<<"s"<<s<<""<<std::endl;
+
     calculateNewTransformation(verschiebung);
 
     if(sc){
@@ -629,7 +625,6 @@ void CgSceneControl::windowresize(CgBaseEvent *e)
 {
     if (e->getType() == Cg::WindowResizeEvent) {
         CgWindowResizeEvent *ev = (CgWindowResizeEvent *) e;
-        std::cout <<"2: "<< *ev << std::endl;
         m_proj_matrix = glm::perspective(45.0f, (float) (ev->w()) / ev->h(), 0.01f, 100.0f);
 
     }
@@ -640,7 +635,6 @@ void CgSceneControl::changePage(CgBaseEvent *e)
 
     if(e->getType()==Cg::TabChange){
         page =((bestersliderMoveEvent*)e)->getTraegerKlasse()->getTab();
-        std::cout<<"page "<<page<<std::endl;
         if(page==0)page1();
         if(page==1)page2();
         if(page==2)page3();
@@ -684,8 +678,6 @@ void CgSceneControl::handleEvent(CgBaseEvent *e) {
     // die Enums sind so gebaut, dass man alle Arten von MausEvents über CgEvent::CgMouseEvent abprüfen kann,
     // siehe dazu die CgEvent enums im CgEnums.h
     if (e->getType() == Cg::CgMouseEvent) {
-        std::cout<<"6: "<<((CgMouseEvent *) e)->getLocalPos().x<<std::endl;
-        std::cout<<"7: "<<((CgMouseEvent *) e)->getLocalPos().y<<std::endl;
         // hier kommt jetzt die Abarbeitung des Events hin...
     }
     if(e->getType()== Cg::CgZeigeNormalePage2){
@@ -699,7 +691,6 @@ void CgSceneControl::handleEvent(CgBaseEvent *e) {
             initZylinder();
 
         }
-        std::cout<<shownormals<<"sadasd"<<std::endl;
     }
 
     // die Enums sind so gebaut, dass man alle Arten von KeyEvents über CgEvent::CgKeyEvent abprüfen kann,
@@ -708,7 +699,6 @@ void CgSceneControl::handleEvent(CgBaseEvent *e) {
 
     if (e->getType() == Cg::CgKeyEvent) {
         CgKeyEvent *ev = (CgKeyEvent *) e;
-        std::cout <<"1: "<< *ev << std::endl;
         handleKeyEvents(ev);
 
         // hier kommt jetzt die Abarbeitung des Events hin...
