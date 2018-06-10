@@ -1,4 +1,5 @@
 *.o
 *.exe
-*.moc
-build-CG*
+*.pro
+*.pro.*
+*build*
