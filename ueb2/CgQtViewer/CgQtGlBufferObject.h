@@ -19,17 +19,13 @@ public:
     CgQtGlBufferObject(QOpenGLShaderProgram *);
 
 
-    QOpenGLVertexArrayObject m_object;
-    QOpenGLBuffer m_vertices;
-    QOpenGLBuffer m_normals;
-    QOpenGLBuffer m_face_indices;
+    QOpenGLBuffer vertexbuffer;
+    QOpenGLBuffer normalbuffer;
+    QOpenGLBuffer indexbuffer;
 
     QOpenGLShaderProgram *m_program;
 
     void draw(CgBaseRenderableObject*);
-
-    int m_vert_size;
-    int m_face_indices_size;
 
     void initPolyline(CgBasePolyline* obj);
     void initTriangleMesh(CgBaseTriangleMesh* obj);

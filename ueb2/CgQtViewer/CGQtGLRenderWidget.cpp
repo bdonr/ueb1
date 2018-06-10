@@ -12,6 +12,7 @@
 #include <QMouseEvent>
 #include <QOpenGLShaderProgram>
 #include <QCoreApplication>
+#include <QString>
 #include <math.h>
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
@@ -40,6 +41,9 @@ CgQtGLRenderWidget::CgQtGLRenderWidget(QWidget *parent)
         fmt.setAlphaBufferSize(8);
         setFormat(fmt);
     }
+
+
+
 }
 
 CgQtGLRenderWidget::~CgQtGLRenderWidget()
@@ -75,74 +79,6 @@ void CgQtGLRenderWidget::cleanup()
     doneCurrent();
 }
 
-static const char *vertexShaderSourceCore =
-    "#version 150\n"
-    "in vec4 vertex;\n"
-    "in vec3 normal;\n"
-    "out vec3 vert;\n"
-    "out vec3 vertNormal;\n"
-    "uniform mat4 projMatrix;\n"
-    "uniform mat4 mvMatrix;\n"
-    "uniform mat3 normalMatrix;\n"
-    "void main() {\n"
-    "   vert = vertex.xyz;\n"
-    "   vertNormal = normalMatrix * normal;\n"
-    "   gl_Position = projMatrix * mvMatrix * vertex;\n"
-    "}\n";
-
-static const char *fragmentShaderSourceCore =
-    "#version 150\n"
-    "in highp vec3 vert;\n"
-    "in highp vec3 vertNormal;\n"
-    "out highp vec4 fragColor;\n"
-    "uniform highp vec3 lightPos;\n"
-    "void main() {\n"
-    "   highp vec3 L = normalize(lightPos - vert);\n"
-    "   highp float NL = max(dot(normalize(vertNormal), L), 0.0);\n"
-    "   highp vec3 color = vec3(0.39, 1.0, 0.0);\n"
-    "   highp vec3 col = clamp(color * 0.2 + color * 0.8 * NL, 0.0, 1.0);\n"
-    "   fragColor = vec4(col, 1.0);\n"
-    "}\n";
-
-static const char *vertexShaderSource =
-    "attribute vec4 vertex;\n"
-    "attribute vec3 normal;\n"
-    "varying vec3 vert;\n"
-    "varying vec3 vertNormal;\n"
-    "uniform mat4 projMatrix;\n"
-    "uniform mat4 mvMatrix;\n"
-    "uniform mat3 normalMatrix;\n"
-    "void main() {\n"
-    "   vert = vertex.xyz;\n"
-    "   vertNormal = normalMatrix * normal;\n"
-    "   gl_Position = projMatrix * mvMatrix * vertex;\n"
-    "}\n";
-
-static const char *fragmentShaderSource =
-    "varying highp vec3 vert;\n"
-    "varying highp vec3 vertNormal;\n"
-    "uniform highp vec3 lightPos;\n"
-    "uniform bool  calcLighting;\n"
-    "uniform vec3 singlecolor;\n"
-    "uniform bool use_single_color;\n"
-
-    "void main() {\n"
-    "   highp vec3 L = normalize(lightPos - vert);\n"
-    "   highp float NL = max(dot(normalize(vertNormal), L), 0.0);\n"
-    "   highp vec3 color;\n"
-    "   if(use_single_color)\n"
-    "   {\n "
-    "      color=singlecolor;\n"
-    "    }\n"
-    "   else\n"
-    "   {\n "
-    "      color= vec3(0.39, 1.0, 0.0);\n"
-    "    }\n"
-    "   highp vec3 col = clamp(color * 0.2 + color * 0.8 * NL, 0.0, 1.0);\n"
-    "   if(!calcLighting)\n"
-    "      { col=color;} \n"
-    "   gl_FragColor = vec4(col, 1.0);\n"
-    "}\n";
 
 
 
@@ -159,37 +95,14 @@ void CgQtGLRenderWidget::render(CgBaseRenderableObject* obj,glm::mat4 world_coor
         m_world = arc_rot* m_world ;
     }
 
-    if(m_lighting)
-    {
-        std::cout << "light on" << std::endl;
-    }
 
     glm::mat4 mv_matrix = m_lookat * m_world ;
     glm::mat3 normal_matrix = glm::transpose(glm::inverse(glm::mat3(mv_matrix)));
 
-
-    m_program->setUniformValue(m_projMatrixLoc, QMatrix4x4(glm::value_ptr(m_proj)).transposed());
-    m_program->setUniformValue(m_mvMatrixLoc, QMatrix4x4(glm::value_ptr(mv_matrix)).transposed());
-    m_program->setUniformValue(m_normalMatrixLoc, QMatrix3x3(glm::value_ptr(normal_matrix)));
-    m_program->setUniformValue(m_lightPosLoc,QVector3D(m_light_pos.x,m_light_pos.y,m_light_pos.z));
-    m_program->setUniformValue(m_calcLightingLoc,m_lighting);
-
-
-    if(obj->getType()==Cg::Polyline)
-    {
-      CgBasePolyline* c_obj=(CgBasePolyline*)obj;
-      m_program->setUniformValue(m_ColorLoc,QVector3D(c_obj->getColor().x,c_obj->getColor().y,c_obj->getColor().z));
-      m_program->setUniformValue(m_UseSingleColorLoc,true);
-    }
-
-
-    if(obj->getType()==Cg::TriangleMesh)
-    {
-      m_program->setUniformValue(m_UseSingleColorLoc,false);
-      glLineWidth(1.0f);
-    }
-
-
+    setUniformValue("projMatrix",m_proj);
+    setUniformValue("lookatMatrix",m_lookat);
+    setUniformValue("worldMatrix",m_world);
+    setUniformValue("normalMatrix",normal_matrix);
 
     if(m_gl_buffer_objects.find(obj->getID())!=m_gl_buffer_objects.end())
     {
@@ -197,6 +110,57 @@ void CgQtGLRenderWidget::render(CgBaseRenderableObject* obj,glm::mat4 world_coor
     }
 
 
+}
+
+
+void CgQtGLRenderWidget::setUniformValue(std::string name,glm::mat3 val)
+{
+     if(m_attribute_locations.find(name)==m_attribute_locations.end())
+          m_attribute_locations.insert(std::make_pair(name, m_program->uniformLocation(name.c_str())));
+      m_program->bind();
+      m_program->setUniformValue(m_attribute_locations[name], QMatrix3x3(glm::value_ptr(val)).transposed());
+}
+
+void CgQtGLRenderWidget::setUniformValue(std::string name,glm::mat4 val)
+{
+     if(m_attribute_locations.find(name)==m_attribute_locations.end())
+          m_attribute_locations.insert(std::make_pair(name, m_program->uniformLocation(name.c_str())));
+      m_program->bind();
+      m_program->setUniformValue(m_attribute_locations[name], QMatrix4x4(glm::value_ptr(val)).transposed());
+}
+
+
+void CgQtGLRenderWidget::setUniformValue(std::string name,glm::vec4 val)
+{
+     if(m_attribute_locations.find(name)==m_attribute_locations.end())
+          m_attribute_locations.insert(std::make_pair(name, m_program->uniformLocation(name.c_str())));
+      m_program->bind();
+      m_program->setUniformValue(m_attribute_locations[name],QVector4D(val.x,val.y,val.z,val.w));
+}
+
+
+void CgQtGLRenderWidget::setUniformValue(std::string name,glm::vec3 val)
+{
+     if(m_attribute_locations.find(name)==m_attribute_locations.end())
+          m_attribute_locations.insert(std::make_pair(name, m_program->uniformLocation(name.c_str())));
+      m_program->bind();
+      m_program->setUniformValue(m_attribute_locations[name],QVector3D(val.x,val.y,val.z));
+}
+
+void CgQtGLRenderWidget::setUniformValue(std::string name,double val)
+{
+     if(m_attribute_locations.find(name)==m_attribute_locations.end())
+          m_attribute_locations.insert(std::make_pair(name, m_program->uniformLocation(name.c_str())));
+      m_program->bind();
+      m_program->setUniformValue(m_attribute_locations[name],(float)val);
+}
+
+void CgQtGLRenderWidget::setUniformValue(std::string name,int val)
+{
+     if(m_attribute_locations.find(name)==m_attribute_locations.end())
+          m_attribute_locations.insert(std::make_pair(name, m_program->uniformLocation(name.c_str())));
+      m_program->bind();
+      m_program->setUniformValue(m_attribute_locations[name],val);
 }
 
 
@@ -218,7 +182,10 @@ void CgQtGLRenderWidget::init(CgBaseRenderableObject* obj)
     if(m_gl_buffer_objects.find(obj->getID())!=m_gl_buffer_objects.end())
         bobj = m_gl_buffer_objects[obj->getID()];
     else
+    {
         bobj = new CgQtGlBufferObject(m_program);
+        m_gl_buffer_objects.insert(std::make_pair(obj->getID(),bobj));
+    }
 
 
 
@@ -239,8 +206,7 @@ void CgQtGLRenderWidget::init(CgBaseRenderableObject* obj)
         bobj->initPointCloud((CgBasePointCloud*)obj);
     }
 
-    m_gl_buffer_objects.insert(std::make_pair(obj->getID(),bobj));
-}
+  }
 
 
 
@@ -267,37 +233,37 @@ void CgQtGLRenderWidget::initializeGL()
 
     glFrontFace(GL_CCW);
     glClearColor(0, 0, 0, m_transparent ? 0 : 1);
-
-
     m_program = new QOpenGLShaderProgram;
-    m_program->addShaderFromSourceCode(QOpenGLShader::Vertex, m_core ? vertexShaderSourceCore : vertexShaderSource);
-    m_program->addShaderFromSourceCode(QOpenGLShader::Fragment, m_core ? fragmentShaderSourceCore : fragmentShaderSource);
-    m_program->bindAttributeLocation("vertex", 0);
-    m_program->bindAttributeLocation("normal", 1);
+
+    setShaderSourceFiles("../UebungSS2018/CgShader/simple.vert","../UebungSS2018/CgShader/simple.frag");
+
     m_program->link();
+
 
     m_program->bind();
     
-    
-    m_projMatrixLoc = m_program->uniformLocation("projMatrix");
-    m_mvMatrixLoc = m_program->uniformLocation("mvMatrix");
-    m_normalMatrixLoc = m_program->uniformLocation("normalMatrix");
-    m_lightPosLoc = m_program->uniformLocation("lightPos");
-    m_calcLightingLoc = m_program->uniformLocation("calcLighting");
-    m_ColorLoc = m_program->uniformLocation("singlecolor");
-    m_UseSingleColorLoc = m_program->uniformLocation("use_single_color");
-
-
+    setUniformValue("mycolor",glm::vec4(0.0,1.0,0.0,1.0));
 
     // Our camera never changes in this example.
     m_lookat=glm::lookAt(glm::vec3(0.0,0.0,1.0),glm::vec3(0.0,0.0,0.0),glm::vec3(0.0,1.0,0.0));
-
     m_world=glm::mat4(1.);
 
 
     // Light position is fixed.
     m_light_pos=glm::vec3(0.0,0.0,70.0);
-    m_program->release();
+
+}
+
+void CgQtGLRenderWidget::setShaderSourceFiles(std::string filename_vert,std::string filename_fragment)
+{
+     if(m_program->isLinked())
+             m_program->release();
+
+     m_program->removeAllShaders();
+     m_program->addShaderFromSourceFile(QOpenGLShader::Vertex,filename_vert.c_str());
+     m_program->addShaderFromSourceFile(QOpenGLShader::Fragment,filename_fragment.c_str());
+     m_program->link();
+     m_program->bind();
 }
 
 
@@ -316,6 +282,7 @@ void CgQtGLRenderWidget::paintGL()
         break;
      default: break;
     }
+
 
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     glEnable(GL_DEPTH_TEST);

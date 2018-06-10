@@ -5,6 +5,7 @@ CgKeyEvent::CgKeyEvent()
 
 }
 
+
 CgKeyEvent::CgKeyEvent(Cg::EventType type,Cg::Key key,Cg::KeyboardModifiers mod, std::string text)
 {
     m_type=type;

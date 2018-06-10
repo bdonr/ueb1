@@ -2,11 +2,11 @@
 #include "CgQtGLRenderWidget.h"
 #include "CgQtGui.h"
 #include "CgQtMainApplication.h"
-#include "../CgBase/CgEnums.h"
-#include "../CgEvents/CgMouseEvent.h"
-#include "../CgEvents/CgKeyEvent.h"
-#include "../CgEvents/CgWindowResizeEvent.h"
-#include "../CgSceneGraph/CgSceneControl.h"
+#include "CgBase/CgEnums.h"
+#include "CgEvents/CgMouseEvent.h"
+#include "CgEvents/CgKeyEvent.h"
+#include "CgEvents/CgWindowResizeEvent.h"
+#include "CgSceneGraph/CgSceneControl.h"
 #include "CgEvents/besterslidermoveevent.h"
 #include "CgClass/traegerklasse.h"
 #include <QSlider>
@@ -172,7 +172,7 @@ QSlider *CgQtGui::createSlider()
     return slider;
 }
 
-QSlider *CgQtGui::createSlider(int r,int size,int max,int min,int steps)
+QSlider *CgQtGui::createSlider(int max,int min,int steps)
 {
     QSlider *slider = new QSlider(Qt::Vertical);
     slider->setRange(min, max );
@@ -190,7 +190,7 @@ void CgQtGui::page2(QWidget* parent)
     QVBoxLayout *tab1_control = new QVBoxLayout();
     QPushButton* myButton2 = new QPushButton("Zeige Polyline");
     tab1_control->addWidget(myButton2);
-    connect(myButton2, SIGNAL( clicked() ), this, SLOT(slotMyButton1Pressed()));
+   // connect(myButton2, SIGNAL( clicked() ), this, SLOT(slotMyButton1Pressed()));
 
     QLabel* lab7= new QLabel("RotationsKörper Refine");
     tab1_control->addWidget(lab7);
@@ -302,11 +302,11 @@ void CgQtGui::page1(QWidget* parent)
 
     QPushButton* myButton1 = new QPushButton("Zeige Würfell");
     tab3_control->addWidget(myButton1);
-    connect(myButton1, SIGNAL( clicked() ), this, SLOT(slotMyButton1Pressed()) );
+    //connect(myButton1, SIGNAL( clicked() ), this, SLOT(slotMyButton1Pressed()) );
 
     QPushButton* myButton2 = new QPushButton("Zeige Normale");
     tab3_control->addWidget(myButton2);
-    connect(myButton2, SIGNAL( clicked() ), this, SLOT(slotMyButton1Pressed()) );
+    //connect(myButton2, SIGNAL( clicked() ), this, SLOT(slotMyButton1Pressed()) );
 
 
     QLabel* lab2= new QLabel("Rot");
@@ -362,13 +362,13 @@ void CgQtGui::page3(QWidget* parent)
     myButtonGroup->setExclusive(true);
 
     QRadioButton* radiobutton1 = new QRadioButton( "&Hase");
-    connect(radiobutton1, SIGNAL(pressed()), this, SLOT(objectOpenSelect1()));
+   // connect(radiobutton1, SIGNAL(pressed()), this, SLOT(objectOpenSelect1()));
     QRadioButton* radiobutton2 = new QRadioButton( "&Tyranosaorus");
-    connect(radiobutton2, SIGNAL(pressed()), this, SLOT(objectOpenSelect2()));
+  //  connect(radiobutton2, SIGNAL(pressed()), this, SLOT(objectOpenSelect2()));
     QRadioButton* radiobutton3 = new QRadioButton( "&Porsche");
-    connect(radiobutton3, SIGNAL(pressed()), this, SLOT(objectOpenSelect3()));
+    //connect(radiobutton3, SIGNAL(pressed()), this, SLOT(objectOpenSelect3()));
     QRadioButton* radiobutton4 = new QRadioButton( "&Kugel");
-    connect(radiobutton4, SIGNAL(pressed()), this, SLOT(objectOpenSelect4()));
+  //  connect(radiobutton4, SIGNAL(pressed()), this, SLOT(objectOpenSelect4()));
 
     radiobutton3->setChecked(true);
 
@@ -408,7 +408,7 @@ void CgQtGui::page3(QWidget* parent)
     obj_rotate_X->setMinimum(1);
     obj_rotate_X->setMaximum(50);
     obj_rotate_X->setValue(1);
-    connect( obj_rotate_X, SIGNAL(editingFinished()), this, SLOT(changeRotationsObject()));
+    //connect( obj_rotate_X, SIGNAL(editingFinished()), this, SLOT(changeRotationsObject()));
     subSBox->addWidget(obj_rotate_X);
 
     QLabel* lab3= new QLabel("drehung Y achse");
@@ -419,7 +419,7 @@ void CgQtGui::page3(QWidget* parent)
     obj_rotate_Y->setMinimum(1);
     obj_rotate_Y->setMaximum(50);
     obj_rotate_Y->setValue(1);
-    connect( obj_rotate_Y, SIGNAL(editingFinished()), this, SLOT(changeRotationsObject()));
+    //connect( obj_rotate_Y, SIGNAL(editingFinished()), this, SLOT(changeRotationsObject()));
     subSBox->addWidget(obj_rotate_Y);
 
     QLabel* lab4= new QLabel("drehung Z achse");

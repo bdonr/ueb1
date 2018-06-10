@@ -33,7 +33,8 @@ SOURCES += main.cpp \
     CgClass/kamera.cpp \
     CgClass/wuerfel.cpp \
     CgClass/dreiecke.cpp \
-    CgClass/pfeil.cpp
+    CgClass/pfeil.cpp \
+    CgQtViewer/CgQtGLRenderWindow.cpp
 
 
 HEADERS += \
@@ -64,7 +65,7 @@ HEADERS += \
     CgClass/Mypolyline.h \
     CgEvents/slidermoveevent.h \
     CgClass/rotationskoerper.h \
-CgUtils/ObjLoader.h \
+    CgUtils/ObjLoader.h \
     CgClass/dreiecke.h \
     CgClass/koordinatensystem.h \
     CgEvents/objectopenevent.h \
@@ -76,4 +77,5 @@ CgUtils/ObjLoader.h \
     CgClass/appearance.h \
     CgClass/kamera.h \
     CgClass/wuerfel.h \
-    CgClass/pfeil.h
+    CgClass/pfeil.h \
+    CgQtViewer/CgQtGLRenderWindow.h

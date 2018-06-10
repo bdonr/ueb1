@@ -103,18 +103,18 @@ CgSceneControl::~CgSceneControl() {
 void CgSceneControl::initRotationBody()
 {
     if(rotationbody!=NULL){
-        if(!rotationbody->getPolyVec().size()>0){
-            for(int i = 0; i<rotationbody->getPolyVec().size()-1;i++){
+        if((!rotationbody->getPolyVec().size())>0){
+            for(unsigned int i = 0; i<rotationbody->getPolyVec().size()-1;i++){
                 m_renderer->init(rotationbody->getPolyVec().at(i));
             }
         }
-        if(rotationbody->getKeisVec().size()>1){
-            for(int i = 0; i<=rotationbody->getKeisVec().size()-2;i++){
+        if((rotationbody->getKeisVec().size())>1){
+            for(unsigned int i = 0; i<=rotationbody->getKeisVec().size()-2;i++){
                 m_renderer->init(rotationbody->getKeisVec().at(i));
             }
         }
-        if(rotationbody->getNormale().size()>0){
-            for(int i = 0; i<=rotationbody->getNormale().size()-1;i++){
+        if((rotationbody->getNormale().size())>0){
+            for(unsigned int i = 0; i<=rotationbody->getNormale().size()-1;i++){
                 m_renderer->init(rotationbody->getNormale().at(i));
             }
 
@@ -149,20 +149,20 @@ void CgSceneControl::renderRotationsBody()
     if(rotationbody){
         if(!rotationbody->getKeisVec().empty())
             if(rotationbody->getPolyVec().size()>0){
-                for(int i = 0; i<rotationbody->getPolyVec().size()-1;i++){
+                for(unsigned int i = 0; i<rotationbody->getPolyVec().size()-1;i++){
                     m_renderer->render(rotationbody->getPolyVec().at(i),old);
                 }
             }
         if(!rotationbody->getKeisVec().empty()){
             if(rotationbody->getKeisVec().size()>1){
-                for(int i = 0; i<=rotationbody->getKeisVec().size()-2;i++){
+                for(unsigned int i = 0; i<=rotationbody->getKeisVec().size()-2;i++){
                     m_renderer->render(rotationbody->getKeisVec().at(i),old);
                 }
             }
         }
         if(!rotationbody->getNormale().empty()){
             if(rotationbody->getNormale().size()>0){
-                for(int i = 0; i<=rotationbody->getNormale().size()-1;i++){
+                for(unsigned int i = 0; i<=rotationbody->getNormale().size()-1;i++){
                     m_renderer->render(rotationbody->getNormale().at(i),old);
                 }
             }
@@ -174,7 +174,7 @@ void CgSceneControl::renderWurfel()
 {
     if(wuerfel){
         m_renderer->render(wuerfel,old );
-        for(int i =0; i<wuerfel->getGeraden().size();i++){
+        for(unsigned int i =0; i<wuerfel->getGeraden().size();i++){
             m_renderer->render(wuerfel->getGeraden().at(i),old);
         }
     }
@@ -283,7 +283,7 @@ void CgSceneControl::registerSceneGraph(CgBaseRenderer *r, SceneEntity* e)
         r->init(e->getOb());
     }
     else{
-        for(int i=0;i<=e->getChildren().size()-1;i++){
+        for(unsigned int i=0;i<=e->getChildren().size()-1;i++){
             r->init(e->getChildren().at(i)->getOb());
             if(!e->getChildren().at(i)->getChildren().empty()){
                 registerSceneGraph(r,e->getChildren().at(i));
@@ -299,7 +299,7 @@ void CgSceneControl::drawSceneGraph(CgBaseRenderer *r, SceneEntity *e)
         r->render(e->getOb(),e->getTransformation());
     }
     else{
-        for(int i=0;i<=e->getChildren().size()-1;i++){
+        for(unsigned int i=0;i<=e->getChildren().size()-1;i++){
             r->render(e->getChildren().at(i)->getOb(),e->getChildren().at(i)->getTransformation());
             if(!e->getChildren().at(i)->getChildren().empty()){
                 drawSceneGraph(r,e->getChildren().at(i));
@@ -308,7 +308,7 @@ void CgSceneControl::drawSceneGraph(CgBaseRenderer *r, SceneEntity *e)
     }
 }
 
-glm::mat4x4 CgSceneControl::transform(glm::vec3 k,float winkely,float winkelz,float wunschwinkel,float skala)
+glm::mat4x4 CgSceneControl::transform(glm::vec3 k,float winkely,float winkelz,float wunschwinkel)
 {
     calculateNewTransformation(verschiebung);
     return
@@ -357,7 +357,7 @@ void CgSceneControl::renderKegel()
 {
     if(kegel){
         m_renderer->render(kegel,old);
-        for(int i=0;i< kegel->getGeraden().size();i++){
+        for(unsigned int i=0;i< kegel->getGeraden().size();i++){
             m_renderer->init(kegel->getGeraden().at(i));
             m_renderer->render(kegel->getGeraden().at(i),old);
         }
@@ -368,7 +368,7 @@ void CgSceneControl::initKegel()
 {
     if(kegel){
         m_renderer->init(kegel);
-        for(int j=0; j<kegel->getGeraden().size();j++){
+        for(unsigned int j=0; j<kegel->getGeraden().size();j++){
             m_renderer->init(kegel->getGeraden().at(j));
         }
     }
@@ -396,7 +396,7 @@ void CgSceneControl::renderZylinder()
     if(zylinder){
         m_renderer->render(zylinder,old);
         if(!zylinder->getGeraden().empty()){
-            for(int j=0; j<zylinder->getGeraden().size()-1;j++){
+            for(unsigned int j=0; j<zylinder->getGeraden().size()-1;j++){
                 m_renderer->render(zylinder->getGeraden().at(j),old);
             }
         }
@@ -408,7 +408,7 @@ void CgSceneControl::initZylinder()
     if(zylinder!=NULL){
         m_renderer->init(zylinder);
         if(!zylinder->getGeraden().empty())
-            for(int j=0; j<zylinder->getGeraden().size()-1;j++){
+            for(unsigned int j=0; j<zylinder->getGeraden().size()-1;j++){
                 m_renderer->init(zylinder->getGeraden().at(j));
             }
     }
@@ -437,8 +437,8 @@ void CgSceneControl::changeRefineRota(CgBaseEvent *e)
 {
     if(e->getType() == Cg::CgChangeRota){
 
-        int refine= ((bestersliderMoveEvent*)e)->getTraegerKlasse()->getDreiDVector().x;
-        int hoehe= ((bestersliderMoveEvent*)e)->getTraegerKlasse()->getDreiDVector().y;
+        unsigned int refine= ((bestersliderMoveEvent*)e)->getTraegerKlasse()->getDreiDVector().x;
+        unsigned int hoehe= ((bestersliderMoveEvent*)e)->getTraegerKlasse()->getDreiDVector().y;
         std::cout<<hoehe<<" "<<refine<<std::endl;
         rotationbody= MeshFactory::createRotationKoerper(refine,hoehe);
         initRotationBody();
@@ -447,7 +447,7 @@ void CgSceneControl::changeRefineRota(CgBaseEvent *e)
     }
 }
 
-void CgSceneControl::handleKeyY(CgBaseEvent *e)
+void CgSceneControl::handleKeyY()
 {
     old=old*rotationY(y);
     if(y==3){
@@ -460,7 +460,7 @@ void CgSceneControl::handleKeyY(CgBaseEvent *e)
 
 }
 
-void CgSceneControl::handleKeyX(CgBaseEvent *e)
+void CgSceneControl::handleKeyX()
 {
 
     old=old*rotationX(x);
@@ -474,7 +474,7 @@ void CgSceneControl::handleKeyX(CgBaseEvent *e)
 
 }
 
-void CgSceneControl::handleKeyZ(CgBaseEvent *e)
+void CgSceneControl::handleKeyZ()
 {
     old=old*rotationZ(z);
     if(z==3){
@@ -492,7 +492,7 @@ void CgSceneControl::handleKeyZ(CgBaseEvent *e)
 
 }
 
-void CgSceneControl::handleKeyMinus(CgBaseEvent *e)
+void CgSceneControl::handleKeyMinus()
 {
 
     if(s<0.01){
@@ -514,7 +514,7 @@ void CgSceneControl::handleKeyMinus(CgBaseEvent *e)
 
 }
 
-void CgSceneControl::handleKeyPlus(CgBaseEvent *e)
+void CgSceneControl::handleKeyPlus()
 {
 
     if(s>0.9){
@@ -535,7 +535,7 @@ void CgSceneControl::handleKeyPlus(CgBaseEvent *e)
 
 }
 
-void CgSceneControl::handleKeyD(CgBaseEvent *e)
+void CgSceneControl::handleKeyD()
 {
 
     countA+=.1;
@@ -543,58 +543,58 @@ void CgSceneControl::handleKeyD(CgBaseEvent *e)
 
 }
 
-void CgSceneControl::handleKeyA(CgBaseEvent *e)
+void CgSceneControl::handleKeyA()
 {
     countA-=.1;
     cam->strafeMINUS((-1)*countA);
 }
 
-void CgSceneControl::handleKeyW(CgBaseEvent *e)
+void CgSceneControl::handleKeyW()
 {
     countW+=.1;
     cam->towardPLUS(countW);
 }
 
-void CgSceneControl::handleKeyS(CgBaseEvent *e)
+void CgSceneControl::handleKeyS()
 {
     countW-=.1;
     cam->towardMINUS((-1)*countW);
 }
 
-void CgSceneControl::handleKeyU(CgBaseEvent *e)
+void CgSceneControl::handleKeyU()
 {
     cam->rotateMinus();
 }
 
-void CgSceneControl::handleKeyI(CgBaseEvent *e)
+void CgSceneControl::handleKeyI()
 {
     cam->rotatePlus();
 }
 
-void CgSceneControl::handleKeyEvents(CgBaseEvent *e)
+void CgSceneControl::handleKeyEvents(CgBaseEvent*e)
 {
     switch(((CgKeyEvent*)e)->key()){
-    case Cg::Key_Y:handleKeyY(e);
+    case Cg::Key_Y:handleKeyY();
         break;
-    case Cg::Key_X:handleKeyX(e);
+    case Cg::Key_X:handleKeyX();
         break;
-    case Cg::Key_Z:handleKeyZ(e);
+    case Cg::Key_Z:handleKeyZ();
         break;
-    case Cg::Key_Minus : handleKeyMinus(e);
+    case Cg::Key_Minus : handleKeyMinus();
         break;
-    case Cg::Key_Plus:handleKeyPlus(e);
+    case Cg::Key_Plus:handleKeyPlus();
         break;
-    case Cg::Key_D:handleKeyD(e);
+    case Cg::Key_D:handleKeyD();
         break;
-    case Cg::Key_A:handleKeyA(e);
+    case Cg::Key_A:handleKeyA();
         break;
-    case Cg::Key_W:handleKeyW(e);
+    case Cg::Key_W:handleKeyW();
         break;
-    case Cg::Key_S:handleKeyS(e);
+    case Cg::Key_S:handleKeyS();
         break;
-    case Cg::Key_U:handleKeyU(e);
+    case Cg::Key_U:handleKeyU();
         break;
-    case Cg::Key_I:handleKeyI(e);
+    case Cg::Key_I:handleKeyI();
         break;
     default:
         break;
@@ -604,7 +604,6 @@ void CgSceneControl::handleKeyEvents(CgBaseEvent *e)
 void CgSceneControl::changeRota(CgBaseEvent *e)
 {
     if(e->getType()==Cg::CgChangeRota){
-        bool k=false;
         float x =((bestersliderMoveEvent*)e)->getTraegerKlasse()->getIntvec().x/10;
         float y =((bestersliderMoveEvent*)e)->getTraegerKlasse()->getIntvec().y/10;
         float z =((bestersliderMoveEvent*)e)->getTraegerKlasse()->getIntvec().z/10;
@@ -746,16 +745,7 @@ void CgSceneControl::resetAll(){
     delete wuerfel;
 
 }
-glm::mat4x4 CgSceneControl::overallRotation(int x, int y, int z){
-    float x1=x*1.;
-    float y1=y*1.;
-    float z1=z*1.0;
-}
 void CgSceneControl::renew(){
-
-}
-
-glm::mat4x4 rotationX(int x){
 
 }
 

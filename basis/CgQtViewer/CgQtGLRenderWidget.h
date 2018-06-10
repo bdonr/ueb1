@@ -16,6 +16,7 @@ class CgQtGlBufferObject;
 class CgTrackball;
 
 
+
 QT_FORWARD_DECLARE_CLASS(QOpenGLShaderProgram)
 
 class CgQtGLRenderWidget : public QOpenGLWidget,public CgBaseRenderer, protected QOpenGLFunctions
@@ -43,7 +44,14 @@ public:
     void setProjectionMatrix(glm::mat4 proj);
     void setSceneControl(CgBaseSceneControl* scene_control) {m_scene_control=scene_control;}
 
+    void setShaderSourceFiles(std::string filename_vert,std::string filename_fragment);
 
+    void setUniformValue(std::string,glm::mat3);
+    void setUniformValue(std::string,glm::mat4);
+    void setUniformValue(std::string,glm::vec3);
+    void setUniformValue(std::string,glm::vec4);
+    void setUniformValue(std::string,double);
+    void setUniformValue(std::string,int);
 
     void setCustomRotation(bool arg);
     bool getCustomRotation();
@@ -82,7 +90,6 @@ private:
     bool m_core;
 
 
-
     QOpenGLShaderProgram *m_program;
 
     int m_projMatrixLoc;
@@ -111,6 +118,8 @@ private:
     CgTrackball* m_trackball;
 
     std::map<unsigned int,CgQtGlBufferObject*> m_gl_buffer_objects;
+
+    std::map<std::string,int> m_attribute_locations;
 
 };
 

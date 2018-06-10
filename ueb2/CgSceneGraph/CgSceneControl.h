@@ -44,7 +44,7 @@ public:
     glm::mat4x4 overallRotation(int x, int y, int z);
     void resetRenderKugel(int refine, float hoehe, float radius);
     glm::mat4x4 transform(glm::vec3 k, int winkely, int winkelz, int wunschwinkel);
-    glm::mat4x4 transform(glm::vec3 k, float winkely, float winkelz, float wunschwinkel, float skala);
+    glm::mat4x4 transform(glm::vec3 k, float winkely, float winkelz, float wunschwinkel);
     void page1();
     void page2();
     void page3();
@@ -72,27 +72,27 @@ public:
 
     void handleKeyEvents(CgBaseEvent *e);
 
-    void handleKeyY(CgBaseEvent *e);
+    void handleKeyY();
 
-    void handleKeyX(CgBaseEvent *e);
+    void handleKeyX();
 
-    void handleKeyZ(CgBaseEvent *e);
+    void handleKeyZ();
 
-    void handleKeyMinus(CgBaseEvent *e);
+    void handleKeyMinus();
 
-    void handleKeyPlus(CgBaseEvent *e);
+    void handleKeyPlus();
 
-    void handleKeyD(CgBaseEvent *e);
+    void handleKeyD();
 
-    void handleKeyA(CgBaseEvent *e);
+    void handleKeyA();
 
-    void handleKeyW(CgBaseEvent *e);
+    void handleKeyW();
 
-    void handleKeyS(CgBaseEvent *e);
+    void handleKeyS();
 
-    void handleKeyU(CgBaseEvent *e);
+    void handleKeyU();
 
-    void handleKeyI(CgBaseEvent *e);
+    void handleKeyI();
 
     void changeRota(CgBaseEvent *e);
 
