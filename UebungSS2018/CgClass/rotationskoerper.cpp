@@ -9,7 +9,8 @@ RotationsKoerper::RotationsKoerper(MyPolyline* poly, int refine):poly(poly), ref
 
 }
 
-RotationsKoerper::RotationsKoerper(int id, int refine,int hoehe):refine(refine), id(id),hoehe(hoehe)
+RotationsKoerper::RotationsKoerper(int id, int refine,int hoehe,bool showline,bool shownormals):refine(refine),
+    id(id),hoehe(hoehe),showline(showline),shownormals(shownormals)
 {
     drehe();
 }
@@ -25,52 +26,6 @@ std::vector<MyPolyline*> RotationsKoerper::getNormale(){
     return this->normale;
 }
 
-void RotationsKoerper::erstelleKugel(){
-    int count = 0;
-    float y = 0;
-
-
-    std::vector<glm::vec3> vect;
-    std::vector<glm::vec3> matrix;
-
-
-    for(float i=0.0; i<=180.;i=i+20.){
-        std::cout<<i<<std::endl;
-        // std::cout<<"hallo"<<vectneu.size()<<std::endl;
-        vect.push_back(glm::vec3(glm::sin(glm::radians(i)),glm::cos(glm::radians(i)),0));
-        //    std::cout<<glm::cos(i)<<","<<glm::sin(i)<<"i"<<i<<std::endl;
-        //vectneu.at(i)->fuelleAuf();
-    }
-
-    for( float y = 0.0;y<360.0+360.0/refine;y=y+(360.0/refine))
-    {
-        std::vector<glm::vec3> matrix;
-        matrix.push_back(glm::vec3(glm::cos(glm::radians(y)),0,glm::sin(glm::radians(y))));
-        matrix.push_back(glm::vec3(0,1,0));
-        matrix.push_back(glm::vec3((-1)*glm::sin(glm::radians(y)),0,glm::cos(glm::radians(y))));
-        std::vector<glm::vec3> vectneu;
-        // std::cout<<"hallo"<<vectneu.size()<<std::endl;
-        for(int i=0;i<vect.size();i++){
-            vectneu.push_back(vectorMalMatrix(vect.at(i),matrix));
-
-            //vectneu.at(i)->fuelleAuf();
-
-        }
-
-        polyVec.push_back(MeshFactory::createMyPolyline(glm::vec3(255,0,0),vectneu));
-
-        // polyVec.at(count)->fuelleAuf();
-        // polyVec.at(count)->fuelleAuf();
-
-        count++;
-    }
-    zieheLinieZwischenZweiNachBarSegmenten();
-
-}
-
-void RotationsKoerper::erstelleRotationsKoerper(){
-
-}
 
 glm::vec3 RotationsKoerper::vectorMalMatrix(glm::vec3 vector,std::vector<glm::vec3>matrix){
     glm::vec3 erg;
@@ -100,13 +55,15 @@ void RotationsKoerper::zieheLinieZwischenZweiNachBarSegmenten(){
             glm::vec3 mittelpunkt=mittelPunkt(a,b,c);
 
             k.push_back(mittelpunkt);
-            k.push_back(normalen(a,b,c,mittelpunkt));
+            if(shownormals){
+                k.push_back(normalen(a,b,c,mittelpunkt));
 
-            std::vector<glm::vec3> m;
-            glm::vec3 mittelpunkt2=mittelPunkt(d,b,c);
-            this->normale.push_back(MeshFactory::createMyPolyline(glm::vec3(0,255,0),k));
-            m.push_back(normalen(d,b,c,mittelpunkt2));
-            this->normale.push_back(MeshFactory::createMyPolyline(glm::vec3(0,255,0),m));
+                std::vector<glm::vec3> m;
+                glm::vec3 mittelpunkt2=mittelPunkt(d,b,c);
+                this->normale.push_back(MeshFactory::createMyPolyline(glm::vec3(0,255,0),k));
+                m.push_back(normalen(d,b,c,mittelpunkt2));
+                this->normale.push_back(MeshFactory::createMyPolyline(glm::vec3(0,255,0),m));
+            };
         }
     }
 }
@@ -137,35 +94,75 @@ glm::vec3 RotationsKoerper::normalen(glm::vec3 a,glm::vec3 b, glm::vec3 c,glm::v
     return k;
 }
 
-void RotationsKoerper::drehe(){
-    int count = 0;
+std::vector<glm::vec3> RotationsKoerper::initLines()
+{
     std::vector<glm::vec3> vect;
     vect.push_back(glm::vec3(0,.0,0));
-    vect.push_back(glm::vec3(.65,.25,0));
-    vect.push_back(glm::vec3(1,.0,0));
+    vect.push_back(glm::vec3(.5,.25,0));
+    vect.push_back(glm::vec3(1,.75,0));
+    vect.push_back(glm::vec3(1.5,.0,0));
 
-    vect.push_back(glm::vec3(.3,.0,0));
-
-    for( float y = 0.0;y<360.0+360.0/refine;y=y+(360.0/refine))
-    {
-        std::vector<glm::vec3> matrix;
-        matrix.push_back(glm::vec3(1,0,0));
-        matrix.push_back(glm::vec3(0,glm::cos(glm::radians(y)),(-1)*glm::sin(glm::radians(y))));
-        matrix.push_back(glm::vec3(0,glm::sin(glm::radians(y)),glm::cos(glm::radians(y))));
-        std::vector<glm::vec3> vectneu;
-        for(int i=0;i<vect.size();i++){
-            vectneu.push_back(vectorMalMatrix(vect.at(i),matrix));
-        }
-        polyVec.push_back(MeshFactory::createMyPolyline(glm::vec3(255,0,0),vectneu));
-        count++;
+    for(unsigned int i =0;i< hoehe-1; i++){
+        LaneAlgo(vect);
     }
+    for(unsigned int i = 0; i < vect.size()-2;i++){
+        glm::vec3 a = vect.at(i);
+        glm::vec3 b = vect.at(i+1);
+        std::vector<glm::vec3> ab;
+        ab.push_back(a);
+        ab.push_back(b);
+        this->polyVec.push_back(MeshFactory::createMyPolyline(glm::vec3(255,12,12),ab));
+    }
+    return vect;
+}
 
+void RotationsKoerper::drehe(){
+    int count = 0;
+    std::vector<glm::vec3> vect = initLines();
 
-
-
-    zieheLinieZwischenZweiNachBarSegmenten();
+        if(!showline){
+            for( float y = refine;y<360.0+360.0/refine;y=y+(360.0/refine))
+            {
+                std::vector<glm::vec3> matrix;
+                matrix.push_back(glm::vec3(1,0,0));
+                matrix.push_back(glm::vec3(0,glm::cos(glm::radians(y)),(-1)*glm::sin(glm::radians(y))));
+                matrix.push_back(glm::vec3(0,glm::sin(glm::radians(y)),glm::cos(glm::radians(y))));
+                std::vector<glm::vec3> vectneu;
+                for(unsigned int i=0;i<vect.size();i++){
+                    vectneu.push_back(vectorMalMatrix(vect.at(i),matrix));
+                }
+                polyVec.push_back(MeshFactory::createMyPolyline(glm::vec3(255,0,0),vectneu));
+                count++;
+            }
+            zieheLinieZwischenZweiNachBarSegmenten();
+        }
 
 }
+
+//kopiere benachbarte Elemente in ein resizetes array
+void RotationsKoerper::LaneAlgo(std::vector<glm::vec3>& muh){
+    unsigned int ende = muh.size();
+    muh.resize(ende+ende);
+    unsigned int neuende = muh.size()-1;
+    for(int i=ende-1;i>=0;i--){
+        muh.at(neuende) = muh.at(i);
+        muh.at(neuende-1)=muh.at(i);
+        neuende=neuende-2;
+    }
+    rechne(muh);
+}
+void RotationsKoerper::rechne(std::vector<glm::vec3>&muh) {
+    unsigned int laenge = muh.size();
+    for (unsigned int i = 0; i < laenge - 2; i=i+2) {
+        muh.at(i).x = (muh.at(i).x*0.75)+(muh.at(i+2).x*0.25);
+        muh.at(i).y = (muh.at(i).y*0.75)+(muh.at(i+2).y*0.25);
+        muh.at(i).z = (muh.at(i).z*0.75)+(muh.at(i+2).z*0.25);
+        muh.at(i+1).x = (muh.at(i).x*0.25)+(muh.at(i+2).x*0.75);
+        muh.at(i+1).y = (muh.at(i).y*0.25)+(muh.at(i+2).y*0.75);
+        muh.at(i+1).z = (muh.at(i).z*0.25)+(muh.at(i+2).z*0.75);
+    }
+}
+
 
 
 
