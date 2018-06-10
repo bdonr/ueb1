@@ -121,7 +121,7 @@ void RotationsKoerper::drehe(){
     std::vector<glm::vec3> vect = initLines();
 
         if(!showline){
-            for( float y = refine;y<360.0+360.0/refine;y=y+(360.0/refine))
+            for( float y = 0;y<360.0+360.0/refine;y=y+(360.0/refine))
             {
                 std::vector<glm::vec3> matrix;
                 matrix.push_back(glm::vec3(1,0,0));

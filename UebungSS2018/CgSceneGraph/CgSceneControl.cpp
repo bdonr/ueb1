@@ -704,10 +704,21 @@ void CgSceneControl::handleEvent(CgBaseEvent *e) {
     if(e->getType()==Cg::CgLaneRefine){
            delete rotationbody;
            this->rotationbody=NULL;
-        int x = ((bestersliderMoveEvent*)e)->getTraegerKlasse()->getAn_aus();
+        int x = ((bestersliderMoveEvent*)e)->getTraegerKlasse()->getDreiDVector().x;
+        std::cout<<x<<std::endl;
         this->rotationbody=MeshFactory::createRotationKoerper(1,x,true,false);
-
+        initRotationBody();
        }
+    if(e->getType()==Cg::CgChangeRota){
+        delete rotationbody;
+        this->rotationbody=NULL;
+        int x = ((bestersliderMoveEvent*)e)->getTraegerKlasse()->getDreiDVector().x;
+        int k = ((bestersliderMoveEvent*)e)->getTraegerKlasse()->getDreiDVector().y;
+        std::cout<<x<<std::endl;
+        std::cout<<k<<std::endl;
+        this->rotationbody=MeshFactory::createRotationKoerper(x,k,false,false);
+        initRotationBody();
+    }
 
 
     // die Enums sind so gebaut, dass man alle Arten von KeyEvents über CgEvent::CgKeyEvent abprüfen kann,
