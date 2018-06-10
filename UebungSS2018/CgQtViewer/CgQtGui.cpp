@@ -34,12 +34,15 @@
 //                    merke MyPolyline hat den lane riesenfeld algo !!!!
 //aufgabe 4.c
 //aufgbae 6.c ?
-//aufgabe 7.b taste X, koordinaten system PFEILE
-//aufgabe 7.c verscheibung des obejktes als GUI ----------------------------------------CHECK
-//aufgabe 8.b vergleich der rotamatritzen, BUTTON
+//aufgabe 7.c verscheibung des obejktes implementierung
+//aufgabe 8.b vergleich der rotamatritzen implementerung
 //aufgabe 10 refactorn
 //aufgabe 13 EVENTUEL
 //aufgabe 14 EVENTUEL
+
+// page4 2 buttons , ausgabe der tage, buttons erhöhen tages wert
+//zeige Planetensystem (button), hide alle page4 comps
+// page4 starte rotation und 3d pfeil anzeigen (BUTTONS)
 
 
 //problem mit zylinder und kegel in zeile 410 laut debuger, noch mal nachsehen.
@@ -105,6 +108,10 @@ void CgQtGui::init()
     /* create Menu Bar */
     m_menuBar = new QMenuBar;
     QMenu *file_menu = new QMenu("&File" );
+    file_menu->addAction("&Load Hase", this, SLOT(objectOpenHase()));
+    file_menu->addAction("&Load Tyranosaorus", this, SLOT(objectOpenTyra()));
+    file_menu->addAction("&Load Porsche", this, SLOT(objectOpenPorshe()));
+
     //file_menu->addAction("&Open Mesh Model", this, SLOT(slotLoadMeshFile()));
     // todo: Add Quit-Action
     m_menuBar->addMenu( file_menu );
@@ -368,43 +375,7 @@ void CgQtGui::page3(QWidget* parent)
     //tab4_control-->subBox-->myGroupBox-->vbox-->addWidget(radioButton123)    myButtonGroup-->addButton(addButton)
 
     QVBoxLayout *tab4_control = new QVBoxLayout();
-    //---------------------------------------------------------------------------------------
-    QVBoxLayout *subBox = new QVBoxLayout();
 
-
-    QGroupBox* myGroupBox = new QGroupBox("Figur darstellen ");
-
-    myButtonGroup = new QButtonGroup(subBox);
-    myButtonGroup->setExclusive(true);
-
-    QRadioButton* radiobutton1 = new QRadioButton( "&Hase");
-   // connect(radiobutton1, SIGNAL(pressed()), this, SLOT(objectOpenSelect1()));
-    QRadioButton* radiobutton2 = new QRadioButton( "&Tyranosaorus");
-  //  connect(radiobutton2, SIGNAL(pressed()), this, SLOT(objectOpenSelect2()));
-    QRadioButton* radiobutton3 = new QRadioButton( "&Porsche");
-    //connect(radiobutton3, SIGNAL(pressed()), this, SLOT(objectOpenSelect3()));
-    QRadioButton* radiobutton4 = new QRadioButton( "&Kugel");
-  //  connect(radiobutton4, SIGNAL(pressed()), this, SLOT(objectOpenSelect4()));
-
-    radiobutton3->setChecked(true);
-
-    myButtonGroup->addButton(radiobutton1,0);
-    myButtonGroup->addButton(radiobutton2,1);
-    myButtonGroup->addButton(radiobutton3,2);
-    myButtonGroup->addButton(radiobutton4,3);
-
-
-
-    QVBoxLayout *vbox = new QVBoxLayout;
-    vbox->addWidget(radiobutton1);
-    vbox->addWidget(radiobutton2);
-    vbox->addWidget(radiobutton3);
-    vbox->addWidget(radiobutton4);
-
-    vbox->addStretch(1);
-    myGroupBox->setLayout(vbox);
-    subBox->addWidget(myGroupBox);
-    tab4_control->addLayout(subBox);
     //----------------------------------------------------------------------------------------
 //    QGroupBox* mySpinnerBox = new QGroupBox("figur drehen ");
 //    QVBoxLayout* SBox = new QVBoxLayout;
@@ -416,7 +387,7 @@ void CgQtGui::page3(QWidget* parent)
 
 
     QLabel* lab2= new QLabel("drehung X achse");
-    subBox->addWidget(lab2);
+    subSBox->addWidget(lab2);
 
     obj_rotate_X = new QSpinBox();
     tab4_control->addWidget(obj_rotate_X);
@@ -546,6 +517,7 @@ void CgQtGui::page4(QWidget* parent)
     connect(myButton1, SIGNAL(clicked()), this, SLOT(matrizenCheck()));
 
     QLabel* lab1= new QLabel("Matritzen unchecked");
+
 
 
     QVBoxLayout *vbox = new QVBoxLayout;
@@ -740,6 +712,30 @@ void CgQtGui::changeRotationPlanet()
     traeger->setDreiDVector(glm::vec3(sl_change_RotaX->value(),sl_change_RotaY->value(),sl_change_RotaZ->value()));
     notifyObserver(new bestersliderMoveEvent(Cg::CgChangeRotationPlaneten,traeger));
 }
+
+void CgQtGui::objectOpenHase()
+{
+    std::cout<<"load Hase"<<std::endl;
+    traeger->setAn_aus(0);
+    notifyObserver(new bestersliderMoveEvent(Cg::CgChangeWahl,traeger));
+}
+
+
+void CgQtGui::objectOpenTyra()
+{
+    std::cout<<"load Tyra"<<std::endl;
+    traeger->setAn_aus(1);
+    notifyObserver(new bestersliderMoveEvent(Cg::CgChangeWahl,traeger));
+}
+
+
+void CgQtGui::objectOpenPorshe()
+{
+    std::cout<<"load Porshe"<<std::endl;
+    traeger->setAn_aus(2);
+    notifyObserver(new bestersliderMoveEvent(Cg::CgChangeWahl,traeger));
+}
+
 
 /*
 void CgQtGui::selectSlider(QSlider* sl)

@@ -173,7 +173,9 @@ private slots:
     void selectZ();
     void matrizenCheck();
     void changeRotationPlanet();
-  //  void selectSlider(QSlider* sl);
+    void objectOpenHase();
+    void objectOpenTyra();
+    void objectOpenPorshe();
 
 };
 
