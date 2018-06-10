@@ -33,12 +33,14 @@ namespace Cg{
     CgEventGroup1                   = 0x000f000,
     CgChangeRota                    = 0x0f00000,
     CgChangeColor                   = 0x0aaaaa0,
-
+    CgLaneRefine                    = 0x4231000,
     CgZeigeNormalePage2             = 0x0ababa0,
     CgObjRotate                     = 0x1460000,
     CgObjTranslate                  = 0x2578000,
     CgMatritzeChecken               = 0x4324100,
-    CgChangeRotationPlaneten        = 0x8332240
+    CgChangeRotationPlaneten        = 0x8332240,
+    CgZeigePolyline                 = 0x5342100,
+    CgResetPolyline                 = 0x6354210
     // feel free to add whatever you like
     }EventType;
 

@@ -190,7 +190,23 @@ void CgQtGui::page2(QWidget* parent)
     QVBoxLayout *tab1_control = new QVBoxLayout();
     QPushButton* myButton2 = new QPushButton("Zeige Polyline");
     tab1_control->addWidget(myButton2);
-   // connect(myButton2, SIGNAL( clicked() ), this, SLOT(slotMyButton1Pressed()));
+    connect(myButton2, SIGNAL( clicked() ), this, SLOT(ZeigePolylineButton()));
+
+    QPushButton* myButton3 = new QPushButton("Reset Polyline");
+    tab1_control->addWidget(myButton3);
+    connect(myButton3, SIGNAL( clicked() ), this, SLOT(ResetPolylineButton()));
+
+    QLabel* lab10= new QLabel("Lane-Riesenfeld Refine");
+    tab1_control->addWidget(lab10);
+
+    sl_rota_lane_refine = createSlider();
+    tab1_control->addWidget(sl_rota_lane_refine);
+    sl_rota_lane_refine->setMinimum(3);
+    sl_rota_lane_refine->setMaximum(60);
+    sl_rota_lane_refine->setValue(20);
+    sl_rota_lane_refine->setTickInterval(1);
+    connect(sl_rota_lane_refine, SIGNAL(sliderReleased()), this, SLOT(laneRotaChange()));
+
 
     QLabel* lab7= new QLabel("RotationsKörper Refine");
     tab1_control->addWidget(lab7);
@@ -408,7 +424,7 @@ void CgQtGui::page3(QWidget* parent)
     obj_rotate_X->setMinimum(1);
     obj_rotate_X->setMaximum(50);
     obj_rotate_X->setValue(1);
-    //connect( obj_rotate_X, SIGNAL(editingFinished()), this, SLOT(changeRotationsObject()));
+    connect( obj_rotate_X, SIGNAL(editingFinished()), this, SLOT(changeRotationObject()));
     subSBox->addWidget(obj_rotate_X);
 
     QLabel* lab3= new QLabel("drehung Y achse");
@@ -419,7 +435,7 @@ void CgQtGui::page3(QWidget* parent)
     obj_rotate_Y->setMinimum(1);
     obj_rotate_Y->setMaximum(50);
     obj_rotate_Y->setValue(1);
-    //connect( obj_rotate_Y, SIGNAL(editingFinished()), this, SLOT(changeRotationsObject()));
+    connect( obj_rotate_Y, SIGNAL(editingFinished()), this, SLOT(changeRotationObject()));
     subSBox->addWidget(obj_rotate_Y);
 
     QLabel* lab4= new QLabel("drehung Z achse");
@@ -430,7 +446,7 @@ void CgQtGui::page3(QWidget* parent)
     obj_rotate_Z->setMinimum(1);
     obj_rotate_Z->setMaximum(50);
     obj_rotate_Z->setValue(1);
-    //connect( obj_rotate_Z, SIGNAL(editingFinished()), this, SLOT(changeRotationsObject()));
+    connect( obj_rotate_Z, SIGNAL(editingFinished()), this, SLOT(changeRotationObject()));
     subSBox->addWidget(obj_rotate_Z);
 
 //------------------------------------------------------------------------------------------
@@ -571,6 +587,13 @@ void CgQtGui::changeRotaKoerper()
     notifyObserver(new bestersliderMoveEvent(Cg::CgChangeRota,traeger));
 }
 
+void CgQtGui::laneRotaChange()
+{
+    std::cout<<"lane-riesenfeld refine "<<sl_rota_lane_refine->value()<<std::endl;
+    traeger->setDreiDVector(glm::vec3(sl_rota_lane_refine->value(),0,0));
+    notifyObserver(new bestersliderMoveEvent(Cg::CgLaneRefine,traeger));
+}
+
 void CgQtGui::changeColor()
 {
     std::cout<<"farbe "<<sl_change_Red->value()<<sl_change_Green->value()<<sl_change_Blue->value()<<std::endl;
@@ -578,15 +601,30 @@ void CgQtGui::changeColor()
     notifyObserver(new bestersliderMoveEvent(Cg::CgChangeColor,traeger));
 }
 
+void CgQtGui::ZeigePolylineButton()
+{
+
+    std::cout<<"Zeige Polyline"<<std::endl;
+    traeger = new TraegerKlasse();
+    notifyObserver(new bestersliderMoveEvent(Cg::CgZeigePolyline,traeger));
+}
+
+void CgQtGui::ResetPolylineButton()
+{
+    std::cout<<"Reset Polyline"<<std::endl;
+    traeger = new TraegerKlasse();
+    notifyObserver(new bestersliderMoveEvent(Cg::CgResetPolyline,traeger));
+}
+
 void CgQtGui::zeige_normale_taste_page2()
 {
     if(zeige_normale_anAus==0){
         zeige_normale_anAus=1;
-        traeger->setZeige_normale(1);
+        traeger->setAn_aus(1);
         notifyObserver(new bestersliderMoveEvent(Cg::CgZeigeNormalePage2,traeger));
     }else{
         zeige_normale_anAus=0;
-        traeger->setZeige_normale(0);
+        traeger->setAn_aus(0);
         notifyObserver(new bestersliderMoveEvent(Cg::CgZeigeNormalePage2,traeger));
     }
     std::cout<<"zeige nornmale "<<zeige_normale_anAus<<std::endl;

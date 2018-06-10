@@ -9,7 +9,7 @@ class TraegerKlasse
 private: glm::vec3 intvec;
     std::vector<int> x;
     glm::vec3 dreiDVector;
-    int zeige_normale;
+    int an_aus;
     int tab;
 public:
     TraegerKlasse();
@@ -27,8 +27,9 @@ public:
     std::vector<int> getX() const;
     glm::vec3 getDreiDVector() const;
     void setDreiDVector(const glm::vec3 &value);
-    int getZeige_normale() const;
-    void setZeige_normale(int value);
+    int getAn_aus() const;
+    void setAn_aus(int value);
+
 };
 
 #endif // TRAEGERKLASSE_H
