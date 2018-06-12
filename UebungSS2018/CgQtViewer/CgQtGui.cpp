@@ -27,6 +27,8 @@
 #include <QMenuBar>
 #include <QActionGroup>
 #include <iostream>
+#include <string>
+#include <ostream>
 
 
 //Höhe slider definieren, funktionalität inkludieren-------------------------------------CHECK
@@ -39,14 +41,6 @@
 //aufgabe 10 refactorn
 //aufgabe 13 EVENTUEL
 //aufgabe 14 EVENTUEL
-
-// page4 2 buttons , ausgabe der tage, buttons erhöhen tages wert
-//zeige Planetensystem (button), hide alle page4 comps
-// page4 starte rotation und 3d pfeil anzeigen (BUTTONS)
-
-
-//problem mit zylinder und kegel in zeile 410 laut debuger, noch mal nachsehen.
-
 
 
 
@@ -78,6 +72,10 @@ void CgQtGui::init()
 
     QWidget* opt4 = new QWidget;
     page4(opt4);
+
+    QWidget* opt5 = new QWidget;
+    page5(opt5);
+
 //    connect(opt4, SIGNAL(objectNameChanged(QString)), this, SLOT(tabChange(QString)));
 //    opt4->addAction(tabChange());
 
@@ -86,6 +84,8 @@ void CgQtGui::init()
     m_tabs->addTab(opt,"&Aufgabe 2");
     m_tabs->addTab(opt3,"&Aufagbe 3");
     m_tabs->addTab(opt4,"&Aufagbe 4");
+    m_tabs->addTab(opt5,"&Aufgabe 5");
+    m_tabs->adjustSize();
     connect(m_tabs,SIGNAL(tabBarClicked(int)),this,SLOT(tabChange(int)));
 
     container->addWidget(m_tabs);
@@ -195,13 +195,14 @@ QSlider *CgQtGui::createSlider(int max,int min,int steps)
 void CgQtGui::page2(QWidget* parent)
 {
     QVBoxLayout *tab1_control = new QVBoxLayout();
-    QPushButton* myButton2 = new QPushButton("Zeige Polyline");
-    tab1_control->addWidget(myButton2);
-    connect(myButton2, SIGNAL( clicked() ), this, SLOT(ZeigePolylineButton()));
+    bt_show_poly = new QPushButton("Zeige Polyline");
+    bt_show_poly->setCheckable(false);
+    tab1_control->addWidget(bt_show_poly);
+    connect(bt_show_poly, SIGNAL( clicked() ), this, SLOT(ZeigePolylineButton()));
 
-    QPushButton* myButton3 = new QPushButton("Reset Polyline");
-    tab1_control->addWidget(myButton3);
-    connect(myButton3, SIGNAL( clicked() ), this, SLOT(ResetPolylineButton()));
+    bt_rese_poly = new QPushButton("Reset Polyline");
+    tab1_control->addWidget(bt_rese_poly);
+    connect(bt_rese_poly, SIGNAL( clicked() ), this, SLOT(ResetPolylineButton()));
 
     QLabel* lab10= new QLabel("Lane-Riesenfeld Refine");
     tab1_control->addWidget(lab10);
@@ -241,9 +242,10 @@ void CgQtGui::page2(QWidget* parent)
     QLabel* lab9= new QLabel("----------------------------------------------------------------------------------");
     tab1_control->addWidget(lab9);
 
-    QPushButton* myButton1 = new QPushButton("Zeige Normale");
-    tab1_control->addWidget(myButton1);
-    connect(myButton1, SIGNAL( clicked() ), this, SLOT(zeige_normale_taste_page2()));
+    bt_show_normal = new QPushButton("Zeige Normale");
+    tab1_control->addWidget(bt_show_normal);
+    bt_show_normal->setCheckable(false);
+    connect(bt_show_normal, SIGNAL( clicked() ), this, SLOT(zeige_normale_taste_page2()));
 
     QLabel* lab1= new QLabel("Zylinder Hoehe");
     tab1_control->addWidget(lab1);
@@ -513,16 +515,51 @@ void CgQtGui::page4(QWidget* parent)
     myButtonGroup->addButton(radiobutton12,1);
     myButtonGroup->addButton(radiobutton13,2);
 
-    QPushButton* myButton1 = new QPushButton("Vergleiche Matritzen");
-    connect(myButton1, SIGNAL(clicked()), this, SLOT(matrizenCheck()));
+   bt_vergleiche_matritzen = new QPushButton("Vergleiche Matritzen");
+    connect(bt_vergleiche_matritzen, SIGNAL(clicked()), this, SLOT(matrizenCheck()));
 
-    QLabel* lab1= new QLabel("Matritzen unchecked");
+    lab_matr_check= new QLabel("Matritzen unchecked");
 
 
+//    CgChangeTageswert               = 0x9786354,
+//    CgZeigeSonnenSystem             = 0x1847200,
+//    CgStartRotation                 = 0x1837260,
+//    CgZeige3DPfeile                 = 0x9955883
+
+
+    bt_inc_day = new QPushButton("erhöhe tageswert");
+    connect(bt_inc_day, SIGNAL(clicked()), this, SLOT(erhoeheTageswert()));
+    bt_dec_day = new QPushButton("verringere tageswert");
+    connect(bt_dec_day, SIGNAL(clicked()), this, SLOT(verringereTageswert()));
+
+    lab_day_rota= new QLabel("rotations Tageswert: 1");
+
+    bt_show_sun = new QPushButton("Zeige Sonnensystem");
+    bt_show_sun->setCheckable(false);
+    connect(bt_show_sun, SIGNAL(clicked()), this, SLOT(zeigeSonnensystem()));
+
+    bt_hide_all= new QPushButton("Hide All");
+    connect(bt_hide_all, SIGNAL(clicked()), this, SLOT(hideAll()));
+
+    bt_start_rotation = new QPushButton("Start Rotation");
+    bt_start_rotation->setCheckable(false);
+    connect(bt_start_rotation, SIGNAL(clicked()), this, SLOT(startRotation()));
+
+    bt_show_3d_arrow = new QPushButton("zeige 3D Pfeile");
+    bt_show_3d_arrow->setCheckable(false);
+    connect(bt_show_3d_arrow, SIGNAL(clicked()), this, SLOT(show3dArrow()));
 
     QVBoxLayout *vbox = new QVBoxLayout;
-    vbox->addWidget(myButton1);
-    vbox->addWidget(lab1);
+    vbox->addWidget(bt_hide_all);
+    vbox->addWidget(bt_show_sun);
+    vbox->addWidget(bt_show_3d_arrow);
+    vbox->addWidget(bt_inc_day);
+    vbox->addWidget(bt_dec_day);
+    vbox->addWidget(lab_day_rota);
+    vbox->addWidget(bt_start_rotation);
+    vbox->addWidget(bt_vergleiche_matritzen);
+
+    vbox->addWidget(lab_matr_check);
     vbox->addWidget(radiobutton11);
     vbox->addWidget(sl_change_RotaX);
     vbox->addWidget(radiobutton12);
@@ -536,6 +573,14 @@ void CgQtGui::page4(QWidget* parent)
     subBox->addWidget(myGroupBox);
     tab5_control->addLayout(subBox);
     parent->setLayout(tab5_control);
+}
+
+void CgQtGui::page5(QWidget *parent)
+{
+    QVBoxLayout *tab1_control = new QVBoxLayout();
+
+
+    parent->setLayout(tab1_control);
 }
 
 void CgQtGui::changeRotationObject()
@@ -575,10 +620,19 @@ void CgQtGui::changeColor()
 
 void CgQtGui::ZeigePolylineButton()
 {
-
-    std::cout<<"Zeige Polyline"<<std::endl;
-    traeger = new TraegerKlasse();
-    notifyObserver(new bestersliderMoveEvent(Cg::CgZeigePolyline,traeger));
+    if(bt_show_poly->isCheckable()){
+        bt_show_poly->setCheckable(false);
+        bt_show_poly->setText("Zeige polyline");
+        std::cout<<"verstecke polyline"<<std::endl;
+        traeger->setAn_aus(0);
+        notifyObserver(new bestersliderMoveEvent(Cg::CgZeigePolyline,traeger));
+    }else{
+        bt_show_poly->setCheckable(true);
+        bt_show_poly->setText("verstecke polyline");
+        std::cout<<"zeige polyline"<<std::endl;
+        traeger->setAn_aus(1);
+        notifyObserver(new bestersliderMoveEvent(Cg::CgZeigePolyline,traeger));
+    }
 }
 
 void CgQtGui::ResetPolylineButton()
@@ -590,16 +644,20 @@ void CgQtGui::ResetPolylineButton()
 
 void CgQtGui::zeige_normale_taste_page2()
 {
-    if(zeige_normale_anAus==0){
-        zeige_normale_anAus=1;
-        traeger->setAn_aus(1);
-        notifyObserver(new bestersliderMoveEvent(Cg::CgZeigeNormalePage2,traeger));
-    }else{
-        zeige_normale_anAus=0;
+
+    if(bt_show_normal->isCheckable()){
+        bt_show_normal->setCheckable(false);
+        bt_show_normal->setText("Zeige Normale");
+        std::cout<<"verstecke Noemale"<<std::endl;
         traeger->setAn_aus(0);
         notifyObserver(new bestersliderMoveEvent(Cg::CgZeigeNormalePage2,traeger));
+    }else{
+        bt_show_normal->setCheckable(true);
+        bt_show_normal->setText("verstecke Normale");
+        std::cout<<"zeige Normale"<<std::endl;
+        traeger->setAn_aus(1);
+        notifyObserver(new bestersliderMoveEvent(Cg::CgZeigeNormalePage2,traeger));
     }
-    std::cout<<"zeige nornmale "<<zeige_normale_anAus<<std::endl;
 }
 
 void CgQtGui::changeKegel()
@@ -701,7 +759,7 @@ void CgQtGui::selectZ()
 
 void CgQtGui::matrizenCheck()
 {
-    std::cout<<" checke matritzen"<<std::endl;
+    std::cout<<"checke matritzen"<<std::endl;
     traeger = new TraegerKlasse();
     notifyObserver(new bestersliderMoveEvent(Cg::CgMatritzeChecken,traeger));
 }
@@ -735,6 +793,107 @@ void CgQtGui::objectOpenPorshe()
     traeger->setAn_aus(2);
     notifyObserver(new bestersliderMoveEvent(Cg::CgChangeWahl,traeger));
 }
+
+void CgQtGui::hideAll()
+{
+    if(!bt_inc_day->isVisible()){
+        bt_hide_all->setText("Hide All");
+        bt_inc_day->setVisible(true);
+        bt_dec_day->setVisible(true);
+        bt_show_3d_arrow->setVisible(true);
+        bt_show_sun->setVisible(true);
+        bt_start_rotation->setVisible(true);
+        lab_day_rota->setVisible(true);
+        bt_vergleiche_matritzen->setVisible(true);
+        lab_matr_check->setVisible(true);
+    }else{
+        bt_hide_all->setText("Show All");
+        bt_inc_day->setVisible(false);
+        bt_dec_day->setVisible(false);
+        bt_show_3d_arrow->setVisible(false);
+        bt_show_sun->setVisible(false);
+        bt_start_rotation->setVisible(false);
+        lab_day_rota->setVisible(false);
+        bt_vergleiche_matritzen->setVisible(false);
+        lab_matr_check->setVisible(false);
+    }
+}
+
+void CgQtGui::erhoeheTageswert()
+{
+    tag += 1;
+    QString s = QStringLiteral("rotations Tageswert: %1").arg(tag);
+    lab_day_rota->setText(s);
+    std::cout<<"erhöhe tages wert"<<std::endl;
+    traeger->setAn_aus(1);
+    notifyObserver(new bestersliderMoveEvent(Cg::CgChangeTageswert,traeger));
+}
+
+void CgQtGui::verringereTageswert()
+{
+    if(tag>=2){
+    tag -= 1;
+    QString s = QStringLiteral("rotations Tageswert: %1").arg(tag);
+    lab_day_rota->setText(s);
+    std::cout<<"verringere tages wert"<<std::endl;
+    traeger->setAn_aus(0);
+    notifyObserver(new bestersliderMoveEvent(Cg::CgChangeTageswert,traeger));
+    }else{
+        lab_day_rota->setText("weniger als 1 geht es nicht");
+    }
+}
+
+void CgQtGui::zeigeSonnensystem()
+{
+    if(bt_show_sun->isCheckable()){
+        bt_show_sun->setCheckable(false);
+        bt_show_sun->setText("Zeige Sonnensystem");
+        std::cout<<"verstecke sonnen system"<<std::endl;
+        traeger->setAn_aus(0);
+        notifyObserver(new bestersliderMoveEvent(Cg::CgZeigeSonnenSystem,traeger));
+    }else{
+        bt_show_sun->setCheckable(true);
+        bt_show_sun->setText("verstecke Sonnensystem");
+        std::cout<<"zeige sonnen system"<<std::endl;
+        traeger->setAn_aus(1);
+        notifyObserver(new bestersliderMoveEvent(Cg::CgZeigeSonnenSystem,traeger));
+    }
+}
+
+void CgQtGui::startRotation()
+{
+    if(bt_start_rotation->isCheckable()){
+        bt_start_rotation->setCheckable(false);
+        bt_start_rotation->setText("Start Rotation");
+        std::cout<<"beende Rotation"<<std::endl;
+        traeger->setAn_aus(0);
+        notifyObserver(new bestersliderMoveEvent(Cg::CgStartRotation,traeger));
+    }else{
+        bt_start_rotation->setCheckable(true);
+        bt_start_rotation->setText("End Rotation");
+        std::cout<<"starte rotation"<<std::endl;
+        traeger->setAn_aus(1);
+        notifyObserver(new bestersliderMoveEvent(Cg::CgStartRotation,traeger));
+    }
+}
+
+void CgQtGui::show3dArrow()
+{
+    if(bt_show_3d_arrow->isCheckable()){
+        bt_show_3d_arrow->setCheckable(false);
+        bt_show_3d_arrow->setText("zeige 3D Pfeile");
+        std::cout<<"Verstecke 3D Pfeile"<<std::endl;
+        traeger->setAn_aus(0);
+        notifyObserver(new bestersliderMoveEvent(Cg::CgZeige3DPfeile,traeger));
+    }else{
+        bt_show_3d_arrow->setCheckable(true);
+        bt_show_3d_arrow->setText("verstecke 3D Pfeile");
+        std::cout<<"Zeige 3D Pfeile"<<std::endl;
+        traeger->setAn_aus(1);
+        notifyObserver(new bestersliderMoveEvent(Cg::CgZeige3DPfeile,traeger));
+    }
+}
+
 
 
 /*
