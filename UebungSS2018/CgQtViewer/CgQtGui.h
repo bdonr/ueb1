@@ -44,6 +44,7 @@
 #include <QWidget>
 #include "../CgBase/CgObservable.h"
 #include "../CgBase/CgEnums.h"
+#include <QLabel>
 #include <glm/glm.hpp>
 #include "CgClass/traegerklasse.h"
 
@@ -109,16 +110,15 @@ private:
 
 
     /* example for usage of qt gui elements, feel free to add what you like */
-    void page2(QWidget* panel);
-    void createOptionPanelExample2(QWidget* panel);
     void page1(QWidget* panel);
+    void page2(QWidget* panel);
     void page3(QWidget* panel);
     void page4(QWidget* panel);
+    void page5(QWidget* panel);
     TraegerKlasse* traeger;
     QButtonGroup* myButtonGroup;
     QCheckBox* myCheckBox1;
     QSpinBox* mySpinBox1;
-    int zeige_normale_anAus;
 
     QSlider* sl_zylinder_hoehe;
     QSlider* sl_zylinder_radius;
@@ -150,6 +150,21 @@ private:
 
     glm::vec3 color;
 
+    QPushButton* bt_inc_day;
+    QPushButton* bt_dec_day;
+    QPushButton* bt_show_sun;
+    QPushButton* bt_start_rotation;
+    QPushButton* bt_show_3d_arrow;
+    QPushButton* bt_vergleiche_matritzen;
+    QPushButton* bt_hide_all;
+    QLabel* lab_day_rota;
+    QLabel* lab_matr_check;
+    QPushButton* bt_show_poly;
+    QPushButton* bt_rese_poly;
+    QPushButton* bt_show_normal;
+    int tag = 1;
+
+
 
 
 private slots:
@@ -176,6 +191,13 @@ private slots:
     void objectOpenHase();
     void objectOpenTyra();
     void objectOpenPorshe();
+
+    void hideAll();
+    void erhoeheTageswert();
+    void verringereTageswert();
+    void zeigeSonnensystem();
+    void startRotation();
+    void show3dArrow();
 
 };
 
