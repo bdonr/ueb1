@@ -31,8 +31,8 @@ MyPolyline* MeshFactory::createMyPolyline(glm::vec3 color,std::vector<glm::vec3>
 
 }
 
-RotationsKoerper* MeshFactory::createRotationKoerper(int refine,int hoehe){
-return new RotationsKoerper(++all_id, refine,hoehe);
+RotationsKoerper* MeshFactory::createRotationKoerper(int refine,int hoehe,bool showline,bool shownormals){
+return new RotationsKoerper(++all_id, refine,hoehe,showline,shownormals);
 }
 
 Dreiecke * MeshFactory::createDreiecke(std::vector<glm::vec3>x,std::vector<unsigned int>k){

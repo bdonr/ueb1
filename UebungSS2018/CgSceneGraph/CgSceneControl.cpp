@@ -103,18 +103,18 @@ CgSceneControl::~CgSceneControl() {
 void CgSceneControl::initRotationBody()
 {
     if(rotationbody!=NULL){
-        if((!rotationbody->getPolyVec().size())>0){
-            for(unsigned int i = 0; i<rotationbody->getPolyVec().size()-1;i++){
+        if((rotationbody->getPolyVec().size())>0){
+            for(unsigned int i = 0; i<rotationbody->getPolyVec().size();i++){
                 m_renderer->init(rotationbody->getPolyVec().at(i));
             }
         }
-        if((rotationbody->getKeisVec().size())>1){
-            for(unsigned int i = 0; i<=rotationbody->getKeisVec().size()-2;i++){
+        if((rotationbody->getKeisVec().size())>0){
+            for(unsigned int i = 0; i<rotationbody->getKeisVec().size();i++){
                 m_renderer->init(rotationbody->getKeisVec().at(i));
             }
         }
         if((rotationbody->getNormale().size())>0){
-            for(unsigned int i = 0; i<=rotationbody->getNormale().size()-1;i++){
+            for(unsigned int i = 0; i<rotationbody->getNormale().size();i++){
                 m_renderer->init(rotationbody->getNormale().at(i));
             }
 
@@ -149,23 +149,23 @@ void CgSceneControl::renderRotationsBody()
 {
     if(rotationbody){
         if(!rotationbody->getKeisVec().empty())
-            if(rotationbody->getPolyVec().size()>0){
-                for(unsigned int i = 0; i<rotationbody->getPolyVec().size()-1;i++){
+            if(rotationbody->getKeisVec().size()>0){
+                for(unsigned int i = 0; i<rotationbody->getKeisVec().size();i++){
                     m_renderer->setUniformValue("mycolor",glm::vec4(1.,1.,1.,1.));
-                    m_renderer->render(rotationbody->getPolyVec().at(i),old);
+                    m_renderer->render(rotationbody->getKeisVec().at(i),old);
                 }
             }
-        if(!rotationbody->getKeisVec().empty()){
-            if(rotationbody->getKeisVec().size()>1){
-                for(unsigned int i = 0; i<=rotationbody->getKeisVec().size()-2;i++){
+        if(!rotationbody->getPolyVec().empty()){
+            if(rotationbody->getPolyVec().size()>0){
+                for(unsigned int i = 0; i<rotationbody->getPolyVec().size();i++){
                     m_renderer->setUniformValue("mycolor",glm::vec3(1.,1.,1.));
-                    m_renderer->render(rotationbody->getKeisVec().at(i),old);
+                    m_renderer->render(rotationbody->getPolyVec().at(i),old);
                 }
             }
         }
         if(!rotationbody->getNormale().empty()){
             if(rotationbody->getNormale().size()>0){
-                for(unsigned int i = 0; i<=rotationbody->getNormale().size()-1;i++){
+                for(unsigned int i = 0; i<rotationbody->getNormale().size();i++){
                     m_renderer->setUniformValue("mycolor",glm::vec3(255.,2.,3.));
                     m_renderer->render(rotationbody->getNormale().at(i),old);
                 }
@@ -186,6 +186,7 @@ void CgSceneControl::renderWurfel()
 
 void CgSceneControl::renderCoords()
 {
+
     koordinatensystem=new Koordinatensystem(m_renderer,m_current_transformation);
     koordinatensystem->renderO();
 }
@@ -207,6 +208,8 @@ void CgSceneControl::renderObjects() {
     renderDreiecke();
     renderKegel();
     renderZylinder();
+    pfeil = new Pfeil(m_renderer,new Appearance("mycolor",glm::vec4(1,0,2,1)),old);
+    pfeil->render();
 
     if(sc){
         sc->render(m_renderer,sc->getSc());
@@ -403,7 +406,6 @@ void CgSceneControl::renderZylinder()
         if(!zylinder->getGeraden().empty()){
             for(unsigned int j=0; j<zylinder->getGeraden().size();j++){
                 m_renderer->setUniformValue("mycolor",glm::vec4(0.,222.,3.,1.));
-
                 m_renderer->render(zylinder->getGeraden().at(j),old);
             }
         }
@@ -445,10 +447,9 @@ void CgSceneControl::changeZylinder(CgBaseEvent *e)
 void CgSceneControl::changeRefineRota(CgBaseEvent *e)
 {
     if(e->getType() == Cg::CgChangeRota){
-
         unsigned int refine= ((bestersliderMoveEvent*)e)->getTraegerKlasse()->getDreiDVector().x;
         unsigned int hoehe= ((bestersliderMoveEvent*)e)->getTraegerKlasse()->getDreiDVector().y;
-        rotationbody= MeshFactory::createRotationKoerper(refine,hoehe);
+        rotationbody= MeshFactory::createRotationKoerper(refine,hoehe,false,shownormals);
         initRotationBody();
         renderRotationsBody();
 
@@ -696,6 +697,32 @@ void CgSceneControl::handleEvent(CgBaseEvent *e) {
 
         }
     }
+    if(e->getType()==Cg::CgZeigePolyline){
+        this->rotationbody=MeshFactory::createRotationKoerper(1,1,true,false);
+        initRotationBody();
+    } if(e->getType()==Cg::CgResetPolyline){
+        delete rotationbody;
+        this->rotationbody=NULL;
+    }
+    if(e->getType()==Cg::CgLaneRefine){
+           delete rotationbody;
+           this->rotationbody=NULL;
+        int x = ((bestersliderMoveEvent*)e)->getTraegerKlasse()->getDreiDVector().x;
+        std::cout<<x<<std::endl;
+        this->rotationbody=MeshFactory::createRotationKoerper(1,x,true,false);
+        initRotationBody();
+       }
+    if(e->getType()==Cg::CgChangeRota){
+        delete rotationbody;
+        this->rotationbody=NULL;
+        int x = ((bestersliderMoveEvent*)e)->getTraegerKlasse()->getDreiDVector().x;
+        int k = ((bestersliderMoveEvent*)e)->getTraegerKlasse()->getDreiDVector().y;
+        std::cout<<x<<std::endl;
+        std::cout<<k<<std::endl;
+        this->rotationbody=MeshFactory::createRotationKoerper(x,k,false,false);
+        initRotationBody();
+    }
+
 
     // die Enums sind so gebaut, dass man alle Arten von KeyEvents über CgEvent::CgKeyEvent abprüfen kann,
     // siehe dazu die CgEvent eolynums im CgEnums.h

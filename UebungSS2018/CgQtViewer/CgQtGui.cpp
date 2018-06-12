@@ -209,9 +209,9 @@ void CgQtGui::page2(QWidget* parent)
 
     sl_rota_lane_refine = createSlider();
     tab1_control->addWidget(sl_rota_lane_refine);
-    sl_rota_lane_refine->setMinimum(3);
-    sl_rota_lane_refine->setMaximum(60);
-    sl_rota_lane_refine->setValue(20);
+    sl_rota_lane_refine->setMinimum(1);
+    sl_rota_lane_refine->setMaximum(5);
+    sl_rota_lane_refine->setValue(1);
     sl_rota_lane_refine->setTickInterval(1);
     connect(sl_rota_lane_refine, SIGNAL(sliderReleased()), this, SLOT(laneRotaChange()));
 
@@ -221,9 +221,9 @@ void CgQtGui::page2(QWidget* parent)
 
     sl_rota_refine = createSlider();
     tab1_control->addWidget(sl_rota_refine);
-    sl_rota_refine->setMinimum(3);
-    sl_rota_refine->setMaximum(60);
-    sl_rota_refine->setValue(20);
+    sl_rota_refine->setMinimum(1);
+    sl_rota_refine->setMaximum(360);
+    sl_rota_refine->setValue(1);
     sl_rota_refine->setTickInterval(1);
     connect(sl_rota_refine, SIGNAL(sliderReleased()), this, SLOT(changeRotaKoerper()));
 
@@ -233,8 +233,8 @@ void CgQtGui::page2(QWidget* parent)
     sl_rota_hoehe = createSlider();
     tab1_control->addWidget(sl_rota_hoehe);
     sl_rota_hoehe->setMinimum(1);
-    sl_rota_hoehe->setMaximum(60);
-    sl_rota_hoehe->setValue(20);
+    sl_rota_hoehe->setMaximum(5);
+    sl_rota_hoehe->setValue(1);
     sl_rota_hoehe->setTickInterval(1);
     connect(sl_rota_hoehe, SIGNAL(sliderReleased()), this, SLOT(changeRotaKoerper()));
 

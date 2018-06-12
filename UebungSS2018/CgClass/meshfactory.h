@@ -27,5 +27,6 @@ public:
     static RotationsKoerper* createRotationKoerper(int refine,int hoehe);
     static Dreiecke * createDreiecke(std::vector<glm::vec3>x,std::vector<unsigned int>k);
     static Kugel *createKugel(float radius, float hoehe, int refine);
+    static RotationsKoerper *createRotationKoerper(int refine, int hoehe, bool showline, bool shownormals);
 };
 #endif // MESHFACTORY_H
