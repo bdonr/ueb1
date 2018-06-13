@@ -3,12 +3,14 @@
 
 #include "glm/glm.hpp"
 #include <vector>
+#include <QString>
 class TraegerKlasse
 {
 
 private: glm::vec3 intvec;
     std::vector<int> x;
     glm::vec3 dreiDVector;
+    QString name;
     glm::vec4 amb;
     glm::vec4 def;
     glm::vec4 spec;
@@ -44,6 +46,9 @@ public:
     void setScala(double value);
     glm::vec4 getAmb() const;
     void setAmb(const glm::vec4 &value);
+
+    QString getName() const;
+    void setName(const QString &value);
 };
 
 #endif // TRAEGERKLASSE_H

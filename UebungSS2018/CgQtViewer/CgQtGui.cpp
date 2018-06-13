@@ -105,6 +105,9 @@ void CgQtGui::init()
     QWidget* opt5 = new QWidget;
     page5(opt5);
 
+    QWidget* opt6 = new QWidget;
+    page6(opt6);
+
 //    connect(opt4, SIGNAL(objectNameChanged(QString)), this, SLOT(tabChange(QString)));
 //    opt4->addAction(tabChange());
 
@@ -114,6 +117,7 @@ void CgQtGui::init()
     m_tabs->addTab(opt3,"&Aufagbe 3");
     m_tabs->addTab(opt4,"&Aufagbe 4");
     m_tabs->addTab(opt5,"&Aufgabe 5");
+    m_tabs->addTab(opt6,"&Aufgabe 6");
     m_tabs->adjustSize();
     connect(m_tabs,SIGNAL(tabBarClicked(int)),this,SLOT(tabChange(int)));
 
@@ -623,14 +627,37 @@ void CgQtGui::page5(QWidget *parent)
     QVBoxLayout *tab1_control = new QVBoxLayout();
 
 
-    material = new QComboBox();
-    material->addItem("Chrom");
-    material->addItem("Perle");
-    material->addItem("Obsidian");
-    material->addItem("Jade");
-    material->addItem("Poliertes Gold");
-    tab1_control->addWidget(material);
-    connect(material, SIGNAL(activated(int)), this, SLOT(materialChanged()));
+
+    parent->setLayout(tab1_control);
+}
+
+
+
+void CgQtGui::page6(QWidget *parent)
+{
+    QVBoxLayout *tab1_control = new QVBoxLayout();
+
+    combo_box_objekt = new QComboBox();
+    combo_box_objekt->addItem("Stern");
+    combo_box_objekt->addItem("Planet 1");
+    combo_box_objekt->addItem("Planet 2");
+    combo_box_objekt->addItem("Erde");
+    combo_box_objekt->addItem("Planet 1");
+    combo_box_objekt->addItem("Planet 2");
+    combo_box_objekt->addItem("Planet 3");
+    combo_box_objekt->setToolTip("first: select object, second: select material");
+    tab1_control->addWidget(combo_box_objekt);
+   // connect(combo_box_objekt, SIGNAL(activated(int)), this, SLOT(materialChanged()));
+
+
+    combo_box_material = new QComboBox();
+    combo_box_material->addItem("Chrom");
+    combo_box_material->addItem("Perle");
+    combo_box_material->addItem("Obsidian");
+    combo_box_material->addItem("Jade");
+    combo_box_material->addItem("Poliertes Gold");
+    tab1_control->addWidget(combo_box_material);
+    connect(combo_box_material, SIGNAL(activated(int)), this, SLOT(materialChanged()));
 
     lab_licht_rot = new QLabel("Licht Rot: 1");
     tab1_control->addWidget(lab_licht_rot);
@@ -1017,10 +1044,11 @@ void CgQtGui::materialChanged()
 {
     std::cout<<"wähle material"<<std::endl;
 
-    traeger->setAmb(amb.at(material->currentIndex()));
-    traeger->setDef(def.at(material->currentIndex()));
-    traeger->setSpec(spec.at(material->currentIndex()));
-    traeger->setScala(scala.at(material->currentIndex()));
+    traeger->setAmb(amb.at(combo_box_material->currentIndex()));
+    traeger->setDef(def.at(combo_box_material->currentIndex()));
+    traeger->setSpec(spec.at(combo_box_material->currentIndex()));
+    traeger->setScala(scala.at(combo_box_material->currentIndex()));
+    traeger->setName(combo_box_objekt->currentText());
 
     notifyObserver(new bestersliderMoveEvent(Cg::CgChangeMaterial,traeger));
 }

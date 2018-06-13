@@ -117,6 +117,7 @@ private:
     void page3(QWidget* panel);
     void page4(QWidget* panel);
     void page5(QWidget* panel);
+    void page6(QWidget* panel);
     TraegerKlasse* traeger;
     QButtonGroup* myButtonGroup;
     QCheckBox* myCheckBox1;
@@ -175,7 +176,8 @@ private:
 //    int varLichtZ = 1;
 
 
-    QComboBox* material;
+    QComboBox* combo_box_material;
+    QComboBox* combo_box_objekt;
     std::vector <glm::vec4> amb;
     std::vector <glm::vec4> def;
     std::vector <glm::vec4> spec;
