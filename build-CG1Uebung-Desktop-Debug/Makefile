@@ -77,6 +77,7 @@ SOURCES       = ../UebungSS2018/main.cpp \
 		../UebungSS2018/CgClass/kamera.cpp \
 		../UebungSS2018/CgClass/wuerfel.cpp \
 		../UebungSS2018/CgClass/dreiecke.cpp \
+		../UebungSS2018/CgClass/mats.cpp \
 		../UebungSS2018/CgClass/pfeil.cpp moc_CgQtGLRenderWidget.cpp \
 		moc_CgQtGui.cpp \
 		moc_CgQtMainApplication.cpp
@@ -109,6 +110,7 @@ OBJECTS       = main.o \
 		kamera.o \
 		wuerfel.o \
 		dreiecke.o \
+		mats.o \
 		pfeil.o \
 		moc_CgQtGLRenderWidget.o \
 		moc_CgQtGui.o \
@@ -194,6 +196,7 @@ DIST          = /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
 		../UebungSS2018/CgClass/Zylinder.h \
 		../UebungSS2018/CgClass/kegel.h \
 		../UebungSS2018/CgClass/Mypolyline.h \
+		../UebungSS2018/CgClass/mats.h \
 		../UebungSS2018/CgEvents/slidermoveevent.h \
 		../UebungSS2018/CgClass/rotationskoerper.h \
 		../UebungSS2018/CgUtils/ObjLoader.h \
@@ -237,6 +240,7 @@ DIST          = /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
 		../UebungSS2018/CgClass/kamera.cpp \
 		../UebungSS2018/CgClass/wuerfel.cpp \
 		../UebungSS2018/CgClass/dreiecke.cpp \
+		../UebungSS2018/CgClass/mats.cpp \
 		../UebungSS2018/CgClass/pfeil.cpp
 QMAKE_TARGET  = uebung1
 DESTDIR       = #avoid trailing-slash linebreak
@@ -405,8 +409,8 @@ dist: distdir FORCE
 distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
-	$(COPY_FILE) --parents ../UebungSS2018/CgBase/CgBaseRenderWindow.h ../UebungSS2018/CgQtViewer/CgQtGLRenderWidget.h ../UebungSS2018/CgQtViewer/CgQtGui.h ../UebungSS2018/CgBase/CgObserver.h ../UebungSS2018/CgBase/CgObservable.h ../UebungSS2018/CgBase/CgBaseEvent.h ../UebungSS2018/CgBase/CgEnums.h ../UebungSS2018/CgEvents/CgMouseEvent.h ../UebungSS2018/CgQtViewer/CgQtMainApplication.h ../UebungSS2018/CgSceneGraph/CgSceneControl.h ../UebungSS2018/CgEvents/CgKeyEvent.h ../UebungSS2018/CgBase/CgBaseRenderer.h ../UebungSS2018/CgBase/CgBaseRenderableObject.h ../UebungSS2018/CgBase/CgBasePointCloud.h ../UebungSS2018/CgBase/CgBaseTriangleMesh.h ../UebungSS2018/CgBase/CgBasePolygonMesh.h ../UebungSS2018/CgBase/CgBasePolyline.h ../UebungSS2018/CgBase/CgBaseSceneControl.h ../UebungSS2018/CgQtViewer/CgQtGlBufferObject.h ../UebungSS2018/CgQtViewer/CgTrackball.h ../UebungSS2018/CgEvents/CgWindowResizeEvent.h ../UebungSS2018/CgClass/meshfactory.h ../UebungSS2018/CgClass/Zylinder.h ../UebungSS2018/CgClass/kegel.h ../UebungSS2018/CgClass/Mypolyline.h ../UebungSS2018/CgEvents/slidermoveevent.h ../UebungSS2018/CgClass/rotationskoerper.h ../UebungSS2018/CgUtils/ObjLoader.h ../UebungSS2018/CgClass/dreiecke.h ../UebungSS2018/CgClass/koordinatensystem.h ../UebungSS2018/CgEvents/objectopenevent.h ../UebungSS2018/CgClass/kugel.h ../UebungSS2018/CgEvents/besterslidermoveevent.h ../UebungSS2018/CgClass/traegerklasse.h ../UebungSS2018/CgClass/scenegraph.h ../UebungSS2018/CgClass/sceneentity.h ../UebungSS2018/CgClass/appearance.h ../UebungSS2018/CgClass/kamera.h ../UebungSS2018/CgClass/wuerfel.h ../UebungSS2018/CgClass/pfeil.h $(DISTDIR)/
-	$(COPY_FILE) --parents ../UebungSS2018/main.cpp ../UebungSS2018/CgQtViewer/CGQtGLRenderWidget.cpp ../UebungSS2018/CgQtViewer/CgQtGui.cpp ../UebungSS2018/CgBase/CgObservable.cpp ../UebungSS2018/CgEvents/CgMouseEvent.cpp ../UebungSS2018/CgQtViewer/CgQtMainApplication.cpp ../UebungSS2018/CgSceneGraph/CgSceneControl.cpp ../UebungSS2018/CgEvents/CgKeyEvent.cpp ../UebungSS2018/CgQtViewer/CgQtGlBufferObject.cpp ../UebungSS2018/CgQtViewer/CgTrackball.cpp ../UebungSS2018/CgEvents/CgWindowResizeEvent.cpp ../UebungSS2018/CgClass/meshfactory.cpp ../UebungSS2018/CgClass/Zylinder.cpp ../UebungSS2018/CgClass/kegel.cpp ../UebungSS2018/CgClass/Mypolyline.cpp ../UebungSS2018/CgEvents/slidermoveevent.cpp ../UebungSS2018/CgClass/rotationskoerper.cpp ../UebungSS2018/CgUtils/ObjLoader.cpp ../UebungSS2018/CgClass/koordinatensystem.cpp ../UebungSS2018/CgEvents/objectopenevent.cpp ../UebungSS2018/CgClass/kugel.cpp ../UebungSS2018/CgEvents/besterslidermoveevent.cpp ../UebungSS2018/CgClass/traegerklasse.cpp ../UebungSS2018/CgClass/scenegraph.cpp ../UebungSS2018/CgClass/sceneentity.cpp ../UebungSS2018/CgClass/appearance.cpp ../UebungSS2018/CgClass/kamera.cpp ../UebungSS2018/CgClass/wuerfel.cpp ../UebungSS2018/CgClass/dreiecke.cpp ../UebungSS2018/CgClass/pfeil.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents ../UebungSS2018/CgBase/CgBaseRenderWindow.h ../UebungSS2018/CgQtViewer/CgQtGLRenderWidget.h ../UebungSS2018/CgQtViewer/CgQtGui.h ../UebungSS2018/CgBase/CgObserver.h ../UebungSS2018/CgBase/CgObservable.h ../UebungSS2018/CgBase/CgBaseEvent.h ../UebungSS2018/CgBase/CgEnums.h ../UebungSS2018/CgEvents/CgMouseEvent.h ../UebungSS2018/CgQtViewer/CgQtMainApplication.h ../UebungSS2018/CgSceneGraph/CgSceneControl.h ../UebungSS2018/CgEvents/CgKeyEvent.h ../UebungSS2018/CgBase/CgBaseRenderer.h ../UebungSS2018/CgBase/CgBaseRenderableObject.h ../UebungSS2018/CgBase/CgBasePointCloud.h ../UebungSS2018/CgBase/CgBaseTriangleMesh.h ../UebungSS2018/CgBase/CgBasePolygonMesh.h ../UebungSS2018/CgBase/CgBasePolyline.h ../UebungSS2018/CgBase/CgBaseSceneControl.h ../UebungSS2018/CgQtViewer/CgQtGlBufferObject.h ../UebungSS2018/CgQtViewer/CgTrackball.h ../UebungSS2018/CgEvents/CgWindowResizeEvent.h ../UebungSS2018/CgClass/meshfactory.h ../UebungSS2018/CgClass/Zylinder.h ../UebungSS2018/CgClass/kegel.h ../UebungSS2018/CgClass/Mypolyline.h ../UebungSS2018/CgClass/mats.h ../UebungSS2018/CgEvents/slidermoveevent.h ../UebungSS2018/CgClass/rotationskoerper.h ../UebungSS2018/CgUtils/ObjLoader.h ../UebungSS2018/CgClass/dreiecke.h ../UebungSS2018/CgClass/koordinatensystem.h ../UebungSS2018/CgEvents/objectopenevent.h ../UebungSS2018/CgClass/kugel.h ../UebungSS2018/CgEvents/besterslidermoveevent.h ../UebungSS2018/CgClass/traegerklasse.h ../UebungSS2018/CgClass/scenegraph.h ../UebungSS2018/CgClass/sceneentity.h ../UebungSS2018/CgClass/appearance.h ../UebungSS2018/CgClass/kamera.h ../UebungSS2018/CgClass/wuerfel.h ../UebungSS2018/CgClass/pfeil.h $(DISTDIR)/
+	$(COPY_FILE) --parents ../UebungSS2018/main.cpp ../UebungSS2018/CgQtViewer/CGQtGLRenderWidget.cpp ../UebungSS2018/CgQtViewer/CgQtGui.cpp ../UebungSS2018/CgBase/CgObservable.cpp ../UebungSS2018/CgEvents/CgMouseEvent.cpp ../UebungSS2018/CgQtViewer/CgQtMainApplication.cpp ../UebungSS2018/CgSceneGraph/CgSceneControl.cpp ../UebungSS2018/CgEvents/CgKeyEvent.cpp ../UebungSS2018/CgQtViewer/CgQtGlBufferObject.cpp ../UebungSS2018/CgQtViewer/CgTrackball.cpp ../UebungSS2018/CgEvents/CgWindowResizeEvent.cpp ../UebungSS2018/CgClass/meshfactory.cpp ../UebungSS2018/CgClass/Zylinder.cpp ../UebungSS2018/CgClass/kegel.cpp ../UebungSS2018/CgClass/Mypolyline.cpp ../UebungSS2018/CgEvents/slidermoveevent.cpp ../UebungSS2018/CgClass/rotationskoerper.cpp ../UebungSS2018/CgUtils/ObjLoader.cpp ../UebungSS2018/CgClass/koordinatensystem.cpp ../UebungSS2018/CgEvents/objectopenevent.cpp ../UebungSS2018/CgClass/kugel.cpp ../UebungSS2018/CgEvents/besterslidermoveevent.cpp ../UebungSS2018/CgClass/traegerklasse.cpp ../UebungSS2018/CgClass/scenegraph.cpp ../UebungSS2018/CgClass/sceneentity.cpp ../UebungSS2018/CgClass/appearance.cpp ../UebungSS2018/CgClass/kamera.cpp ../UebungSS2018/CgClass/wuerfel.cpp ../UebungSS2018/CgClass/dreiecke.cpp ../UebungSS2018/CgClass/mats.cpp ../UebungSS2018/CgClass/pfeil.cpp $(DISTDIR)/
 
 
 clean: compiler_clean 
@@ -775,6 +779,9 @@ dreiecke.o: ../UebungSS2018/CgClass/dreiecke.cpp ../UebungSS2018/CgClass/dreieck
 		../UebungSS2018/CgClass/mats.h \
 		../UebungSS2018/CgClass/wuerfel.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o dreiecke.o ../UebungSS2018/CgClass/dreiecke.cpp
+
+mats.o: ../UebungSS2018/CgClass/mats.cpp ../UebungSS2018/CgClass/mats.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o mats.o ../UebungSS2018/CgClass/mats.cpp
 
 pfeil.o: ../UebungSS2018/CgClass/pfeil.cpp ../UebungSS2018/CgClass/pfeil.h \
 		../UebungSS2018/CgClass/kegel.h \

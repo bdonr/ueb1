@@ -33,6 +33,7 @@ SOURCES += main.cpp \
     CgClass/kamera.cpp \
     CgClass/wuerfel.cpp \
     CgClass/dreiecke.cpp \
+    CgClass/mats.cpp \
     CgClass/pfeil.cpp
 
 
@@ -62,6 +63,7 @@ HEADERS += \
     CgClass/Zylinder.h \
     CgClass/kegel.h \
     CgClass/Mypolyline.h \
+    CgClass/mats.h \
     CgEvents/slidermoveevent.h \
     CgClass/rotationskoerper.h \
 CgUtils/ObjLoader.h \
