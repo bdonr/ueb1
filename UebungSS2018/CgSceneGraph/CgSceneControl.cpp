@@ -65,6 +65,7 @@ CgSceneControl::CgSceneControl() {
     countQ=0.0;
     countE=0.0;
     s=1;
+    lighton=false;
     cam = new Kamera();
 
     //  cam->setProjection(cam->perspective(100,eye.x,eye.y,eye.z));
@@ -801,7 +802,7 @@ void CgSceneControl::materialChange(CgBaseEvent *e){
         glm::vec4 ding2 =((bestersliderMoveEvent*)e)->getTraegerKlasse()->getDef();
         glm::vec4 ding3 =((bestersliderMoveEvent*)e)->getTraegerKlasse()->getSpec();
         double ding4 =((bestersliderMoveEvent*)e)->getTraegerKlasse()->getScala();
-        std::cout<<"ambient "<<ding1.x<<" "<<ding1.y<<" "<<ding1.z<<" "<<ding1.w<<std::endl;
+        std::cout<<ding1.x<<" "<<ding1.y<<" "<<ding1.z<<" "<<ding1.w<<std::endl;
         std::cout<<"defuse "<<ding2.x<<" "<<ding2.y<<" "<<ding2.z<<" "<<ding2.w<<std::endl;
         std::cout<<"specular "<<ding3.x<<" "<<ding3.y<<" "<<ding3.z<<" "<<ding3.w<<std::endl;
         std::cout<<"double "<<ding4<<std::endl;

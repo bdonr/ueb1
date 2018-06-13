@@ -16,6 +16,7 @@ private:
 
 public:
     Appearance();
+    Appearance(Mats* material);
     Appearance(const std::string& text, const glm::vec3& color);
     Appearance(const std::string& text, const glm::vec4& color);
 
