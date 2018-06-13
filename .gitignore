@@ -2,5 +2,4 @@
 *.exe
 *.pro
 *.pro.*
-*build*
-*_moc*
+build

@@ -44,7 +44,10 @@ namespace Cg{
     CgChangeTageswert               = 0x9786354,
     CgZeigeSonnenSystem             = 0x1847200,
     CgStartRotation                 = 0x1837260,
-    CgZeige3DPfeile                 = 0x9955883
+    CgZeige3DPfeile                 = 0x9955883,
+    CgChangeMaterial                = 0x9381625,
+    CgChangeLichtFarbe              = 0x1627132,
+    CgChangeLichtPosition           = 0x4653786
     // feel free to add whatever you like
     }EventType;
 

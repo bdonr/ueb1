@@ -13,7 +13,7 @@
 #include <stdio.h>
 #include <string.h>
 #include "CgUtils/ObjLoader.h"
-#include "CgEvents/objectopenevent.h"
+#include "CgEvents/objectopenevent.h"0.8 0.5 0.5 0.7
 #include "CgEvents/besterslidermoveevent.h"
 #include "CgClass/scenegraph.h"
 #include "CgClass/sceneentity.h"
@@ -788,12 +788,27 @@ void CgSceneControl::handleEvent(CgBaseEvent *e) {
     changeRota(e);
     handleKeyEvents(e);
     loadObject(e);
+    materialChange(e);
 
 
     // an der Stelle an der ein Event abgearbeitet ist wird es auch gelöscht.
     delete e;
 
 }
+void CgSceneControl::materialChange(CgBaseEvent *e){
+    if(e->getType()==Cg::CgChangeMaterial){
+        glm::vec4 ding1 =((bestersliderMoveEvent*)e)->getTraegerKlasse()->getAmb();
+        glm::vec4 ding2 =((bestersliderMoveEvent*)e)->getTraegerKlasse()->getDef();
+        glm::vec4 ding3 =((bestersliderMoveEvent*)e)->getTraegerKlasse()->getSpec();
+        double ding4 =((bestersliderMoveEvent*)e)->getTraegerKlasse()->getScala();
+        std::cout<<"ambient "<<ding1.x<<" "<<ding1.y<<" "<<ding1.z<<" "<<ding1.w<<std::endl;
+        std::cout<<"defuse "<<ding2.x<<" "<<ding2.y<<" "<<ding2.z<<" "<<ding2.w<<std::endl;
+        std::cout<<"specular "<<ding3.x<<" "<<ding3.y<<" "<<ding3.z<<" "<<ding3.w<<std::endl;
+        std::cout<<"double "<<ding4<<std::endl;
+    }
+
+}
+
 void CgSceneControl::page1(){
     //würfel
     reset();

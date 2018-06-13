@@ -47,6 +47,8 @@
 #include <QLabel>
 #include <glm/glm.hpp>
 #include "CgClass/traegerklasse.h"
+#include <QComboBox>
+#include <QRadioButton>
 
 QT_BEGIN_NAMESPACE
 class QSlider;
@@ -162,8 +164,46 @@ private:
     QPushButton* bt_show_poly;
     QPushButton* bt_rese_poly;
     QPushButton* bt_show_normal;
+    QString s;
     int tag = 1;
 
+    int SuperVar = 1;
+//    int varGruen = 1;
+//    int varBlau = 1;
+//    int varLichtX = 1;
+//    int varLichtY = 1;
+//    int varLichtZ = 1;
+
+
+    QComboBox* material;
+    std::vector <glm::vec4> amb;
+    std::vector <glm::vec4> def;
+    std::vector <glm::vec4> spec;
+    std::vector <double> scala;
+    QSlider* sl_licht_rot;
+    QSlider* sl_licht_gruen;
+    QSlider* sl_licht_blau;
+    QSlider* sl_licht_X;
+    QSlider* sl_licht_Y;
+    QSlider* sl_licht_Z;
+    QLabel* lab_licht_rot;
+    QLabel* lab_licht_gruen;
+    QLabel* lab_licht_blau;
+    QLabel* lab_licht_X;
+    QLabel* lab_licht_Y;
+    QLabel* lab_licht_Z;
+    QRadioButton* RButton1;
+    QRadioButton* RButton2;
+    QRadioButton* RButton3;
+    QLabel* lab_lane_refine;
+    QLabel* lab_rota_refine;
+    QLabel* lab_rota_hoehe;
+    QLabel* lab_Zylinder_radius;
+    QLabel* lab_Zylinder_refine;
+    QLabel* lab_Zylinder_Hoehe;
+    QLabel* lab_Kegel_refine;
+    QLabel* lab_Kegel_radius;
+    QLabel* lab_Kegel_hoehe;
 
 
 
@@ -199,6 +239,11 @@ private slots:
     void startRotation();
     void show3dArrow();
 
+    void materialChanged();
+    void changeLichtFarbe();
+    void changeLichtPosition();
+
+    void reranderLabelofSlider();
 };
 
 #endif

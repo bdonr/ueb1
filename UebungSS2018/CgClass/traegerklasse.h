@@ -9,6 +9,10 @@ class TraegerKlasse
 private: glm::vec3 intvec;
     std::vector<int> x;
     glm::vec3 dreiDVector;
+    glm::vec4 amb;
+    glm::vec4 def;
+    glm::vec4 spec;
+    double scala;
     int an_aus;
     int tab;
 public:
@@ -30,6 +34,16 @@ public:
     int getAn_aus() const;
     void setAn_aus(int value);
 
+
+
+    glm::vec4 getDef() const;
+    void setDef(const glm::vec4 &value);
+    glm::vec4 getSpec() const;
+    void setSpec(const glm::vec4 &value);
+    double getScala() const;
+    void setScala(double value);
+    glm::vec4 getAmb() const;
+    void setAmb(const glm::vec4 &value);
 };
 
 #endif // TRAEGERKLASSE_H
