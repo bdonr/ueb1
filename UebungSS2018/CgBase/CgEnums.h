@@ -40,7 +40,11 @@ namespace Cg{
     CgMatritzeChecken               = 0x4324100,
     CgChangeRotationPlaneten        = 0x8332240,
     CgZeigePolyline                 = 0x5342100,
-    CgResetPolyline                 = 0x6354210
+    CgResetPolyline                 = 0x6354210,
+    CgChangeTageswert               = 0x9786354,
+    CgZeigeSonnenSystem             = 0x1847200,
+    CgStartRotation                 = 0x1837260,
+    CgZeige3DPfeile                 = 0x9955883
     // feel free to add whatever you like
     }EventType;
 

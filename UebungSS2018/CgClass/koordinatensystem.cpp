@@ -4,7 +4,6 @@ Koordinatensystem::Koordinatensystem(CgBaseRenderer *render,glm::mat4x4 x)
 {
     this->render=render;
     this->translation=x;
-    //m_renderer->setUniformValue("ka",glm::vec4(1.,1.,1.,1.));
 
     pfeile.push_back(new Pfeil(render,new Appearance("mycolor",glm::vec4(1,0.,0.,1.))));
     pfeile.push_back(new Pfeil(render,new Appearance("mycolor",glm::vec4(0.,1,0.,1.))));

@@ -1,7 +1,10 @@
 #ifndef DREIECK_H
 #define DREIECK_H
 #include "CgBase/CgBaseTriangleMesh.h"
+#include "CgClass/Mypolyline.h"
+#include "CgClass/meshfactory.h"
 
+class MyPolyline;
 class Dreiecke:public CgBaseTriangleMesh
 {
 
@@ -16,6 +19,8 @@ private:
     std::vector<unsigned int> indeces;
     std::vector<glm::vec3> facenormals;
     std::vector<glm::vec3> fcolor;
+    std::vector<glm::vec3> pointnormals;
+    std::vector<MyPolyline*> geraden;
 
 public:
     Dreiecke();
@@ -33,8 +38,14 @@ public:
     const std::vector<unsigned int> &getTriangleIndices() const;
     const std::vector<glm::vec3> &getFaceNormals() const;
     const std::vector<glm::vec3> &getFaceColors() const;
-    int create();
 
+    bool equal(glm::vec3 a, glm::vec3 b);
+    bool equalDouble(double x, double y);
+    bool berechnePunktNormale();
+    glm::vec3 berechneSchwerPunkte(glm::vec3 a, glm::vec3 b, glm::vec3 c);
+    glm::vec3 normalenV(glm::vec3 a, glm::vec3 b, glm::vec3 c, glm::vec3 mittelpunkt);
+    std::vector<MyPolyline *> getGeraden() const;
+    void setGeraden(const std::vector<MyPolyline *> &value);
 };
 
 #endif // DREIECK_H

@@ -96,13 +96,13 @@ void Zylinder::create(){
         //side
         //3.5-5.7-7.9
         //2.4-4.6-6.8
-        triangleIndices.push_back(d+3);
         triangleIndices.push_back(d+2);
+        triangleIndices.push_back(d+3);
         triangleIndices.push_back(d+5);
 
-        triangleIndices.push_back(d+3);
-        triangleIndices.push_back(d+4);
         triangleIndices.push_back(d+5);
+        triangleIndices.push_back(d+4);
+        triangleIndices.push_back(d+2);
 
 
 

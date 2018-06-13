@@ -3,10 +3,23 @@
 in vec3 vert;
 in vec3 vertNormal;
 
-uniform vec4 mycolor;
+in vec3 pixelLight;
+in vec3 pixelCam;
+in vec4 lightcolor;
+
+	in vec4 color;
 
 
     void main() {
-     
-       gl_FragColor = mycolor;
+	vec3 N = normalize (vert);
+	vec3 L = normalize(pixelLight);
+     	vec3 E = normalize(-pixelCam);
+	vec3 H = normalize(L+E);
+
+	float diff = max(dot(N,L),0);
+	vec4 diffuse = diff * color;
+
+	float spec =pow(max(dot(N,H),0.0),200);
+	vec4 specular = spec * lightcolor;
+       gl_FragColor = diffuse+specular;
     }
