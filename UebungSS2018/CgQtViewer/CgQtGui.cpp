@@ -44,6 +44,7 @@
 //aufgabe 14 EVENTUEL
 
 
+// go
 
 void CgQtGui::init()
 {
