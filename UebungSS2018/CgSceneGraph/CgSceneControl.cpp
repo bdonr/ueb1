@@ -128,10 +128,10 @@ void CgSceneControl::setRenderer(CgBaseRenderer *r) {
 
     //  setShaderSourceFiles("../UebungSS2018/CgShader/simple.vert","../UebungSS2018/CgShader/simple.frag");
     m_renderer->setSceneControl(this);
-    m_renderer->setUniformValue("mycolor",glm::vec4(.1,.8,.8,0));
+    m_renderer->setUniformValue("mycolor",glm::vec4(1,.8,.8,0));
     m_renderer->setUniformValue("light",glm::vec3(-1,1,.5));
-    m_renderer->setUniformValue("lightdir",glm::vec3(-1,0,0));
-    m_renderer->setUniformValue("lightcolor",glm::vec4(.1,.8,.8,1));
+    m_renderer->setUniformValue("lightdir",glm::vec3(1,0,0));
+    m_renderer->setUniformValue("lightColor",glm::vec4(1,.8,.8,1));
   //  m_renderer->setUniformValue("lightcolor",glm::vec4(1,0.1,0.1,1));
 
 
@@ -203,6 +203,11 @@ void CgSceneControl::renderDreiecke()
 {
     if(dreiecke){
         m_renderer->render(dreiecke,old);
+        if(!dreiecke->getGeraden().empty()){
+            for(unsigned int i=0; i<dreiecke->getGeraden().size();i++){
+                m_renderer->render(dreiecke->getGeraden().at(i),old);
+            }
+        }
     }
 }
 
@@ -655,7 +660,6 @@ void CgSceneControl::loadObject(CgBaseEvent *e)
 
     if(e->getType()==Cg::CgChangeWahl){
         dreiecke = new Dreiecke();
-        std::cout<<"obejct"<<((bestersliderMoveEvent*)e)->getTraegerKlasse()->getAn_aus()<<std::endl;
         if(objecte.empty()){
             ObjLoader loader;
             loader.load("../CgData/bunny.obj");
@@ -678,7 +682,12 @@ void CgSceneControl::loadObject(CgBaseEvent *e)
         }
         dreiecke = objecte.at(((bestersliderMoveEvent*)e)->getTraegerKlasse()->getAn_aus());
         //   dreiecke = objecte.at(((ObjectOpenEvent*) e)->getWahl());
-        this->m_renderer->init(dreiecke);
+        if(!dreiecke->getGeraden().empty()){
+            for(unsigned int i=0; i<dreiecke->getGeraden().size();i++){
+                m_renderer->init(dreiecke->getGeraden().at(i));
+            }
+        }
+        renderDreiecke();
         this->m_renderer->redraw();
 
     }
