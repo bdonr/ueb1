@@ -50,7 +50,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="CgTrackball.h" pinned="false" current-in-tab="false">
+      <file leaf-file-name="CgTrackball.h" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/CgQtViewer/CgTrackball.h">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="0">
@@ -60,6 +60,7 @@
           </provider>
         </entry>
       </file>
+<<<<<<< HEAD
       <file leaf-file-name="CG1Uebung.pro" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/CG1Uebung.pro">
           <provider selected="true" editor-type-id="text-editor">
@@ -90,6 +91,8 @@
           </provider>
         </entry>
       </file>
+=======
+>>>>>>> 9764ec9c3baf9b578f3a569805e43666acedaa6e
       <file leaf-file-name="CgQtGui.cpp" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/CgQtViewer/CgQtGui.cpp">
           <provider selected="true" editor-type-id="text-editor">
@@ -113,8 +116,13 @@
       <file leaf-file-name="CgSceneControl.cpp" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/CgSceneGraph/CgSceneControl.cpp">
           <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
             <state relative-caret-position="12078">
               <caret line="671" column="0" lean-forward="false" selection-start-line="671" selection-start-column="0" selection-end-line="671" selection-end-column="0" />
+=======
+            <state relative-caret-position="12096">
+              <caret line="677" column="0" lean-forward="false" selection-start-line="677" selection-start-column="0" selection-end-line="677" selection-end-column="0" />
+>>>>>>> 9764ec9c3baf9b578f3a569805e43666acedaa6e
               <folding />
             </state>
           </provider>
@@ -233,21 +241,34 @@
       <workItem from="1525106599633" duration="26000" />
       <workItem from="1525107764954" duration="666000" />
       <workItem from="1526426901453" duration="9000" />
+<<<<<<< HEAD
       <workItem from="1528779391034" duration="25000" />
       <workItem from="1528779478425" duration="2853000" />
       <workItem from="1528783641485" duration="1568000" />
+=======
+      <workItem from="1528823169474" duration="8000" />
+      <workItem from="1528826444799" duration="543000" />
+>>>>>>> 9764ec9c3baf9b578f3a569805e43666acedaa6e
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
+<<<<<<< HEAD
     <option name="totallyTimeSpent" value="6909000" />
+=======
+    <option name="totallyTimeSpent" value="3014000" />
+>>>>>>> 9764ec9c3baf9b578f3a569805e43666acedaa6e
   </component>
   <component name="ToolWindowManager">
     <frame x="-141" y="47" width="1857" height="1092" extended-state="6" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24959569" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+<<<<<<< HEAD
       <window_info id="CMake" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32959184" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+=======
+      <window_info id="CMake" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32959184" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+>>>>>>> 9764ec9c3baf9b578f3a569805e43666acedaa6e
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -287,8 +308,20 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
+<<<<<<< HEAD
     <entry file="file://$PROJECT_DIR$/CgSceneGraph/CgExampleTriangle.cpp" />
     <entry file="file://$PROJECT_DIR$/CG1Uebung.pro">
+=======
+    <entry file="file://$PROJECT_DIR$/CgQtViewer/CgQtGlBufferObject.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="306">
+          <caret line="17" column="23" lean-forward="false" selection-start-line="17" selection-start-column="23" selection-end-line="17" selection-end-column="23" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CgQtViewer/CgTrackball.h">
+>>>>>>> 9764ec9c3baf9b578f3a569805e43666acedaa6e
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
@@ -296,6 +329,11 @@
         </state>
       </provider>
     </entry>
+<<<<<<< HEAD
+=======
+    <entry file="file://$PROJECT_DIR$/CgSceneGraph/CgExampleTriangle.cpp" />
+    <entry file="file://$PROJECT_DIR$/CG1Uebung.pro" />
+>>>>>>> 9764ec9c3baf9b578f3a569805e43666acedaa6e
     <entry file="file://$PROJECT_DIR$/CgSceneGraph/CgSceneControl.cpp">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2466">
@@ -359,6 +397,7 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/CgSceneGraph/CgExampleTriangle.cpp" />
+<<<<<<< HEAD
     <entry file="file://$PROJECT_DIR$/CG1Uebung.pro">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -367,6 +406,9 @@
         </state>
       </provider>
     </entry>
+=======
+    <entry file="file://$PROJECT_DIR$/CG1Uebung.pro" />
+>>>>>>> 9764ec9c3baf9b578f3a569805e43666acedaa6e
     <entry file="file://$PROJECT_DIR$/CgSceneGraph/CgSceneControl.cpp">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2466">
@@ -436,6 +478,7 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/CgSceneGraph/CgExampleTriangle.cpp" />
+<<<<<<< HEAD
     <entry file="file://$PROJECT_DIR$/CG1Uebung.pro">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -444,6 +487,9 @@
         </state>
       </provider>
     </entry>
+=======
+    <entry file="file://$PROJECT_DIR$/CG1Uebung.pro" />
+>>>>>>> 9764ec9c3baf9b578f3a569805e43666acedaa6e
     <entry file="file://$PROJECT_DIR$/CMakeLists.txt" />
     <entry file="file://$PROJECT_DIR$/CgQtViewer/CgQtGui.h">
       <provider selected="true" editor-type-id="text-editor">
@@ -543,6 +589,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="306">
           <caret line="17" column="1" lean-forward="false" selection-start-line="17" selection-start-column="1" selection-end-line="17" selection-end-column="1" />
+<<<<<<< HEAD
           <folding />
         </state>
       </provider>
@@ -561,10 +608,13 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1602">
           <caret line="89" column="0" lean-forward="false" selection-start-line="89" selection-start-column="0" selection-end-line="89" selection-end-column="0" />
+=======
+>>>>>>> 9764ec9c3baf9b578f3a569805e43666acedaa6e
           <folding />
         </state>
       </provider>
     </entry>
+<<<<<<< HEAD
     <entry file="file://$PROJECT_DIR$/CgSceneGraph/CgSceneControl.cpp">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="12078">
@@ -574,6 +624,11 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/CgBase/CgObserver.h">
+=======
+    <entry file="file://$PROJECT_DIR$/CgSceneGraph/CgExampleTriangle.cpp" />
+    <entry file="file://$PROJECT_DIR$/moc_CgQtGui.cpp" />
+    <entry file="file://$PROJECT_DIR$/CgQtViewer/CgQtGui.cpp">
+>>>>>>> 9764ec9c3baf9b578f3a569805e43666acedaa6e
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
@@ -583,16 +638,26 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/CG1Uebung.pro">
       <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
         <state relative-caret-position="432">
           <caret line="24" column="31" lean-forward="false" selection-start-line="24" selection-start-column="31" selection-end-line="24" selection-end-column="31" />
+=======
+        <state relative-caret-position="1602">
+          <caret line="89" column="0" lean-forward="false" selection-start-line="89" selection-start-column="0" selection-end-line="89" selection-end-column="0" />
+>>>>>>> 9764ec9c3baf9b578f3a569805e43666acedaa6e
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/CgQtViewer/CgQtGui.cpp">
       <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
         <state relative-caret-position="180">
           <caret line="10" column="13" lean-forward="false" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="13" />
+=======
+        <state relative-caret-position="12096">
+          <caret line="677" column="0" lean-forward="false" selection-start-line="677" selection-start-column="0" selection-end-line="677" selection-end-column="0" />
+>>>>>>> 9764ec9c3baf9b578f3a569805e43666acedaa6e
           <folding />
         </state>
       </provider>
@@ -605,10 +670,18 @@
         </state>
       </provider>
     </entry>
+<<<<<<< HEAD
     <entry file="file://$PROJECT_DIR$/CgShader/simple.vert">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="288">
           <caret line="16" column="26" lean-forward="false" selection-start-line="16" selection-start-column="26" selection-end-line="16" selection-end-column="26" />
+=======
+    <entry file="file://$PROJECT_DIR$/CG1Uebung.pro" />
+    <entry file="file://$PROJECT_DIR$/CgQtViewer/CgTrackball.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+>>>>>>> 9764ec9c3baf9b578f3a569805e43666acedaa6e
           <folding />
         </state>
       </provider>

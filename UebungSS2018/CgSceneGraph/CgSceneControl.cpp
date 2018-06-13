@@ -125,8 +125,15 @@ void CgSceneControl::initRotationBody()
 
 void CgSceneControl::setRenderer(CgBaseRenderer *r) {
     m_renderer = r;
+
+    //  setShaderSourceFiles("../UebungSS2018/CgShader/simple.vert","../UebungSS2018/CgShader/simple.frag");
     m_renderer->setSceneControl(this);
-    m_renderer->setUniformValue("mycolor",glm::vec4(1.,1.,1.,1.));
+    m_renderer->setUniformValue("mycolor",glm::vec4(1,.8,.8,0));
+    m_renderer->setUniformValue("light",glm::vec3(-1,1,.5));
+    m_renderer->setUniformValue("lightdir",glm::vec3(1,0,0));
+    m_renderer->setUniformValue("lightColor",glm::vec4(1,.8,.8,1));
+  //  m_renderer->setUniformValue("lightcolor",glm::vec4(1,0.1,0.1,1));
+
 
     //sc->render(m_renderer,sc->getSc());
     // registerSceneGraph(m_renderer,sc->getSc());
@@ -196,6 +203,11 @@ void CgSceneControl::renderDreiecke()
 {
     if(dreiecke){
         m_renderer->render(dreiecke,old);
+        if(!dreiecke->getGeraden().empty()){
+            for(unsigned int i=0; i<dreiecke->getGeraden().size();i++){
+                m_renderer->render(dreiecke->getGeraden().at(i),old);
+            }
+        }
     }
 }
 
@@ -362,10 +374,10 @@ void CgSceneControl::renderKegel()
     if(kegel){
         m_renderer->render(kegel,old);
         for(unsigned int i=0;i< kegel->getGeraden().size();i++){
-            m_renderer->setUniformValue("mycolor",glm::vec4(255.,45.0,3.,1.));
+            m_renderer->setUniformValue("mycolor",glm::vec4(.25,.22,.06,1.));
 
             m_renderer->init(kegel->getGeraden().at(i));
-            m_renderer->setUniformValue("mycolor",glm::vec4(0.,222.,3.,1.));
+            m_renderer->setUniformValue("mycolor",glm::vec4(.25,.22,.06,1.));
             m_renderer->render(kegel->getGeraden().at(i),old);
         }
     }
@@ -376,7 +388,6 @@ void CgSceneControl::initKegel()
     if(kegel){
         m_renderer->init(kegel);
         for(unsigned int j=0; j<kegel->getGeraden().size();j++){
-            m_renderer->setUniformValue("mycolor",glm::vec3(0,45.0,3.));
             m_renderer->init(kegel->getGeraden().at(j));
         }
     }
@@ -418,7 +429,7 @@ void CgSceneControl::initZylinder()
         m_renderer->init(zylinder);
         if(!zylinder->getGeraden().empty())
             for(unsigned int j=0; j<zylinder->getGeraden().size()-1;j++){
-                m_renderer->setUniformValue("mycolor",glm::vec4(0.,222.,3.,1.));
+                m_renderer->setUniformValue("mycolor",glm::vec4(0.,0.,0,1.));
 
                 m_renderer->init(zylinder->getGeraden().at(j));
             }
@@ -494,7 +505,7 @@ void CgSceneControl::handleKeyZ()
     //0 1 0 0
     //0 0 1 0
     //0 0 0 1
-   else{
+    else{
         z=z+0.5;
     }
 
@@ -648,22 +659,21 @@ void CgSceneControl::loadObject(CgBaseEvent *e)
 {
 
     if(e->getType()==Cg::CgChangeWahl){
-dreiecke = new Dreiecke();
-std::cout<<"obejct"<<((bestersliderMoveEvent*)e)->getTraegerKlasse()->getAn_aus()<<std::endl;
+        dreiecke = new Dreiecke();
         if(objecte.empty()){
             ObjLoader loader;
-                loader.load("../CgData/bunny.obj");
-                loader.getPositionData(dreickevertices);
-                loader.getFaceIndexData(dreieckecords);
-                objecte.push_back(MeshFactory::createDreiecke(dreickevertices,dreieckecords));
-                loader.load("../CgData/tyra.obj");
-                loader.getPositionData(dreickevertices);
-                loader.getFaceIndexData(dreieckecords);
-                objecte.push_back(MeshFactory::createDreiecke(dreickevertices,dreieckecords));
-                loader.load("../CgData/porsche.obj");
-                loader.getPositionData(dreickevertices);
-                loader.getFaceIndexData(dreieckecords);
-                objecte.push_back(MeshFactory::createDreiecke(dreickevertices,dreieckecords));
+            loader.load("../CgData/bunny.obj");
+            loader.getPositionData(dreickevertices);
+            loader.getFaceIndexData(dreieckecords);
+            objecte.push_back(MeshFactory::createDreiecke(dreickevertices,dreieckecords));
+            loader.load("../CgData/tyra.obj");
+            loader.getPositionData(dreickevertices);
+            loader.getFaceIndexData(dreieckecords);
+            objecte.push_back(MeshFactory::createDreiecke(dreickevertices,dreieckecords));
+            loader.load("../CgData/porsche.obj");
+            loader.getPositionData(dreickevertices);
+            loader.getFaceIndexData(dreieckecords);
+            objecte.push_back(MeshFactory::createDreiecke(dreickevertices,dreieckecords));
 
             //            loader.load("../CgData/kugel.obj");
             //            loader.getPositionData(dreickevertices);
@@ -671,8 +681,13 @@ std::cout<<"obejct"<<((bestersliderMoveEvent*)e)->getTraegerKlasse()->getAn_aus(
             //            objecte.push_back(MeshFactory::createDreiecke(dreickevertices,dreieckecords));
         }
         dreiecke = objecte.at(((bestersliderMoveEvent*)e)->getTraegerKlasse()->getAn_aus());
-     //   dreiecke = objecte.at(((ObjectOpenEvent*) e)->getWahl());
-        this->m_renderer->init(dreiecke);
+        //   dreiecke = objecte.at(((ObjectOpenEvent*) e)->getWahl());
+        if(!dreiecke->getGeraden().empty()){
+            for(unsigned int i=0; i<dreiecke->getGeraden().size();i++){
+                m_renderer->init(dreiecke->getGeraden().at(i));
+            }
+        }
+        renderDreiecke();
         this->m_renderer->redraw();
 
     }
@@ -705,13 +720,13 @@ void CgSceneControl::handleEvent(CgBaseEvent *e) {
         this->rotationbody=NULL;
     }
     if(e->getType()==Cg::CgLaneRefine){
-           delete rotationbody;
-           this->rotationbody=NULL;
+        delete rotationbody;
+        this->rotationbody=NULL;
         int x = ((bestersliderMoveEvent*)e)->getTraegerKlasse()->getDreiDVector().x;
         std::cout<<x<<std::endl;
         this->rotationbody=MeshFactory::createRotationKoerper(1,x,true,false);
         initRotationBody();
-       }
+    }
     if(e->getType()==Cg::CgChangeRota){
         delete rotationbody;
         this->rotationbody=NULL;
