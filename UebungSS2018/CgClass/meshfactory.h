@@ -11,6 +11,7 @@ class RotationsKoerper;
 class Kugel;
 class Wuerfel;
 class Kegel;
+class Dreiecke;
 class Zylinder;
 class MeshFactory
 {
