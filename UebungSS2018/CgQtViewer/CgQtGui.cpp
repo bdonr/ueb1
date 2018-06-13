@@ -654,7 +654,11 @@ void CgQtGui::page6(QWidget *parent)
     combo_box_material->addItem("Jade");
     combo_box_material->addItem("Poliertes Gold");
     tab1_control->addWidget(combo_box_material);
-    connect(combo_box_material, SIGNAL(currentIndexChanged(int)), this, SLOT(materialChanged()));
+    //connect(combo_box_material, SIGNAL(currentIndexChanged(int)), this, SLOT(materialChanged()));
+
+    QPushButton* ButtonXY = new QPushButton("Senden");
+    connect(ButtonXY, SIGNAL(clicked()), this, SLOT(materialChanged()));
+    tab1_control->addWidget(ButtonXY);
 
     lab_licht_rot = new QLabel("Licht Rot: 1");
     tab1_control->addWidget(lab_licht_rot);
