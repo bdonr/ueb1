@@ -90,6 +90,16 @@ void TraegerKlasse::setAmb(const glm::vec4 &value)
     amb = value;
 }
 
+QString TraegerKlasse::getName() const
+{
+    return name;
+}
+
+void TraegerKlasse::setName(const QString &value)
+{
+    name = value;
+}
+
 TraegerKlasse::TraegerKlasse()
 {
     intvec=glm::vec3(0,0,0);
