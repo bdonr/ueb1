@@ -5,6 +5,7 @@
 Zylinder::Zylinder(unsigned int id,float radius,float hoehe, int refine,bool normalsberechnen):type(Cg::TriangleMesh),id(id),radius(radius),hoehe(hoehe),refine(refine)
   ,normalsberechnen(normalsberechnen){
     create();
+    this->appear=new Appearance();
 
 }
 
@@ -66,6 +67,16 @@ void Zylinder::setNormalsberechnen(bool value)
     faceColors.clear();
     geraden.clear();
     create();
+}
+
+Appearance *Zylinder::getAppear() const
+{
+    return appear;
+}
+
+void Zylinder::setAppear(Appearance *value)
+{
+    appear = value;
 }
 
 void Zylinder::create(){

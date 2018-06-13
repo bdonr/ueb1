@@ -3,6 +3,7 @@
 #include <CgBase/CgBaseTriangleMesh.h>
 #include <vector>
 #include "CgClass/Mypolyline.h"
+#include "CgClass/appearance.h"
 #include "CgClass/meshfactory.h"
 class Zylinder: public CgBaseTriangleMesh
 {
@@ -11,6 +12,7 @@ private:
     // CgBaseRenderableObject interface
     enum Cg::ObjectType type;
     unsigned int id;
+    Appearance* appear;
     float radius;
     float hoehe;
     int refine;
@@ -53,6 +55,9 @@ public:
     glm::vec3 normalen(glm::vec3 a, glm::vec3 b, glm::vec3 c, glm::vec3 mittelpunkt);
     bool getNormalsberechnen() const;
     void setNormalsberechnen(bool value);
+
+    Appearance *getAppear() const;
+    void setAppear(Appearance *value);
 };
 
 #endif // Zylinder_H
