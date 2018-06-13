@@ -565,12 +565,6 @@ void CgQtGui::page4(QWidget* parent)
     lab_matr_check= new QLabel("Matritzen unchecked");
 
 
-//    CgChangeTageswert               = 0x9786354,
-//    CgZeigeSonnenSystem             = 0x1847200,
-//    CgStartRotation                 = 0x1837260,
-//    CgZeige3DPfeile                 = 0x9955883
-
-
     bt_inc_day = new QPushButton("erhöhe tageswert");
     connect(bt_inc_day, SIGNAL(clicked()), this, SLOT(erhoeheTageswert()));
     bt_dec_day = new QPushButton("verringere tageswert");
