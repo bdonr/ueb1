@@ -6,6 +6,7 @@
 #include "glm/glm.hpp"
 #include "iostream"
 #include "CgClass/appearance.h"
+#include "CgClass/mats.h"
 class Pfeil
 {
 private: Kegel* kegel;
@@ -13,7 +14,6 @@ private: Kegel* kegel;
     glm::mat4x4 transform();
     glm::mat4x4 xyz;
     CgBaseRenderer *renderer;
-    Appearance* appear;
 public:
     Pfeil(CgBaseRenderer *renderer,Appearance* appear);
     Pfeil(CgBaseRenderer *renderer, Appearance *appear, glm::mat4x4 mat);
@@ -25,6 +25,7 @@ public:
     glm::mat4 transformation;
     void render();
     void render(glm::mat4x4 p);
+
 };
 
 #endif // PFEIL_H

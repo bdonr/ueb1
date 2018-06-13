@@ -1,5 +1,15 @@
 #include "kugel.h"
 #include <iostream>
+Appearance *Kugel::getAppear() const
+{
+    return appear;
+}
+
+void Kugel::setAppear(Appearance *value)
+{
+    appear = value;
+}
+
 Kugel::Kugel()
 {
 

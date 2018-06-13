@@ -4,12 +4,14 @@
 #include <CgBase/CgBasePolyline.h>
 #include "CgClass/Mypolyline.h"
 #include "CgClass/meshfactory.h"
+#include "CgClass/appearance.h"
 class Kegel: public CgBaseTriangleMesh
 {
 private:
     // CgBaseRenderableObject interface
     enum Cg::ObjectType type;
     enum Cg::ObjectType intern;
+    Appearance* appear;
     unsigned int id;
     float radius;
     float hoehe;
@@ -60,6 +62,8 @@ public:
     glm::vec3 normalen(glm::vec3 a, glm::vec3 b, glm::vec3 c, glm::vec3 mittelpunkt);
     bool getNormalsberechnen() const;
     void setNormalsberechnen(bool value);
+    Appearance *getAppear() const;
+    void setAppear(Appearance *value);
 };
 
 #endif // KEGEL_H

@@ -3,6 +3,7 @@
 
 #include "glm/glm.hpp"
 #include <string>
+#include <CgClass/mats.h>
 class Appearance
 {
 
@@ -11,19 +12,21 @@ private:
     glm::vec4 vierDcolor;
     glm::vec3 mats;
     std::string text;
+    Mats* material;
 
 public:
     Appearance();
+    Appearance(Mats* material);
     Appearance(const std::string& text, const glm::vec3& color);
     Appearance(const std::string& text, const glm::vec4& color);
-    glm::vec3 getMats() const;
-    void setMats(const glm::vec3 &value);
-    glm::vec3 getColor() const;
-    void setColor(const glm::vec3 &value);
+
     std::string getText() const;
     void setText(const std::string &value);
     glm::vec4 getVierDcolor() const;
     void setVierDcolor(const glm::vec4 &value);
+
+    Mats *getMaterial() const;
+    void setMaterial(Mats *value);
 };
 
 #endif // APPEARANCE_H

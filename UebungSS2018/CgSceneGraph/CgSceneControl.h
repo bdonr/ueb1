@@ -54,7 +54,7 @@ public:
     void resetAll();
     void calculateNewTransformation(glm::vec3 verschiebung);
     void renderRotationsBody();
-
+    bool lighton;
     void createScene();
 
     void createStandartMatrix();
@@ -216,6 +216,7 @@ public:
 
     void initKegel();
 
+    void materialChange(CgBaseEvent *e);
 private:
     int tab;
     glm::vec3 w;

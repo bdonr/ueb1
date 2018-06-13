@@ -48,6 +48,58 @@ void TraegerKlasse::setAn_aus(int value)
     an_aus = value;
 }
 
+
+
+glm::vec4 TraegerKlasse::getDef() const
+{
+    return def;
+}
+
+void TraegerKlasse::setDef(const glm::vec4 &value)
+{
+    def = value;
+}
+
+glm::vec4 TraegerKlasse::getSpec() const
+{
+    return spec;
+}
+
+void TraegerKlasse::setSpec(const glm::vec4 &value)
+{
+    spec = value;
+}
+
+double TraegerKlasse::getScala() const
+{
+    return scala;
+}
+
+void TraegerKlasse::setScala(double value)
+{
+    scala = value;
+}
+
+glm::vec4 TraegerKlasse::getAmb() const
+{
+    return amb;
+}
+
+void TraegerKlasse::setAmb(const glm::vec4 &value)
+{
+    amb = value;
+}
+
+QString TraegerKlasse::getName() const
+{
+    return name;
+}
+
+void TraegerKlasse::setName(const QString &value)
+{
+    name = value;
+}
+
 TraegerKlasse::TraegerKlasse()
 {
     intvec=glm::vec3(0,0,0);

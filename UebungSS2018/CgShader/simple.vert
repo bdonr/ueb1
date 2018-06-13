@@ -16,7 +16,10 @@ uniform mat4 worldMatrix;
 uniform mat3 normalMatrix;
 uniform mat4 rotations;
 uniform vec4 mycolor;
-
+uniform vec4 amb;
+uniform vec4 def;
+uniform vec4 spec;
+uniform float skalar;
 
 out vec4 color;
 uniform sampler2D u_texture;   //diffuse map
@@ -26,6 +29,8 @@ uniform sampler2D u_normals;   //normal map
 			      //resolution of screen
 uniform vec3 light;        //light position, normalized
 uniform vec4 LightColor;      //light RGBA -- alpha is intensity
+
+uniform bool lighton;
 
 
 void main() {
