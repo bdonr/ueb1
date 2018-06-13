@@ -645,6 +645,9 @@ void CgQtGui::page6(QWidget *parent)
     combo_box_objekt->addItem("Planet 1");
     combo_box_objekt->addItem("Planet 2");
     combo_box_objekt->addItem("Planet 3");
+    combo_box_objekt->addItem("Zylinder");
+    combo_box_objekt->addItem("Kegel");
+
     combo_box_objekt->setToolTip("first: select object, second: select material");
     tab1_control->addWidget(combo_box_objekt);
    // connect(combo_box_objekt, SIGNAL(activated(int)), this, SLOT(materialChanged()));

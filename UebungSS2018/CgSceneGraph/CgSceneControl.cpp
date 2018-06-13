@@ -739,8 +739,8 @@ void CgSceneControl::handleEvent(CgBaseEvent *e) {
         if(zylinder!=NULL){
             zylinder->setNormalsberechnen(shownormals);
             initZylinder();
-
         }
+
     }
     if(e->getType()==Cg::CgZeigePolyline){
         this->rotationbody=MeshFactory::createRotationKoerper(1,1,true,false);
@@ -804,6 +804,24 @@ void CgSceneControl::materialChange(CgBaseEvent *e){
         double ding4 =((bestersliderMoveEvent*)e)->getTraegerKlasse()->getScala();
 
         std::string st = ((bestersliderMoveEvent*)e)->getTraegerKlasse()->getName().toStdString();
+        Appearance* k = new Appearance();
+        Mats* ma =new Mats();
+        ma->setAmb(ding1);
+        ma->setDef(ding2);
+        ma->setSpec(ding3);
+        ma->setScalar(ding4);
+        k->setMaterial(ma);
+
+        if(st=="Zylinder"){
+
+            lighton=true;
+                zylinder = MeshFactory::createZylinder(10,10,10,false);
+                zylinder->setAppear(k);
+                initZylinder();
+
+        }
+
+
         std::cout<<"ambient "<<ding1.x<<" "<<ding1.y<<" "<<ding1.z<<" "<<ding1.w<<std::endl;
 
         std::cout<<"defuse "<<ding2.x<<" "<<ding2.y<<" "<<ding2.z<<" "<<ding2.w<<std::endl;
