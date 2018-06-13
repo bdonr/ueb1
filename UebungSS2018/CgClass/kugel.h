@@ -4,6 +4,7 @@
 #include "CgBase/CgBaseTriangleMesh.h"
 #include "vector"
 #include "glm/glm.hpp"
+#include "CgClass/appearance.h"
 class Kugel : public CgBaseTriangleMesh
 {
 
@@ -18,6 +19,7 @@ private :
     std::vector<glm::vec3> faceNormals;
     std::vector<glm::vec3> faceColors;
     enum Cg::ObjectType type;
+    Appearance* appear;
     int refine;
     int id;
 public:
@@ -39,6 +41,8 @@ public:
     const std::vector<glm::vec3> &getFaceNormals() const;
     const std::vector<glm::vec3> &getFaceColors() const;
     int create();
+    Appearance *getAppear() const;
+    void setAppear(Appearance *value);
 };
 
 #endif // KUGEL_H

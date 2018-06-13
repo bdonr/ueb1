@@ -128,10 +128,16 @@ void CgSceneControl::setRenderer(CgBaseRenderer *r) {
 
     //  setShaderSourceFiles("../UebungSS2018/CgShader/simple.vert","../UebungSS2018/CgShader/simple.frag");
     m_renderer->setSceneControl(this);
-    m_renderer->setUniformValue("mycolor",glm::vec4(1,.8,.8,0));
-    m_renderer->setUniformValue("light",glm::vec3(-1,1,.5));
-    m_renderer->setUniformValue("lightdir",glm::vec3(1,0,0));
-    m_renderer->setUniformValue("lightColor",glm::vec4(1,.8,.8,1));
+    m_renderer->setUniformValue("mycolor",glm::vec4(2,.8,.8,0));
+    m_renderer->setUniformValue("light",glm::vec3(0,1,1));
+
+    m_renderer->setUniformValue("lightColor",glm::vec4(1,1,1,0));
+    m_renderer->setUniformValue("def",glm::vec4(.4,.4,.4,1.0));
+    m_renderer->setUniformValue("spec",glm::vec4(.77,.77,.77,1.0));
+    m_renderer->setUniformValue("amb",glm::vec4(.0,.0,.0,0.0));
+    double s =76.8;
+    m_renderer->setUniformValue("scalar",s);
+
   //  m_renderer->setUniformValue("lightcolor",glm::vec4(1,0.1,0.1,1));
 
 
@@ -374,12 +380,21 @@ void CgSceneControl::renderKegel()
     if(kegel){
         m_renderer->render(kegel,old);
         for(unsigned int i=0;i< kegel->getGeraden().size();i++){
-            m_renderer->setUniformValue("mycolor",glm::vec4(.25,.22,.06,1.));
-
+            /*uniform vec4 amat;
+            uniform vec4 adef;
+            uniform vec4 asub;
+            uniform float sfactor
+            */
+            m_renderer->setUniformValue("amb",kegel->getAppear()->getMaterial()->getAmb());
+            m_renderer->setUniformValue("def",kegel->getAppear()->getMaterial()->getDef());
+            m_renderer->setUniformValue("spec",kegel->getAppear()->getMaterial()->getSpec());
+            m_renderer->setUniformValue("scalar",kegel->getAppear()->getMaterial()->getScalar());
             m_renderer->init(kegel->getGeraden().at(i));
             m_renderer->setUniformValue("mycolor",glm::vec4(.25,.22,.06,1.));
             m_renderer->render(kegel->getGeraden().at(i),old);
         }
+
+
     }
 }
 
@@ -402,9 +417,16 @@ void CgSceneControl::changeKegel(CgBaseEvent *e)
         float hoehe = traeger->getDreiDVector().x;
         float radius = traeger->getDreiDVector().y;
         float refine = traeger->getDreiDVector().z;
+
+        Appearance* k = new Appearance();
+        k->getMaterial()->setAmb(glm::vec4(.1,.1,.1,1));
+        k->getMaterial()->setDef(glm::vec4(.1,.1,.1,1));
+        k->getMaterial()->setSpec(glm::vec4(.1,.1,.1,1));
+        k->getMaterial()->setScalar(2);
+
         kegel = MeshFactory::createKegel(refine,hoehe,radius,shownormals);
 
-
+        kegel->setAppear(k);
         //resetRenderKegel(refine,hoehe,radius);
         initKegel();
     }
@@ -416,7 +438,10 @@ void CgSceneControl::renderZylinder()
         m_renderer->render(zylinder,old);
         if(!zylinder->getGeraden().empty()){
             for(unsigned int j=0; j<zylinder->getGeraden().size();j++){
-                m_renderer->setUniformValue("mycolor",glm::vec4(0.,222.,3.,1.));
+                m_renderer->setUniformValue("amb",zylinder->getAppear()->getMaterial()->getAmb());
+                m_renderer->setUniformValue("def",zylinder->getAppear()->getMaterial()->getDef());
+                m_renderer->setUniformValue("spec",zylinder->getAppear()->getMaterial()->getSpec());
+                m_renderer->setUniformValue("scalar",zylinder->getAppear()->getMaterial()->getScalar());
                 m_renderer->render(zylinder->getGeraden().at(j),old);
             }
         }
@@ -429,8 +454,6 @@ void CgSceneControl::initZylinder()
         m_renderer->init(zylinder);
         if(!zylinder->getGeraden().empty())
             for(unsigned int j=0; j<zylinder->getGeraden().size()-1;j++){
-                m_renderer->setUniformValue("mycolor",glm::vec4(0.,0.,0,1.));
-
                 m_renderer->init(zylinder->getGeraden().at(j));
             }
     }
@@ -446,6 +469,12 @@ void CgSceneControl::changeZylinder(CgBaseEvent *e)
         float radius = traeger->getDreiDVector().y;
         float refine = traeger->getDreiDVector().z;
         zylinder = MeshFactory::createZylinder(refine,hoehe,radius,shownormals);
+        Appearance* k = new Appearance();
+        k->getMaterial()->setAmb(glm::vec4(.1,.1,.1,1));
+        k->getMaterial()->setDef(glm::vec4(.1,.1,.1,1));
+        k->getMaterial()->setSpec(glm::vec4(.1,.1,.1,1));
+        k->getMaterial()->setScalar(2);
+        zylinder->setAppear(k);
         //resetRenderKegel(refine,hoehe,radius);
         initZylinder();
     }

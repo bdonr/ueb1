@@ -4,6 +4,7 @@
 Kegel::Kegel(int id,float radius,float hoehe, int refine,bool normalsberechnen):type(Cg::TriangleMesh),id(id),radius(radius),hoehe(hoehe),refine(refine),
     normalsberechnen(normalsberechnen)
 {
+    this->appear=new Appearance();
 create();
 }
 
@@ -176,3 +177,13 @@ glm::vec3 Kegel::normalen(glm::vec3 a,glm::vec3 b, glm::vec3 c,glm::vec3 mittelp
     return glm::normalize(o);
 }
 
+
+Appearance *Kegel::getAppear() const
+{
+    return appear;
+}
+
+void Kegel::setAppear(Appearance *value)
+{
+    appear = value;
+}

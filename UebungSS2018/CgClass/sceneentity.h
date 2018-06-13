@@ -43,6 +43,9 @@ public:
     glm::mat4x4 translatetoVectot();
     void setAusrichtung();
     glm::mat4x4 transform();
+    void rotateMond(float wunschwinkel, float winkel_y);
+    void rotateErde(float winkel_y, float wunschwinkel);
+    void rotateMond2(float winkel_z, float wunschwinkel);
 };
 
 #endif // SCENEENTITY_H
