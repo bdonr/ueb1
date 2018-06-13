@@ -64,7 +64,7 @@ HEADERS += \
     CgClass/Mypolyline.h \
     CgEvents/slidermoveevent.h \
     CgClass/rotationskoerper.h \
-    CgUtils/ObjLoader.h \
+CgUtils/ObjLoader.h \
     CgClass/dreiecke.h \
     CgClass/koordinatensystem.h \
     CgEvents/objectopenevent.h \
@@ -76,4 +76,4 @@ HEADERS += \
     CgClass/appearance.h \
     CgClass/kamera.h \
     CgClass/wuerfel.h \
-    CgClass/pfeil.h
+CgClass/pfeil.h
