@@ -35,10 +35,17 @@ void Scenegraph::render(CgBaseRenderer *render,SceneEntity* sc)
     matrixstack.push(ma);
     sc->rotate(counter,counter,counter);
     for(int i=0; i < sc->getChildren().size(); i++){
-
+        render->setUniformValue("amb",sc->getChildren().at(i)->getAppear()->getMaterial()->getAmb());
+        render->setUniformValue("def",sc->getChildren().at(i)->getAppear()->getMaterial()->getDef());
+        render->setUniformValue("spec",sc->getChildren().at(i)->getAppear()->getMaterial()->getSpec());
+        render->setUniformValue("spec",sc->getChildren().at(i)->getAppear()->getMaterial()->getScalar());
         this->render(render,sc->getChildren().at(i));
 
     }
+    render->setUniformValue("amb",sc->getAppear()->getMaterial()->getAmb());
+    render->setUniformValue("def",sc->getAppear()->getMaterial()->getDef());
+    render->setUniformValue("spec",sc->getAppear()->getMaterial()->getSpec());
+    render->setUniformValue("spec",sc->getAppear()->getMaterial()->getScalar());
     render->init(sc->getOb());
     render->render(sc->getOb(),ma);
     matrixstack.pop();

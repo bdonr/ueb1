@@ -127,6 +127,39 @@ std::vector<SceneEntity *> SceneEntity::getChildren() const
 
 
 
+void SceneEntity::rotateMond(float wunschwinkel, float winkel_y)
+{
+    transformation=
+            rotationZ(-this->winkelz)*
+            rotationY(-this->winkely)*
+            rotationX(winkel_y*2000)*
+            rotationY(this->winkely)*
+            rotationZ(this->winkelz);
+    wunschwinkel=wunschwinkel*28;
+}
+
+void SceneEntity::rotateErde(float winkel_y, float wunschwinkel)
+{
+    transformation*=
+            rotationZ(-this->winkelz)*
+            rotationY(-this->winkely)*
+            rotationZ(winkel_y*4100)*
+            rotationY(this->winkely)*
+            rotationZ(this->winkelz);
+    wunschwinkel=wunschwinkel*20;
+}
+
+void SceneEntity::rotateMond2(float winkel_z, float wunschwinkel)
+{
+    transformation=
+            rotationZ(-this->winkelz)*
+            rotationY(-this->winkely)*
+            rotationZ(winkel_z*100)*
+            rotationY(this->winkely)*
+            rotationZ(this->winkelz);
+    wunschwinkel=wunschwinkel*100;
+}
+
 void SceneEntity::rotate(float winkel_y,float winkel_z,float wunschwinkel)
 {
 
@@ -146,36 +179,18 @@ void SceneEntity::rotate(float winkel_y,float winkel_z,float wunschwinkel)
     if(type!=Cg::Stern){
     if(type==Cg::Erde){
         //this->winkely+=10;
-        transformation*=
-                rotationZ(-this->winkelz)*
-                rotationY(-this->winkely)*
-                rotationZ(winkel_y*4100)*
-                rotationY(this->winkely)*
-                rotationZ(this->winkelz);
-        wunschwinkel=wunschwinkel*20;
+        rotateErde(winkel_y, wunschwinkel);
     }
 
 
     if(type==Cg::Mond1){
-        transformation=
-                rotationZ(-this->winkelz)*
-                rotationY(-this->winkely)*
-                rotationX(winkel_y*2000)*
-                rotationY(this->winkely)*
-                rotationZ(this->winkelz);
-        wunschwinkel=wunschwinkel*28;
+        rotateMond(wunschwinkel, winkel_y);
 
     }
 
     if(type==Cg::Mond2){
         this->winkelx+=10;
-        transformation=
-                rotationZ(-this->winkelz)*
-                rotationY(-this->winkely)*
-                rotationZ(winkel_z*100)*
-                rotationY(this->winkely)*
-                rotationZ(this->winkelz);
-        wunschwinkel=wunschwinkel*100;
+        rotateMond2(winkel_z, wunschwinkel);
 
     }
     if(type==Cg::Mond3){
