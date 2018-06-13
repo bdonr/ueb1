@@ -54,7 +54,7 @@ public:
     void resetAll();
     void calculateNewTransformation(glm::vec3 verschiebung);
     void renderRotationsBody();
-
+    bool lighton;
     void createScene();
 
     void createStandartMatrix();

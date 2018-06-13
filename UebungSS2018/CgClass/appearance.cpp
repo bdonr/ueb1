@@ -39,6 +39,11 @@ Appearance::Appearance()
     this->material=new Mats();
 }
 
+Appearance::Appearance(Mats *material)
+{
+    this->material=material;
+}
+
 Appearance::Appearance(const std::string& text, const glm::vec4 &color)
 {
     this->text=text;

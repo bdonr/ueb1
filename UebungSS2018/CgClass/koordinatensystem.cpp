@@ -4,10 +4,26 @@ Koordinatensystem::Koordinatensystem(CgBaseRenderer *render,glm::mat4x4 x)
 {
     this->render=render;
     this->translation=x;
+    Appearance* k = new Appearance();
+    k->getMaterial()->setAmb(glm::vec4(1,0,0,0));
+    k->getMaterial()->setDef(glm::vec4(.1,.1,.1,1));
+    k->getMaterial()->setSpec(glm::vec4(.1,.1,.1,1));
+    k->getMaterial()->setScalar(2);
 
-    pfeile.push_back(new Pfeil(render,new Appearance("mycolor",glm::vec4(1,0.,0.,1.))));
-    pfeile.push_back(new Pfeil(render,new Appearance("mycolor",glm::vec4(0.,1,0.,1.))));
-    pfeile.push_back(new Pfeil(render,new Appearance("mycolor",glm::vec4(0.,0,1,1.))));
+    pfeile.push_back(new Pfeil(render,k));
+    Appearance* g = new Appearance();
+    g->getMaterial()->setAmb(glm::vec4(0,1,0,1));
+    g->getMaterial()->setDef(glm::vec4(.1,.1,.1,1));
+    g->getMaterial()->setSpec(glm::vec4(.1,.1,.1,1));
+    g->getMaterial()->setScalar(2);
+    pfeile.push_back(new Pfeil(render,g));
+
+            Appearance* o = new Appearance();
+            o->getMaterial()->setAmb(glm::vec4(0,0,1,1));
+            o->getMaterial()->setDef(glm::vec4(.1,.1,.1,1));
+            o->getMaterial()->setSpec(glm::vec4(.1,.1,.1,1));
+            o->getMaterial()->setScalar(2);
+    pfeile.push_back(new Pfeil(render,o));
 }
 
 

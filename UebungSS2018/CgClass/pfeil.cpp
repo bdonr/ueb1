@@ -26,14 +26,14 @@ void Pfeil::render(glm::mat4x4 p)
     renderer->setUniformValue("amb",getKegel()->getAppear()->getMaterial()->getAmb());
     renderer->setUniformValue("def",getKegel()->getAppear()->getMaterial()->getDef());
     renderer->setUniformValue("spec",getKegel()->getAppear()->getMaterial()->getSpec());
-    renderer->setUniformValue("spec",getKegel()->getAppear()->getMaterial()->getScalar());
-    renderer->render(this->getKegel(),xyz*transform());
+    renderer->setUniformValue("scalar",getKegel()->getAppear()->getMaterial()->getScalar());
+    renderer->render(this->getKegel(),p*transform());
 
     renderer->setUniformValue("amb",getZylinder()->getAppear()->getMaterial()->getAmb());
     renderer->setUniformValue("def",getZylinder()->getAppear()->getMaterial()->getDef());
     renderer->setUniformValue("spec",getZylinder()->getAppear()->getMaterial()->getSpec());
-    renderer->setUniformValue("spec",getZylinder()->getAppear()->getMaterial()->getScalar());
-    renderer->render(this->getZylinder(),xyz);
+    renderer->setUniformValue("scalar",getZylinder()->getAppear()->getMaterial()->getScalar());
+    renderer->render(this->getZylinder(),p*xyz);
 }
 
 void Pfeil::render()
@@ -41,13 +41,13 @@ void Pfeil::render()
     renderer->setUniformValue("amb",getKegel()->getAppear()->getMaterial()->getAmb());
     renderer->setUniformValue("def",getKegel()->getAppear()->getMaterial()->getDef());
     renderer->setUniformValue("spec",getKegel()->getAppear()->getMaterial()->getSpec());
-    renderer->setUniformValue("spec",getKegel()->getAppear()->getMaterial()->getScalar());
+    renderer->setUniformValue("scalar",getKegel()->getAppear()->getMaterial()->getScalar());
     renderer->render(this->getKegel(),xyz*transform());
 
     renderer->setUniformValue("amb",getZylinder()->getAppear()->getMaterial()->getAmb());
     renderer->setUniformValue("def",getZylinder()->getAppear()->getMaterial()->getDef());
     renderer->setUniformValue("spec",getZylinder()->getAppear()->getMaterial()->getSpec());
-    renderer->setUniformValue("spec",getZylinder()->getAppear()->getMaterial()->getScalar());
+    renderer->setUniformValue("scalar",getZylinder()->getAppear()->getMaterial()->getScalar());
     renderer->render(this->getZylinder(),xyz);
 }
 

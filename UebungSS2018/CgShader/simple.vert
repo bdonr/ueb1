@@ -30,7 +30,7 @@ uniform sampler2D u_normals;   //normal map
 uniform vec3 light;        //light position, normalized
 uniform vec4 LightColor;      //light RGBA -- alpha is intensity
 
-
+uniform bool lighton;
 
 
 void main() {

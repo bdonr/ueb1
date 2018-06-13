@@ -12,11 +12,12 @@ uniform vec4 amb;
 uniform vec4 def;
 uniform vec4 spec;
 uniform float skalar;
-
+uniform bool lighton;
 
 
     void main() {
-	
+vec4 col;
+	if(lighton){
 	vec3 N = normalize (vert);
 	vec3 L = normalize(pixelLight);
      	vec3 E = normalize(-pixelCam);
@@ -37,8 +38,11 @@ uniform float skalar;
 	vec4 specular = mspecular;
 
 
-        vec4 col = diffuse+ambient+specular;
-	
+        col = diffuse+ambient+specular;
+	}
+	else{
+		 col = amb;
+	}
 	gl_FragColor = col;
     }
 
