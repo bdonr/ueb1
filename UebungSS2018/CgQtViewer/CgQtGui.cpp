@@ -29,6 +29,7 @@
 #include <iostream>
 #include <string>
 #include <ostream>
+#include <QComboBox>
 
 
 //Höhe slider definieren, funktionalität inkludieren-------------------------------------CHECK
@@ -46,6 +47,33 @@
 
 void CgQtGui::init()
 {
+    //--------------------------------------------------------------
+
+    amb.push_back(glm::vec4(.25,.25,.25,1.0));
+    def.push_back(glm::vec4(.40,.40,.40,1.0));
+    spec.push_back(glm::vec4(.77,.77,.77,1.0));
+    scala.push_back(76.8);
+
+    amb.push_back(glm::vec4(.25,.21,.21,.90));
+    def.push_back(glm::vec4(0.99,.83,.83,.90));
+    spec.push_back(glm::vec4(0.30,0.30,0.30,0.90));
+    scala.push_back(11.3);
+
+    amb.push_back(glm::vec4(0.5,0.5,0.7,0.8));
+    def.push_back(glm::vec4(0.18,0.17,0.23,0.8));
+    spec.push_back(glm::vec4(0.33,0.33,0.35,0.8));
+    scala.push_back(38.4);
+
+    amb.push_back(glm::vec4(0.14,0.22,0.16,0.9));
+    def.push_back(glm::vec4(0.54,0.89,0.63,0.9));
+    spec.push_back(glm::vec4(0.32,0.32,0.32,0.9));
+    scala.push_back(12.8);
+
+    amb.push_back(glm::vec4(0.25,0.22,0.6,1.0));
+    def.push_back(glm::vec4(0.35,0.31,0.9,1.0));
+    spec.push_back(glm::vec4(0.8,0.72,0.21,1.0));
+    scala.push_back(83.2);
+    //--------------------------------------------------------------
     std::vector<int> abc;
     abc.push_back(0);
     abc.push_back(0);
@@ -204,8 +232,8 @@ void CgQtGui::page2(QWidget* parent)
     tab1_control->addWidget(bt_rese_poly);
     connect(bt_rese_poly, SIGNAL( clicked() ), this, SLOT(ResetPolylineButton()));
 
-    QLabel* lab10= new QLabel("Lane-Riesenfeld Refine");
-    tab1_control->addWidget(lab10);
+    lab_lane_refine= new QLabel("Lane-Riesenfeld Refine");
+    tab1_control->addWidget(lab_lane_refine);
 
     sl_rota_lane_refine = createSlider();
     tab1_control->addWidget(sl_rota_lane_refine);
@@ -214,10 +242,10 @@ void CgQtGui::page2(QWidget* parent)
     sl_rota_lane_refine->setValue(1);
     sl_rota_lane_refine->setTickInterval(1);
     connect(sl_rota_lane_refine, SIGNAL(sliderReleased()), this, SLOT(laneRotaChange()));
+    connect(sl_rota_lane_refine, SIGNAL(sliderMoved(int)), this, SLOT(reranderLabelofSlider()));
 
-
-    QLabel* lab7= new QLabel("RotationsKörper Refine");
-    tab1_control->addWidget(lab7);
+    lab_rota_refine= new QLabel("Rotationskörper Refine");
+    tab1_control->addWidget(lab_rota_refine);
 
     sl_rota_refine = createSlider();
     tab1_control->addWidget(sl_rota_refine);
@@ -226,9 +254,10 @@ void CgQtGui::page2(QWidget* parent)
     sl_rota_refine->setValue(1);
     sl_rota_refine->setTickInterval(1);
     connect(sl_rota_refine, SIGNAL(sliderReleased()), this, SLOT(changeRotaKoerper()));
+    connect(sl_rota_refine, SIGNAL(sliderMoved(int)), this, SLOT(reranderLabelofSlider()));
 
-    QLabel* lab8= new QLabel("RotationsKörper Hoehe");
-    tab1_control->addWidget(lab8);
+    lab_rota_hoehe = new QLabel("Rotationskörper Hoehe");
+    tab1_control->addWidget(lab_rota_hoehe);
 
     sl_rota_hoehe = createSlider();
     tab1_control->addWidget(sl_rota_hoehe);
@@ -237,7 +266,7 @@ void CgQtGui::page2(QWidget* parent)
     sl_rota_hoehe->setValue(1);
     sl_rota_hoehe->setTickInterval(1);
     connect(sl_rota_hoehe, SIGNAL(sliderReleased()), this, SLOT(changeRotaKoerper()));
-
+    connect(sl_rota_hoehe, SIGNAL(sliderMoved(int)), this, SLOT(reranderLabelofSlider()));
 
     QLabel* lab9= new QLabel("----------------------------------------------------------------------------------");
     tab1_control->addWidget(lab9);
@@ -247,30 +276,8 @@ void CgQtGui::page2(QWidget* parent)
     bt_show_normal->setCheckable(false);
     connect(bt_show_normal, SIGNAL( clicked() ), this, SLOT(zeige_normale_taste_page2()));
 
-    QLabel* lab1= new QLabel("Zylinder Hoehe");
-    tab1_control->addWidget(lab1);
-
-    sl_zylinder_hoehe = createSlider();
-    tab1_control->addWidget(sl_zylinder_hoehe);
-    sl_zylinder_hoehe->setMinimum(0);
-    sl_zylinder_hoehe->setMaximum(60);
-    sl_zylinder_hoehe->setValue(20);
-    sl_zylinder_hoehe->setTickInterval(1);
-    connect(sl_zylinder_hoehe, SIGNAL(sliderReleased()), this, SLOT(changeZylinder()));
-
-    QLabel* lab2= new QLabel("Zylinder Radius");
-    tab1_control->addWidget(lab2);
-
-    sl_zylinder_radius = createSlider();
-    tab1_control->addWidget(sl_zylinder_radius);
-    sl_zylinder_radius->setMinimum(0);
-    sl_zylinder_radius->setMaximum(60);
-    sl_zylinder_radius->setValue(20);
-    sl_zylinder_radius->setTickInterval(1);
-    connect(sl_zylinder_radius, SIGNAL(sliderReleased()), this, SLOT(changeZylinder()));
-
-    QLabel* lab3= new QLabel("Zylinder Refine");
-    tab1_control->addWidget(lab3);
+    lab_Zylinder_refine = new QLabel("Zylinder Refine");
+    tab1_control->addWidget(lab_Zylinder_refine);
 
     sl_zylinder_refine = createSlider();
     tab1_control->addWidget(sl_zylinder_refine);
@@ -279,9 +286,34 @@ void CgQtGui::page2(QWidget* parent)
     sl_zylinder_refine->setValue(20);
     sl_zylinder_refine->setTickInterval(1);
     connect(sl_zylinder_refine, SIGNAL(sliderReleased()), this, SLOT(changeZylinder()));
+    connect(sl_zylinder_refine, SIGNAL(sliderMoved(int)), this, SLOT(reranderLabelofSlider()));
 
-    QLabel* lab4= new QLabel("Kegel Refine");
-    tab1_control->addWidget(lab4);
+    lab_Zylinder_radius = new QLabel("Zylinder Radius");
+    tab1_control->addWidget(lab_Zylinder_radius);
+
+    sl_zylinder_radius = createSlider();
+    tab1_control->addWidget(sl_zylinder_radius);
+    sl_zylinder_radius->setMinimum(0);
+    sl_zylinder_radius->setMaximum(60);
+    sl_zylinder_radius->setValue(20);
+    sl_zylinder_radius->setTickInterval(1);
+    connect(sl_zylinder_radius, SIGNAL(sliderReleased()), this, SLOT(changeZylinder()));
+    connect(sl_zylinder_radius, SIGNAL(sliderMoved(int)), this, SLOT(reranderLabelofSlider()));
+
+    lab_Zylinder_Hoehe = new QLabel("Zylinder Hoehe");
+    tab1_control->addWidget(lab_Zylinder_Hoehe);
+
+    sl_zylinder_hoehe = createSlider();
+    tab1_control->addWidget(sl_zylinder_hoehe);
+    sl_zylinder_hoehe->setMinimum(0);
+    sl_zylinder_hoehe->setMaximum(60);
+    sl_zylinder_hoehe->setValue(20);
+    sl_zylinder_hoehe->setTickInterval(1);
+    connect(sl_zylinder_hoehe, SIGNAL(sliderReleased()), this, SLOT(changeZylinder()));
+    connect(sl_zylinder_hoehe, SIGNAL(sliderMoved(int)), this, SLOT(reranderLabelofSlider()));
+
+    lab_Kegel_refine = new QLabel("Kegel Refine");
+    tab1_control->addWidget(lab_Kegel_refine);
 
     sl_kegel_refine = createSlider();
     tab1_control->addWidget(sl_kegel_refine);
@@ -290,9 +322,10 @@ void CgQtGui::page2(QWidget* parent)
     sl_kegel_refine->setValue(20);
     sl_kegel_refine->setTickInterval(1);
     connect(sl_kegel_refine, SIGNAL(sliderReleased()), this, SLOT(changeKegel()));
+    connect(sl_kegel_refine, SIGNAL(sliderMoved(int)), this, SLOT(reranderLabelofSlider()));
 
-    QLabel* lab5= new QLabel("Kegel Radius");
-    tab1_control->addWidget(lab5);
+    lab_Kegel_radius = new QLabel("Kegel Radius");
+    tab1_control->addWidget(lab_Kegel_radius);
 
     sl_kegel_radius = createSlider();
     tab1_control->addWidget(sl_kegel_radius);
@@ -301,9 +334,10 @@ void CgQtGui::page2(QWidget* parent)
     sl_kegel_radius->setValue(20);
     sl_kegel_radius->setTickInterval(1);
     connect(sl_kegel_radius, SIGNAL(sliderReleased()), this, SLOT(changeKegel()));
+    connect(sl_kegel_radius, SIGNAL(sliderMoved(int)), this, SLOT(reranderLabelofSlider()));
 
-    QLabel* lab6= new QLabel("Kegel Hoehe");
-    tab1_control->addWidget(lab6);
+    lab_Kegel_hoehe = new QLabel("Kegel Hoehe");
+    tab1_control->addWidget(lab_Kegel_hoehe);
 
     sl_kegel_hoehe = createSlider();
     tab1_control->addWidget(sl_kegel_hoehe);
@@ -312,6 +346,7 @@ void CgQtGui::page2(QWidget* parent)
     sl_kegel_hoehe->setValue(20);
     sl_kegel_hoehe->setTickInterval(1);
     connect(sl_kegel_hoehe, SIGNAL(sliderReleased()), this, SLOT(changeKegel()));
+    connect(sl_kegel_hoehe, SIGNAL(sliderMoved(int)), this, SLOT(reranderLabelofSlider()));
 
     parent->setLayout(tab1_control);
 
@@ -483,12 +518,13 @@ void CgQtGui::page4(QWidget* parent)
     myButtonGroup = new QButtonGroup(subBox);
     myButtonGroup->setExclusive(false);
 
-    QRadioButton* radiobutton11 = new QRadioButton( "&X");
-    connect(radiobutton11, SIGNAL(pressed()), this, SLOT(selectX()));
-    QRadioButton* radiobutton12 = new QRadioButton( "&Y");
-    connect(radiobutton12, SIGNAL(pressed()), this, SLOT(selectY()));
-    QRadioButton* radiobutton13 = new QRadioButton( "&Z");
-    connect(radiobutton13, SIGNAL(pressed()), this, SLOT(selectZ()));
+    RButton1 = new QRadioButton( "&X");
+    connect(RButton1, SIGNAL(pressed()), this, SLOT(selectX()));
+    RButton2 = new QRadioButton( "&Y");
+    connect(RButton2, SIGNAL(pressed()), this, SLOT(selectY()));
+    RButton3 = new QRadioButton( "&Z");
+    connect(RButton3, SIGNAL(pressed()), this, SLOT(selectZ()));
+
 
     sl_change_RotaX = new QSlider(Qt::Horizontal);
     sl_change_RotaX->setMaximum(10);
@@ -496,6 +532,7 @@ void CgQtGui::page4(QWidget* parent)
     sl_change_RotaX->setTickInterval(1);
     sl_change_RotaX->setVisible(false);
     connect(sl_change_RotaX, SIGNAL(sliderReleased()), this, SLOT(changeRotationPlanet()));
+    connect(sl_change_RotaX, SIGNAL(sliderMoved(int)), this, SLOT(reranderLabelofSlider()));
 
     sl_change_RotaY = new QSlider(Qt::Horizontal);
     sl_change_RotaY->setMaximum(10);
@@ -503,6 +540,7 @@ void CgQtGui::page4(QWidget* parent)
     sl_change_RotaY->setTickInterval(1);
     sl_change_RotaY->setVisible(false);
     connect(sl_change_RotaY, SIGNAL(sliderReleased()), this, SLOT(changeRotationPlanet()));
+    connect(sl_change_RotaY, SIGNAL(sliderMoved(int)), this, SLOT(reranderLabelofSlider()));
 
     sl_change_RotaZ = new QSlider(Qt::Horizontal);
     sl_change_RotaZ->setMaximum(10);
@@ -510,10 +548,11 @@ void CgQtGui::page4(QWidget* parent)
     sl_change_RotaZ->setTickInterval(1);
     sl_change_RotaZ->setVisible(false);
     connect(sl_change_RotaZ, SIGNAL(sliderReleased()), this, SLOT(changeRotationPlanet()));
+    connect(sl_change_RotaZ, SIGNAL(sliderMoved(int)), this, SLOT(reranderLabelofSlider()));
 
-    myButtonGroup->addButton(radiobutton11,0);
-    myButtonGroup->addButton(radiobutton12,1);
-    myButtonGroup->addButton(radiobutton13,2);
+    myButtonGroup->addButton(RButton1,0);
+    myButtonGroup->addButton(RButton2,1);
+    myButtonGroup->addButton(RButton3,2);
 
    bt_vergleiche_matritzen = new QPushButton("Vergleiche Matritzen");
     connect(bt_vergleiche_matritzen, SIGNAL(clicked()), this, SLOT(matrizenCheck()));
@@ -560,11 +599,14 @@ void CgQtGui::page4(QWidget* parent)
     vbox->addWidget(bt_vergleiche_matritzen);
 
     vbox->addWidget(lab_matr_check);
-    vbox->addWidget(radiobutton11);
+
+    vbox->addWidget(RButton1);
     vbox->addWidget(sl_change_RotaX);
-    vbox->addWidget(radiobutton12);
+
+    vbox->addWidget(RButton2);
     vbox->addWidget(sl_change_RotaY);
-    vbox->addWidget(radiobutton13);
+
+    vbox->addWidget(RButton3);
     vbox->addWidget(sl_change_RotaZ);
 
     vbox->addStretch(1);
@@ -578,6 +620,82 @@ void CgQtGui::page4(QWidget* parent)
 void CgQtGui::page5(QWidget *parent)
 {
     QVBoxLayout *tab1_control = new QVBoxLayout();
+
+
+    material = new QComboBox();
+    material->addItem("Chrom");
+    material->addItem("Perle");
+    material->addItem("Obsidian");
+    material->addItem("Jade");
+    material->addItem("Poliertes Gold");
+    tab1_control->addWidget(material);
+    connect(material, SIGNAL(activated(int)), this, SLOT(materialChanged()));
+
+    lab_licht_rot = new QLabel("Licht Rot: 1");
+    tab1_control->addWidget(lab_licht_rot);
+
+    sl_licht_rot = createSlider();
+    tab1_control->addWidget(sl_licht_rot);
+    sl_licht_rot->setMinimum(1);
+    sl_licht_rot->setMaximum(360);
+    sl_licht_rot->setValue(5);
+    connect( sl_licht_rot, SIGNAL(sliderReleased()), this, SLOT(changeLichtFarbe()));
+    connect( sl_licht_rot, SIGNAL(sliderMoved(int)), this, SLOT(reranderLabelofSlider()));
+
+    lab_licht_gruen = new QLabel("Licht Gruen: 1");
+    tab1_control->addWidget(lab_licht_gruen);
+
+    sl_licht_gruen = createSlider();
+    tab1_control->addWidget(sl_licht_gruen);
+    sl_licht_gruen->setMinimum(1);
+    sl_licht_gruen->setMaximum(360);
+    sl_licht_gruen->setValue(5);
+    connect( sl_licht_gruen, SIGNAL(sliderReleased()), this, SLOT(changeLichtFarbe()));
+    connect( sl_licht_gruen, SIGNAL(sliderMoved(int)), this, SLOT(reranderLabelofSlider()));
+
+    lab_licht_blau = new QLabel("Licht Blau: 1");
+    tab1_control->addWidget(lab_licht_blau);
+
+    sl_licht_blau = createSlider();
+    tab1_control->addWidget(sl_licht_blau);
+    sl_licht_blau->setMinimum(1);
+    sl_licht_blau->setMaximum(360);
+    sl_licht_blau->setValue(5);
+    connect( sl_licht_blau, SIGNAL(sliderReleased()), this, SLOT(changeLichtFarbe()));
+    connect( sl_licht_blau, SIGNAL(sliderMoved(int)), this, SLOT(reranderLabelofSlider()));
+
+    lab_licht_X = new QLabel("Licht X Pos: 1");
+    tab1_control->addWidget(lab_licht_X);
+
+    sl_licht_X = createSlider();
+    tab1_control->addWidget(sl_licht_X);
+    sl_licht_X->setMinimum(1);
+    sl_licht_X->setMaximum(360);
+    sl_licht_X->setValue(5);
+    connect( sl_licht_X, SIGNAL(sliderReleased()), this, SLOT(changeLichtPosition()));
+    connect( sl_licht_X, SIGNAL(sliderMoved(int)), this, SLOT(reranderLabelofSlider()));
+
+    lab_licht_Y = new QLabel("Licht Y Pos: 1");
+    tab1_control->addWidget(lab_licht_Y);
+
+    sl_licht_Y = createSlider();
+    tab1_control->addWidget(sl_licht_Y);
+    sl_licht_Y->setMinimum(1);
+    sl_licht_Y->setMaximum(360);
+    sl_licht_Y->setValue(5);
+    connect( sl_licht_Y, SIGNAL(sliderReleased()), this, SLOT(changeLichtPosition()));
+    connect( sl_licht_Y, SIGNAL(sliderMoved(int)), this, SLOT(reranderLabelofSlider()));
+
+    lab_licht_Z = new QLabel("Licht Z Pos: 1");
+    tab1_control->addWidget(lab_licht_Z);
+
+    sl_licht_Z = createSlider();
+    tab1_control->addWidget(sl_licht_Z);
+    sl_licht_Z->setMinimum(1);
+    sl_licht_Z->setMaximum(360);
+    sl_licht_Z->setValue(5);
+    connect( sl_licht_Z, SIGNAL(sliderReleased()), this, SLOT(changeLichtPosition()));
+    connect( sl_licht_Z, SIGNAL(sliderMoved(int)), this, SLOT(reranderLabelofSlider()));
 
 
     parent->setLayout(tab1_control);
@@ -822,7 +940,7 @@ void CgQtGui::hideAll()
 void CgQtGui::erhoeheTageswert()
 {
     tag += 1;
-    QString s = QStringLiteral("rotations Tageswert: %1").arg(tag);
+    s = QStringLiteral("rotations Tageswert: %1").arg(tag);
     lab_day_rota->setText(s);
     std::cout<<"erhöhe tages wert"<<std::endl;
     traeger->setAn_aus(1);
@@ -833,7 +951,7 @@ void CgQtGui::verringereTageswert()
 {
     if(tag>=2){
     tag -= 1;
-    QString s = QStringLiteral("rotations Tageswert: %1").arg(tag);
+    s = QStringLiteral("rotations Tageswert: %1").arg(tag);
     lab_day_rota->setText(s);
     std::cout<<"verringere tages wert"<<std::endl;
     traeger->setAn_aus(0);
@@ -894,18 +1012,107 @@ void CgQtGui::show3dArrow()
     }
 }
 
-
-
-/*
-void CgQtGui::selectSlider(QSlider* sl)
+void CgQtGui::materialChanged()
 {
-    if(!sl->isVisible()){
-        sl->setVisible(true);
-    }else{
-        sl->setVisible(false);
-    }
+    std::cout<<"wähle material"<<std::endl;
+
+    traeger->setAmb(amb.at(material->currentIndex()));
+    traeger->setDef(def.at(material->currentIndex()));
+    traeger->setSpec(spec.at(material->currentIndex()));
+    traeger->setScala(scala.at(material->currentIndex()));
+
+    notifyObserver(new bestersliderMoveEvent(Cg::CgChangeMaterial,traeger));
 }
-*/
+
+void CgQtGui::changeLichtFarbe()
+{
+    std::cout<<"Change licht Fabre"<<std::endl;
+    traeger->setDreiDVector(glm::vec3(sl_licht_rot->value(),sl_licht_gruen->value(),sl_licht_blau->value()));
+    notifyObserver(new bestersliderMoveEvent(Cg::CgChangeLichtFarbe,traeger));
+}
+
+void CgQtGui::changeLichtPosition()
+{
+    std::cout<<"change Licht Position"<<std::endl;
+    traeger->setDreiDVector(glm::vec3(sl_licht_X->value(),sl_licht_Y->value(),sl_licht_Z->value()));
+    notifyObserver(new bestersliderMoveEvent(Cg::CgChangeLichtPosition,traeger));
+}
+
+void CgQtGui::reranderLabelofSlider()
+{
+
+    SuperVar = sl_licht_rot->value();
+    s = QStringLiteral("Licht Rot: %1").arg(SuperVar);
+    lab_licht_rot->setText(s);
+
+    SuperVar = sl_licht_gruen->value();
+    s = QStringLiteral("Licht Gruen: %1").arg(SuperVar);
+    lab_licht_gruen->setText(s);
+
+    SuperVar = sl_licht_blau->value();
+    s = QStringLiteral("Licht Blau: %1").arg(SuperVar);
+    lab_licht_blau->setText(s);
+
+    SuperVar = sl_licht_X->value();
+    s = QStringLiteral("Licht X Pos: %1").arg(SuperVar);
+    lab_licht_X->setText(s);
+
+    SuperVar = sl_licht_Y->value();
+    s = QStringLiteral("Licht Y Pos: %1").arg(SuperVar);
+    lab_licht_Y->setText(s);
+
+    SuperVar = sl_licht_Z->value();
+    s = QStringLiteral("Licht Z Pos: %1").arg(SuperVar);
+    lab_licht_Z->setText(s);
+
+    SuperVar = sl_change_RotaX->value();
+    s = QStringLiteral("X: %1").arg(SuperVar);
+    RButton1->setText(s);
+
+    SuperVar = sl_change_RotaY->value();
+    s = QStringLiteral("Y: %1").arg(SuperVar);
+    RButton2->setText(s);
+
+    SuperVar = sl_change_RotaZ->value();
+    s = QStringLiteral("Z: %1").arg(SuperVar);
+    RButton3->setText(s);
+
+    SuperVar = sl_rota_lane_refine->value();
+    s = QStringLiteral("Lane-Riesenfeld Refine: %1").arg(SuperVar);
+    lab_lane_refine->setText(s);
+
+    SuperVar = sl_rota_refine->value();
+    s = QStringLiteral("Rotationskörper Refine: %1").arg(SuperVar);
+    lab_rota_refine->setText(s);
+
+    SuperVar = sl_rota_hoehe->value();
+    s = QStringLiteral("Rotationskörper Hoehe: %1").arg(SuperVar);
+    lab_rota_hoehe->setText(s);
+
+    SuperVar = sl_zylinder_refine->value();
+    s = QStringLiteral("Zylinder Refine: %1").arg(SuperVar);
+    lab_Zylinder_refine->setText(s);
+
+    SuperVar = sl_zylinder_radius->value();
+    s = QStringLiteral("Zylinder Radius: %1").arg(SuperVar);
+    lab_Zylinder_radius->setText(s);
+
+    SuperVar = sl_zylinder_hoehe->value();
+    s = QStringLiteral("Zylinder Hoehe: %1").arg(SuperVar);
+    lab_Zylinder_Hoehe->setText(s);
+
+    SuperVar = sl_kegel_refine->value();
+    s = QStringLiteral("Kegel Refine: %1").arg(SuperVar);
+    lab_Kegel_refine->setText(s);
+
+    SuperVar = sl_kegel_radius->value();
+    s = QStringLiteral("Kegel Radius: %1").arg(SuperVar);
+    lab_Kegel_radius->setText(s);
+
+    SuperVar = sl_kegel_hoehe->value();
+    s = QStringLiteral("Kegel hoehe: %1").arg(SuperVar);
+    lab_Kegel_hoehe->setText(s);
+}
 
 CgBaseRenderer* CgQtGui::getRenderer()
 {
