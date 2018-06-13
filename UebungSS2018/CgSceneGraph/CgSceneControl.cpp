@@ -129,6 +129,7 @@ void CgSceneControl::setRenderer(CgBaseRenderer *r) {
 
     //  setShaderSourceFiles("../UebungSS2018/CgShader/simple.vert","../UebungSS2018/CgShader/simple.frag");
     m_renderer->setSceneControl(this);
+    m_renderer->setUniformValue("lighton",false);
     m_renderer->setUniformValue("mycolor",glm::vec4(2,.8,.8,0));
     m_renderer->setUniformValue("light",glm::vec3(0,1,1));
 
@@ -391,7 +392,6 @@ void CgSceneControl::renderKegel()
             m_renderer->setUniformValue("spec",kegel->getAppear()->getMaterial()->getSpec());
             m_renderer->setUniformValue("scalar",kegel->getAppear()->getMaterial()->getScalar());
             m_renderer->init(kegel->getGeraden().at(i));
-            m_renderer->setUniformValue("mycolor",glm::vec4(.25,.22,.06,1.));
             m_renderer->render(kegel->getGeraden().at(i),old);
         }
 
@@ -724,7 +724,14 @@ void CgSceneControl::loadObject(CgBaseEvent *e)
 }
 
 void CgSceneControl::handleEvent(CgBaseEvent *e) {
+    std::cout<<"hallo du mongo"<<std::endl;
+    if (e->getType() == Cg::CgKeyEvent) {
+        CgKeyEvent *ev = (CgKeyEvent *) e;
+        std::cout<<"hallo du mongo"<<std::endl;
+        handleKeyEvents(ev);
 
+        // hier kommt jetzt die Abarbeitung des Events hin...
+    }
     // die Enums sind so gebaut, dass man alle Arten von MausEvents über CgEvent::CgMouseEvent abprüfen kann,
     // siehe dazu die CgEvent enums im CgEnums.h
     if (e->getType() == Cg::CgMouseEvent) {
@@ -740,8 +747,45 @@ void CgSceneControl::handleEvent(CgBaseEvent *e) {
             zylinder->setNormalsberechnen(shownormals);
             initZylinder();
         }
+        else{
+            std::cout<<"MUH!"<<std::endl;
+        }
 
     }
+    if(e->getType()==Cg::CgChangeMaterial){
+        glm::vec4 ding1 =((bestersliderMoveEvent*)e)->getTraegerKlasse()->getAmb();
+        glm::vec4 ding2 =((bestersliderMoveEvent*)e)->getTraegerKlasse()->getDef();
+        glm::vec4 ding3 =((bestersliderMoveEvent*)e)->getTraegerKlasse()->getSpec();
+        double ding4 =((bestersliderMoveEvent*)e)->getTraegerKlasse()->getScala();
+
+        std::string st = ((bestersliderMoveEvent*)e)->getTraegerKlasse()->getName().toStdString();
+        Appearance* k = new Appearance();
+        Mats* ma =new Mats();
+        ma->setAmb(ding1);
+        ma->setDef(ding2);
+        ma->setSpec(ding3);
+        ma->setScalar(ding4);
+        k->setMaterial(ma);
+
+        if(st=="Zylinder"){
+                lighton=true;
+                m_renderer->setUniformValue("lighton",true);
+                zylinder = MeshFactory::createZylinder(10,10,10,false);
+                zylinder->setAppear(k);
+                initZylinder();
+
+        }
+
+
+        std::cout<<"ambient "<<ding1.x<<" "<<ding1.y<<" "<<ding1.z<<" "<<ding1.w<<std::endl;
+
+        std::cout<<"defuse "<<ding2.x<<" "<<ding2.y<<" "<<ding2.z<<" "<<ding2.w<<std::endl;
+        std::cout<<"specular "<<ding3.x<<" "<<ding3.y<<" "<<ding3.z<<" "<<ding3.w<<std::endl;
+        std::cout<<"double "<<ding4<<std::endl;
+        std::cout<<st<<std::endl;
+    }
+
+
     if(e->getType()==Cg::CgZeigePolyline){
         this->rotationbody=MeshFactory::createRotationKoerper(1,1,true,false);
         initRotationBody();
@@ -773,12 +817,7 @@ void CgSceneControl::handleEvent(CgBaseEvent *e) {
     // siehe dazu die CgEvent eolynums im CgEnums.h
     // momentan werden nur KeyPressEvents gefangen.
 
-    if (e->getType() == Cg::CgKeyEvent) {
-        CgKeyEvent *ev = (CgKeyEvent *) e;
-        handleKeyEvents(ev);
 
-        // hier kommt jetzt die Abarbeitung des Events hin...
-    }
     changePage(e);
     windowresize(e);
     //(int refine,float hoehe,float radius)
@@ -789,48 +828,14 @@ void CgSceneControl::handleEvent(CgBaseEvent *e) {
     changeRota(e);
     handleKeyEvents(e);
     loadObject(e);
-    materialChange(e);
+
 
 
     // an der Stelle an der ein Event abgearbeitet ist wird es auch gelöscht.
     delete e;
 
 }
-void CgSceneControl::materialChange(CgBaseEvent *e){
-    if(e->getType()==Cg::CgChangeMaterial){
-        glm::vec4 ding1 =((bestersliderMoveEvent*)e)->getTraegerKlasse()->getAmb();
-        glm::vec4 ding2 =((bestersliderMoveEvent*)e)->getTraegerKlasse()->getDef();
-        glm::vec4 ding3 =((bestersliderMoveEvent*)e)->getTraegerKlasse()->getSpec();
-        double ding4 =((bestersliderMoveEvent*)e)->getTraegerKlasse()->getScala();
 
-        std::string st = ((bestersliderMoveEvent*)e)->getTraegerKlasse()->getName().toStdString();
-        Appearance* k = new Appearance();
-        Mats* ma =new Mats();
-        ma->setAmb(ding1);
-        ma->setDef(ding2);
-        ma->setSpec(ding3);
-        ma->setScalar(ding4);
-        k->setMaterial(ma);
-
-        if(st=="Zylinder"){
-
-            lighton=true;
-                zylinder = MeshFactory::createZylinder(10,10,10,false);
-                zylinder->setAppear(k);
-                initZylinder();
-
-        }
-
-
-        std::cout<<"ambient "<<ding1.x<<" "<<ding1.y<<" "<<ding1.z<<" "<<ding1.w<<std::endl;
-
-        std::cout<<"defuse "<<ding2.x<<" "<<ding2.y<<" "<<ding2.z<<" "<<ding2.w<<std::endl;
-        std::cout<<"specular "<<ding3.x<<" "<<ding3.y<<" "<<ding3.z<<" "<<ding3.w<<std::endl;
-        std::cout<<"double "<<ding4<<std::endl;
-        std::cout<<st<<std::endl;
-    }
-
-}
 
 void CgSceneControl::page1(){
     //würfel

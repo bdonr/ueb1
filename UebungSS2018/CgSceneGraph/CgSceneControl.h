@@ -216,7 +216,6 @@ public:
 
     void initKegel();
 
-    void materialChange(CgBaseEvent *e);
 private:
     int tab;
     glm::vec3 w;

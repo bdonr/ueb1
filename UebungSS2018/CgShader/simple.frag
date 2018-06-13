@@ -16,8 +16,8 @@ uniform bool lighton;
 
 
     void main() {
-vec4 col;
-	if(lighton){
+	vec4 col;
+	if(lighton==true){
 	vec3 N = normalize (vert);
 	vec3 L = normalize(pixelLight);
      	vec3 E = normalize(-pixelCam);
