@@ -2,7 +2,7 @@
 #include "CgBase/CgBaseRenderableObject.h"
 #include <iostream>
 #include "unistd.h"
-SceneEntity::SceneEntity(CgBaseTriangleMesh* ob,enum Cg::ObjectType type,glm::vec3 ausrichtung):ob(ob),type(type),ausrichtung(ausrichtung)
+SceneEntity::SceneEntity(CgBaseTriangleMesh* ob,enum Cg::ObjectType type,glm::vec3 ausrichtung,Appearance* appear):ob(ob),type(type),ausrichtung(ausrichtung),appear(appear)
 {
 
     if(type==Cg::Stern){
@@ -12,6 +12,7 @@ SceneEntity::SceneEntity(CgBaseTriangleMesh* ob,enum Cg::ObjectType type,glm::ve
         this->winkely=0;
         this->winkelz=10;
         this->transformation=transform();
+
     }
 
     if(type==Cg::Erde){

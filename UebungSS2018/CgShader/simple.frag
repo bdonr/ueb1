@@ -4,45 +4,34 @@ in vec3 vert;
 in vec3 vertNormal;
 
 
-in vec3 pixelLight;
+
 in vec3 pixelCam;
-in vec4 lightcolor;
 
-uniform vec4 amb;
-uniform vec4 def;
-uniform vec4 spec;
-uniform float skalar;
-uniform bool lighton;
+in vec4 Amb;
+in vec4 Def;
+in vec4 Spec;
+in float Skalar;
+uniform vec3 llight;
+uniform vec4 lcolor;
 
+in vec3 ll;
+//lichtfarbe
+in vec4 lc;
 
     void main() {
+	
 	vec4 col;
-	if(lighton==true){
+	
 	vec3 N = normalize (vert);
-	vec3 L = normalize(pixelLight);
-     	vec3 E = normalize(-pixelCam);
+	vec3 L = normalize(llight);
+     	vec3 E = normalize(llight-pixelCam);
 	vec3 H = normalize(L+E);
-
-	vec4 ambient = amb* lightcolor;
+	float amblight = .15;
+	vec4 ambiente = lcolor*amblight;
 	
-	float ldiff = 1.0*(dot(L,N));
-	vec4 ldiffuse = ldiff *lightcolor;
+	float diff = max(dot(L,N),0.0)*.3;
+	vec4 cdiff = diff * lcolor;
 	
-	float mdiff = max(dot(N,L),skalar);
-	vec4 mdiffuse= mdiff * def;
+	gl_FragColor= (ambiente+cdiff)*Amb;
 
-	vec4 diffuse = ldiffuse* mdiffuse;
-
-	float mspec =pow(max(dot(N,H),0.0),11);
-	vec4 mspecular = mspec * spec;
-	vec4 specular = mspecular;
-
-
-        col = diffuse+ambient+specular;
-	}
-	else{
-		 col = amb;
-	}
-	gl_FragColor = col;
-    }
-
+    }	

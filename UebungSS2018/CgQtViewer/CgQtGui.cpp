@@ -660,6 +660,12 @@ void CgQtGui::page6(QWidget *parent)
     connect(ButtonXY, SIGNAL(clicked()), this, SLOT(materialChanged()));
     tab1_control->addWidget(ButtonXY);
 
+
+    QPushButton* ButtonXYZ = new QPushButton("Licht An");
+    connect(ButtonXYZ, SIGNAL(clicked()), this, SLOT(lightChanged()));
+    tab1_control->addWidget(ButtonXYZ);
+
+
     lab_licht_rot = new QLabel("Licht Rot: 1");
     tab1_control->addWidget(lab_licht_rot);
 
@@ -1052,6 +1058,12 @@ void CgQtGui::materialChanged()
     traeger->setName(combo_box_objekt->currentText());
 
     notifyObserver(new bestersliderMoveEvent(Cg::CgChangeMaterial,traeger));
+}
+
+void CgQtGui::lightChanged()
+{
+    std::cout<<"Licht an"<<std::endl;
+    notifyObserver(new bestersliderMoveEvent(Cg::CgTurnLightOnOff,traeger));
 }
 
 void CgQtGui::changeLichtFarbe()

@@ -4,6 +4,7 @@
 #include "glm/glm.hpp"
 #include "appearance.h"
 #include <vector>
+#include "CgClass/kugel.h"
 class SceneEntity
 {
 private:
@@ -24,7 +25,7 @@ private:
     enum Cg::ObjectType type;
 public:
     void calculateRota(int winkely, int winkelz, int wunschwinkel);
-    SceneEntity(CgBaseTriangleMesh*ob,enum Cg::ObjectType type,glm::vec3 aus);
+    SceneEntity(CgBaseTriangleMesh*ob,enum Cg::ObjectType type,glm::vec3 aus,Appearance* appear);
     CgBaseTriangleMesh *getOb() const;
     void setOb(CgBaseTriangleMesh *value);
     void addChildren(SceneEntity *value);

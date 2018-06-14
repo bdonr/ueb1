@@ -83,6 +83,8 @@ public:
 
     void init();
 
+public slots:
+    void lightChanged();
 protected:
     void keyPressEvent(QKeyEvent *event) Q_DECL_OVERRIDE;
 
