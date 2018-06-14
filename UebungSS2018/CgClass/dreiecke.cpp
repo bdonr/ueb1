@@ -29,35 +29,28 @@ enum Cg::ObjectType Dreiecke::getType() const{
 }
 //Laufzeit O(n*k)
 bool Dreiecke::berechnePunktNormale(){
-    for(unsigned int i =0;i<indeces.size();i++){
-        glm::vec3 p = vetices.at(indeces.at(i));
-        std::vector<glm::vec3> gerade;
-        glm::vec3 normalen;
-        for(int j=i;j<indeces.size()-3;j=j+3){
-            int count =0;
+   //Compute normals per vertex
+        for(int vertice=0; vertice < m_vertices.size(); vertice++) //For every vertex
+        {
+            int normCounter = 0;
+            int faceCounter = 0;
+            glm::vec3 norm= glm::vec3(0,0,0);
 
-            //wenn punkt nicht mehr im nächsten triangle vorkommt reset
-            if(!equal(p,vetices.at(indeces.at(j)))&&
-                    !equal(p,vetices.at(indeces.at(j+1))) &&
-                    !equal(p,vetices.at(indeces.at(j+2)))){
-                if(count>0){
+            for(int indexCounter=0; indexCounter < m_triangle_indices.size() - 3; indexCounter+=3){ //Through every Face
 
-                    glm::vec3 o = glm::vec3(normalen.x/count,normalen.y/count,normalen.z/count);
-                    gerade.push_back(p);
-                    gerade.push_back(o);
-                    geraden.push_back(MeshFactory::createMyPolyline(glm::vec3(121,121,121),gerade));
-                    this->pointnormals.push_back(o);
-                    gerade.clear();
-                    j=vetices.size();
+
+                if(m_triangle_indices.at(indexCounter) == vertice || m_triangle_indices.at(indexCounter+1) == vertice || m_triangle_indices.at(indexCounter+2) == vertice)// Check if face includes vertex
+                {
+                    norm= norm + m_face_normals.at(faceCounter);
+                    normCounter++;
                 }
-                else{
-                    normalen+=normalenV(vetices.at(indeces.at(j)),vetices.at(indeces.at(j+1)),vetices.at(indeces.at(j+2)),
-                                        berechneSchwerPunkte(vetices.at(indeces.at(j)),vetices.at(indeces.at(j+1)),vetices.at(indeces.at(j+2))));
-                    count++;
-                }
+
+                faceCounter++;
             }
+
+            m_vertex_normals.push_back(glm::normalize(norm / (float)normCounter));
         }
-    }
+
 }
 
 glm::vec3 Dreiecke::berechneSchwerPunkte(glm::vec3 a, glm::vec3 b, glm::vec3 c){
