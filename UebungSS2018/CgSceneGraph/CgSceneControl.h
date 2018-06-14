@@ -267,6 +267,7 @@ private:
     std::vector<unsigned int> dreieckecords;
     Scenegraph* sc;
     Light* light;
+    bool shader;
 
     void renew();
 };

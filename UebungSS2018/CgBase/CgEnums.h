@@ -47,7 +47,8 @@ namespace Cg{
     CgZeige3DPfeile                 = 0x9955883,
     CgChangeMaterial                = 0x9381625,
     CgChangeLichtFarbe              = 0x1627132,
-    CgChangeLichtPosition           = 0x4653786
+    CgChangeLichtPosition           = 0x4653786,
+    CgTurnLightOnOff                = 0x3223223,
     // feel free to add whatever you like
     }EventType;
 

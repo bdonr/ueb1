@@ -93,6 +93,10 @@ CgSceneControl::CgSceneControl() {
     //kegel, zlinder
     //figuren
     dreiecke=NULL;
+    light = new Light();
+    light->setItensity(19);
+    light->setLightcolor(glm::vec4(1,1,1,1));
+    light->setSource(glm::vec3(1,1,1));
 
     m_current_transformation = glm::mat4(1.);
     m_proj_matrix = glm::mat4x4(glm::vec4(1.792591, 0.0, 0.0, 0.0), glm::vec4(0.0, 1.792591, 0.0, 0.0),
@@ -148,7 +152,7 @@ void CgSceneControl::setRenderer(CgBaseRenderer *r) {
     double s =76.8;
     m_renderer->setUniformValue("scalar",s);
 
-  //  m_renderer->setUniformValue("lightcolor",glm::vec4(1,0.1,0.1,1));
+    //  m_renderer->setUniformValue("lightcolor",glm::vec4(1,0.1,0.1,1));
 
 
     //sc->render(m_renderer,sc->getSc());
@@ -391,16 +395,7 @@ void CgSceneControl::renderKegel()
     if(kegel){
         m_renderer->render(kegel,old);
         for(unsigned int i=0;i< kegel->getGeraden().size();i++){
-            /*uniform vec4 amat;
-            uniform vec4 adef;
-            uniform vec4 asub;
-            uniform float sfactor
-            */
-            m_renderer->setUniformValue("amb",kegel->getAppear()->getMaterial()->getAmb());
-            m_renderer->setUniformValue("def",kegel->getAppear()->getMaterial()->getDef());
-            m_renderer->setUniformValue("spec",kegel->getAppear()->getMaterial()->getSpec());
-            m_renderer->setUniformValue("scalar",kegel->getAppear()->getMaterial()->getScalar());
-            m_renderer->init(kegel->getGeraden().at(i));
+
             m_renderer->render(kegel->getGeraden().at(i),old);
         }
 
@@ -427,16 +422,8 @@ void CgSceneControl::changeKegel(CgBaseEvent *e)
         float hoehe = traeger->getDreiDVector().x;
         float radius = traeger->getDreiDVector().y;
         float refine = traeger->getDreiDVector().z;
-
-        Appearance* k = new Appearance();
-        k->getMaterial()->setAmb(glm::vec4(.1,.1,.1,1));
-        k->getMaterial()->setDef(glm::vec4(.1,.1,.1,1));
-        k->getMaterial()->setSpec(glm::vec4(.1,.1,.1,1));
-        k->getMaterial()->setScalar(2);
-
         kegel = MeshFactory::createKegel(refine,hoehe,radius,shownormals);
-
-        kegel->setAppear(k);
+        //kegel->setAppear(k);
         //resetRenderKegel(refine,hoehe,radius);
         initKegel();
     }
@@ -444,12 +431,8 @@ void CgSceneControl::changeKegel(CgBaseEvent *e)
 
 void CgSceneControl::setLight()
 {
-    light=new Light();
-    light->setItensity(0.15);
-    light->setLightcolor(glm::vec4(0,1,1,1));
-    light->setSource(glm::vec3(1,1,1));
-    m_renderer->setUniformValue("light",light->getSource());
-    m_renderer->setUniformValue("lightcolor",light->getLightcolor());
+    m_renderer->setUniformValue("llight",glm::vec3(.4,.4,1));
+    m_renderer->setUniformValue("lcolor",glm::vec4(.4,.4,1,1));
 }
 
 void CgSceneControl::setZylinderColor()
@@ -458,15 +441,14 @@ void CgSceneControl::setZylinderColor()
     m_renderer->setUniformValue("def",zylinder->getAppear()->getMaterial()->getDef());
     m_renderer->setUniformValue("spec",zylinder->getAppear()->getMaterial()->getSpec());
     m_renderer->setUniformValue("scalar",zylinder->getAppear()->getMaterial()->getScalar());
+
 }
 
 void CgSceneControl::renderZylinder()
 {
 
-    if(lighton){
-        setLight();
-    }
-    if(zylinder){
+    if(zylinder!=NULL){
+        setZylinderColor();
 
         m_renderer->render(zylinder,old);
         if(!zylinder->getGeraden().empty()){
@@ -480,7 +462,6 @@ void CgSceneControl::renderZylinder()
 void CgSceneControl::initZylinder()
 {
     if(zylinder!=NULL){
-         setZylinderColor();
         m_renderer->init(zylinder);
         if(!zylinder->getGeraden().empty())
             for(unsigned int j=0; j<zylinder->getGeraden().size()-1;j++){
@@ -498,13 +479,20 @@ void CgSceneControl::changeZylinder(CgBaseEvent *e)
         float hoehe = traeger->getDreiDVector().x;
         float radius = traeger->getDreiDVector().y;
         float refine = traeger->getDreiDVector().z;
-        zylinder = MeshFactory::createZylinder(refine,hoehe,radius,shownormals);
-        Appearance* k = new Appearance();
-        k->getMaterial()->setAmb(glm::vec4(.1,.1,.1,1));
-        k->getMaterial()->setDef(glm::vec4(.1,.1,.1,1));
-        k->getMaterial()->setSpec(glm::vec4(.1,.1,.1,1));
-        k->getMaterial()->setScalar(2);
+        Appearance* k;
+        if(zylinder==NULL){
+            k = new Appearance();
+            k->getMaterial()->setAmb(glm::vec4(.1,.1,.1,1));
+            k->getMaterial()->setDef(glm::vec4(.1,.1,.1,1));
+            k->getMaterial()->setSpec(glm::vec4(.1,.1,.1,1));
+            k->getMaterial()->setScalar(2);
+        }
+        else{
+            k = zylinder->getAppear();
+        }
+        zylinder = zylinder = MeshFactory::createZylinder(refine,hoehe,radius,shownormals);
         zylinder->setAppear(k);
+
         //resetRenderKegel(refine,hoehe,radius);
         initZylinder();
     }
@@ -768,16 +756,12 @@ void CgSceneControl::handleMaterial(CgBaseEvent *e)
         ma->setSpec(ding3);
         ma->setScalar(ding4);
         k->setMaterial(ma);
-
         if(st=="Zylinder"){
-                lighton=true;
-                zylinder = MeshFactory::createZylinder(10,10,10,false);
-                zylinder->setAppear(k);
-                m_renderer->setShaderSourceFiles("../UebungSS2018/CgShader/simple.vert","../UebungSS2018/CgShader/simple.frag");
-                initZylinder();
-                renderZylinder();
 
-
+            zylinder = MeshFactory::createZylinder(10,10,10,false);
+            zylinder->setAppear(k);
+            initZylinder();
+            renderZylinder();
         }
 
 
@@ -801,6 +785,50 @@ void CgSceneControl::handleEvent(CgBaseEvent *e) {
     // siehe dazu die CgEvent enums im CgEnums.h
     if (e->getType() == Cg::CgMouseEvent) {
         // hier kommt jetzt die Abarbeitung des Events hin...
+    }
+
+    //setDreiDVector
+    if(e->getType()==Cg::CgChangeLichtFarbe){
+        if(lighton){
+
+             glm::vec3 c = ((bestersliderMoveEvent*)e)->getTraegerKlasse()->getDreiDVector();
+             glm::vec4 d = glm::vec4(c.x,c.y,c.z,1);
+            light->setLightcolor(d);
+        }
+    }
+
+
+    if(e->getType()==Cg::CgChangeLichtPosition){
+        if(lighton){
+
+             glm::vec3 c = ((bestersliderMoveEvent*)e)->getTraegerKlasse()->getDreiDVector();
+            light->setSource(c);
+        }
+    }
+
+    if(e->getType()==Cg::CgTurnLightOnOff){
+        lighton=!lighton;
+        if(lighton){
+            std::cout<<"licht an"<<std::endl;
+            m_renderer->setShaderSourceFiles("../UebungSS2018/CgShader/simple.vert","../UebungSS2018/CgShader/simple.frag");
+            m_renderer->setUniformValue("llight",light->getSource());
+            m_renderer->setUniformValue("lcolor",light->getLightcolor());
+        }
+        else{
+             m_renderer->setShaderSourceFiles("../UebungSS2018/CgShader/lightoff.vert","../UebungSS2018/CgShader/lightoff.frag");
+        }
+    }
+    if(e->getType()==Cg::CgTurnLightOnOff){
+        lighton=!lighton;
+        if(lighton){
+            std::cout<<"licht an"<<std::endl;
+            m_renderer->setShaderSourceFiles("../UebungSS2018/CgShader/simple.vert","../UebungSS2018/CgShader/simple.frag");
+            m_renderer->setUniformValue("llight",light->getSource());
+            m_renderer->setUniformValue("lcolor",light->getLightcolor());
+        }
+        else{
+             m_renderer->setShaderSourceFiles("../UebungSS2018/CgShader/lightoff.vert","../UebungSS2018/CgShader/lightoff.frag");
+        }
     }
     if(e->getType()== Cg::CgZeigeNormalePage2){
         shownormals=!shownormals;
