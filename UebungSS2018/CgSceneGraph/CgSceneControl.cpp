@@ -692,7 +692,7 @@ void CgSceneControl::changeRota(CgBaseEvent *e)
     }
 }
 
-void CgSceneControl::windowresize(CgBaseEvent *e)
+void CgSceneControl::windowresize(CgBaseEvent *e)//-----------------------------------------------
 {
     if (e->getType() == Cg::WindowResizeEvent) {
         CgWindowResizeEvent *ev = (CgWindowResizeEvent *) e;

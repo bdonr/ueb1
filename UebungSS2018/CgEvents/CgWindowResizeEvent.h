@@ -12,7 +12,7 @@ class CgWindowResizeEvent : public CgBaseEvent
 public:
     CgWindowResizeEvent();
     CgWindowResizeEvent(Cg::EventType type, int w, int h);
-    ~CgWindowResizeEvent(){};
+    ~CgWindowResizeEvent(){}
 
     //inherited
     Cg::EventType  getType();

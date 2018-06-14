@@ -5,6 +5,16 @@ virtCam::virtCam()
 
 }
 
+glm::vec4 virtCam::worldToCamCoordinates(glm::vec4 worldCoordinates)
+{
+    glm::mat4* lookAtMat = new glm::mat4(glm::vec4(),
+                                         glm::vec4(),
+                                         glm::vec4(),
+                                         glm::vec4());
+
+
+}
+
 glm::vec3 virtCam::getEye(void) const
 {
     return eye;

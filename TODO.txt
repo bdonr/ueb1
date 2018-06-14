@@ -1,0 +1,2 @@
+Gerrit:
+- Update size of Window with CgWindowResieEvent in virtCam

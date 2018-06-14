@@ -10,6 +10,8 @@ class virtCam
 public:
     virtCam();
 
+    glm::vec4 worldToCamCoordinates(glm::vec4);
+
 
 
     //Getter, Setter
