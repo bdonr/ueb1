@@ -169,14 +169,14 @@ void CgSceneControl::renderRotationsBody()
         if(!rotationbody->getKeisVec().empty())
             if(rotationbody->getKeisVec().size()>0){
                 for(unsigned int i = 0; i<rotationbody->getKeisVec().size();i++){
-                    m_renderer->setUniformValue("mycolor",glm::vec4(1.,1.,1.,1.));
+                    m_renderer->setUniformValue("mamp",glm::vec4(1.,1.,1.,1.));
                     m_renderer->render(rotationbody->getKeisVec().at(i),old);
                 }
             }
         if(!rotationbody->getPolyVec().empty()){
             if(rotationbody->getPolyVec().size()>0){
                 for(unsigned int i = 0; i<rotationbody->getPolyVec().size();i++){
-                    m_renderer->setUniformValue("mycolor",glm::vec3(1.,1.,1.));
+                    m_renderer->setUniformValue("mamp",glm::vec3(1.,1.,1.));
                     m_renderer->render(rotationbody->getPolyVec().at(i),old);
                 }
             }
@@ -184,7 +184,7 @@ void CgSceneControl::renderRotationsBody()
         if(!rotationbody->getNormale().empty()){
             if(rotationbody->getNormale().size()>0){
                 for(unsigned int i = 0; i<rotationbody->getNormale().size();i++){
-                    m_renderer->setUniformValue("mycolor",glm::vec3(255.,2.,3.));
+                    m_renderer->setUniformValue("mamp",glm::vec3(255.,2.,3.));
                     m_renderer->render(rotationbody->getNormale().at(i),old);
                 }
             }
@@ -804,7 +804,7 @@ void CgSceneControl::handleEvent(CgBaseEvent *e) {
         else{
             std::cout<<"licht aus"<<std::endl;
 
-             m_renderer->setShaderSourceFiles("../CgShader/lightoff.vert","../CgShader/lightoff.frag");
+             m_renderer->setShaderSourceFiles("../UebungSS2018/CgShader/lightsoff.vert","../UebungSS2018/CgShader/lightsoff.frag");
         }
 
     }

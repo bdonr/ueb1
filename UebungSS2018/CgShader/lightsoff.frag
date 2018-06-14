@@ -13,7 +13,6 @@ uniform vec4 mdef;
 uniform vec4 mspec;
 uniform float mshine;
 
-
     void main() {
 	gl_FragColor = mamb;
     }
