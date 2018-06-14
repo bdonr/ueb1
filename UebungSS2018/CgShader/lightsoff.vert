@@ -15,11 +15,6 @@ uniform mat4 lookatMatrix;
 uniform mat4 worldMatrix;
 uniform mat3 normalMatrix;
 uniform mat4 rotations;
-uniform vec4 mycolor;
-uniform vec4 amb;
-uniform vec4 def;
-uniform vec4 spec;
-uniform float skalar;
 
 out vec4 color;
 uniform sampler2D u_texture;   //diffuse map
@@ -39,7 +34,6 @@ void main() {
 	vertNormal = normalMatrix * normal;
 	pixelLight = light;
 	pixelCam = (lookatMatrix*worldMatrix*vert4).xyz;
-	color = mycolor;
 	lightcolor = lightColor;
 	gl_Position = projMatrix * lookatMatrix * worldMatrix * vert4;
 }

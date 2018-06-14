@@ -142,7 +142,7 @@ void CgSceneControl::setRenderer(CgBaseRenderer *r) {
 
     //  setShaderSourceFiles("../UebungSS2018/CgShader/lighton.vert","../UebungSS2018/CgShader/simple.frag");
     m_renderer->setSceneControl(this);
-    m_renderer->setShaderSourceFiles("../UebungSS2018/CgShader/lightoff.vert","../UebungSS2018/CgShader/lightoff.frag");
+    m_renderer->setShaderSourceFiles("../UebungSS2018/CgShader/lightsoff.vert","../UebungSS2018/CgShader/lightsoff.frag");
     //  m_renderer->setUniformValue("lightcolor",glm::vec4(1,0.1,0.1,1));
 
 
@@ -804,7 +804,7 @@ void CgSceneControl::handleEvent(CgBaseEvent *e) {
         else{
             std::cout<<"licht aus"<<std::endl;
 
-             m_renderer->setShaderSourceFiles("../UebungSS2018/CgShader/lightoff.vert","../UebungSS2018/CgShader/lightoff.frag");
+             m_renderer->setShaderSourceFiles("../CgShader/lightoff.vert","../CgShader/lightoff.frag");
         }
 
     }
