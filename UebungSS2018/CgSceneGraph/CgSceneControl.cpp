@@ -794,6 +794,8 @@ void CgSceneControl::handleEvent(CgBaseEvent *e) {
              glm::vec3 c = ((bestersliderMoveEvent*)e)->getTraegerKlasse()->getDreiDVector();
              glm::vec4 d = glm::vec4(c.x,c.y,c.z,1);
             light->setLightcolor(d);
+            m_renderer->setUniformValue("llight",light->getSource());
+            m_renderer->setUniformValue("lcolor",light->getLightcolor());
         }
     }
 
@@ -803,6 +805,9 @@ void CgSceneControl::handleEvent(CgBaseEvent *e) {
 
              glm::vec3 c = ((bestersliderMoveEvent*)e)->getTraegerKlasse()->getDreiDVector();
             light->setSource(c);
+            m_renderer->setUniformValue("llight",light->getSource());
+            m_renderer->setUniformValue("lcolor",light->getLightcolor());
+
         }
     }
 
@@ -818,18 +823,7 @@ void CgSceneControl::handleEvent(CgBaseEvent *e) {
              m_renderer->setShaderSourceFiles("../UebungSS2018/CgShader/lightoff.vert","../UebungSS2018/CgShader/lightoff.frag");
         }
     }
-    if(e->getType()==Cg::CgTurnLightOnOff){
-        lighton=!lighton;
-        if(lighton){
-            std::cout<<"licht an"<<std::endl;
-            m_renderer->setShaderSourceFiles("../UebungSS2018/CgShader/simple.vert","../UebungSS2018/CgShader/simple.frag");
-            m_renderer->setUniformValue("llight",light->getSource());
-            m_renderer->setUniformValue("lcolor",light->getLightcolor());
-        }
-        else{
-             m_renderer->setShaderSourceFiles("../UebungSS2018/CgShader/lightoff.vert","../UebungSS2018/CgShader/lightoff.frag");
-        }
-    }
+
     if(e->getType()== Cg::CgZeigeNormalePage2){
         shownormals=!shownormals;
         if(kegel!=NULL){

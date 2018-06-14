@@ -26,7 +26,8 @@ in vec4 lc;
 	vec3 L = normalize(llight);
      	vec3 E = normalize(llight-pixelCam);
 	vec3 H = normalize(L+E);
-	vec4 ambiente = Amb*lcolor*10;
-	gl_FragColor= Amb*lcolor;
+	float amblight = .15;
+	vec4 ambiente = Amb*lcolor*amblight;
+	gl_FragColor= ambient;
 
     }	
