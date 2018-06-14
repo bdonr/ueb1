@@ -565,12 +565,6 @@ void CgQtGui::page4(QWidget* parent)
     lab_matr_check= new QLabel("Matritzen unchecked");
 
 
-//    CgChangeTageswert               = 0x9786354,
-//    CgZeigeSonnenSystem             = 0x1847200,
-//    CgStartRotation                 = 0x1837260,
-//    CgZeige3DPfeile                 = 0x9955883
-
-
     bt_inc_day = new QPushButton("erhöhe tageswert");
     connect(bt_inc_day, SIGNAL(clicked()), this, SLOT(erhoeheTageswert()));
     bt_dec_day = new QPushButton("verringere tageswert");
@@ -660,7 +654,11 @@ void CgQtGui::page6(QWidget *parent)
     combo_box_material->addItem("Jade");
     combo_box_material->addItem("Poliertes Gold");
     tab1_control->addWidget(combo_box_material);
-    connect(combo_box_material, SIGNAL(activated(int)), this, SLOT(materialChanged()));
+    //connect(combo_box_material, SIGNAL(currentIndexChanged(int)), this, SLOT(materialChanged()));
+
+    QPushButton* ButtonXY = new QPushButton("Senden");
+    connect(ButtonXY, SIGNAL(clicked()), this, SLOT(materialChanged()));
+    tab1_control->addWidget(ButtonXY);
 
     lab_licht_rot = new QLabel("Licht Rot: 1");
     tab1_control->addWidget(lab_licht_rot);

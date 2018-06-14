@@ -12,11 +12,13 @@
 #include "CgClass/kamera.h"
 #include "CgClass/traegerklasse.h"
 #include "CgClass/pfeil.h"
+#include "CgClass/light.h"
 class CgBaseEvent;
 class CgBaseRenderer;
 class CgExampleTriangle;
 class CgBaseTriangleMesh;
 class Wuerfel;
+class Light;
 class Zylinder;
 class Kegel;
 
@@ -216,7 +218,14 @@ public:
 
     void initKegel();
 
-    void materialChange(CgBaseEvent *e);
+    void setLight();
+
+    void setZylinderColor();
+
+    void handleMaterialChange(double ding4, glm::vec4 ding2, glm::vec4 ding1, Appearance* k, glm::vec4 ding3, std::string st);
+
+    void handleMaterial(CgBaseEvent *e);
+
 private:
     int tab;
     glm::vec3 w;
@@ -257,6 +266,7 @@ private:
     Koordinatensystem* koordinatensystem;
     std::vector<unsigned int> dreieckecords;
     Scenegraph* sc;
+    Light* light;
 
     void renew();
 };
