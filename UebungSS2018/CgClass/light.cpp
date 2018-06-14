@@ -1,24 +1,6 @@
 #include "light.h"
 
-float Light::getItensity() const
-{
-    return itensity;
-}
 
-void Light::setItensity(float value)
-{
-    itensity = value;
-}
-
-glm::vec4 Light::getLightcolor() const
-{
-    return lightcolor;
-}
-
-void Light::setLightcolor(const glm::vec4 &value)
-{
-    lightcolor = value;
-}
 
 glm::vec3 Light::getSource() const
 {
@@ -28,6 +10,57 @@ glm::vec3 Light::getSource() const
 void Light::setSource(const glm::vec3 &value)
 {
     source = value;
+}
+
+
+glm::vec4 Light::getLdif() const
+{
+    return ldif;
+}
+
+void Light::setLdif(const glm::vec4 &value)
+{
+    ldif = value;
+}
+
+glm::vec4 Light::getLamp() const
+{
+    return lamp;
+}
+
+void Light::setLamp(const glm::vec4 &value)
+{
+    lamp = value;
+}
+
+glm::vec4 Light::getLspec() const
+{
+    return lspec;
+}
+
+void Light::setLspec(const glm::vec4 &value)
+{
+    lspec = value;
+}
+
+glm::vec3 Light::getLDir() const
+{
+    return lDir;
+}
+
+void Light::setLDir(const glm::vec3 &value)
+{
+    lDir = value;
+}
+
+float Light::getShine() const
+{
+    return shine;
+}
+
+void Light::setShine(float value)
+{
+    shine = value;
 }
 
 Light::Light()

@@ -8,13 +8,13 @@ in vec3 pixelLight;
 in vec3 pixelCam;
 in vec4 lightcolor;
 
-uniform vec4 amb;
-uniform vec4 def;
-uniform vec4 spec;
-uniform float skalar;
+uniform vec4 mamb;
+uniform vec4 mdef;
+uniform vec4 mspec;
+uniform float mshine;
 
 
     void main() {
-	gl_FragColor = amb;
+	gl_FragColor = mamb;
     }
 

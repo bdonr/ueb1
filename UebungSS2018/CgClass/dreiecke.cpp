@@ -21,7 +21,7 @@ Dreiecke::Dreiecke(int id,std::vector<glm::vec3>vertices,std::vector<unsigned in
 {
     this->vcolor.push_back(glm::vec3(255,0,0));
     this->fcolor.push_back(glm::vec3(0,255,0));
-    berechnePunktNormale();
+    //berechnePunktNormale();
 }
 
 enum Cg::ObjectType Dreiecke::getType() const{
@@ -30,25 +30,22 @@ enum Cg::ObjectType Dreiecke::getType() const{
 //Laufzeit O(n*k)
 bool Dreiecke::berechnePunktNormale(){
    //Compute normals per vertex
-        for(int vertice=0; vertice < m_vertices.size(); vertice++) //For every vertex
+        for(int i=0; i < vetices.size(); i++) //For every vertex
         {
             int normCounter = 0;
             int faceCounter = 0;
             glm::vec3 norm= glm::vec3(0,0,0);
 
-            for(int indexCounter=0; indexCounter < m_triangle_indices.size() - 3; indexCounter+=3){ //Through every Face
-
-
-                if(m_triangle_indices.at(indexCounter) == vertice || m_triangle_indices.at(indexCounter+1) == vertice || m_triangle_indices.at(indexCounter+2) == vertice)// Check if face includes vertex
+            for(int indexCounter=0; indexCounter < indeces.size() - 3; indexCounter+=3){ //Through every Face
+                if(indeces.at(indexCounter) == i || indeces.at(indexCounter+1) == i || indeces.at(indexCounter+2) == i)// Check if face includes vertex
                 {
-                    norm= norm + m_face_normals.at(faceCounter);
+                    norm= norm + facenormals.at(faceCounter);
                     normCounter++;
                 }
-
                 faceCounter++;
             }
 
-            m_vertex_normals.push_back(glm::normalize(norm / (float)normCounter));
+            this->pointnormals.push_back(glm::normalize(norm / (float)normCounter));
         }
 
 }
