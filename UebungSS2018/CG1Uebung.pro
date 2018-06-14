@@ -34,7 +34,8 @@ SOURCES += main.cpp \
     CgClass/wuerfel.cpp \
     CgClass/dreiecke.cpp \
     CgClass/mats.cpp \
-    CgClass/pfeil.cpp
+    CgClass/pfeil.cpp \
+    CgClass/virtCam.cpp
 
 
 HEADERS += \
@@ -78,4 +79,5 @@ CgUtils/ObjLoader.h \
     CgClass/appearance.h \
     CgClass/kamera.h \
     CgClass/wuerfel.h \
-CgClass/pfeil.h
+CgClass/pfeil.h \
+    CgClass/virtCam.h

@@ -443,13 +443,13 @@ void CgSceneControl::changeKegel(CgBaseEvent *e)
 }
 
 void CgSceneControl::setLight()
-{
+{/*
     light=new Light();
     light->setItensity(0.15);
     light->setLightcolor(glm::vec4(0,1,1,1));
     light->setSource(glm::vec3(1,1,1));
     m_renderer->setUniformValue("light",light->getSource());
-    m_renderer->setUniformValue("lightcolor",light->getLightcolor());
+    m_renderer->setUniformValue("lightcolor",light->getLightcolor());*/
 }
 
 void CgSceneControl::setZylinderColor()
