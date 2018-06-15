@@ -224,16 +224,16 @@ QSlider *CgQtGui::createSlider(int max,int min,int steps)
 void CgQtGui::page2(QWidget* parent)
 {
     QVBoxLayout *tab1_control = new QVBoxLayout();
-    bt_show_poly = new QPushButton("Zeige Polyline");
+    bt_show_poly = new QPushButton("Reset Polyline");
     bt_show_poly->setCheckable(false);
     tab1_control->addWidget(bt_show_poly);
     connect(bt_show_poly, SIGNAL( clicked() ), this, SLOT(ZeigePolylineButton()));
 
-    bt_rese_poly = new QPushButton("Reset Polyline");
+    bt_rese_poly = new QPushButton("Hide Polyline/Rotakörper");
     tab1_control->addWidget(bt_rese_poly);
     connect(bt_rese_poly, SIGNAL( clicked() ), this, SLOT(ResetPolylineButton()));
 
-    lab_lane_refine= new QLabel("Lane-Riesenfeld Refine");
+    lab_lane_refine= new QLabel("Lane-Riesenfeld Refine (Polyline)");
     tab1_control->addWidget(lab_lane_refine);
 
     sl_rota_lane_refine = createSlider();
@@ -251,13 +251,13 @@ void CgQtGui::page2(QWidget* parent)
     sl_rota_refine = createSlider();
     tab1_control->addWidget(sl_rota_refine);
     sl_rota_refine->setMinimum(1);
-    sl_rota_refine->setMaximum(360);
+    sl_rota_refine->setMaximum(100);
     sl_rota_refine->setValue(1);
     sl_rota_refine->setTickInterval(1);
     connect(sl_rota_refine, SIGNAL(sliderReleased()), this, SLOT(changeRotaKoerper()));
     connect(sl_rota_refine, SIGNAL(sliderMoved(int)), this, SLOT(reranderLabelofSlider()));
 
-    lab_rota_hoehe = new QLabel("Rotationskörper Hoehe");
+    lab_rota_hoehe = new QLabel("Rotationskörper Lane-Riesenfeld");
     tab1_control->addWidget(lab_rota_hoehe);
 
     sl_rota_hoehe = createSlider();
@@ -789,13 +789,11 @@ void CgQtGui::ZeigePolylineButton()
 {
     if(bt_show_poly->isCheckable()){
         bt_show_poly->setCheckable(false);
-        bt_show_poly->setText("Zeige polyline");
         std::cout<<"verstecke polyline"<<std::endl;
         traeger->setAn_aus(0);
         notifyObserver(new bestersliderMoveEvent(Cg::CgZeigePolyline,traeger));
     }else{
         bt_show_poly->setCheckable(true);
-        bt_show_poly->setText("verstecke polyline");
         std::cout<<"zeige polyline"<<std::endl;
         traeger->setAn_aus(1);
         notifyObserver(new bestersliderMoveEvent(Cg::CgZeigePolyline,traeger));
