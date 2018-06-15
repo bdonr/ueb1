@@ -33,6 +33,7 @@ SOURCES += main.cpp \
     CgClass/kamera.cpp \
     CgClass/wuerfel.cpp \
     CgClass/dreiecke.cpp \
+    CgClass/light.cpp \
     CgClass/mats.cpp \
     CgClass/pfeil.cpp
 
@@ -66,7 +67,7 @@ HEADERS += \
     CgClass/mats.h \
     CgEvents/slidermoveevent.h \
     CgClass/rotationskoerper.h \
-CgUtils/ObjLoader.h \
+    CgUtils/ObjLoader.h \
     CgClass/dreiecke.h \
     CgClass/koordinatensystem.h \
     CgEvents/objectopenevent.h \
@@ -77,5 +78,6 @@ CgUtils/ObjLoader.h \
     CgClass/sceneentity.h \
     CgClass/appearance.h \
     CgClass/kamera.h \
+    CgClass/light.h \
     CgClass/wuerfel.h \
 CgClass/pfeil.h

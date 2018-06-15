@@ -21,7 +21,7 @@ Dreiecke::Dreiecke(int id,std::vector<glm::vec3>vertices,std::vector<unsigned in
 {
     this->vcolor.push_back(glm::vec3(255,0,0));
     this->fcolor.push_back(glm::vec3(0,255,0));
-    berechnePunktNormale();
+    //berechnePunktNormale();
 }
 
 enum Cg::ObjectType Dreiecke::getType() const{

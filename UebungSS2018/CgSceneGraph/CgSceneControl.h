@@ -226,6 +226,8 @@ public:
 
     void handleMaterial(CgBaseEvent *e);
 
+    void changeObjectRota(CgBaseEvent *e);
+    void changeObjectTranslate(CgBaseEvent *e);
 private:
     int tab;
     glm::vec3 w;
