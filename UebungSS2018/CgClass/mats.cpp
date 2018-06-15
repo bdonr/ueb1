@@ -2,42 +2,42 @@
 
 glm::vec4 Mats::getAmb() const
 {
-    return amb;
+    return mamb;
 }
 
 void Mats::setAmb(const glm::vec4 &value)
 {
-    amb = value;
+    mamb = value;
 }
 
 glm::vec4 Mats::getDef() const
 {
-    return def;
+    return mdif;
 }
 
 void Mats::setDef(const glm::vec4 &value)
 {
-    def = value;
+    mdif = value;
 }
 
 glm::vec4 Mats::getSpec() const
 {
-    return spec;
+    return mspec;
 }
 
 void Mats::setSpec(const glm::vec4 &value)
 {
-    spec = value;
+    mspec = value;
 }
 
 double Mats::getScalar() const
 {
-    return scalar;
+    return mshine;
 }
 
 void Mats::setScalar(double value)
 {
-    scalar = value;
+    mshine = value;
 }
 
 Mats::Mats()

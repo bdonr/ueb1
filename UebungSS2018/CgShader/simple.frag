@@ -7,31 +7,44 @@ in vec3 vertNormal;
 
 in vec3 pixelCam;
 
-in vec4 Amb;
-in vec4 Def;
-in vec4 Spec;
-in float Skalar;
-uniform vec3 llight;
+
+uniform vec4 mdif;
+uniform vec4 mspec;
+uniform float mshine;
+
+
 uniform vec4 lcolor;
 
-in vec3 ll;
-//lichtfarbe
-in vec4 lc;
+in vec3 ldir;
+uniform vec4 lspec;
+uniform vec4 ldif;
+uniform vec4 lamb;
 
-    void main() {
-	
-	vec4 col;
-	
-	vec3 N = normalize (vert);
-	vec3 L = normalize(llight);
-     	vec3 E = normalize(llight-pixelCam);
-	vec3 H = normalize(L+E);
-	float amblight = .15;
-	vec4 ambiente = lcolor*amblight;
-	
-	float diff = max(dot(L,N),0.0)*.3;
-	vec4 cdiff = diff * lcolor;
-	
-	gl_FragColor= (ambiente+cdiff)*Amb;
 
-    }	
+in vec3 fragColor;
+in vec3 fragViewVec;
+in vec3 fragLightVec;
+
+
+void main() {
+vec3 specular=vec3(1.0);
+vec3 diffuse =vec3(1.0);
+vec3 ambiente;
+
+	vec3 N = normalize(vertNormal);
+	vec3 L = normalize(fragLightVec);
+	vec3 V = normalize(fragViewVec);
+	vec3 R = reflect (L,N);
+	 ambiente = fragColor.xyz*.1;
+	vec3 h = fragColor*lamb.xyz;
+	 diffuse = max(dot(N,L),0.0)* h;
+	float k = pow(max(dot(R,V),0.0),12);
+	vec3 a = lspec.xyz;
+	vec3 b = mspec.xyz;
+	vec3 s = (a*b);
+
+	vec3 spec = k*s;
+	vec3 alle = spec + diffuse+ambiente;
+	gl_FragColor = vec4(spec,1.0);
+	
+}

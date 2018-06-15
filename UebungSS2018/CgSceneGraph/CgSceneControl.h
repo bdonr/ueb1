@@ -218,17 +218,17 @@ public:
 
     void initKegel();
 
-    void setLight();
-
     void setZylinderColor();
 
     void handleMaterialChange(double ding4, glm::vec4 ding2, glm::vec4 ding1, Appearance* k, glm::vec4 ding3, std::string st);
 
     void handleMaterial(CgBaseEvent *e);
 
+    void setLight();
     void changeObjectRota(CgBaseEvent *e);
     void changeObjectTranslate(CgBaseEvent *e);
 private:
+
     int tab;
     glm::vec3 w;
     glm::vec3 v;
@@ -272,6 +272,15 @@ private:
     bool shader;
 
     void renew();
+
+
+
+
+    bool compateMat(const glm::mat4& x, const glm::mat4& y, float epsilon);
+    bool compateVec4(const glm::vec4& x, const glm::vec4& y,float epsilon);
+
+    bool compateFloat(float x, float y,float epsilon);
+
 };
 
 #endif // CGSCENECONTROL_H
