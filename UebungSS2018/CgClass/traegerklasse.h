@@ -14,6 +14,8 @@ private: glm::vec3 intvec;
     glm::vec4 amb;
     glm::vec4 def;
     glm::vec4 spec;
+    int shading;
+    int interpol;
     double scala;
     int an_aus;
     int tab;
@@ -53,6 +55,11 @@ public:
     void setName(const QString &value);
     std::string getLog() const;
     void setLog(const std::string &value);
+    int getShading() const;
+    void setShading(int value);
+    int getInterpol() const;
+    void setInterpol(int value);
+
 };
 
 #endif // TRAEGERKLASSE_H

@@ -32,15 +32,11 @@
 #include <QComboBox>
 
 
-//Höhe slider definieren, funktionalität inkludieren-------------------------------------CHECK
-//normalen von rota-körper und kegel und zylinder anzeigen "taste", FUNKTIONALITÄT-------CHECK
+
+
 //                    merke MyPolyline hat den lane riesenfeld algo !!!!
-//aufgabe 4.c
-//aufgbae 6.c ?
-//aufgabe 7.c verscheibung des obejktes implementierung
+//aufgbae 6.c (o(n punkt normale berechnen))
 //aufgabe 8.b vergleich der rotamatritzen implementerung
-//aufgabe 10 refactorn
-//aufgabe 13 EVENTUEL
 //aufgabe 14 EVENTUEL
 
 
@@ -228,16 +224,16 @@ QSlider *CgQtGui::createSlider(int max,int min,int steps)
 void CgQtGui::page2(QWidget* parent)
 {
     QVBoxLayout *tab1_control = new QVBoxLayout();
-    bt_show_poly = new QPushButton("Zeige Polyline");
+    bt_show_poly = new QPushButton("Reset Polyline");
     bt_show_poly->setCheckable(false);
     tab1_control->addWidget(bt_show_poly);
     connect(bt_show_poly, SIGNAL( clicked() ), this, SLOT(ZeigePolylineButton()));
 
-    bt_rese_poly = new QPushButton("Reset Polyline");
+    bt_rese_poly = new QPushButton("Hide Polyline/Rotakörper");
     tab1_control->addWidget(bt_rese_poly);
     connect(bt_rese_poly, SIGNAL( clicked() ), this, SLOT(ResetPolylineButton()));
 
-    lab_lane_refine= new QLabel("Lane-Riesenfeld Refine");
+    lab_lane_refine= new QLabel("Lane-Riesenfeld Refine (Polyline)");
     tab1_control->addWidget(lab_lane_refine);
 
     sl_rota_lane_refine = createSlider();
@@ -255,13 +251,13 @@ void CgQtGui::page2(QWidget* parent)
     sl_rota_refine = createSlider();
     tab1_control->addWidget(sl_rota_refine);
     sl_rota_refine->setMinimum(1);
-    sl_rota_refine->setMaximum(360);
+    sl_rota_refine->setMaximum(100);
     sl_rota_refine->setValue(1);
     sl_rota_refine->setTickInterval(1);
     connect(sl_rota_refine, SIGNAL(sliderReleased()), this, SLOT(changeRotaKoerper()));
     connect(sl_rota_refine, SIGNAL(sliderMoved(int)), this, SLOT(reranderLabelofSlider()));
 
-    lab_rota_hoehe = new QLabel("Rotationskörper Hoehe");
+    lab_rota_hoehe = new QLabel("Rotationskörper Lane-Riesenfeld");
     tab1_control->addWidget(lab_rota_hoehe);
 
     sl_rota_hoehe = createSlider();
@@ -434,9 +430,10 @@ void CgQtGui::page3(QWidget* parent)
     obj_rotate_X = new QSpinBox();
     tab4_control->addWidget(obj_rotate_X);
     obj_rotate_X->setMinimumHeight(25);
-    obj_rotate_X->setMinimum(1);
-    obj_rotate_X->setMaximum(50);
-    obj_rotate_X->setValue(1);
+    obj_rotate_X->setSingleStep(1);
+    obj_rotate_X->setMinimum(0);
+    obj_rotate_X->setMaximum(45);
+    obj_rotate_X->setValue(0);
     connect( obj_rotate_X, SIGNAL(editingFinished()), this, SLOT(changeRotationObject()));
     subSBox->addWidget(obj_rotate_X);
 
@@ -445,9 +442,10 @@ void CgQtGui::page3(QWidget* parent)
 
     obj_rotate_Y = new QSpinBox();
     tab4_control->addWidget(obj_rotate_Y);
-    obj_rotate_Y->setMinimum(1);
-    obj_rotate_Y->setMaximum(50);
-    obj_rotate_Y->setValue(1);
+    obj_rotate_Y->setSingleStep(1);
+    obj_rotate_Y->setMinimum(0);
+    obj_rotate_Y->setMaximum(45);
+    obj_rotate_Y->setValue(0);
     connect( obj_rotate_Y, SIGNAL(editingFinished()), this, SLOT(changeRotationObject()));
     subSBox->addWidget(obj_rotate_Y);
 
@@ -456,9 +454,10 @@ void CgQtGui::page3(QWidget* parent)
 
     obj_rotate_Z = new QSpinBox();
     tab4_control->addWidget(obj_rotate_Z);
-    obj_rotate_Z->setMinimum(1);
-    obj_rotate_Z->setMaximum(50);
-    obj_rotate_Z->setValue(1);
+    obj_rotate_Z->setSingleStep(1);
+    obj_rotate_Z->setMinimum(0);
+    obj_rotate_Z->setMaximum(45);
+    obj_rotate_Z->setValue(0);
     connect( obj_rotate_Z, SIGNAL(editingFinished()), this, SLOT(changeRotationObject()));
     subSBox->addWidget(obj_rotate_Z);
 
@@ -477,9 +476,10 @@ void CgQtGui::page3(QWidget* parent)
 
     obj_translate_X = new QSpinBox();
     tab4_control->addWidget(obj_translate_X);
-    obj_translate_X->setMinimum(1);
-    obj_translate_X->setMaximum(50);
-    obj_translate_X->setValue(1);
+    obj_translate_X->setMinimum(0);
+    obj_translate_X->setSingleStep(1);
+    obj_translate_X->setMaximum(100);
+    obj_translate_X->setValue(0);
     connect( obj_translate_X, SIGNAL(editingFinished()), this, SLOT(changeTranslateObject()));
     subSBox->addWidget(obj_translate_X);
 
@@ -488,9 +488,10 @@ void CgQtGui::page3(QWidget* parent)
 
     obj_translate_Y = new QSpinBox();
     tab4_control->addWidget(obj_translate_Y);
-    obj_translate_Y->setMinimum(1);
-    obj_translate_Y->setMaximum(50);
-    obj_translate_Y->setValue(1);
+    obj_translate_Y->setMinimum(0);
+    obj_translate_Y->setSingleStep(1);
+    obj_translate_Y->setMaximum(100);
+    obj_translate_Y->setValue(0);
     connect( obj_translate_Y, SIGNAL(editingFinished()), this, SLOT(changeTranslateObject()));
     subSBox->addWidget(obj_translate_Y);
 
@@ -499,9 +500,10 @@ void CgQtGui::page3(QWidget* parent)
 
     obj_translate_Z = new QSpinBox();
     tab4_control->addWidget(obj_translate_Z);
-    obj_translate_Z->setMinimum(1);
-    obj_translate_Z->setMaximum(50);
-    obj_translate_Z->setValue(1);
+    obj_translate_Z->setMinimum(0);
+    obj_translate_Z->setSingleStep(1);
+    obj_translate_Z->setMaximum(100);
+    obj_translate_Z->setValue(0);
     connect( obj_translate_Z, SIGNAL(editingFinished()), this, SLOT(changeTranslateObject()));
     subSBox->addWidget(obj_translate_Z);
 //-----------------------------------------------------------------------------------------
@@ -641,10 +643,8 @@ void CgQtGui::page6(QWidget *parent)
     combo_box_objekt->addItem("Planet 3");
     combo_box_objekt->addItem("Zylinder");
     combo_box_objekt->addItem("Kegel");
-
-    combo_box_objekt->setToolTip("first: select object, second: select material");
+    combo_box_objekt->setToolTip("first: select object, second: select material,dotn forget to set Shading and interpolation");
     tab1_control->addWidget(combo_box_objekt);
-   // connect(combo_box_objekt, SIGNAL(activated(int)), this, SLOT(materialChanged()));
 
 
     combo_box_material = new QComboBox();
@@ -653,27 +653,40 @@ void CgQtGui::page6(QWidget *parent)
     combo_box_material->addItem("Obsidian");
     combo_box_material->addItem("Jade");
     combo_box_material->addItem("Poliertes Gold");
+    combo_box_material->setToolTip("first: select object, second: select material,dotn forget to set Shading and interpolation");
     tab1_control->addWidget(combo_box_material);
-    //connect(combo_box_material, SIGNAL(currentIndexChanged(int)), this, SLOT(materialChanged()));
 
-    QPushButton* ButtonXY = new QPushButton("Senden");
+    combo_box_shading = new QComboBox();
+    combo_box_shading->addItem("Gouraud");
+    combo_box_shading->addItem("Phong");
+    combo_box_shading->setToolTip("first: select object, second: select material,dotn forget to set Shading and interpolation");
+    tab1_control->addWidget(combo_box_shading);
+
+    combo_box_interpol = new QComboBox();
+    combo_box_interpol->addItem("Flat");
+    combo_box_interpol->addItem("Smooth");
+    combo_box_interpol->setToolTip("first: select object, second: select material,dotn forget to set Shading and interpolation");
+    tab1_control->addWidget(combo_box_interpol);
+
+
+    QPushButton* ButtonXY = new QPushButton("erstelle Object");
     connect(ButtonXY, SIGNAL(clicked()), this, SLOT(materialChanged()));
     tab1_control->addWidget(ButtonXY);
 
 
-    QPushButton* ButtonXYZ = new QPushButton("Licht An");
-    connect(ButtonXYZ, SIGNAL(clicked()), this, SLOT(lightChanged()));
-    tab1_control->addWidget(ButtonXYZ);
-
+    licht = new QPushButton("Licht aus");
+    licht->setCheckable(false);
+    connect(licht, SIGNAL(clicked()), this, SLOT(lightChanged()));
+    tab1_control->addWidget(licht);
 
     lab_licht_rot = new QLabel("Licht Rot: 1");
     tab1_control->addWidget(lab_licht_rot);
 
     sl_licht_rot = createSlider();
     tab1_control->addWidget(sl_licht_rot);
-    sl_licht_rot->setMinimum(1);
-    sl_licht_rot->setMaximum(360);
-    sl_licht_rot->setValue(5);
+    sl_licht_rot->setMinimum(0);
+    sl_licht_rot->setMaximum(255);
+    sl_licht_rot->setValue(0);
     connect( sl_licht_rot, SIGNAL(sliderReleased()), this, SLOT(changeLichtFarbe()));
     connect( sl_licht_rot, SIGNAL(sliderMoved(int)), this, SLOT(reranderLabelofSlider()));
 
@@ -682,9 +695,9 @@ void CgQtGui::page6(QWidget *parent)
 
     sl_licht_gruen = createSlider();
     tab1_control->addWidget(sl_licht_gruen);
-    sl_licht_gruen->setMinimum(1);
-    sl_licht_gruen->setMaximum(360);
-    sl_licht_gruen->setValue(5);
+    sl_licht_gruen->setMinimum(0);
+    sl_licht_gruen->setMaximum(255);
+    sl_licht_gruen->setValue(0);
     connect( sl_licht_gruen, SIGNAL(sliderReleased()), this, SLOT(changeLichtFarbe()));
     connect( sl_licht_gruen, SIGNAL(sliderMoved(int)), this, SLOT(reranderLabelofSlider()));
 
@@ -693,9 +706,9 @@ void CgQtGui::page6(QWidget *parent)
 
     sl_licht_blau = createSlider();
     tab1_control->addWidget(sl_licht_blau);
-    sl_licht_blau->setMinimum(1);
-    sl_licht_blau->setMaximum(360);
-    sl_licht_blau->setValue(5);
+    sl_licht_blau->setMinimum(0);
+    sl_licht_blau->setMaximum(255);
+    sl_licht_blau->setValue(0);
     connect( sl_licht_blau, SIGNAL(sliderReleased()), this, SLOT(changeLichtFarbe()));
     connect( sl_licht_blau, SIGNAL(sliderMoved(int)), this, SLOT(reranderLabelofSlider()));
 
@@ -704,9 +717,9 @@ void CgQtGui::page6(QWidget *parent)
 
     sl_licht_X = createSlider();
     tab1_control->addWidget(sl_licht_X);
-    sl_licht_X->setMinimum(1);
+    sl_licht_X->setMinimum(0);
     sl_licht_X->setMaximum(360);
-    sl_licht_X->setValue(5);
+    sl_licht_X->setValue(0);
     connect( sl_licht_X, SIGNAL(sliderReleased()), this, SLOT(changeLichtPosition()));
     connect( sl_licht_X, SIGNAL(sliderMoved(int)), this, SLOT(reranderLabelofSlider()));
 
@@ -715,9 +728,9 @@ void CgQtGui::page6(QWidget *parent)
 
     sl_licht_Y = createSlider();
     tab1_control->addWidget(sl_licht_Y);
-    sl_licht_Y->setMinimum(1);
+    sl_licht_Y->setMinimum(0);
     sl_licht_Y->setMaximum(360);
-    sl_licht_Y->setValue(5);
+    sl_licht_Y->setValue(0);
     connect( sl_licht_Y, SIGNAL(sliderReleased()), this, SLOT(changeLichtPosition()));
     connect( sl_licht_Y, SIGNAL(sliderMoved(int)), this, SLOT(reranderLabelofSlider()));
 
@@ -726,9 +739,9 @@ void CgQtGui::page6(QWidget *parent)
 
     sl_licht_Z = createSlider();
     tab1_control->addWidget(sl_licht_Z);
-    sl_licht_Z->setMinimum(1);
+    sl_licht_Z->setMinimum(0);
     sl_licht_Z->setMaximum(360);
-    sl_licht_Z->setValue(5);
+    sl_licht_Z->setValue(0);
     connect( sl_licht_Z, SIGNAL(sliderReleased()), this, SLOT(changeLichtPosition()));
     connect( sl_licht_Z, SIGNAL(sliderMoved(int)), this, SLOT(reranderLabelofSlider()));
 
@@ -746,7 +759,8 @@ void CgQtGui::changeRotationObject()
 void CgQtGui::changeTranslateObject()
 {
     std::cout<<"translate obj "<<obj_translate_X->value()<<" "<<obj_translate_Y->value()<<" "<<obj_translate_Z->value()<<std::endl;
-    traeger->setDreiDVector(glm::vec3(obj_translate_X->value(),obj_translate_Y->value(),obj_translate_Z->value()));
+    std::cout<<(double)obj_translate_X->value()/10<<std::endl;
+    traeger->setDreiDVector(glm::vec3((double)obj_translate_X->value()/100,(double)obj_translate_Y->value()/100,(double)obj_translate_Z->value()/100));
     notifyObserver(new bestersliderMoveEvent(Cg::CgObjTranslate,traeger));
 }
 
@@ -775,13 +789,11 @@ void CgQtGui::ZeigePolylineButton()
 {
     if(bt_show_poly->isCheckable()){
         bt_show_poly->setCheckable(false);
-        bt_show_poly->setText("Zeige polyline");
         std::cout<<"verstecke polyline"<<std::endl;
         traeger->setAn_aus(0);
         notifyObserver(new bestersliderMoveEvent(Cg::CgZeigePolyline,traeger));
     }else{
         bt_show_poly->setCheckable(true);
-        bt_show_poly->setText("verstecke polyline");
         std::cout<<"zeige polyline"<<std::endl;
         traeger->setAn_aus(1);
         notifyObserver(new bestersliderMoveEvent(Cg::CgZeigePolyline,traeger));
@@ -1056,20 +1068,33 @@ void CgQtGui::materialChanged()
     traeger->setSpec(spec.at(combo_box_material->currentIndex()));
     traeger->setScala(scala.at(combo_box_material->currentIndex()));
     traeger->setName(combo_box_objekt->currentText());
+    traeger->setShading(combo_box_shading->currentIndex());
+    traeger->setInterpol(combo_box_interpol->currentIndex());
 
     notifyObserver(new bestersliderMoveEvent(Cg::CgChangeMaterial,traeger));
 }
 
 void CgQtGui::lightChanged()
 {
-    std::cout<<"Licht an"<<std::endl;
+
+    if(licht->isCheckable()){
+        licht->setCheckable(false);
+        licht->setText("Licht aus");
+        std::cout<<"Licht ist aus"<<std::endl;
+    }else{
+        licht->setCheckable(true);
+        licht->setText("Licht an");
+        std::cout<<"Licht ist an"<<std::endl;
+
+    }
+
     notifyObserver(new bestersliderMoveEvent(Cg::CgTurnLightOnOff,traeger));
 }
 
 void CgQtGui::changeLichtFarbe()
 {
     std::cout<<"Change licht Fabre"<<std::endl;
-    traeger->setDreiDVector(glm::vec3(sl_licht_rot->value(),sl_licht_gruen->value(),sl_licht_blau->value()));
+    traeger->setDreiDVector(glm::vec3((double)sl_licht_rot->value()/10,(double)sl_licht_gruen->value()/10,(double)sl_licht_blau->value()/10));
     notifyObserver(new bestersliderMoveEvent(Cg::CgChangeLichtFarbe,traeger));
 }
 

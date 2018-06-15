@@ -100,6 +100,26 @@ void TraegerKlasse::setName(const QString &value)
     name = value;
 }
 
+int TraegerKlasse::getShading() const
+{
+    return shading;
+}
+
+void TraegerKlasse::setShading(int value)
+{
+    shading = value;
+}
+
+int TraegerKlasse::getInterpol() const
+{
+    return interpol;
+}
+
+void TraegerKlasse::setInterpol(int value)
+{
+    interpol = value;
+}
+
 TraegerKlasse::TraegerKlasse()
 {
     intvec=glm::vec3(0,0,0);

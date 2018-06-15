@@ -737,6 +737,7 @@ void CgSceneControl::loadObject(CgBaseEvent *e)
         renderDreiecke();
         this->m_renderer->redraw();
 
+
     }
 }
 
@@ -837,8 +838,6 @@ void CgSceneControl::handleEvent(CgBaseEvent *e) {
     if(e->getType()==Cg::CgTurnLightOnOff){
         lighton=!lighton;
         if(lighton){
-
-            std::cout<<"licht an"<<std::endl;
             m_renderer->setShaderSourceFiles("../UebungSS2018/CgShader/simple.vert","../UebungSS2018/CgShader/simple.frag");
             light = new Light();
             light = new Light();
@@ -920,11 +919,35 @@ void CgSceneControl::handleEvent(CgBaseEvent *e) {
     changeRota(e);
     handleKeyEvents(e);
     loadObject(e);
-
-
+    changeObjectRota(e);
+    changeObjectTranslate(e);
 
     // an der Stelle an der ein Event abgearbeitet ist wird es auch gelöscht.
     delete e;
+
+}
+
+void CgSceneControl::changeObjectRota(CgBaseEvent* e){
+    if(e->getType()==Cg::CgObjRotate){
+        glm::vec3 a = ((bestersliderMoveEvent*)e)->getTraegerKlasse()->getDreiDVector();
+        x = a.x;
+        y = a.y;
+        z = a.z;
+        old = old * rotationX(x);// * rotationY(y) * rotationZ(z) * rotationX(-x) * rotationY(-y);
+        old = old * rotationY(y);
+        old = old * rotationZ(z);
+    }
+
+}
+
+void CgSceneControl::changeObjectTranslate(CgBaseEvent* e){
+    if(e->getType()==Cg::CgObjTranslate){
+        glm::vec3 a = ((bestersliderMoveEvent*)e)->getTraegerKlasse()->getDreiDVector();
+        old = transform(a,0,0,0);
+
+    }
+
+
 
 }
 

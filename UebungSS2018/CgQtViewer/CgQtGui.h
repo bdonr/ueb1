@@ -105,7 +105,6 @@ private:
     float hoehe;
     int refine;
 
-
     QWidget*               m_option_panel_ex1;
     QWidget*               m_option_panel_ex2;
     QWidget*               m_option_panel_ex3;
@@ -208,6 +207,11 @@ private:
     QLabel* lab_Kegel_refine;
     QLabel* lab_Kegel_radius;
     QLabel* lab_Kegel_hoehe;
+    QComboBox* combo_box_shading;
+    QComboBox* combo_box_interpol;
+    QPushButton* licht;
+
+
 
 
 
