@@ -270,6 +270,15 @@ private:
     bool shader;
 
     void renew();
+
+
+
+
+    bool compateMat(const glm::mat4& x, const glm::mat4& y, float epsilon);
+    bool compateVec4(const glm::vec4& x, const glm::vec4& y,float epsilon);
+
+    bool compateFloat(float x, float y,float epsilon);
+
 };
 
 #endif // CGSCENECONTROL_H

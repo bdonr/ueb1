@@ -50,29 +50,29 @@ void CgQtGui::init()
 {
     //--------------------------------------------------------------
 
-    amb.push_back(glm::vec4(.25,.25,.25,1.0));
-    def.push_back(glm::vec4(.40,.40,.40,1.0));
-    spec.push_back(glm::vec4(.77,.77,.77,1.0));
+    amb.push_back(glm::vec4(.25f,.25f,.25f,1.0));
+    def.push_back(glm::vec4(.40f,.40f,.40f,1.0));
+    spec.push_back(glm::vec4(.77f,.77f,.77f,1.0));
     scala.push_back(76.8);
 
-    amb.push_back(glm::vec4(.25,.21,.21,.90));
-    def.push_back(glm::vec4(0.99,.83,.83,.90));
-    spec.push_back(glm::vec4(0.30,0.30,0.30,0.90));
+    amb.push_back(glm::vec4(.25f,.21f,.21f,.90f));
+    def.push_back(glm::vec4(0.99f,.83f,.83f,.90f));
+    spec.push_back(glm::vec4(0.30f,0.30f,0.30f,0.90f));
     scala.push_back(11.3);
 
-    amb.push_back(glm::vec4(0.5,0.5,0.7,0.8));
-    def.push_back(glm::vec4(0.18,0.17,0.23,0.8));
-    spec.push_back(glm::vec4(0.33,0.33,0.35,0.8));
+    amb.push_back(glm::vec4(0.5f,0.5f,0.7f,0.8f));
+    def.push_back(glm::vec4(0.18f,0.17f,0.23f,0.8f));
+    spec.push_back(glm::vec4(0.33f,0.33f,0.35f,0.8f));
     scala.push_back(38.4);
 
-    amb.push_back(glm::vec4(0.14,0.22,0.16,0.9));
-    def.push_back(glm::vec4(0.54,0.89,0.63,0.9));
-    spec.push_back(glm::vec4(0.32,0.32,0.32,0.9));
+    amb.push_back(glm::vec4(0.14f,0.22f,0.16f,0.9f));
+    def.push_back(glm::vec4(0.54f,0.89f,0.63f,0.9f));
+    spec.push_back(glm::vec4(0.32f,0.32f,0.32f,0.9f));
     scala.push_back(12.8);
 
-    amb.push_back(glm::vec4(0.25,0.22,0.6,1.0));
-    def.push_back(glm::vec4(0.35,0.31,0.9,1.0));
-    spec.push_back(glm::vec4(0.8,0.72,0.21,1.0));
+    amb.push_back(glm::vec4(0.25f,0.22f,0.6f,1.0f));
+    def.push_back(glm::vec4(0.35f,0.31f,0.9f,1.0f));
+    spec.push_back(glm::vec4(0.8f,0.72f,0.21f,1.0f));
     scala.push_back(83.2);
     //--------------------------------------------------------------
     std::vector<int> abc;

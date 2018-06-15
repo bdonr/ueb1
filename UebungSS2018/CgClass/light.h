@@ -2,6 +2,7 @@
 #define LIGHT_H
 
 #include "glm/common.hpp"
+
 class Light
 {
 
@@ -26,6 +27,7 @@ private : glm::vec3 source;
     glm::vec4 lspec;
     glm::vec3 lDir;
     float shine;
+
 public:
     Light();
 
@@ -41,6 +43,10 @@ public:
     void setLDir(const glm::vec3 &value);
     float getShine() const;
     void setShine(float value);
+
+    // CgBaseRenderableObject interface
+
+
 };
 
 #endif // LIGHT_H

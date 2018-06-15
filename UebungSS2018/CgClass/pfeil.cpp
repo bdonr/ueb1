@@ -24,13 +24,13 @@ void Pfeil::render(glm::mat4x4 p)
 {
 
     renderer->setUniformValue("mamb",getKegel()->getAppear()->getMaterial()->getAmb());
-    renderer->setUniformValue("mdef",getKegel()->getAppear()->getMaterial()->getDef());
+    renderer->setUniformValue("mdif",getKegel()->getAppear()->getMaterial()->getDef());
     renderer->setUniformValue("mspec",getKegel()->getAppear()->getMaterial()->getSpec());
     renderer->setUniformValue("mshine",getKegel()->getAppear()->getMaterial()->getScalar());
     renderer->render(this->getKegel(),p*transform());
 
     renderer->setUniformValue("mamb",getZylinder()->getAppear()->getMaterial()->getAmb());
-    renderer->setUniformValue("mdef",getZylinder()->getAppear()->getMaterial()->getDef());
+    renderer->setUniformValue("mdif",getZylinder()->getAppear()->getMaterial()->getDef());
     renderer->setUniformValue("mspec",getZylinder()->getAppear()->getMaterial()->getSpec());
     renderer->setUniformValue("mshine",getZylinder()->getAppear()->getMaterial()->getScalar());
     renderer->render(this->getZylinder(),p*xyz);
@@ -39,13 +39,13 @@ void Pfeil::render(glm::mat4x4 p)
 void Pfeil::render()
 {
     renderer->setUniformValue("mamb",getZylinder()->getAppear()->getMaterial()->getAmb());
-    renderer->setUniformValue("mdef",getZylinder()->getAppear()->getMaterial()->getDef());
+    renderer->setUniformValue("mdif",getZylinder()->getAppear()->getMaterial()->getDef());
     renderer->setUniformValue("mspec",getZylinder()->getAppear()->getMaterial()->getSpec());
     renderer->setUniformValue("mshine",getZylinder()->getAppear()->getMaterial()->getScalar());
     renderer->render(this->getKegel(),xyz*transform());
 
     renderer->setUniformValue("mamb",getZylinder()->getAppear()->getMaterial()->getAmb());
-    renderer->setUniformValue("mdef",getZylinder()->getAppear()->getMaterial()->getDef());
+    renderer->setUniformValue("mdif",getZylinder()->getAppear()->getMaterial()->getDef());
     renderer->setUniformValue("mspec",getZylinder()->getAppear()->getMaterial()->getSpec());
     renderer->setUniformValue("mshine",getZylinder()->getAppear()->getMaterial()->getScalar());
     renderer->render(this->getZylinder(),xyz);
