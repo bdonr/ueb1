@@ -58,6 +58,7 @@ public:
 
     Appearance *getAppear() const;
     void setAppear(Appearance *value);
+    void handleNormalenberechnen();
 };
 
 #endif // Zylinder_H

@@ -21,6 +21,7 @@
 // bla dingens
 void CgSceneControl::createScene()
 {
+    delete sc;
     sc=NULL;
     kugel=MeshFactory::createKugel(1,20,20);
     Appearance* appear = new Appearance();
@@ -50,6 +51,8 @@ void CgSceneControl::createScene()
 
 }
 
+
+
 void CgSceneControl::createStandartMatrix()
 {
     old=glm::mat4(           glm::vec4(1,0,0,0),
@@ -76,7 +79,7 @@ CgSceneControl::CgSceneControl() {
     lighton=false;
     cam = new Kamera();
 
-    //  cam->setProjection(cam->perspective(100,eye.x,eye.y,eye.z));
+    cam->setProjection(cam->perspective(100,eye.x,eye.y,eye.z));
 
     sc=NULL;
     wuerfel=NULL;
@@ -93,11 +96,7 @@ CgSceneControl::CgSceneControl() {
     //kegel, zlinder
     //figuren
     dreiecke=NULL;
-    light = new Light();
-    light->setLamp(glm::vec4(1.,1.,1.,1.0f));
-    light->setLdif(glm::vec4(1.f,1.f,1.f,1.0f));
-    light->setLspec(glm::vec4(121.f,1.f,1.f,1.0f));
-    light->setLDir(glm::vec3(3.,2.,3.0));
+
 
     m_current_transformation = glm::mat4(1.);
     m_proj_matrix = glm::mat4x4(glm::vec4(1.792591, 0.0, 0.0, 0.0), glm::vec4(0.0, 1.792591, 0.0, 0.0),
@@ -144,17 +143,6 @@ void CgSceneControl::setRenderer(CgBaseRenderer *r) {
     m_renderer->setSceneControl(this);
 
     m_renderer->setShaderSourceFiles("../UebungSS2018/CgShader/lightsoff.vert","../UebungSS2018/CgShader/lightsoff.frag");
-    //  m_renderer->setUniformValue("lightcolor",glm::vec4(1,0.1,0.1,1));
-    //sc->render(m_renderer,sc->getSc());
-    // registerSceneGraph(m_renderer,sc->getSc());
-
-    // m_renderer->init(kugel);
-
-    //initRotationBody();
-
-
-
-
 }
 void CgSceneControl::resetObject(){
     delete dreiecke;
@@ -225,15 +213,14 @@ void CgSceneControl::renderObjects() {
 
 
     m_renderer->setProjectionMatrix(m_proj_matrix);
-    //m_renderer->setLookAtMatrix(cam->getLookAt());
-
+    m_renderer->setLookAtMatrix(cam->getLookAt());
+    m_renderer->redraw();
     renderCoords();
     renderWurfel();
     renderRotationsBody();
     renderDreiecke();
     renderKegel();
     renderZylinder();
-
     pfeil = new Pfeil(m_renderer,new Appearance("mamb",glm::vec4(1,0,2,1)),old);
     pfeil->render();
 
@@ -376,7 +363,7 @@ void CgSceneControl::changeColorCube(CgBaseEvent *e)
 
     if (e->getType() == Cg::CgChangeColor){
         reset();
-        glm::vec3 colors=((bestersliderMoveEvent*) e)->getTraegerKlasse()->getDreiDVector();
+        glm::vec3 colors=((allgemeinesEvent*) e)->getTraegerKlasse()->getDreiDVector();
         delete wuerfel;
         wuerfel=NULL;
         wuerfel = MeshFactory::createWuerfel(colors);
@@ -411,7 +398,7 @@ void CgSceneControl::changeKegel(CgBaseEvent *e)
 {
     if (e->getType() == Cg::KegelChange){
         reset();
-        traeger = ((bestersliderMoveEvent*) e)->getTraegerKlasse();
+        traeger = ((allgemeinesEvent*) e)->getTraegerKlasse();
 
         float hoehe = traeger->getDreiDVector().x;
         float radius = traeger->getDreiDVector().y;
@@ -425,10 +412,10 @@ void CgSceneControl::changeKegel(CgBaseEvent *e)
 
 void CgSceneControl::setLight()
 {
-    m_renderer->setUniformValue("lDir",light->getLDir());
-    m_renderer->setUniformValue("lspec",light->getLspec());
-    m_renderer->setUniformValue("ldif",light->getLdif());
-    m_renderer->setUniformValue("lamb",light->getLamp());
+    m_renderer->setUniformValue("adir",light->getAdir());
+    m_renderer->setUniformValue("aspec",light->getAspec());
+    m_renderer->setUniformValue("adif",light->getAdif());
+    m_renderer->setUniformValue("aamb",light->getAamb());
 }
 
 void CgSceneControl::setZylinderColor()
@@ -442,11 +429,12 @@ void CgSceneControl::setZylinderColor()
 
 void CgSceneControl::renderZylinder()
 {
-
     if(zylinder!=NULL){
+
         setZylinderColor();
         m_renderer->render(zylinder,old);
         if(!zylinder->getGeraden().empty()){
+
             for(unsigned int j=0; j<zylinder->getGeraden().size();j++){
                 m_renderer->render(zylinder->getGeraden().at(j),old);
             }
@@ -473,7 +461,7 @@ void CgSceneControl::changeZylinder(CgBaseEvent *e)
 {
     if(e->getType() == Cg::ZylinderChange){
         reset();
-        traeger = ((bestersliderMoveEvent*) e)->getTraegerKlasse();
+        traeger = ((allgemeinesEvent*) e)->getTraegerKlasse();
 
         float hoehe = traeger->getDreiDVector().x;
         float radius = traeger->getDreiDVector().y;
@@ -504,8 +492,8 @@ void CgSceneControl::changeZylinder(CgBaseEvent *e)
 void CgSceneControl::changeRefineRota(CgBaseEvent *e)
 {
     if(e->getType() == Cg::CgChangeRota){
-        unsigned int refine= ((bestersliderMoveEvent*)e)->getTraegerKlasse()->getDreiDVector().x;
-        unsigned int hoehe= ((bestersliderMoveEvent*)e)->getTraegerKlasse()->getDreiDVector().y;
+        unsigned int refine= ((allgemeinesEvent*)e)->getTraegerKlasse()->getDreiDVector().x;
+        unsigned int hoehe= ((allgemeinesEvent*)e)->getTraegerKlasse()->getDreiDVector().y;
         rotationbody= MeshFactory::createRotationKoerper(refine,hoehe,false,shownormals);
         initRotationBody();
         renderRotationsBody();
@@ -528,7 +516,7 @@ void CgSceneControl::handleKeyY()
 
 void CgSceneControl::handleKeyX()
 {
-
+    std::cout<<"taste x"<<std::endl;
     old=old*rotationX(x);
     if(x==3){
         x=0;
@@ -670,9 +658,9 @@ void CgSceneControl::handleKeyEvents(CgBaseEvent*e)
 void CgSceneControl::changeRota(CgBaseEvent *e)
 {
     if(e->getType()==Cg::CgChangeRota){
-        float x =((bestersliderMoveEvent*)e)->getTraegerKlasse()->getIntvec().x/10;
-        float y =((bestersliderMoveEvent*)e)->getTraegerKlasse()->getIntvec().y/10;
-        float z =((bestersliderMoveEvent*)e)->getTraegerKlasse()->getIntvec().z/10;
+        float x =((allgemeinesEvent*)e)->getTraegerKlasse()->getIntvec().x/10;
+        float y =((allgemeinesEvent*)e)->getTraegerKlasse()->getIntvec().y/10;
+        float z =((allgemeinesEvent*)e)->getTraegerKlasse()->getIntvec().z/10;
         verschiebung = glm::vec3(x,y,z);
         old = transform(verschiebung,10,20,30);
         x=true;
@@ -692,7 +680,7 @@ void CgSceneControl::changePage(CgBaseEvent *e)
 {
 
     if(e->getType()==Cg::TabChange){
-        page =((bestersliderMoveEvent*)e)->getTraegerKlasse()->getTab();
+        page =((allgemeinesEvent*)e)->getTraegerKlasse()->getTab();
         if(page==0)page1();
         if(page==1)page2();
         if(page==2)page3();
@@ -726,7 +714,7 @@ void CgSceneControl::loadObject(CgBaseEvent *e)
             //            loader.getFaceIndexData(dreieckecords);
             //            objecte.push_back(MeshFactory::createDreiecke(dreickevertices,dreieckecords));
         }
-        dreiecke = objecte.at(((bestersliderMoveEvent*)e)->getTraegerKlasse()->getAn_aus());
+        dreiecke = objecte.at(((allgemeinesEvent*)e)->getTraegerKlasse()->getAn_aus());
         //   dreiecke = objecte.at(((ObjectOpenEvent*) e)->getWahl());
         if(!dreiecke->getGeraden().empty()){
             for(unsigned int i=0; i<dreiecke->getGeraden().size();i++){
@@ -744,12 +732,12 @@ void CgSceneControl::loadObject(CgBaseEvent *e)
 void CgSceneControl::handleMaterial(CgBaseEvent *e)
 {
     if(e->getType()==Cg::CgChangeMaterial){
-        glm::vec4 ding1 =((bestersliderMoveEvent*)e)->getTraegerKlasse()->getAmb();
-        glm::vec4 ding2 =((bestersliderMoveEvent*)e)->getTraegerKlasse()->getDef();
-        glm::vec4 ding3 =((bestersliderMoveEvent*)e)->getTraegerKlasse()->getSpec();
-        double ding4 =((bestersliderMoveEvent*)e)->getTraegerKlasse()->getScala();
+        glm::vec4 ding1 =((allgemeinesEvent*)e)->getTraegerKlasse()->getAmb();
+        glm::vec4 ding2 =((allgemeinesEvent*)e)->getTraegerKlasse()->getDef();
+        glm::vec4 ding3 =((allgemeinesEvent*)e)->getTraegerKlasse()->getSpec();
+        double ding4 =((allgemeinesEvent*)e)->getTraegerKlasse()->getScala();
 
-        std::string st = ((bestersliderMoveEvent*)e)->getTraegerKlasse()->getName().toStdString();
+        std::string st = ((allgemeinesEvent*)e)->getTraegerKlasse()->getName().toStdString();
         Appearance* k = new Appearance();
         Mats* ma =new Mats();
         ma->setAmb(ding1);
@@ -757,12 +745,112 @@ void CgSceneControl::handleMaterial(CgBaseEvent *e)
         ma->setSpec(ding3);
         ma->setScalar(ding4);
         k->setMaterial(ma);
-        if(st=="Zylinder"){
+        if(st.compare("Zylinder")==0){
             delete zylinder;
             zylinder=NULL;
             zylinder = MeshFactory::createZylinder(10,10,10,false);
             zylinder->setAppear(k);
             m_renderer->init(zylinder);
+            renderZylinder();
+        }
+        if(st.compare("Stern")==0 ||st.compare("Mond")==0 || st.compare("Mond2")==0
+                || st.compare("Erde")==0 || st.compare("Planet1")==0 || st.compare("Planet2")==0 || st.compare("Mond1")==0){
+            if(sc==NULL){
+                createScene();
+            }
+
+            if(st.compare("Stern")==0){
+                std::cout<<"sdad"<<std::endl;
+                sc->findAndSetAppear(k,Cg::Stern);
+            }
+            if(st.compare("Erde")==0){
+                sc->findAndSetAppear(k,Cg::Erde);
+            }
+            if(st.compare("Mond1")==0){
+                sc->findAndSetAppear(k,Cg::Mond1);
+            }
+            if(st.compare("Mond2")==0){
+                sc->findAndSetAppear(k,Cg::Mond2);
+            }
+            if(st.compare("Mond2")==0){
+                sc->findAndSetAppear(k,Cg::Mond3);
+            }
+            if(st.compare("Planet1")==0){
+                sc->findAndSetAppear(k,Cg::Planet1);
+            }
+            if(st.compare("Planet2")==0){
+                sc->findAndSetAppear(k,Cg::Planet2);
+            }
+            sc->render(m_renderer,sc->getSc());
+        }
+
+    }
+
+}
+
+
+
+void CgSceneControl::testeMatrizen(CgBaseEvent *e)
+{
+    if(e->getType()==Cg::CgMatritzeChecken){
+        glm::mat4 standart = glm::mat4(glm::vec4(1,0,0,0),glm::vec4(0,1,0,0),glm::vec4(0,0,1,0),glm::vec4(0,0,0,1));
+        std::cout << "asdasd"<<std::endl;
+        glm::vec3 ankle = glm::vec3(30.0,20.0,40.0);
+        glm::mat4 trans;
+        trans = glm::rotate(trans, glm::radians(30.0f), glm::vec3(1.0, 0.0, 0.0));
+        trans = glm::rotate(trans, glm::radians(20.0f), glm::vec3(0.0, 1.0, 0.0));
+        trans = glm::rotate(trans, glm::radians(40.0f), glm::vec3(0.0, 0.0, 1.0));
+        glm::mat4 j = standart *rotationX(30.)*rotationY(20.)*rotationZ(40.);
+
+        for(float i= 1000000.0 ; i>10.0 ; i=i+1000.0){
+            if(!compateMat(trans,j,1/i)){
+                std::cout <<"beide matrizen gleich bis zu einem epsilon von "<<(1/i)<<std::endl;
+                i=0.0;
+                break;
+            }
+        }
+
+        glm::mat4 trans2;
+        trans2 = glm::rotate(trans2, glm::radians(-11.0f), glm::vec3(1.0, 0.0, 0.0));
+        trans2 = glm::rotate(trans2, glm::radians(4.f), glm::vec3(0.0, 1.0, 0.0));
+        trans2 = glm::rotate(trans2, glm::radians(-0.1f), glm::vec3(0.0, 0.0, 1.0));
+        j = standart *rotationX(-11.)*rotationY(4.)*rotationZ(-.1f);
+        for(float i= 1000000.0 ; i>10.0 ; i=i+1000.0){
+            if(!compateMat(trans2,j,1/i)){
+                std::cout <<"beide matrizen gleich bis zu einem epsilon von "<<(1/i)<<std::endl;
+                i=0.0;
+                break;
+            }
+        }
+
+    }
+}
+
+void CgSceneControl::handleLightChange(CgBaseEvent *e)
+{
+    if(e->getType()==Cg::CgTurnLightOnOff){
+        lighton=!lighton;
+
+        if(lighton){
+
+            m_renderer->setShaderSourceFiles("../UebungSS2018/CgShader/phong/phong.vert","../UebungSS2018/CgShader/phong/phong.frag");
+            light = new Light();
+            light->setAamb(glm::vec4(1.0,1.0,1.0,1.));
+            light->setAdir(glm::vec3(0.,4.,1.));
+            light->setAdif(glm::vec4(0.3,0.2,.5,1.0));
+            light->setAspec(glm::vec4(1.0,1.0,1.0,1.0));
+            setLight();
+            initZylinder();
+            renderZylinder();
+
+        }
+        else{
+            if(light!=NULL){
+                delete light;
+                light=NULL;
+            }
+            m_renderer->setShaderSourceFiles("../UebungSS2018/CgShader/lightsoff.vert","../UebungSS2018/CgShader/lightsoff.frag");
+            renderZylinder();
         }
 
     }
@@ -773,53 +861,22 @@ void CgSceneControl::handleEvent(CgBaseEvent *e) {
         CgKeyEvent *ev = (CgKeyEvent *) e;
         handleKeyEvents(ev);
 
-        // hier kommt jetzt die Abarbeitung des Events hin...
+        // hier kommt  jetzt die Abarbeitung des Events hin...
     }
-    setLight();
+
     // die Enums sind so gebaut, dass man alle Arten von MausEvents über CgEvent::CgMouseEvent abprüfen kann,
     // siehe dazu die CgEvent enums im CgEnums.h
     if (e->getType() == Cg::CgMouseEvent) {
         // hier kommt jetzt die Abarbeitung des Events hin...
     }
-    if(e->getType()==Cg::CgMatritzeChecken){
-        glm::mat4 standart = glm::mat4(glm::vec4(1,0,0,0),glm::vec4(0,1,0,0),glm::vec4(0,0,1,0),glm::vec4(0,0,0,1));
-        std::cout << "asdasd"<<std::endl;
-        glm::vec3 ankle = glm::vec3(30.0,20.0,40.0);
-        glm::mat4 trans;
-       trans = glm::rotate(trans, glm::radians(30.0f), glm::vec3(1.0, 0.0, 0.0));
-        trans = glm::rotate(trans, glm::radians(20.0f), glm::vec3(0.0, 1.0, 0.0));
-        trans = glm::rotate(trans, glm::radians(40.0f), glm::vec3(0.0, 0.0, 1.0));
-       glm::mat4 j = standart *rotationX(30.)*rotationY(20.)*rotationZ(40.);
-
-       for(float i= 1000000.0 ; i>10.0 ; i=i+1000.0){
-           if(!compateMat(trans,j,1/i)){
-               std::cout <<"beide matrizen gleich bis zu einem epsilon von "<<(1/i)<<std::endl;
-               i=0.0;
-               break;
-           }
-       }
-
-       glm::mat4 trans2;
-       trans2 = glm::rotate(trans2, glm::radians(-11.0f), glm::vec3(1.0, 0.0, 0.0));
-        trans2 = glm::rotate(trans2, glm::radians(4.f), glm::vec3(0.0, 1.0, 0.0));
-        trans2 = glm::rotate(trans2, glm::radians(-0.1f), glm::vec3(0.0, 0.0, 1.0));
-       j = standart *rotationX(-11.)*rotationY(4.)*rotationZ(-.1f);
-       for(float i= 1000000.0 ; i>10.0 ; i=i+1000.0){
-           if(!compateMat(trans2,j,1/i)){
-               std::cout <<"beide matrizen gleich bis zu einem epsilon von "<<(1/i)<<std::endl;
-               i=0.0;
-               break;
-           }
-       }
-
-    }
+    testeMatrizen(e);
 
     //setDreiDVector
     if(e->getType()==Cg::CgChangeLichtFarbe){
         if(lighton){
-            glm::vec3 c = ((bestersliderMoveEvent*)e)->getTraegerKlasse()->getDreiDVector();
+            glm::vec3 c = ((allgemeinesEvent*)e)->getTraegerKlasse()->getDreiDVector();
             glm::vec4 d = glm::vec4(c.x,c.y,c.z,1);
-            light->setLamp(d);
+            light->setAamb(d);
         }
 
     }
@@ -828,34 +885,15 @@ void CgSceneControl::handleEvent(CgBaseEvent *e) {
     if(e->getType()==Cg::CgChangeLichtPosition){
         if(lighton){
 
-            glm::vec3 c = ((bestersliderMoveEvent*)e)->getTraegerKlasse()->getDreiDVector();
-            light->setLDir(c);
+            glm::vec3 c = ((allgemeinesEvent*)e)->getTraegerKlasse()->getDreiDVector();
+            light->setAdir(c);
+            setLight();
         }
 
 
     }
 
-    if(e->getType()==Cg::CgTurnLightOnOff){
-        lighton=!lighton;
-        if(lighton){
-            m_renderer->setShaderSourceFiles("../UebungSS2018/CgShader/simple.vert","../UebungSS2018/CgShader/simple.frag");
-            light = new Light();
-            light = new Light();
-            light->setLamp(glm::vec4(1,1,1,1.0f));
-            light->setLdif(glm::vec4(1.f,1.f,.5f,1.0f));
-            light->setLspec(glm::vec4(.4f,1.f,1.f,1.0f));
-            light->setLDir(glm::vec3(-.1,.2,-.3));
-
-            initZylinder();
-            renderZylinder();
-
-        }
-        else{
-            std::cout<<"licht aus"<<std::endl;
-            m_renderer->setShaderSourceFiles("../UebungSS2018/CgShader/lightsoff.vert","../UebungSS2018/CgShader/lightsoff.frag");
-        }
-
-    }
+    handleLightChange(e);
 
     if(e->getType()== Cg::CgZeigeNormalePage2){
         shownormals=!shownormals;
@@ -887,7 +925,7 @@ void CgSceneControl::handleEvent(CgBaseEvent *e) {
     if(e->getType()==Cg::CgLaneRefine){
         delete rotationbody;
         this->rotationbody=NULL;
-        int x = ((bestersliderMoveEvent*)e)->getTraegerKlasse()->getDreiDVector().x;
+        int x = ((allgemeinesEvent*)e)->getTraegerKlasse()->getDreiDVector().x;
         std::cout<<x<<std::endl;
         this->rotationbody=MeshFactory::createRotationKoerper(1,x,true,false);
         initRotationBody();
@@ -895,8 +933,8 @@ void CgSceneControl::handleEvent(CgBaseEvent *e) {
     if(e->getType()==Cg::CgChangeRota){
         delete rotationbody;
         this->rotationbody=NULL;
-        int x = ((bestersliderMoveEvent*)e)->getTraegerKlasse()->getDreiDVector().x;
-        int k = ((bestersliderMoveEvent*)e)->getTraegerKlasse()->getDreiDVector().y;
+        int x = ((allgemeinesEvent*)e)->getTraegerKlasse()->getDreiDVector().x;
+        int k = ((allgemeinesEvent*)e)->getTraegerKlasse()->getDreiDVector().y;
         std::cout<<x<<std::endl;
         std::cout<<k<<std::endl;
         this->rotationbody=MeshFactory::createRotationKoerper(x,k,false,false);
@@ -929,7 +967,7 @@ void CgSceneControl::handleEvent(CgBaseEvent *e) {
 
 void CgSceneControl::changeObjectRota(CgBaseEvent* e){
     if(e->getType()==Cg::CgObjRotate){
-        glm::vec3 a = ((bestersliderMoveEvent*)e)->getTraegerKlasse()->getDreiDVector();
+        glm::vec3 a = ((allgemeinesEvent*)e)->getTraegerKlasse()->getDreiDVector();
         x = a.x;
         y = a.y;
         z = a.z;
@@ -942,7 +980,7 @@ void CgSceneControl::changeObjectRota(CgBaseEvent* e){
 
 void CgSceneControl::changeObjectTranslate(CgBaseEvent* e){
     if(e->getType()==Cg::CgObjTranslate){
-        glm::vec3 a = ((bestersliderMoveEvent*)e)->getTraegerKlasse()->getDreiDVector();
+        glm::vec3 a = ((allgemeinesEvent*)e)->getTraegerKlasse()->getDreiDVector();
         old = transform(a,0,0,0);
 
     }
@@ -1023,5 +1061,5 @@ bool CgSceneControl::compateVec4(const glm::vec4& x, const glm::vec4& y,float ep
 
 bool CgSceneControl::compateFloat(float x, float y,float epsilon){
     if(y==x) return true;
-   return glm::abs(x-y) <epsilon;
+    return glm::abs(x-y) <epsilon;
 }

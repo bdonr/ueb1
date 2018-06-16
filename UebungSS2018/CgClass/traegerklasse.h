@@ -4,6 +4,12 @@
 #include "glm/glm.hpp"
 #include <vector>
 #include <QString>
+
+/**
+ * @brief The TraegerKlasse class
+ *
+ * Hilfsklasse zum Transport von Informationen zwischen GUI und SceneControl
+ */
 class TraegerKlasse
 {
 

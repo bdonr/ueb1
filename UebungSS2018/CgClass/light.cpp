@@ -12,59 +12,45 @@ void Light::setSource(const glm::vec3 &value)
     source = value;
 }
 
-
-glm::vec4 Light::getLdif() const
+glm::vec4 Light::getAdif() const
 {
-    return ldif;
+    return adif;
 }
 
-void Light::setLdif(const glm::vec4 &value)
+void Light::setAdif(const glm::vec4 &value)
 {
-    ldif = value;
+    adif = value;
 }
 
-glm::vec4 Light::getLamp() const
+glm::vec4 Light::getAamb() const
 {
-    return lamp;
+    return aamb;
 }
 
-void Light::setLamp(const glm::vec4 &value)
+void Light::setAamb(const glm::vec4 &value)
 {
-    lamp = value;
+    aamb = value;
 }
 
-glm::vec4 Light::getLspec() const
+glm::vec4 Light::getAspec() const
 {
-    return lspec;
+    return aspec;
 }
 
-void Light::setLspec(const glm::vec4 &value)
+void Light::setAspec(const glm::vec4 &value)
 {
-    lspec = value;
+    aspec = value;
 }
 
-glm::vec3 Light::getLDir() const
+glm::vec3 Light::getAdir() const
 {
-    return lDir;
+    return adir;
 }
 
-void Light::setLDir(const glm::vec3 &value)
+void Light::setAdir(const glm::vec3 &value)
 {
-    lDir = value;
+    adir = value;
 }
-
-float Light::getShine() const
-{
-    return shine;
-}
-
-void Light::setShine(float value)
-{
-    shine = value;
-}
-
-
-
 
 Light::Light()
 {

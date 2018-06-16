@@ -123,6 +123,7 @@ void CgQtGLRenderWidget::setUniformValue(std::string name,glm::mat3 val)
 
 void CgQtGLRenderWidget::setUniformValue(std::string name,glm::mat4 val)
 {
+
      if(m_attribute_locations.find(name)==m_attribute_locations.end())
           m_attribute_locations.insert(std::make_pair(name, m_program->uniformLocation(name.c_str())));
       m_program->bind();
@@ -132,8 +133,16 @@ void CgQtGLRenderWidget::setUniformValue(std::string name,glm::mat4 val)
 
 void CgQtGLRenderWidget::setUniformValue(std::string name,glm::vec4 val)
 {
-     if(m_attribute_locations.find(name)==m_attribute_locations.end())
+
+     if(m_attribute_locations.find(name)==m_attribute_locations.end()){
           m_attribute_locations.insert(std::make_pair(name, m_program->uniformLocation(name.c_str())));
+         std::cout <<std::endl;
+          std::cout <<""
+                      "found "<<name<<std::endl;
+          std::cout <<std::endl;
+     }else{
+
+     }
       m_program->bind();
       m_program->setUniformValue(m_attribute_locations[name],QVector4D(val.x,val.y,val.z,val.w));
 }

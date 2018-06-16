@@ -78,7 +78,32 @@ void Zylinder::setAppear(Appearance *value)
 {
     appear = value;
 }
-
+/**
+ * @brief Zylinder::handleNormalenberechnen
+ * Wenn normalen berechnet werden sollen werden auch die Linien erstellt pro
+ * Normale , die von Schwerpunkt ausgeht
+ *
+ *
+ **/
+void Zylinder::handleNormalenberechnen()
+{
+    if(normalsberechnen){
+        berechneSchwerPunkte();
+        berechneNormale();
+        for(unsigned int i =0;i<faceNormals.size();i++){
+            std::vector<glm::vec3> x;
+            x.push_back(schwerpunkte.at(i));
+            x.push_back(glm::normalize(faceNormals.at(i))+schwerpunkte.at(i));
+            geraden.push_back(MeshFactory::createMyPolyline(glm::vec3(244,44,44),x));
+        }
+    }
+}
+/**
+ * @brief Zylinder::create
+ * Obere und unteren Deckel erstellen und dann mit dreiecken füllen
+ *
+ *
+ **/
 void Zylinder::create(){
     /*0*/   vertices.push_back(glm::vec3(0,0,0));
     /*1*/    vertices.push_back(glm::vec3(0,0,hoehe));
@@ -118,16 +143,8 @@ void Zylinder::create(){
 
 
     }
-    if(normalsberechnen){
-        berechneSchwerPunkte();
-        berechneNormale();
-        for(unsigned int i =0;i<faceNormals.size();i++){
-            std::vector<glm::vec3> x;
-            x.push_back(schwerpunkte.at(i));
-            x.push_back(glm::normalize(faceNormals.at(i))+schwerpunkte.at(i));
-            geraden.push_back(MeshFactory::createMyPolyline(glm::vec3(244,44,44),x));
-        }
-    }
+
+    handleNormalenberechnen();
 
 }
 
@@ -139,7 +156,10 @@ void Zylinder::setHoehe(float wert){
     this->hoehe = wert;
     create();
 }
-
+/**
+ * @brief Zylinder::berechneSchwerPunkte
+ * finde dreiecke in der indeceliste und berechne aus dessen schwerpunkte
+ **/
 void Zylinder::berechneSchwerPunkte()
 {
     for(unsigned int i =0;i<triangleIndices.size();i=i+3){
@@ -156,7 +176,11 @@ void Zylinder::berechneSchwerPunkte()
     }
 
 }
-
+/**
+ * @brief Zylinder::berechneNormale
+ * berechne die Normale mit Hilfe der Schwerpunkte
+ *
+ **/
 void Zylinder::berechneNormale()
 {
     int d=0;
@@ -172,7 +196,15 @@ void Zylinder::berechneNormale()
         }
     }
 }
-
+/**
+ * @brief Zylinder::normalen
+ * @param a
+ * @param b
+ * @param c
+ * @param mittelpunkt
+ * @return
+ * Hilfefunktion zur berechnung der Normalen
+ **/
 glm::vec3 Zylinder::normalen(glm::vec3 a,glm::vec3 b, glm::vec3 c,glm::vec3 mittelpunkt){
     glm::vec3 k;
 

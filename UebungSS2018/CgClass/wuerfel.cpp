@@ -1,6 +1,12 @@
 #include "wuerfel.h"
 #include <iostream>
-
+/**
+ * @brief Wuerfel::Wuerfel
+ * @param id
+ * @param colors
+ *
+ * erstelle würfel mit farben und id sowie typ
+ */
 Wuerfel::Wuerfel(int id,glm::vec3 colors):id(id),type(Cg::TriangleMesh)
 {
 
@@ -141,7 +147,11 @@ void Wuerfel::setSchwerpunkte(const std::vector<glm::vec3> &value)
 {
     schwerpunkte = value;
 }
-
+/**
+ * @brief Wuerfel::berechneSchwerPunkte
+ *
+ * berechne schwerpunkt mit Hilfe der indeces und dessen schwerpunkt
+ */
 void Wuerfel::berechneSchwerPunkte()
 {
     for(int i =0;i<triangleIndices.size();i=i+3){
@@ -153,7 +163,11 @@ void Wuerfel::berechneSchwerPunkte()
     }
 
 }
-
+/**
+ * @brief Wuerfel::berechneNormale
+ * berechne normale
+ *
+ */
 void Wuerfel::berechneNormale()
 {
     for(int i =0;i<triangleIndices.size();i=i+3){
