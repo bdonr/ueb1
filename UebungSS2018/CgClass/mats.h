@@ -5,10 +5,10 @@
 class Mats
 {
 
-private: glm::vec4 amb;
-    glm::vec4 def;
-    glm::vec4 spec;
-    double scalar;
+private: glm::vec4 mamb;
+    glm::vec4 mdif;
+    glm::vec4 mspec;
+    double mshine;
 public:
     Mats();
     glm::vec4 getAmb() const;

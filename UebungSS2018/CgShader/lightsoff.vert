@@ -7,7 +7,7 @@ out vec3 vert;
 out vec3 vertNormal;
 out vec3 pixelLight;
 out vec3 pixelCam;
-out vec4 lightcolor;
+
 
 uniform vec4 lightColor;
 uniform mat4 projMatrix;
@@ -34,6 +34,6 @@ void main() {
 	vertNormal = normalMatrix * normal;
 	pixelLight = light;
 	pixelCam = (lookatMatrix*worldMatrix*vert4).xyz;
-	lightcolor = lightColor;
+
 	gl_Position = projMatrix * lookatMatrix * worldMatrix * vert4;
 }

@@ -63,6 +63,9 @@ void Light::setShine(float value)
     shine = value;
 }
 
+
+
+
 Light::Light()
 {
 

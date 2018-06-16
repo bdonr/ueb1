@@ -225,8 +225,10 @@ public:
     void handleMaterial(CgBaseEvent *e);
 
     void setLight();
-
+    void changeObjectRota(CgBaseEvent *e);
+    void changeObjectTranslate(CgBaseEvent *e);
 private:
+
     int tab;
     glm::vec3 w;
     glm::vec3 v;
@@ -270,6 +272,15 @@ private:
     bool shader;
 
     void renew();
+
+
+
+
+    bool compateMat(const glm::mat4& x, const glm::mat4& y, float epsilon);
+    bool compateVec4(const glm::vec4& x, const glm::vec4& y,float epsilon);
+
+    bool compateFloat(float x, float y,float epsilon);
+
 };
 
 #endif // CGSCENECONTROL_H
