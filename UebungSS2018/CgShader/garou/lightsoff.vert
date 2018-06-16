@@ -36,10 +36,10 @@ void main() {
 
 	vec4 vertex_position_ndc = projMatrix * lookatMatrix * worldMatrix * vert4;
         vec4 light_position_ndc = projMatrix * lookatMatrix * worldMatrix* vec4(adir,1.0);
+
 	vec3 light_vert = normalize(vec3(light_position_ndc-vertex_position_ndc));
 
-
-	vec3 reflection = normalize(reflect(light,));	
+	vec3 reflection = normalize(reflect(light_position_ndc,));	
 	float diff = max(dot(light_vert,vertex_position_ndc),0.0);
 	float specular = max(dot())
 	float distance = lenght(adir-vertNormal)
