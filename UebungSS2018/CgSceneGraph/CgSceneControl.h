@@ -13,6 +13,7 @@
 #include "CgClass/traegerklasse.h"
 #include "CgClass/pfeil.h"
 #include "CgClass/light.h"
+#include "CgCamera.h"
 class CgBaseEvent;
 class CgBaseRenderer;
 class CgExampleTriangle;
@@ -108,7 +109,7 @@ public:
     void renderCoords();
     
     void renderTriangle();
-    
+
     void renderDreiecke();
 
     void openPage(CgBaseEvent *e);
@@ -151,7 +152,7 @@ public:
     glm::mat4 getOld() const;
     void setOld(const glm::mat4 &value);
 
-    std::vector<Dreiecke *> getObjecte() const;
+    //std::vector<Dreiecke *m_proj_matrix> getObjecte() const;
     void setObjecte(const std::vector<Dreiecke *> &value);
 
     CgBaseRenderer *getRenderer() const;
@@ -251,7 +252,7 @@ private:
     Kegel* kegel;
     Zylinder* zylinder;
     glm::mat4 m_current_transformation;
-    glm::mat4 m_proj_matrix;
+    //glm::mat4 m_proj_matrix;
     MyPolyline* rotaAchse;
     Wuerfel* wuerfel;
     float s;
@@ -267,6 +268,9 @@ private:
     std::vector<unsigned int> dreieckecords;
     Scenegraph* sc;
     Light* light;
+
+    //Gerrit
+    CgCamera* camera;
 
     void renew();
 };

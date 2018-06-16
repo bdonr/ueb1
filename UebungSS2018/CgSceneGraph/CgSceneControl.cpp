@@ -94,9 +94,12 @@ CgSceneControl::CgSceneControl() {
     //figuren
     dreiecke=NULL;
 
+    //Gerrit
+    camera = new CgCamera(glm::vec3(0, 0, -1), glm::vec3(0, 0, 0), glm::vec3(0, 1, 0), 400, 400);
+
     m_current_transformation = glm::mat4(1.);
-    m_proj_matrix = glm::mat4x4(glm::vec4(1.792591, 0.0, 0.0, 0.0), glm::vec4(0.0, 1.792591, 0.0, 0.0),
-                                glm::vec4(0.0, 0.0, -1.0002, -1.0), glm::vec4(0.0, 0.0, -0.020002, 0.0));
+    /*m_proj_matrix = glm::mat4x4(glm::vec4(1.792591, 0.0, 0.0, 0.0), glm::vec4(0.0, 1.792591, 0.0, 0.0),
+                                glm::vec4(0.0, 0.0, -1.0002, -1.0), glm::vec4(0.0, 0.0, -0.020002, 0.0));*/
 
     createStandartMatrix();
     verschiebung=glm::vec3(0,0,0);
@@ -228,8 +231,8 @@ void CgSceneControl::renderDreiecke()
 }
 
 void CgSceneControl::renderObjects() {
-    m_renderer->setProjectionMatrix(m_proj_matrix);
-    m_renderer->setLookAtMatrix(cam->getLookAt());
+    m_renderer->setProjectionMatrix(camera->getProjectionMatrix());
+    m_renderer->setLookAtMatrix(camera->getLookAtMatrix());
     renderCoords();
     renderWurfel();
     renderRotationsBody();
@@ -696,7 +699,9 @@ void CgSceneControl::windowresize(CgBaseEvent *e)//-----------------------------
 {
     if (e->getType() == Cg::WindowResizeEvent) {
         CgWindowResizeEvent *ev = (CgWindowResizeEvent *) e;
-        m_proj_matrix = glm::perspective(45.0f, (float) (ev->w()) / ev->h(), 0.01f, 100.0f);
+        //m_proj_matrix = glm::perspective(45.0f, (float) (ev->w()) / ev->h(), 0.01f, 100.0f);
+
+        //TODO an camera weiterleiten
 
     }
 }

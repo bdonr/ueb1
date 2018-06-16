@@ -33,6 +33,11 @@ void virtCam::setCenter(glm::vec3 value)
     center = value;
 }
 
+
+
+
+
+
 glm::vec3 virtCam::getUp(void) const
 {
     return up;
