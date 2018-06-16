@@ -33,7 +33,7 @@ MOVE          = mv -f
 TAR           = tar -cf
 COMPRESS      = gzip -9f
 DISTNAME      = uebung11.0.0
-DISTDIR = /home/don/Schreibtisch/cg\ uebung/ueb1/build-CG1Uebung1-Desktop-Debug/.tmp/uebung11.0.0
+DISTDIR = /home/leoon/Schreibtisch/sem4/cg1/aufgaben/neu\ workpace/ueb1/build-CG1Uebung1-Desktop-Debug/.tmp/uebung11.0.0
 LINK          = g++
 LFLAGS        = -m64
 LIBS          = $(SUBLIBS) -L/usr/X11R6/lib64 -lQt5OpenGL -lQt5Widgets -lQt5Gui -lQt5Core -lGL -lpthread 
@@ -442,16 +442,16 @@ compiler_moc_header_clean:
 	-$(DEL_FILE) moc_CgQtGLRenderWidget.cpp moc_CgQtGui.cpp moc_CgQtMainApplication.cpp
 moc_CgQtGLRenderWidget.cpp: ../UebungSS2018/CgBase/CgBaseRenderer.h \
 		../UebungSS2018/CgQtViewer/CgQtGLRenderWidget.h
-	/usr/lib/x86_64-linux-gnu/qt5/bin/moc $(DEFINES) -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++-64 -I'/home/don/Schreibtisch/cg uebung/ueb1/UebungSS2018' -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtOpenGL -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I. -I/usr/include/c++/5 -I/usr/include/x86_64-linux-gnu/c++/5 -I/usr/include/c++/5/backward -I/usr/lib/gcc/x86_64-linux-gnu/5/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include ../UebungSS2018/CgQtViewer/CgQtGLRenderWidget.h -o moc_CgQtGLRenderWidget.cpp
+	/usr/lib/x86_64-linux-gnu/qt5/bin/moc $(DEFINES) -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++-64 -I'/home/leoon/Schreibtisch/sem4/cg1/aufgaben/neu workpace/ueb1/UebungSS2018' -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtOpenGL -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I. -I/usr/include/c++/5 -I/usr/include/x86_64-linux-gnu/c++/5 -I/usr/include/c++/5/backward -I/usr/lib/gcc/x86_64-linux-gnu/5/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include ../UebungSS2018/CgQtViewer/CgQtGLRenderWidget.h -o moc_CgQtGLRenderWidget.cpp
 
 moc_CgQtGui.cpp: ../UebungSS2018/CgBase/CgObservable.h \
 		../UebungSS2018/CgBase/CgEnums.h \
 		../UebungSS2018/CgClass/traegerklasse.h \
 		../UebungSS2018/CgQtViewer/CgQtGui.h
-	/usr/lib/x86_64-linux-gnu/qt5/bin/moc $(DEFINES) -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++-64 -I'/home/don/Schreibtisch/cg uebung/ueb1/UebungSS2018' -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtOpenGL -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I. -I/usr/include/c++/5 -I/usr/include/x86_64-linux-gnu/c++/5 -I/usr/include/c++/5/backward -I/usr/lib/gcc/x86_64-linux-gnu/5/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include ../UebungSS2018/CgQtViewer/CgQtGui.h -o moc_CgQtGui.cpp
+	/usr/lib/x86_64-linux-gnu/qt5/bin/moc $(DEFINES) -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++-64 -I'/home/leoon/Schreibtisch/sem4/cg1/aufgaben/neu workpace/ueb1/UebungSS2018' -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtOpenGL -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I. -I/usr/include/c++/5 -I/usr/include/x86_64-linux-gnu/c++/5 -I/usr/include/c++/5/backward -I/usr/lib/gcc/x86_64-linux-gnu/5/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include ../UebungSS2018/CgQtViewer/CgQtGui.h -o moc_CgQtGui.cpp
 
 moc_CgQtMainApplication.cpp: ../UebungSS2018/CgQtViewer/CgQtMainApplication.h
-	/usr/lib/x86_64-linux-gnu/qt5/bin/moc $(DEFINES) -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++-64 -I'/home/don/Schreibtisch/cg uebung/ueb1/UebungSS2018' -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtOpenGL -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I. -I/usr/include/c++/5 -I/usr/include/x86_64-linux-gnu/c++/5 -I/usr/include/c++/5/backward -I/usr/lib/gcc/x86_64-linux-gnu/5/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include ../UebungSS2018/CgQtViewer/CgQtMainApplication.h -o moc_CgQtMainApplication.cpp
+	/usr/lib/x86_64-linux-gnu/qt5/bin/moc $(DEFINES) -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++-64 -I'/home/leoon/Schreibtisch/sem4/cg1/aufgaben/neu workpace/ueb1/UebungSS2018' -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtOpenGL -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I. -I/usr/include/c++/5 -I/usr/include/x86_64-linux-gnu/c++/5 -I/usr/include/c++/5/backward -I/usr/lib/gcc/x86_64-linux-gnu/5/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include ../UebungSS2018/CgQtViewer/CgQtMainApplication.h -o moc_CgQtMainApplication.cpp
 
 compiler_moc_source_make_all:
 compiler_moc_source_clean:
@@ -740,6 +740,13 @@ scenegraph.o: ../UebungSS2018/CgClass/scenegraph.cpp ../UebungSS2018/CgClass/sce
 		../UebungSS2018/CgBase/CgEnums.h \
 		../UebungSS2018/CgClass/appearance.h \
 		../UebungSS2018/CgClass/mats.h \
+		../UebungSS2018/CgClass/kugel.h \
+		../UebungSS2018/CgClass/rotationskoerper.h \
+		../UebungSS2018/CgClass/Mypolyline.h \
+		../UebungSS2018/CgBase/CgBasePolyline.h \
+		../UebungSS2018/CgClass/meshfactory.h \
+		../UebungSS2018/CgClass/dreiecke.h \
+		../UebungSS2018/CgClass/wuerfel.h \
 		../UebungSS2018/CgBase/CgBaseRenderer.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o scenegraph.o ../UebungSS2018/CgClass/scenegraph.cpp
 
@@ -748,7 +755,14 @@ sceneentity.o: ../UebungSS2018/CgClass/sceneentity.cpp ../UebungSS2018/CgClass/s
 		../UebungSS2018/CgBase/CgBaseRenderableObject.h \
 		../UebungSS2018/CgBase/CgEnums.h \
 		../UebungSS2018/CgClass/appearance.h \
-		../UebungSS2018/CgClass/mats.h
+		../UebungSS2018/CgClass/mats.h \
+		../UebungSS2018/CgClass/kugel.h \
+		../UebungSS2018/CgClass/rotationskoerper.h \
+		../UebungSS2018/CgClass/Mypolyline.h \
+		../UebungSS2018/CgBase/CgBasePolyline.h \
+		../UebungSS2018/CgClass/meshfactory.h \
+		../UebungSS2018/CgClass/dreiecke.h \
+		../UebungSS2018/CgClass/wuerfel.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o sceneentity.o ../UebungSS2018/CgClass/sceneentity.cpp
 
 appearance.o: ../UebungSS2018/CgClass/appearance.cpp ../UebungSS2018/CgClass/appearance.h \
