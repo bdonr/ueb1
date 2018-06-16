@@ -14,7 +14,7 @@ private:
     float winkely;
     float winkelx;
     float winkelz;
-    glm::vec3 ausrichtung;
+    glm::vec3 bewegung;
     CgBaseTriangleMesh*ob;
     std::vector<SceneEntity*> children;
     SceneEntity* parent;
@@ -47,8 +47,7 @@ public:
     void rotateMond(float wunschwinkel, float winkel_y);
     void rotateErde(float winkel_y, float wunschwinkel);
     void rotateMond2(float winkel_z, float wunschwinkel);
-    Cg::ObjectType getType() const;
-    void setType(const Cg::ObjectType &value);
+    void set(float x, float z, float y);
 };
 
 #endif // SCENEENTITY_H

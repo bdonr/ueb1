@@ -28,6 +28,8 @@ public:
     bool h;
 
 
+    void setUniform(int i, CgBaseRenderer *render, SceneEntity* sc);
+    void setUniform(CgBaseRenderer *render, SceneEntity *sc);
 };
 
 #endif // SCENEGRAPH_H

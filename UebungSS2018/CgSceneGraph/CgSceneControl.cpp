@@ -363,7 +363,7 @@ void CgSceneControl::changeColorCube(CgBaseEvent *e)
 
     if (e->getType() == Cg::CgChangeColor){
         reset();
-        glm::vec3 colors=((bestersliderMoveEvent*) e)->getTraegerKlasse()->getDreiDVector();
+        glm::vec3 colors=((allgemeinesEvent*) e)->getTraegerKlasse()->getDreiDVector();
         delete wuerfel;
         wuerfel=NULL;
         wuerfel = MeshFactory::createWuerfel(colors);
@@ -398,7 +398,7 @@ void CgSceneControl::changeKegel(CgBaseEvent *e)
 {
     if (e->getType() == Cg::KegelChange){
         reset();
-        traeger = ((bestersliderMoveEvent*) e)->getTraegerKlasse();
+        traeger = ((allgemeinesEvent*) e)->getTraegerKlasse();
 
         float hoehe = traeger->getDreiDVector().x;
         float radius = traeger->getDreiDVector().y;
@@ -461,7 +461,7 @@ void CgSceneControl::changeZylinder(CgBaseEvent *e)
 {
     if(e->getType() == Cg::ZylinderChange){
         reset();
-        traeger = ((bestersliderMoveEvent*) e)->getTraegerKlasse();
+        traeger = ((allgemeinesEvent*) e)->getTraegerKlasse();
 
         float hoehe = traeger->getDreiDVector().x;
         float radius = traeger->getDreiDVector().y;
@@ -492,8 +492,8 @@ void CgSceneControl::changeZylinder(CgBaseEvent *e)
 void CgSceneControl::changeRefineRota(CgBaseEvent *e)
 {
     if(e->getType() == Cg::CgChangeRota){
-        unsigned int refine= ((bestersliderMoveEvent*)e)->getTraegerKlasse()->getDreiDVector().x;
-        unsigned int hoehe= ((bestersliderMoveEvent*)e)->getTraegerKlasse()->getDreiDVector().y;
+        unsigned int refine= ((allgemeinesEvent*)e)->getTraegerKlasse()->getDreiDVector().x;
+        unsigned int hoehe= ((allgemeinesEvent*)e)->getTraegerKlasse()->getDreiDVector().y;
         rotationbody= MeshFactory::createRotationKoerper(refine,hoehe,false,shownormals);
         initRotationBody();
         renderRotationsBody();
@@ -658,9 +658,9 @@ void CgSceneControl::handleKeyEvents(CgBaseEvent*e)
 void CgSceneControl::changeRota(CgBaseEvent *e)
 {
     if(e->getType()==Cg::CgChangeRota){
-        float x =((bestersliderMoveEvent*)e)->getTraegerKlasse()->getIntvec().x/10;
-        float y =((bestersliderMoveEvent*)e)->getTraegerKlasse()->getIntvec().y/10;
-        float z =((bestersliderMoveEvent*)e)->getTraegerKlasse()->getIntvec().z/10;
+        float x =((allgemeinesEvent*)e)->getTraegerKlasse()->getIntvec().x/10;
+        float y =((allgemeinesEvent*)e)->getTraegerKlasse()->getIntvec().y/10;
+        float z =((allgemeinesEvent*)e)->getTraegerKlasse()->getIntvec().z/10;
         verschiebung = glm::vec3(x,y,z);
         old = transform(verschiebung,10,20,30);
         x=true;
@@ -680,7 +680,7 @@ void CgSceneControl::changePage(CgBaseEvent *e)
 {
 
     if(e->getType()==Cg::TabChange){
-        page =((bestersliderMoveEvent*)e)->getTraegerKlasse()->getTab();
+        page =((allgemeinesEvent*)e)->getTraegerKlasse()->getTab();
         if(page==0)page1();
         if(page==1)page2();
         if(page==2)page3();
@@ -714,7 +714,7 @@ void CgSceneControl::loadObject(CgBaseEvent *e)
             //            loader.getFaceIndexData(dreieckecords);
             //            objecte.push_back(MeshFactory::createDreiecke(dreickevertices,dreieckecords));
         }
-        dreiecke = objecte.at(((bestersliderMoveEvent*)e)->getTraegerKlasse()->getAn_aus());
+        dreiecke = objecte.at(((allgemeinesEvent*)e)->getTraegerKlasse()->getAn_aus());
         //   dreiecke = objecte.at(((ObjectOpenEvent*) e)->getWahl());
         if(!dreiecke->getGeraden().empty()){
             for(unsigned int i=0; i<dreiecke->getGeraden().size();i++){
@@ -732,12 +732,12 @@ void CgSceneControl::loadObject(CgBaseEvent *e)
 void CgSceneControl::handleMaterial(CgBaseEvent *e)
 {
     if(e->getType()==Cg::CgChangeMaterial){
-        glm::vec4 ding1 =((bestersliderMoveEvent*)e)->getTraegerKlasse()->getAmb();
-        glm::vec4 ding2 =((bestersliderMoveEvent*)e)->getTraegerKlasse()->getDef();
-        glm::vec4 ding3 =((bestersliderMoveEvent*)e)->getTraegerKlasse()->getSpec();
-        double ding4 =((bestersliderMoveEvent*)e)->getTraegerKlasse()->getScala();
+        glm::vec4 ding1 =((allgemeinesEvent*)e)->getTraegerKlasse()->getAmb();
+        glm::vec4 ding2 =((allgemeinesEvent*)e)->getTraegerKlasse()->getDef();
+        glm::vec4 ding3 =((allgemeinesEvent*)e)->getTraegerKlasse()->getSpec();
+        double ding4 =((allgemeinesEvent*)e)->getTraegerKlasse()->getScala();
 
-        std::string st = ((bestersliderMoveEvent*)e)->getTraegerKlasse()->getName().toStdString();
+        std::string st = ((allgemeinesEvent*)e)->getTraegerKlasse()->getName().toStdString();
         Appearance* k = new Appearance();
         Mats* ma =new Mats();
         ma->setAmb(ding1);
@@ -758,6 +758,7 @@ void CgSceneControl::handleMaterial(CgBaseEvent *e)
             if(sc==NULL){
                 createScene();
             }
+
             if(st.compare("Stern")==0){
                 std::cout<<"sdad"<<std::endl;
                 sc->findAndSetAppear(k,Cg::Stern);
@@ -873,7 +874,7 @@ void CgSceneControl::handleEvent(CgBaseEvent *e) {
     //setDreiDVector
     if(e->getType()==Cg::CgChangeLichtFarbe){
         if(lighton){
-            glm::vec3 c = ((bestersliderMoveEvent*)e)->getTraegerKlasse()->getDreiDVector();
+            glm::vec3 c = ((allgemeinesEvent*)e)->getTraegerKlasse()->getDreiDVector();
             glm::vec4 d = glm::vec4(c.x,c.y,c.z,1);
             light->setAamb(d);
         }
@@ -884,7 +885,7 @@ void CgSceneControl::handleEvent(CgBaseEvent *e) {
     if(e->getType()==Cg::CgChangeLichtPosition){
         if(lighton){
 
-            glm::vec3 c = ((bestersliderMoveEvent*)e)->getTraegerKlasse()->getDreiDVector();
+            glm::vec3 c = ((allgemeinesEvent*)e)->getTraegerKlasse()->getDreiDVector();
             light->setAdir(c);
             setLight();
         }
@@ -924,7 +925,7 @@ void CgSceneControl::handleEvent(CgBaseEvent *e) {
     if(e->getType()==Cg::CgLaneRefine){
         delete rotationbody;
         this->rotationbody=NULL;
-        int x = ((bestersliderMoveEvent*)e)->getTraegerKlasse()->getDreiDVector().x;
+        int x = ((allgemeinesEvent*)e)->getTraegerKlasse()->getDreiDVector().x;
         std::cout<<x<<std::endl;
         this->rotationbody=MeshFactory::createRotationKoerper(1,x,true,false);
         initRotationBody();
@@ -932,8 +933,8 @@ void CgSceneControl::handleEvent(CgBaseEvent *e) {
     if(e->getType()==Cg::CgChangeRota){
         delete rotationbody;
         this->rotationbody=NULL;
-        int x = ((bestersliderMoveEvent*)e)->getTraegerKlasse()->getDreiDVector().x;
-        int k = ((bestersliderMoveEvent*)e)->getTraegerKlasse()->getDreiDVector().y;
+        int x = ((allgemeinesEvent*)e)->getTraegerKlasse()->getDreiDVector().x;
+        int k = ((allgemeinesEvent*)e)->getTraegerKlasse()->getDreiDVector().y;
         std::cout<<x<<std::endl;
         std::cout<<k<<std::endl;
         this->rotationbody=MeshFactory::createRotationKoerper(x,k,false,false);
@@ -966,7 +967,7 @@ void CgSceneControl::handleEvent(CgBaseEvent *e) {
 
 void CgSceneControl::changeObjectRota(CgBaseEvent* e){
     if(e->getType()==Cg::CgObjRotate){
-        glm::vec3 a = ((bestersliderMoveEvent*)e)->getTraegerKlasse()->getDreiDVector();
+        glm::vec3 a = ((allgemeinesEvent*)e)->getTraegerKlasse()->getDreiDVector();
         x = a.x;
         y = a.y;
         z = a.z;
@@ -979,7 +980,7 @@ void CgSceneControl::changeObjectRota(CgBaseEvent* e){
 
 void CgSceneControl::changeObjectTranslate(CgBaseEvent* e){
     if(e->getType()==Cg::CgObjTranslate){
-        glm::vec3 a = ((bestersliderMoveEvent*)e)->getTraegerKlasse()->getDreiDVector();
+        glm::vec3 a = ((allgemeinesEvent*)e)->getTraegerKlasse()->getDreiDVector();
         old = transform(a,0,0,0);
 
     }

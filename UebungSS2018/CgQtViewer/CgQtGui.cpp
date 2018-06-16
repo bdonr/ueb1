@@ -753,7 +753,7 @@ void CgQtGui::changeRotationObject()
 {
     std::cout<<"rotate obj "<<obj_rotate_X->value()<<" "<<obj_rotate_Y->value()<<" "<<obj_rotate_Z->value()<<std::endl;
     traeger->setDreiDVector(glm::vec3(obj_rotate_X->value(),obj_rotate_Y->value(),obj_rotate_Z->value()));
-    notifyObserver(new bestersliderMoveEvent(Cg::CgObjRotate,traeger));
+    notifyObserver(new allgemeinesEvent(Cg::CgObjRotate,traeger));
 }
 
 void CgQtGui::changeTranslateObject()
@@ -761,28 +761,28 @@ void CgQtGui::changeTranslateObject()
     std::cout<<"translate obj "<<obj_translate_X->value()<<" "<<obj_translate_Y->value()<<" "<<obj_translate_Z->value()<<std::endl;
     std::cout<<(double)obj_translate_X->value()/10<<std::endl;
     traeger->setDreiDVector(glm::vec3((double)obj_translate_X->value()/100,(double)obj_translate_Y->value()/100,(double)obj_translate_Z->value()/100));
-    notifyObserver(new bestersliderMoveEvent(Cg::CgObjTranslate,traeger));
+    notifyObserver(new allgemeinesEvent(Cg::CgObjTranslate,traeger));
 }
 
 void CgQtGui::changeRotaKoerper()
 {
     std::cout<<"rotationskörper: "<<sl_rota_refine->value()<<" "<<sl_rota_hoehe->value()<<std::endl;
     traeger->setDreiDVector(glm::vec3(sl_rota_refine->value(),sl_rota_hoehe->value(),0));
-    notifyObserver(new bestersliderMoveEvent(Cg::CgChangeRota,traeger));
+    notifyObserver(new allgemeinesEvent(Cg::CgChangeRota,traeger));
 }
 
 void CgQtGui::laneRotaChange()
 {
     std::cout<<"lane-riesenfeld refine "<<sl_rota_lane_refine->value()<<std::endl;
     traeger->setDreiDVector(glm::vec3(sl_rota_lane_refine->value(),0,0));
-    notifyObserver(new bestersliderMoveEvent(Cg::CgLaneRefine,traeger));
+    notifyObserver(new allgemeinesEvent(Cg::CgLaneRefine,traeger));
 }
 
 void CgQtGui::changeColor()
 {
     std::cout<<"farbe "<<sl_change_Red->value()<<sl_change_Green->value()<<sl_change_Blue->value()<<std::endl;
     traeger->setDreiDVector(glm::vec3(sl_change_Red->value(),sl_change_Green->value(),sl_change_Blue->value()));
-    notifyObserver(new bestersliderMoveEvent(Cg::CgChangeColor,traeger));
+    notifyObserver(new allgemeinesEvent(Cg::CgChangeColor,traeger));
 }
 
 void CgQtGui::ZeigePolylineButton()
@@ -791,12 +791,12 @@ void CgQtGui::ZeigePolylineButton()
         bt_show_poly->setCheckable(false);
         std::cout<<"verstecke polyline"<<std::endl;
         traeger->setAn_aus(0);
-        notifyObserver(new bestersliderMoveEvent(Cg::CgZeigePolyline,traeger));
+        notifyObserver(new allgemeinesEvent(Cg::CgZeigePolyline,traeger));
     }else{
         bt_show_poly->setCheckable(true);
         std::cout<<"zeige polyline"<<std::endl;
         traeger->setAn_aus(1);
-        notifyObserver(new bestersliderMoveEvent(Cg::CgZeigePolyline,traeger));
+        notifyObserver(new allgemeinesEvent(Cg::CgZeigePolyline,traeger));
     }
 }
 
@@ -804,7 +804,7 @@ void CgQtGui::ResetPolylineButton()
 {
     std::cout<<"Reset Polyline"<<std::endl;
     traeger = new TraegerKlasse();
-    notifyObserver(new bestersliderMoveEvent(Cg::CgResetPolyline,traeger));
+    notifyObserver(new allgemeinesEvent(Cg::CgResetPolyline,traeger));
 }
 
 void CgQtGui::zeige_normale_taste_page2()
@@ -815,13 +815,13 @@ void CgQtGui::zeige_normale_taste_page2()
         bt_show_normal->setText("Zeige Normale");
         std::cout<<"verstecke Noemale"<<std::endl;
         traeger->setAn_aus(0);
-        notifyObserver(new bestersliderMoveEvent(Cg::CgZeigeNormalePage2,traeger));
+        notifyObserver(new allgemeinesEvent(Cg::CgZeigeNormalePage2,traeger));
     }else{
         bt_show_normal->setCheckable(true);
         bt_show_normal->setText("verstecke Normale");
         std::cout<<"zeige Normale"<<std::endl;
         traeger->setAn_aus(1);
-        notifyObserver(new bestersliderMoveEvent(Cg::CgZeigeNormalePage2,traeger));
+        notifyObserver(new allgemeinesEvent(Cg::CgZeigeNormalePage2,traeger));
     }
 }
 
@@ -829,14 +829,14 @@ void CgQtGui::changeKegel()
 {
     std::cout<<"kegel "<<sl_kegel_hoehe->value()<<" "<<sl_kegel_radius->value()<<" "<<sl_kegel_refine->value()<<std::endl;
     traeger->setDreiDVector(glm::vec3(sl_kegel_hoehe->value(),sl_kegel_radius->value(),sl_kegel_refine->value()));
-    notifyObserver(new bestersliderMoveEvent(Cg::KegelChange,traeger));
+    notifyObserver(new allgemeinesEvent(Cg::KegelChange,traeger));
 }
 
 void CgQtGui::changeZylinder()
 {
     std::cout<<"zylinder "<<sl_zylinder_hoehe->value()<<" "<<sl_zylinder_radius->value()<<" "<<sl_zylinder_refine->value()<<std::endl;
     traeger->setDreiDVector(glm::vec3(sl_zylinder_hoehe->value(),sl_zylinder_radius->value(),sl_zylinder_refine->value()));
-    notifyObserver(new bestersliderMoveEvent(Cg::ZylinderChange,traeger));
+    notifyObserver(new allgemeinesEvent(Cg::ZylinderChange,traeger));
 }
 
 
@@ -891,7 +891,7 @@ void CgQtGui::tabChange(int x)
 {
     TraegerKlasse* tr = new TraegerKlasse();
     tr->setTab(x);
-    bestersliderMoveEvent* bsl = new bestersliderMoveEvent(Cg::TabChange,tr);
+    allgemeinesEvent* bsl = new allgemeinesEvent(Cg::TabChange,tr);
     notifyObserver(bsl);
 }
 
@@ -926,21 +926,21 @@ void CgQtGui::matrizenCheck()
 {
     std::cout<<"checke matritzen"<<std::endl;
     traeger = new TraegerKlasse();
-    notifyObserver(new bestersliderMoveEvent(Cg::CgMatritzeChecken,traeger));
+    notifyObserver(new allgemeinesEvent(Cg::CgMatritzeChecken,traeger));
 }
 
 void CgQtGui::changeRotationPlanet()
 {
     std::cout<<"change rota page4   "<<sl_change_RotaX->value()<<" "<<sl_change_RotaY->value()<<" "<<sl_change_RotaZ->value()<<std::endl;
     traeger->setDreiDVector(glm::vec3(sl_change_RotaX->value(),sl_change_RotaY->value(),sl_change_RotaZ->value()));
-    notifyObserver(new bestersliderMoveEvent(Cg::CgChangeRotationPlaneten,traeger));
+    notifyObserver(new allgemeinesEvent(Cg::CgChangeRotationPlaneten,traeger));
 }
 
 void CgQtGui::objectOpenHase()
 {
     std::cout<<"load Hase"<<std::endl;
     traeger->setAn_aus(0);
-    notifyObserver(new bestersliderMoveEvent(Cg::CgChangeWahl,traeger));
+    notifyObserver(new allgemeinesEvent(Cg::CgChangeWahl,traeger));
 }
 
 
@@ -948,7 +948,7 @@ void CgQtGui::objectOpenTyra()
 {
     std::cout<<"load Tyra"<<std::endl;
     traeger->setAn_aus(1);
-    notifyObserver(new bestersliderMoveEvent(Cg::CgChangeWahl,traeger));
+    notifyObserver(new allgemeinesEvent(Cg::CgChangeWahl,traeger));
 }
 
 
@@ -956,7 +956,7 @@ void CgQtGui::objectOpenPorshe()
 {
     std::cout<<"load Porshe"<<std::endl;
     traeger->setAn_aus(2);
-    notifyObserver(new bestersliderMoveEvent(Cg::CgChangeWahl,traeger));
+    notifyObserver(new allgemeinesEvent(Cg::CgChangeWahl,traeger));
 }
 
 void CgQtGui::hideAll()
@@ -991,7 +991,7 @@ void CgQtGui::erhoeheTageswert()
     lab_day_rota->setText(s);
     std::cout<<"erhöhe tages wert"<<std::endl;
     traeger->setAn_aus(1);
-    notifyObserver(new bestersliderMoveEvent(Cg::CgChangeTageswert,traeger));
+    notifyObserver(new allgemeinesEvent(Cg::CgChangeTageswert,traeger));
 }
 
 void CgQtGui::verringereTageswert()
@@ -1002,7 +1002,7 @@ void CgQtGui::verringereTageswert()
     lab_day_rota->setText(s);
     std::cout<<"verringere tages wert"<<std::endl;
     traeger->setAn_aus(0);
-    notifyObserver(new bestersliderMoveEvent(Cg::CgChangeTageswert,traeger));
+    notifyObserver(new allgemeinesEvent(Cg::CgChangeTageswert,traeger));
     }else{
         lab_day_rota->setText("weniger als 1 geht es nicht");
     }
@@ -1015,13 +1015,13 @@ void CgQtGui::zeigeSonnensystem()
         bt_show_sun->setText("Zeige Sonnensystem");
         std::cout<<"verstecke sonnen system"<<std::endl;
         traeger->setAn_aus(0);
-        notifyObserver(new bestersliderMoveEvent(Cg::CgZeigeSonnenSystem,traeger));
+        notifyObserver(new allgemeinesEvent(Cg::CgZeigeSonnenSystem,traeger));
     }else{
         bt_show_sun->setCheckable(true);
         bt_show_sun->setText("verstecke Sonnensystem");
         std::cout<<"zeige sonnen system"<<std::endl;
         traeger->setAn_aus(1);
-        notifyObserver(new bestersliderMoveEvent(Cg::CgZeigeSonnenSystem,traeger));
+        notifyObserver(new allgemeinesEvent(Cg::CgZeigeSonnenSystem,traeger));
     }
 }
 
@@ -1032,13 +1032,13 @@ void CgQtGui::startRotation()
         bt_start_rotation->setText("Start Rotation");
         std::cout<<"beende Rotation"<<std::endl;
         traeger->setAn_aus(0);
-        notifyObserver(new bestersliderMoveEvent(Cg::CgStartRotation,traeger));
+        notifyObserver(new allgemeinesEvent(Cg::CgStartRotation,traeger));
     }else{
         bt_start_rotation->setCheckable(true);
         bt_start_rotation->setText("End Rotation");
         std::cout<<"starte rotation"<<std::endl;
         traeger->setAn_aus(1);
-        notifyObserver(new bestersliderMoveEvent(Cg::CgStartRotation,traeger));
+        notifyObserver(new allgemeinesEvent(Cg::CgStartRotation,traeger));
     }
 }
 
@@ -1049,13 +1049,13 @@ void CgQtGui::show3dArrow()
         bt_show_3d_arrow->setText("zeige 3D Pfeile");
         std::cout<<"Verstecke 3D Pfeile"<<std::endl;
         traeger->setAn_aus(0);
-        notifyObserver(new bestersliderMoveEvent(Cg::CgZeige3DPfeile,traeger));
+        notifyObserver(new allgemeinesEvent(Cg::CgZeige3DPfeile,traeger));
     }else{
         bt_show_3d_arrow->setCheckable(true);
         bt_show_3d_arrow->setText("verstecke 3D Pfeile");
         std::cout<<"Zeige 3D Pfeile"<<std::endl;
         traeger->setAn_aus(1);
-        notifyObserver(new bestersliderMoveEvent(Cg::CgZeige3DPfeile,traeger));
+        notifyObserver(new allgemeinesEvent(Cg::CgZeige3DPfeile,traeger));
     }
 }
 
@@ -1071,7 +1071,7 @@ void CgQtGui::materialChanged()
     traeger->setShading(combo_box_shading->currentIndex());
     traeger->setInterpol(combo_box_interpol->currentIndex());
 
-    notifyObserver(new bestersliderMoveEvent(Cg::CgChangeMaterial,traeger));
+    notifyObserver(new allgemeinesEvent(Cg::CgChangeMaterial,traeger));
 }
 
 void CgQtGui::lightChanged()
@@ -1088,21 +1088,21 @@ void CgQtGui::lightChanged()
 
     }
 
-    notifyObserver(new bestersliderMoveEvent(Cg::CgTurnLightOnOff,traeger));
+    notifyObserver(new allgemeinesEvent(Cg::CgTurnLightOnOff,traeger));
 }
 
 void CgQtGui::changeLichtFarbe()
 {
     std::cout<<"Change licht Farb"<<std::endl;
     traeger->setDreiDVector(glm::vec3((double)sl_licht_rot->value()/10,(double)sl_licht_gruen->value()/10,(double)sl_licht_blau->value()/10));
-    notifyObserver(new bestersliderMoveEvent(Cg::CgChangeLichtFarbe,traeger));
+    notifyObserver(new allgemeinesEvent(Cg::CgChangeLichtFarbe,traeger));
 }
 
 void CgQtGui::changeLichtPosition()
 {
     std::cout<<"change Licht Position"<<std::endl;
     traeger->setDreiDVector(glm::vec3(sl_licht_X->value(),sl_licht_Y->value(),sl_licht_Z->value()));
-    notifyObserver(new bestersliderMoveEvent(Cg::CgChangeLichtPosition,traeger));
+    notifyObserver(new allgemeinesEvent(Cg::CgChangeLichtPosition,traeger));
 }
 
 void CgQtGui::reranderLabelofSlider()

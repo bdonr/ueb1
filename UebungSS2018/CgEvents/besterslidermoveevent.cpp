@@ -2,28 +2,28 @@
 
 
 
-bestersliderMoveEvent::bestersliderMoveEvent(enum Cg::EventType type, TraegerKlasse *traegerKlasse):type(type),traegerKlasse(traegerKlasse)
+allgemeinesEvent::allgemeinesEvent(enum Cg::EventType type, TraegerKlasse *traegerKlasse):type(type),traegerKlasse(traegerKlasse)
 {
 
 }
 
-TraegerKlasse *bestersliderMoveEvent::getTraegerKlasse() const
+TraegerKlasse *allgemeinesEvent::getTraegerKlasse() const
 {
     return traegerKlasse;
 }
 
-void bestersliderMoveEvent::setTraegerKlasse(TraegerKlasse *value)
+void allgemeinesEvent::setTraegerKlasse(TraegerKlasse *value)
 {
     traegerKlasse = value;
 }
 
-Cg::EventType bestersliderMoveEvent::getType()
+Cg::EventType allgemeinesEvent::getType()
 {
     return type;
 }
 
-CgBaseEvent *bestersliderMoveEvent::clone()
+CgBaseEvent *allgemeinesEvent::clone()
 {
-    return new bestersliderMoveEvent(type,traegerKlasse);
+    return new allgemeinesEvent(type,traegerKlasse);
 }
 
