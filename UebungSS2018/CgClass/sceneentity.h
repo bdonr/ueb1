@@ -8,9 +8,7 @@
 class SceneEntity
 {
 private:
-    glm::mat4x4 rotationY(float winkely);
-    glm::mat4x4 rotationX(float winkelx);
-    glm::mat4x4 rotationZ(float winkelz);
+
     float winkely;
     float winkelx;
     float winkelz;
@@ -24,6 +22,9 @@ private:
     glm::mat4 rota;
     enum Cg::ObjectType type;
 public:
+    glm::mat4x4 rotationY(float winkely);
+    glm::mat4x4 rotationX(float winkelx);
+    glm::mat4x4 rotationZ(float winkelz);
     void calculateRota(int winkely, int winkelz, int wunschwinkel);
     SceneEntity(CgBaseTriangleMesh*ob,enum Cg::ObjectType type,glm::vec3 aus,Appearance* appear);
     CgBaseTriangleMesh *getOb() const;
