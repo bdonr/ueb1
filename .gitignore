@@ -1,7 +1,7 @@
 *.o
 *.exe
 build-CG1Uebung*
-pro.*
+.pro.*
 build
 
 
