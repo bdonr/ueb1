@@ -13,6 +13,24 @@ Scenegraph::Scenegraph(SceneEntity* sc):sc(sc){
     counter=0;
 
 }
+
+void Scenegraph::findAndSetAppear(Appearance *appear, enum Cg::ObjectType type)
+{
+    findAndSetAppear(this->getSc(),appear,type);
+}
+void Scenegraph::findAndSetAppear(SceneEntity * sc,Appearance *appear, enum Cg::ObjectType type)
+{
+    if(sc->getChildren().empty() || sc->getOb()->getType()==type){
+        if(sc->getType()==type){
+            sc->setAppear(appear);
+        }
+    }
+    if(!sc->getChildren().empty()){
+        for(int i=0;i<sc->getChildren().size();i++){
+            findAndSetAppear(sc->getChildren().at(i),appear,type);
+        }
+    }
+}
 SceneEntity *Scenegraph::getSc() const
 {
 

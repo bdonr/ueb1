@@ -674,7 +674,7 @@ void CgQtGui::page6(QWidget *parent)
     tab1_control->addWidget(ButtonXY);
 
 
-    licht = new QPushButton("Licht aus");
+    licht = new QPushButton("Licht An");
     licht->setCheckable(false);
     connect(licht, SIGNAL(clicked()), this, SLOT(lightChanged()));
     tab1_control->addWidget(licht);
@@ -1079,11 +1079,11 @@ void CgQtGui::lightChanged()
 
     if(licht->isCheckable()){
         licht->setCheckable(false);
-        licht->setText("Licht aus");
+        licht->setText("Licht an");
         std::cout<<"Licht ist aus"<<std::endl;
     }else{
         licht->setCheckable(true);
-        licht->setText("Licht an");
+        licht->setText("Licht aus");
         std::cout<<"Licht ist an"<<std::endl;
 
     }
@@ -1093,7 +1093,7 @@ void CgQtGui::lightChanged()
 
 void CgQtGui::changeLichtFarbe()
 {
-    std::cout<<"Change licht Fabre"<<std::endl;
+    std::cout<<"Change licht Farb"<<std::endl;
     traeger->setDreiDVector(glm::vec3((double)sl_licht_rot->value()/10,(double)sl_licht_gruen->value()/10,(double)sl_licht_blau->value()/10));
     notifyObserver(new bestersliderMoveEvent(Cg::CgChangeLichtFarbe,traeger));
 }

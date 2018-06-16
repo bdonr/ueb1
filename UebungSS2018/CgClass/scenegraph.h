@@ -12,18 +12,21 @@ private: SceneEntity *sc;
     std::stack <glm::mat4x4> matrixstack;
     int counter;
     enum Cg::ObjectType type;
+    void findAndSetAppear(SceneEntity *sc, Appearance *appear, Cg::ObjectType type);
 public:
     void pushMatrix();
     void popMatrix();
     void applyTransform(glm::mat4 x);
     //void fillStack();
     Scenegraph(SceneEntity*sc);
+    void findAndSetAppear(Appearance* appear,enum Cg::ObjectType);
     SceneEntity *getSc() const;
     void setSc(SceneEntity *value);
     void render(CgBaseRenderer * render,SceneEntity* sc);
     // void fillstack(SceneEntity *sc);
     void fillstack(SceneEntity *sc);
     bool h;
+
 
 };
 

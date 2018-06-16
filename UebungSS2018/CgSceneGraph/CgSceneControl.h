@@ -227,6 +227,10 @@ public:
     void setLight();
     void changeObjectRota(CgBaseEvent *e);
     void changeObjectTranslate(CgBaseEvent *e);
+    void testeMatrizen(CgBaseEvent *e);
+    
+    void handleLightChange(CgBaseEvent *e);
+
 private:
 
     int tab;

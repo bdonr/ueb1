@@ -19,9 +19,10 @@ SceneEntity::SceneEntity(CgBaseTriangleMesh* ob,enum Cg::ObjectType type,glm::ve
 
         skala=.5;
         this->winkelx=10;
-        this->winkely=110;
+        this->winkely=0;
         this->winkelz=30;
         this->transformation=transform();
+        calculateRota(10,10,1);
     }
 
     if(type==Cg::Mond1){
@@ -133,10 +134,10 @@ void SceneEntity::rotateMond(float wunschwinkel, float winkel_y)
     transformation=
             rotationZ(-this->winkelz)*
             rotationY(-this->winkely)*
-            rotationX(winkel_y*2000)*
+            rotationX(winkel_y+1)*
             rotationY(this->winkely)*
             rotationZ(this->winkelz);
-    wunschwinkel=wunschwinkel*28;
+    wunschwinkel=wunschwinkel*28.0;
 }
 
 void SceneEntity::rotateErde(float winkel_y, float wunschwinkel)
@@ -144,10 +145,10 @@ void SceneEntity::rotateErde(float winkel_y, float wunschwinkel)
     transformation*=
             rotationZ(-this->winkelz)*
             rotationY(-this->winkely)*
-            rotationZ(winkel_y*4100)*
+            rotationZ(winkel_y+20)*
             rotationY(this->winkely)*
             rotationZ(this->winkelz);
-    wunschwinkel=wunschwinkel*20;
+    wunschwinkel=wunschwinkel+360/24.0;
 }
 
 void SceneEntity::rotateMond2(float winkel_z, float wunschwinkel)
@@ -155,7 +156,7 @@ void SceneEntity::rotateMond2(float winkel_z, float wunschwinkel)
     transformation=
             rotationZ(-this->winkelz)*
             rotationY(-this->winkely)*
-            rotationZ(winkel_z*100)*
+            rotationZ(winkel_z+1)*
             rotationY(this->winkely)*
             rotationZ(this->winkelz);
     wunschwinkel=wunschwinkel*100;
@@ -164,8 +165,8 @@ void SceneEntity::rotateMond2(float winkel_z, float wunschwinkel)
 void SceneEntity::rotate(float winkel_y,float winkel_z,float wunschwinkel)
 {
 
-    wunschwinkel=wunschwinkel/1000;
-    winkel_y=winkel_y/1000;
+    wunschwinkel=wunschwinkel/360;
+    winkel_y=winkel_y/360;
     if(type==Cg::Stern){
 
         //wunschwinkel+=wunschwinkel/360;
@@ -195,16 +196,16 @@ void SceneEntity::rotate(float winkel_y,float winkel_z,float wunschwinkel)
 
     }
     if(type==Cg::Mond3){
-        wunschwinkel=wunschwinkel*(-10);
+        wunschwinkel=wunschwinkel+.1;
 
     }
 
     if(type==Cg::Planet1){
-        wunschwinkel=wunschwinkel*10;
+        wunschwinkel=wunschwinkel+.10;
     }
 
     if(type==Cg::Planet2){
-        wunschwinkel=wunschwinkel*(-20);
+        wunschwinkel=wunschwinkel-.1;
         winkely=-winkel_y;
     }
 
@@ -248,9 +249,19 @@ glm::mat4x4 SceneEntity::rotationZ(float winkelz)
                        glm::vec4(0,0,0,1));
 }
 
+Cg::ObjectType SceneEntity::getType() const
+{
+    return type;
+}
+
+void SceneEntity::setType(const Cg::ObjectType &value)
+{
+    type = value;
+}
+
 void SceneEntity::calculateRota(int winkely, int winkelz, int wunschwinkel)
 {
-    transformation=
+    transformation-=
             rotationZ(-winkelz)*
             rotationY(-winkely)*
             rotationZ(wunschwinkel)*
@@ -263,7 +274,7 @@ glm::mat4x4 SceneEntity::transform(){
 
             rotationZ(-winkelz)*
             rotationY(-winkely)*
-            rotationZ(winkely)*
+            rotationZ(winkelz)*
             rotationY(winkely)*
             rotationZ(winkelz)*translatetoVectot()*glm::mat4x4(         glm::vec4(skala,0,0,0),
                                                                         glm::vec4(0,skala,0,0),
