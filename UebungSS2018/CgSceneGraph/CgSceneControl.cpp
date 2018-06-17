@@ -14,11 +14,11 @@
 #include <string.h>
 #include "CgUtils/ObjLoader.h"
 #include "CgEvents/objectopenevent.h"0.8 0.5 0.5 0.7
-#include "CgEvents/besterslidermoveevent.h"
+#include "CgEvents/allgemeinesEvent.h"
 #include "CgClass/scenegraph.h"
 #include "CgClass/sceneentity.h"
 
-// bla dingens
+
 void CgSceneControl::createScene()
 {
     delete sc;
@@ -31,14 +31,14 @@ void CgSceneControl::createScene()
     ma->setScalar(10.2);
     ma->setSpec(glm::vec4(1.,1.,1.,1.));
     appear->setMaterial(ma);
-    SceneEntity * sc1 = new SceneEntity(kugel,Cg::Stern,glm::vec3(0,0,0),appear);
-    SceneEntity * sc2 = new SceneEntity(kugel,Cg::Erde,glm::vec3(7,0,0),appear);
-    SceneEntity * sc3 = new SceneEntity(kugel,Cg::Mond1,glm::vec3(2,0,0),appear);
+    sc1 = new SceneEntity(kugel,Cg::Stern,glm::vec3(0,0,0),appear);
+    sc2 = new SceneEntity(kugel,Cg::Erde,glm::vec3(7,0,0),appear);
+    sc3 = new SceneEntity(kugel,Cg::Mond1,glm::vec3(2,0,0),appear);
 
-    SceneEntity * sc4 = new SceneEntity(kugel,Cg::Planet1,glm::vec3(12,0,0),appear);
-    SceneEntity * sc5 = new SceneEntity(kugel,Cg::Planet2,glm::vec3(17,0,0),appear);
-    SceneEntity * sc6 = new SceneEntity(kugel,Cg::Mond2,glm::vec3(4,0,0),appear);
-    SceneEntity * sc7 = new SceneEntity(kugel,Cg::Mond3,glm::vec3(2,0,0),appear);
+    sc4 = new SceneEntity(kugel,Cg::Planet1,glm::vec3(12,0,0),appear);
+    sc5 = new SceneEntity(kugel,Cg::Planet2,glm::vec3(17,0,0),appear);
+    sc6 = new SceneEntity(kugel,Cg::Mond2,glm::vec3(4,0,0),appear);
+    sc7 = new SceneEntity(kugel,Cg::Mond3,glm::vec3(2,0,0),appear);
     //sc5->setTransformation(transform((11,2,0),0,0,0,.1));
     sc1->addChildren(sc2);
     sc1->addChildren(sc4);
@@ -548,7 +548,6 @@ void CgSceneControl::handleKeyZ()
 
 void CgSceneControl::handleKeyMinus()
 {
-
     if(s<0.01){
         s=0.01;
     }else{
@@ -959,9 +958,27 @@ void CgSceneControl::handleEvent(CgBaseEvent *e) {
     loadObject(e);
     changeObjectRota(e);
     changeObjectTranslate(e);
-
+    changeTageswert(e);
     // an der Stelle an der ein Event abgearbeitet ist wird es auch gelöscht.
     delete e;
+
+}
+
+void CgSceneControl::changeTageswert(CgBaseEvent* e){
+    if(e->getType()==Cg::CgChangeTageswert){
+        if(((allgemeinesEvent*)e)->getTraegerKlasse()->getAn_aus()==1){
+            sc->setCounterIncre(sc->getCounterIncre()+2);
+            std::cout<<"erhöht "<<sc->getCounterIncre()<<std::endl;
+        }else{
+            if(sc->getCounterIncre()<3){
+
+            }else{
+                sc->setCounterIncre(sc->getCounterIncre()-2);
+                            std::cout<<"verringert "<<sc->getCounterIncre()<<std::endl;
+            }
+        }
+
+    }
 
 }
 

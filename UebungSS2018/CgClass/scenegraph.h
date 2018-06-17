@@ -11,6 +11,7 @@ class Scenegraph
 private: SceneEntity *sc;
     std::stack <glm::mat4x4> matrixstack;
     int counter;
+    int counterIncre;
     enum Cg::ObjectType type;
     void findAndSetAppear(SceneEntity *sc, Appearance *appear, Cg::ObjectType type);
 public:
@@ -30,6 +31,8 @@ public:
 
     void setUniform(int i, CgBaseRenderer *render, SceneEntity* sc);
     void setUniform(CgBaseRenderer *render, SceneEntity *sc);
+    int getCounterIncre() const;
+    void setCounterIncre(int value);
 };
 
 #endif // SCENEGRAPH_H

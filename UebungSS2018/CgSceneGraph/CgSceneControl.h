@@ -231,6 +231,7 @@ public:
     
     void handleLightChange(CgBaseEvent *e);
 
+    void changeTageswert(CgBaseEvent *e);
 private:
 
     int tab;
@@ -238,7 +239,6 @@ private:
     glm::vec3 v;
     glm::vec3 u;
     glm::vec3 eye;
-
     float countW;
     float countA;
     float countS;
@@ -264,6 +264,13 @@ private:
     float x;
     float y;
     float z;
+    SceneEntity* sc1;
+    SceneEntity* sc2;
+    SceneEntity* sc3;
+    SceneEntity* sc4;
+    SceneEntity* sc5;
+    SceneEntity* sc6;
+    SceneEntity* sc7;
     int page;
     int changed;
     TraegerKlasse* traeger;

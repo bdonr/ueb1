@@ -18,7 +18,6 @@ SOURCES += main.cpp \
     CgClass/meshfactory.cpp \
     CgClass/Zylinder.cpp \
     CgClass/kegel.cpp \
-CgClass/light.cpp \
     CgClass/Mypolyline.cpp \
     CgEvents/slidermoveevent.cpp \
     CgClass/rotationskoerper.cpp \
@@ -66,7 +65,6 @@ HEADERS += \
     CgClass/kegel.h \
     CgClass/Mypolyline.h \
     CgClass/mats.h \
-    CgClass/light.h \
     CgEvents/slidermoveevent.h \
     CgClass/rotationskoerper.h \
     CgUtils/ObjLoader.h \
@@ -74,7 +72,6 @@ HEADERS += \
     CgClass/koordinatensystem.h \
     CgEvents/objectopenevent.h \
     CgClass/kugel.h \
-    CgEvents/besterslidermoveevent.h \
     CgClass/traegerklasse.h \
     CgClass/scenegraph.h \
     CgClass/sceneentity.h \
@@ -82,4 +79,5 @@ HEADERS += \
     CgClass/kamera.h \
     CgClass/light.h \
     CgClass/wuerfel.h \
-CgClass/pfeil.h
+CgClass/pfeil.h \
+    CgEvents/allgemeinesEvent.h
