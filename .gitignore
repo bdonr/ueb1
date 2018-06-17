@@ -1,7 +1,13 @@
 *.o
 *.exe
+<<<<<<< HEAD
 build-*
 .pro.*
+=======
+build-CG1Uebung*
+.pro.*
+build
+>>>>>>> 480b6701abfd40ef181921f8aaad8eadde98a5ce
 
 
 

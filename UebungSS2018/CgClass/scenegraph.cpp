@@ -11,6 +11,8 @@ Scenegraph::Scenegraph(SceneEntity* sc):sc(sc){
                                  glm::vec4(0,0,0,1)));
 
     counter=0;
+    counterIncre= 1;
+
 
 }
 
@@ -31,6 +33,16 @@ void Scenegraph::findAndSetAppear(Appearance *appear, enum Cg::ObjectType type)
  * @param type
  * setze Appearance einer SceneEntity
  */
+int Scenegraph::getCounterIncre() const
+{
+    return counterIncre;
+}
+
+void Scenegraph::setCounterIncre(int value)
+{
+    counterIncre = value;
+}
+
 void Scenegraph::findAndSetAppear(SceneEntity * sc,Appearance *appear, enum Cg::ObjectType type)
 {
     if(sc->getChildren().empty()){
@@ -85,7 +97,7 @@ void Scenegraph::setUniform(CgBaseRenderer *render, SceneEntity* sc)
 void Scenegraph::render(CgBaseRenderer *render,SceneEntity* sc)
 {
 
-    counter+=(counter+1)%360;
+    counter+=(counter+counterIncre)%360;
     if(counter>=359){
         counter=0;
     }

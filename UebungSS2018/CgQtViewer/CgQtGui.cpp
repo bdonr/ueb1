@@ -7,7 +7,7 @@
 #include "CgEvents/CgKeyEvent.h"
 #include "CgEvents/CgWindowResizeEvent.h"
 #include "CgSceneGraph/CgSceneControl.h"
-#include "CgEvents/besterslidermoveevent.h"
+#include "CgEvents/allgemeinesEvent.h"
 #include "CgClass/traegerklasse.h"
 #include <QSlider>
 #include <QVBoxLayout>
@@ -31,21 +31,20 @@
 #include <ostream>
 #include <QComboBox>
 
-
-
-
 //                    merke MyPolyline hat den lane riesenfeld algo !!!!
 //aufgbae 6.c (o(n punkt normale berechnen))
 //aufgabe 8.b vergleich der rotamatritzen implementerung
 //aufgabe 14 EVENTUEL
 
+//planeten rotations geschwindigkeit wird in
 
-// go
 
+
+//sozusagen der eigentliche Konstruktor.
 void CgQtGui::init()
 {
     //--------------------------------------------------------------
-
+    // füllen der liste Der materialien
     amb.push_back(glm::vec4(.25f,.25f,.25f,1.0));
     def.push_back(glm::vec4(.40f,.40f,.40f,1.0));
     spec.push_back(glm::vec4(.77f,.77f,.77f,1.0));
@@ -71,6 +70,7 @@ void CgQtGui::init()
     spec.push_back(glm::vec4(0.8f,0.72f,0.21f,1.0f));
     scala.push_back(83.2);
     //--------------------------------------------------------------
+
     std::vector<int> abc;
     abc.push_back(0);
     abc.push_back(0);
@@ -220,7 +220,7 @@ QSlider *CgQtGui::createSlider(int max,int min,int steps)
 
 }
 
-
+//page<zahl> sind die konstruktoen der jewaligen Tabs
 void CgQtGui::page2(QWidget* parent)
 {
     QVBoxLayout *tab1_control = new QVBoxLayout();
@@ -748,14 +748,14 @@ void CgQtGui::page6(QWidget *parent)
 
     parent->setLayout(tab1_control);
 }
-
+//rotieren der objecte (hase, porshe, tyra)
 void CgQtGui::changeRotationObject()
 {
     std::cout<<"rotate obj "<<obj_rotate_X->value()<<" "<<obj_rotate_Y->value()<<" "<<obj_rotate_Z->value()<<std::endl;
     traeger->setDreiDVector(glm::vec3(obj_rotate_X->value(),obj_rotate_Y->value(),obj_rotate_Z->value()));
     notifyObserver(new allgemeinesEvent(Cg::CgObjRotate,traeger));
 }
-
+//bewegen der objecte (hase, porshe, tyra)
 void CgQtGui::changeTranslateObject()
 {
     std::cout<<"translate obj "<<obj_translate_X->value()<<" "<<obj_translate_Y->value()<<" "<<obj_translate_Z->value()<<std::endl;
@@ -763,28 +763,28 @@ void CgQtGui::changeTranslateObject()
     traeger->setDreiDVector(glm::vec3((double)obj_translate_X->value()/100,(double)obj_translate_Y->value()/100,(double)obj_translate_Z->value()/100));
     notifyObserver(new allgemeinesEvent(Cg::CgObjTranslate,traeger));
 }
-
+// verändern des Rotation-Körpers in refine, also rotatorische feinheit und einheit des Lane-Risenfeld algorithmus
 void CgQtGui::changeRotaKoerper()
 {
     std::cout<<"rotationskörper: "<<sl_rota_refine->value()<<" "<<sl_rota_hoehe->value()<<std::endl;
     traeger->setDreiDVector(glm::vec3(sl_rota_refine->value(),sl_rota_hoehe->value(),0));
     notifyObserver(new allgemeinesEvent(Cg::CgChangeRota,traeger));
 }
-
+// anwendung des Lane. Risenfeld algo auf die polyline
 void CgQtGui::laneRotaChange()
 {
     std::cout<<"lane-riesenfeld refine "<<sl_rota_lane_refine->value()<<std::endl;
     traeger->setDreiDVector(glm::vec3(sl_rota_lane_refine->value(),0,0));
     notifyObserver(new allgemeinesEvent(Cg::CgLaneRefine,traeger));
 }
-
+//ändern der farbe des würfels
 void CgQtGui::changeColor()
 {
     std::cout<<"farbe "<<sl_change_Red->value()<<sl_change_Green->value()<<sl_change_Blue->value()<<std::endl;
     traeger->setDreiDVector(glm::vec3(sl_change_Red->value(),sl_change_Green->value(),sl_change_Blue->value()));
     notifyObserver(new allgemeinesEvent(Cg::CgChangeColor,traeger));
 }
-
+// zeigen und verstecken der Polyline
 void CgQtGui::ZeigePolylineButton()
 {
     if(bt_show_poly->isCheckable()){
@@ -799,14 +799,14 @@ void CgQtGui::ZeigePolylineButton()
         notifyObserver(new allgemeinesEvent(Cg::CgZeigePolyline,traeger));
     }
 }
-
+// zurücksetzen der polyline auf ausgangswert ohne LAne-Riesenfeld verfeinerung
 void CgQtGui::ResetPolylineButton()
 {
     std::cout<<"Reset Polyline"<<std::endl;
     traeger = new TraegerKlasse();
     notifyObserver(new allgemeinesEvent(Cg::CgResetPolyline,traeger));
 }
-
+//zeigen der normalen bei den Zylinder und Kegel
 void CgQtGui::zeige_normale_taste_page2()
 {
 
@@ -824,23 +824,20 @@ void CgQtGui::zeige_normale_taste_page2()
         notifyObserver(new allgemeinesEvent(Cg::CgZeigeNormalePage2,traeger));
     }
 }
-
+// neu erstellung des Kegels bei veränderung von seiner Höhe/breite/rotatorische feinheit
 void CgQtGui::changeKegel()
 {
     std::cout<<"kegel "<<sl_kegel_hoehe->value()<<" "<<sl_kegel_radius->value()<<" "<<sl_kegel_refine->value()<<std::endl;
     traeger->setDreiDVector(glm::vec3(sl_kegel_hoehe->value(),sl_kegel_radius->value(),sl_kegel_refine->value()));
     notifyObserver(new allgemeinesEvent(Cg::KegelChange,traeger));
 }
-
+// neu erstellung des Zylinders bei veränderung von seiner Höhe/breite/rotatorische feinheit
 void CgQtGui::changeZylinder()
 {
     std::cout<<"zylinder "<<sl_zylinder_hoehe->value()<<" "<<sl_zylinder_radius->value()<<" "<<sl_zylinder_refine->value()<<std::endl;
     traeger->setDreiDVector(glm::vec3(sl_zylinder_hoehe->value(),sl_zylinder_radius->value(),sl_zylinder_refine->value()));
     notifyObserver(new allgemeinesEvent(Cg::ZylinderChange,traeger));
 }
-
-
-
 
 void CgQtGui::mouseEvent(QMouseEvent* event)
 {
@@ -886,7 +883,7 @@ void CgQtGui::viewportChanged(int w, int h)
     CgBaseEvent* e = new CgWindowResizeEvent(Cg::WindowResizeEvent,w,h);
     notifyObserver(e);
 }
-
+//SLOT zur änderung des Tabs
 void CgQtGui::tabChange(int x)
 {
     TraegerKlasse* tr = new TraegerKlasse();
@@ -894,7 +891,7 @@ void CgQtGui::tabChange(int x)
     allgemeinesEvent* bsl = new allgemeinesEvent(Cg::TabChange,tr);
     notifyObserver(bsl);
 }
-
+//SLOT zum Zeigen eines Sliders der X werte des Planetensystems Verändert
 void CgQtGui::selectX()
 {
     if(!sl_change_RotaX->isVisible()){
@@ -903,7 +900,7 @@ void CgQtGui::selectX()
         sl_change_RotaX->setVisible(false);
     }
 }
-
+//SLOT zum Zeigen eines Sliders der Y werte des Planetensystems Verändert
 void CgQtGui::selectY()
 {
     if(!sl_change_RotaY->isVisible()){
@@ -912,7 +909,7 @@ void CgQtGui::selectY()
         sl_change_RotaY->setVisible(false);
     }
 }
-
+//SLOT zum Zeigen eines Sliders der Z werte des Planetensystems Verändert
 void CgQtGui::selectZ()
 {
     if(!sl_change_RotaZ->isVisible()){
@@ -921,44 +918,42 @@ void CgQtGui::selectZ()
         sl_change_RotaZ->setVisible(false);
     }
 }
-
+//SLOT zu vergleich der von uns berechneten matritzen und der von QT berechneten matritzen
 void CgQtGui::matrizenCheck()
 {
     std::cout<<"checke matritzen"<<std::endl;
     traeger = new TraegerKlasse();
     notifyObserver(new allgemeinesEvent(Cg::CgMatritzeChecken,traeger));
 }
-
+//SLOT zu änderung der rotation der planeten
 void CgQtGui::changeRotationPlanet()
 {
     std::cout<<"change rota page4   "<<sl_change_RotaX->value()<<" "<<sl_change_RotaY->value()<<" "<<sl_change_RotaZ->value()<<std::endl;
     traeger->setDreiDVector(glm::vec3(sl_change_RotaX->value(),sl_change_RotaY->value(),sl_change_RotaZ->value()));
     notifyObserver(new allgemeinesEvent(Cg::CgChangeRotationPlaneten,traeger));
 }
-
+//SLOT zum öffnen der objecte
 void CgQtGui::objectOpenHase()
 {
     std::cout<<"load Hase"<<std::endl;
     traeger->setAn_aus(0);
     notifyObserver(new allgemeinesEvent(Cg::CgChangeWahl,traeger));
 }
-
-
+//SLOT zum öffnen der objecte
 void CgQtGui::objectOpenTyra()
 {
     std::cout<<"load Tyra"<<std::endl;
     traeger->setAn_aus(1);
     notifyObserver(new allgemeinesEvent(Cg::CgChangeWahl,traeger));
 }
-
-
+//SLOT zum öffnen der objecte
 void CgQtGui::objectOpenPorshe()
 {
     std::cout<<"load Porshe"<<std::endl;
     traeger->setAn_aus(2);
     notifyObserver(new allgemeinesEvent(Cg::CgChangeWahl,traeger));
 }
-
+//SLOT zum verstecken aller GUI bestandteileder Tab 4
 void CgQtGui::hideAll()
 {
     if(!bt_inc_day->isVisible()){
@@ -983,7 +978,7 @@ void CgQtGui::hideAll()
         lab_matr_check->setVisible(false);
     }
 }
-
+//SLOT zur erhöhung der Rotation in tageswerten
 void CgQtGui::erhoeheTageswert()
 {
     tag += 1;
@@ -993,7 +988,7 @@ void CgQtGui::erhoeheTageswert()
     traeger->setAn_aus(1);
     notifyObserver(new allgemeinesEvent(Cg::CgChangeTageswert,traeger));
 }
-
+//SLOT zur verringerung der Rotation in tageswerten
 void CgQtGui::verringereTageswert()
 {
     if(tag>=2){
@@ -1007,7 +1002,7 @@ void CgQtGui::verringereTageswert()
         lab_day_rota->setText("weniger als 1 geht es nicht");
     }
 }
-
+//SLOT zum zeigen des Sonnensystems
 void CgQtGui::zeigeSonnensystem()
 {
     if(bt_show_sun->isCheckable()){
@@ -1024,7 +1019,7 @@ void CgQtGui::zeigeSonnensystem()
         notifyObserver(new allgemeinesEvent(Cg::CgZeigeSonnenSystem,traeger));
     }
 }
-
+//SLOT der die rotation der planeten startet und stoppt
 void CgQtGui::startRotation()
 {
     if(bt_start_rotation->isCheckable()){
@@ -1041,7 +1036,7 @@ void CgQtGui::startRotation()
         notifyObserver(new allgemeinesEvent(Cg::CgStartRotation,traeger));
     }
 }
-
+//SLOT zum zeigen der bewegungsrichtungs der planeten
 void CgQtGui::show3dArrow()
 {
     if(bt_show_3d_arrow->isCheckable()){
@@ -1058,7 +1053,7 @@ void CgQtGui::show3dArrow()
         notifyObserver(new allgemeinesEvent(Cg::CgZeige3DPfeile,traeger));
     }
 }
-
+//SLOT zum erstellen von Planeten und objecten(zylinder, kegel) mit oberflächen beschaffenheit
 void CgQtGui::materialChanged()
 {
     std::cout<<"wähle material"<<std::endl;
@@ -1073,7 +1068,7 @@ void CgQtGui::materialChanged()
 
     notifyObserver(new allgemeinesEvent(Cg::CgChangeMaterial,traeger));
 }
-
+//SLOT zum an/ausmachen der beleuchtung
 void CgQtGui::lightChanged()
 {
 
@@ -1090,21 +1085,21 @@ void CgQtGui::lightChanged()
 
     notifyObserver(new allgemeinesEvent(Cg::CgTurnLightOnOff,traeger));
 }
-
+//SLOT zum ändern des farbspektrums des lichts
 void CgQtGui::changeLichtFarbe()
 {
     std::cout<<"Change licht Farb"<<std::endl;
     traeger->setDreiDVector(glm::vec3((double)sl_licht_rot->value()/10,(double)sl_licht_gruen->value()/10,(double)sl_licht_blau->value()/10));
     notifyObserver(new allgemeinesEvent(Cg::CgChangeLichtFarbe,traeger));
 }
-
+//SLOT zum ändern der position des lichts
 void CgQtGui::changeLichtPosition()
 {
     std::cout<<"change Licht Position"<<std::endl;
     traeger->setDreiDVector(glm::vec3(sl_licht_X->value(),sl_licht_Y->value(),sl_licht_Z->value()));
     notifyObserver(new allgemeinesEvent(Cg::CgChangeLichtPosition,traeger));
 }
-
+//SLOT zur globalen anzeigen der werte der jewaligen slider
 void CgQtGui::reranderLabelofSlider()
 {
 

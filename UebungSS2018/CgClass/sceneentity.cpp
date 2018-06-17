@@ -156,14 +156,15 @@ void SceneEntity::rotateMond2(float winkel_z, float wunschwinkel)
 
 void SceneEntity::rotate(float winkel_y,float winkel_z,float wunschwinkel)
 {
-
+    float test = winkel_z;
     wunschwinkel=wunschwinkel/1000;
     winkel_y=winkel_y/1000;
     if(type==Cg::Stern){
-
+//std::cout<<"rotation der sonne"<<std::endl;
         //wunschwinkel+=wunschwinkel/360;
         transformation*=
-                rotationZ(-this->winkelz)*
+                rotationZ(-this->winkelz)*        //das ist von dir fest gesetzt DON, gelenkt in methode set() die im konstruktor aufgerufen wird
+                //rotationZ(test)*                       //hiermit kannst du entscheiden wie schnell sich der planet dreht, alles andere ist abhängig vond er geschwindigkeit
                 rotationY(-this->winkely)*
                 rotationZ(wunschwinkel*10)*
                 rotationY(this->winkely)*
@@ -173,7 +174,7 @@ void SceneEntity::rotate(float winkel_y,float winkel_z,float wunschwinkel)
     if(type!=Cg::Stern){
         if(type==Cg::Erde){
             //this->winkely+=10;
-            std::cout<<"erde"<<std::endl;
+           // std::cout<<"erde"<<std::endl;
             wunschwinkel=0;
         }
 
