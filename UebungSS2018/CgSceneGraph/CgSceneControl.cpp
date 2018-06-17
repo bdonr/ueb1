@@ -77,9 +77,10 @@ CgSceneControl::CgSceneControl() {
     countE=0.0;
     s=1;
     lighton=false;
-    cam = new Kamera();
+    cam = new CgCamera(glm::vec3(0, 0, -1), glm::vec3(0, 0, 0), glm::vec3(0, 1, 0), 400, 400);
 
-    cam->setProjection(cam->perspective(100,eye.x,eye.y,eye.z));
+   // cam->setProjection(cam->perspective(100,eye.x,eye.y,eye.z));
+
 
     sc=NULL;
     wuerfel=NULL;
@@ -191,7 +192,7 @@ void CgSceneControl::renderCoords()
 {
 
     koordinatensystem=new Koordinatensystem(m_renderer,m_current_transformation);
-    koordinatensystem->renderO(lighton);
+    koordinatensystem->renderO(lighton,old);
 }
 
 
@@ -208,9 +209,10 @@ void CgSceneControl::renderDreiecke()
 }
 
 void CgSceneControl::renderObjects() {
+    //0 = zentral 1 = parralell 2 = standart
+    m_renderer->setProjectionMatrix(cam->getProjectionMatrix(0));
+    m_renderer->setLookAtMatrix(cam->getLookAtMatrix());
 
-    m_renderer->setProjectionMatrix(m_proj_matrix);
-    //m_renderer->setLookAtMatrix(cam->getLookAt());
     m_renderer->redraw();
     renderCoords();
     renderWurfel();
@@ -218,8 +220,8 @@ void CgSceneControl::renderObjects() {
     renderDreiecke();
     renderKegel();
     renderZylinder();
-    pfeil = new Pfeil(m_renderer,new Appearance("material.mamb",glm::vec4(1,0,2,1)),old);
-    pfeil->render();
+    pfeil = new Pfeil(m_renderer,new Appearance("rgb",glm::vec4(1,0,2,1)));
+    pfeil->render(old,lighton);
 
     if(sc!=NULL){
         sc->render(m_renderer,sc->getSc());
@@ -585,37 +587,33 @@ void CgSceneControl::handleKeyPlus()
 void CgSceneControl::handleKeyD()
 {
 
-    countA+=.1;
-    cam->strafePLUS(countA);
+    cam->setEye(glm::vec3(cam->getEye().x+0.1, cam->getEye().y, cam->getEye().z));
 
 }
 
 void CgSceneControl::handleKeyA()
 {
-    countA-=.1;
-    cam->strafeMINUS((-1)*countA);
+
 }
 
 void CgSceneControl::handleKeyW()
 {
-    countW+=.1;
-    cam->towardPLUS(countW);
+
 }
 
 void CgSceneControl::handleKeyS()
 {
-    countW-=.1;
-    cam->towardMINUS((-1)*countW);
+
 }
 
 void CgSceneControl::handleKeyU()
 {
-    cam->rotateMinus();
+
 }
 
 void CgSceneControl::handleKeyI()
 {
-    cam->rotatePlus();
+
 }
 
 void CgSceneControl::handleKeyEvents(CgBaseEvent*e)

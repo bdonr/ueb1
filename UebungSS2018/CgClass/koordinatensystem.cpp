@@ -23,7 +23,14 @@ Koordinatensystem::Koordinatensystem(CgBaseRenderer *render,glm::mat4x4 x)
             o->getMaterial()->setDef(glm::vec4(.1,.1,.1,1));
             o->getMaterial()->setSpec(glm::vec4(.1,.1,.1,1));
             o->getMaterial()->setScalar(70);
-    pfeile.push_back(new Pfeil(render,o));
+            pfeile.push_back(new Pfeil(render,o));
+}
+
+void Koordinatensystem::renderO(bool lighton, glm::mat4x4 x)
+{
+    pfeile.at(0)->render(x*rotationX(),lighton);
+    pfeile.at(1)->render(x*rotationY(),lighton);
+    pfeile.at(2)->render(x*rotationZ(),lighton);
 }
 
 
@@ -74,12 +81,3 @@ glm::mat4x4 Koordinatensystem::rotationZ()
 }
 
 
-void Koordinatensystem::renderO(bool lighton)
-{
-
-    pfeile.at(0)->render(getTranslation()*rotationX(),lighton);
-    pfeile.at(1)->render(getTranslation()*rotationY(),lighton);
-    pfeile.at(2)->render(getTranslation()*rotationZ(),lighton);
-
-
-}

@@ -35,7 +35,8 @@ SOURCES += main.cpp \
     CgClass/dreiecke.cpp \
     CgClass/light.cpp \
     CgClass/mats.cpp \
-    CgClass/pfeil.cpp
+    CgClass/pfeil.cpp \
+    CgClass/CgCamera.cpp
 
 
 HEADERS += \
@@ -80,4 +81,5 @@ HEADERS += \
     CgClass/light.h \
     CgClass/wuerfel.h \
 CgClass/pfeil.h \
-    CgEvents/allgemeinesEvent.h
+    CgEvents/allgemeinesEvent.h \
+    CgClass/CgCamera.h

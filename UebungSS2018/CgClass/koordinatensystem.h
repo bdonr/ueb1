@@ -18,7 +18,7 @@ private:
     glm::mat4x4 rotationZ();
 public:
     Koordinatensystem(CgBaseRenderer *render, glm::mat4x4 x);
-    void renderO(bool lighton);
+    void renderO(bool lighton,glm::mat4x4 x);
     std::vector<Pfeil *> getPfeile() const;
     void setPfeile(const std::vector<Pfeil *> &value);
     glm::mat4x4 getTranslation() const;

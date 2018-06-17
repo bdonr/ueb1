@@ -17,18 +17,17 @@ private: Kegel* kegel;
     bool lighton;
 public:
     Pfeil(CgBaseRenderer *renderer,Appearance* appear);
-    Pfeil(CgBaseRenderer *renderer, Appearance *appear, glm::mat4x4 mat);
     Kegel *getKegel() const;
     void setKegel(Kegel *value);
     Zylinder *getZylinder() const;
     void setZylinder(Zylinder *value);
 
     glm::mat4 transformation;
-    void render();
     void render(glm::mat4x4 p,bool lighton);
 
     void setMaterialZylinder();
     void setMaterialKegel();
+    void render(glm::mat4 x);
 };
 
 #endif // PFEIL_H

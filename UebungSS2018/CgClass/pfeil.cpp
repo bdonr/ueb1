@@ -55,29 +55,7 @@ void Pfeil::render(glm::mat4x4 p, bool lighton)
 }
 
 
-
-void Pfeil::render()
-{
-    setMaterialKegel();
-    renderer->render(this->getKegel(),xyz*transform());
-
-    setMaterialZylinder();
-    renderer->render(this->getZylinder(),xyz);
-}
-
-Pfeil::Pfeil(CgBaseRenderer *render,Appearance* appear)
-{
-
-    this->renderer = render;
-    zylinder = MeshFactory::createZylinder(100,100,.0001,false);
-    zylinder->setAppear(appear);
-    kegel = MeshFactory::createKegel(100,100,.0001,false);
-    kegel->setAppear(appear);
-    render->init(this->getKegel());
-    render->init(this->getZylinder());
-}
-
-Pfeil::Pfeil(CgBaseRenderer *renderer, Appearance *appear, glm::mat4x4 mat):renderer(renderer),xyz(mat)
+Pfeil::Pfeil(CgBaseRenderer *renderer, Appearance *appear):renderer(renderer)
 {
     zylinder = MeshFactory::createZylinder(100,100,.0001,false);
     kegel = MeshFactory::createKegel(100,100,.0001,false);

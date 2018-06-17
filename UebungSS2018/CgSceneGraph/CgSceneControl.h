@@ -11,6 +11,7 @@
 #include "CgClass/scenegraph.h"
 #include "CgClass/kamera.h"
 #include "CgClass/traegerklasse.h"
+#include "CgClass/CgCamera.h"
 #include "CgClass/pfeil.h"
 #include "CgClass/light.h"
 class CgBaseEvent;
@@ -145,7 +146,7 @@ public:
     glm::vec3 getEye() const;
     void setEye(const glm::vec3 &value);
 
-    Kamera *getCam() const;
+    CgCamera *getCam() const;
     void setCam(Kamera *value);
 
     glm::mat4 getOld() const;
@@ -247,7 +248,7 @@ private:
     float countE;
     bool shownormals;
     Pfeil* pfeil;
-    Kamera* cam;
+    CgCamera* cam;
     glm::mat4 old;
     std::vector <Dreiecke*> objecte;
     CgBaseRenderer* m_renderer;
