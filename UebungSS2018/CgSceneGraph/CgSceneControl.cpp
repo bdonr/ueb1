@@ -430,7 +430,7 @@ void CgSceneControl::setZylinderColor()
 void CgSceneControl::renderZylinder()
 {
     if(zylinder!=NULL){
-
+        setLight();
         setZylinderColor();
         m_renderer->render(zylinder,old);
         if(!zylinder->getGeraden().empty()){
@@ -449,6 +449,7 @@ void calc(){
 void CgSceneControl::initZylinder()
 {
     if(zylinder!=NULL){
+              setLight();
         m_renderer->init(zylinder);
         if(!zylinder->getGeraden().empty())
             for(unsigned int j=0; j<zylinder->getGeraden().size()-1;j++){
