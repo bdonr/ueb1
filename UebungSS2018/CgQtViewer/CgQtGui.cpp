@@ -671,11 +671,13 @@ void CgQtGui::page6(QWidget *parent)
 
     QPushButton* ButtonXY = new QPushButton("erstelle Object");
     connect(ButtonXY, SIGNAL(clicked()), this, SLOT(materialChanged()));
+    connect( ButtonXY, SIGNAL(clicked()), m_glRenderWidget, SLOT(update()));
     tab1_control->addWidget(ButtonXY);
 
 
     licht = new QPushButton("Licht An");
     licht->setCheckable(false);
+    connect(licht, SIGNAL(clicked()), m_glRenderWidget, SLOT(slotLighting()));
     connect(licht, SIGNAL(clicked()), this, SLOT(lightChanged()));
     tab1_control->addWidget(licht);
 
@@ -687,7 +689,8 @@ void CgQtGui::page6(QWidget *parent)
     sl_licht_rot->setMinimum(0);
     sl_licht_rot->setMaximum(255);
     sl_licht_rot->setValue(0);
-    connect( sl_licht_rot, SIGNAL(sliderReleased()), this, SLOT(changeLichtFarbe()));
+    connect( sl_licht_rot, SIGNAL(sliderMoved(int)), m_glRenderWidget, SLOT(slotCustomColorX(int)));
+    connect( sl_licht_rot, SIGNAL(sliderReleased()), m_glRenderWidget, SLOT(repaint()));
     connect( sl_licht_rot, SIGNAL(sliderMoved(int)), this, SLOT(reranderLabelofSlider()));
 
     lab_licht_gruen = new QLabel("Licht Gruen: 1");
@@ -698,7 +701,7 @@ void CgQtGui::page6(QWidget *parent)
     sl_licht_gruen->setMinimum(0);
     sl_licht_gruen->setMaximum(255);
     sl_licht_gruen->setValue(0);
-    connect( sl_licht_gruen, SIGNAL(sliderReleased()), this, SLOT(changeLichtFarbe()));
+    connect( sl_licht_gruen, SIGNAL(sliderMoved(int)), m_glRenderWidget, SLOT(slotCustomColorX(int)));
     connect( sl_licht_gruen, SIGNAL(sliderMoved(int)), this, SLOT(reranderLabelofSlider()));
 
     lab_licht_blau = new QLabel("Licht Blau: 1");
@@ -709,7 +712,7 @@ void CgQtGui::page6(QWidget *parent)
     sl_licht_blau->setMinimum(0);
     sl_licht_blau->setMaximum(255);
     sl_licht_blau->setValue(0);
-    connect( sl_licht_blau, SIGNAL(sliderReleased()), this, SLOT(changeLichtFarbe()));
+    connect( sl_licht_blau, SIGNAL(sliderMoved(int)), m_glRenderWidget, SLOT(slotCustomColorX(int)));
     connect( sl_licht_blau, SIGNAL(sliderMoved(int)), this, SLOT(reranderLabelofSlider()));
 
     lab_licht_X = new QLabel("Licht X Pos: 1");
@@ -718,9 +721,9 @@ void CgQtGui::page6(QWidget *parent)
     sl_licht_X = createSlider();
     tab1_control->addWidget(sl_licht_X);
     sl_licht_X->setMinimum(0);
-    sl_licht_X->setMaximum(360);
+    sl_licht_X->setMaximum(255);
     sl_licht_X->setValue(0);
-    connect( sl_licht_X, SIGNAL(sliderReleased()), this, SLOT(changeLichtPosition()));
+    connect( sl_licht_X, SIGNAL(sliderMoved(int)), m_glRenderWidget, SLOT(slotCustomRotationX(int)));
     connect( sl_licht_X, SIGNAL(sliderMoved(int)), this, SLOT(reranderLabelofSlider()));
 
     lab_licht_Y = new QLabel("Licht Y Pos: 1");
@@ -729,9 +732,9 @@ void CgQtGui::page6(QWidget *parent)
     sl_licht_Y = createSlider();
     tab1_control->addWidget(sl_licht_Y);
     sl_licht_Y->setMinimum(0);
-    sl_licht_Y->setMaximum(360);
+    sl_licht_Y->setMaximum(255);
     sl_licht_Y->setValue(0);
-    connect( sl_licht_Y, SIGNAL(sliderReleased()), this, SLOT(changeLichtPosition()));
+    connect( sl_licht_Y, SIGNAL(sliderMoved(int)), m_glRenderWidget, SLOT(slotCustomRotationY(int)));
     connect( sl_licht_Y, SIGNAL(sliderMoved(int)), this, SLOT(reranderLabelofSlider()));
 
     lab_licht_Z = new QLabel("Licht Z Pos: 1");
@@ -740,9 +743,9 @@ void CgQtGui::page6(QWidget *parent)
     sl_licht_Z = createSlider();
     tab1_control->addWidget(sl_licht_Z);
     sl_licht_Z->setMinimum(0);
-    sl_licht_Z->setMaximum(360);
+    sl_licht_Z->setMaximum(255);
     sl_licht_Z->setValue(0);
-    connect( sl_licht_Z, SIGNAL(sliderReleased()), this, SLOT(changeLichtPosition()));
+    connect( sl_licht_Z, SIGNAL(sliderMoved(int)), m_glRenderWidget, SLOT(slotCustomRotationZ(int)));
     connect( sl_licht_Z, SIGNAL(sliderMoved(int)), this, SLOT(reranderLabelofSlider()));
 
 

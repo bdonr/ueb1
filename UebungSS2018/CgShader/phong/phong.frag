@@ -4,54 +4,38 @@ in vec3 vert;
 in vec3 vertNormal;
 
 
-
-in vec3 pixelCam;
-in vec3 pixelView;
-
-uniform vec4 mamb;
-uniform vec4 mdif;
-uniform vec4 mspec;
-uniform float mshine;
-
-
-
-
-
-flat in vec4 lspec;
-in vec4 ldif;
-in vec4 lamb;
-
+struct Material{
+ vec4 mamb;
+ vec4 mdif;
+ vec4 mspec;
+ float mshine;
+};
+ uniform Material material;
+struct Light {
+    vec3 lamb;
+    vec3 ldir;
+    vec3 ldif;
+    vec3 lspec;
+};
+uniform Light light; 
+uniform vec4 viewPos;
 void main() {
 
-	vec4 col;
-	
-	//fragment normalisiert
-	vec3 N = normalize (vert);
-	//lichtstrahl normalisiert
-	vec3 L = normalize(pixelView);
-	vec3 V = normalize(pixelCam);
+vec3 norm = normalize(vertNormal);
+vec3 lightDir = normalize(light.ldir - vert);
 
-	/*AMBIENTE*/
-	//lichtfarbe * ambient des Objektes = Ambiente
-	vec4 ambiente =mamb*lamb;
-
-	vec3 R = reflect (L,N);
-	/*DIFFUSE*/
-	// das scalarprodukt aus Lichtstrahl und Normalisierte nicht negativ
-	float diff = max(dot(L,N),0.0);
-	//lichtfarbe * diffintensität * material diffuse
-	vec4 diffuse = mdif*diff*ldif;
+vec3 viewDir = normalize(viewPos.xyz - vert);
+vec3 reflectDir = reflect(-lightDir, vert); 
 
 
-	/*SPECULAR*/ 
-	//reflectiere licht in gegenrichtung vom lichstrahl
-	//vec3 reflectDir= reflect(-lightDir,N);
+float spec = pow(max(dot(viewDir, reflectDir), 0.0), material.mshine);
+float diff = max(dot(norm, lightDir), 0.0);
 
-	//potenziere das maximum aus dem scalarprodukt von reflect und sichtwinkel mal dem 		materialspec 
-	float specu = pow(max(dot(R,V),0.0),mshine);
-	//lichtfarbe * specfaktor * materialspec	
-	vec4 specular = mspec*specu  * lspec; 
-	vec4 alle = specular*ambiente*diffuse;
-	gl_FragColor=alle;
+
+vec3 ambient  = light.lamb * material.mamb.xyz;
+vec3 diffuse  = light.ldif * (diff * material.mdif.xyz);
+vec3 specular = light.lspec * (spec * material.mspec.xyz);
+vec3 alle = (ambient+diffuse+specular);
+	gl_FragColor=vec4(ambient,1.0);
 
 } 

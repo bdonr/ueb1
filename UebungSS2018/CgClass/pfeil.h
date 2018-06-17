@@ -14,6 +14,7 @@ private: Kegel* kegel;
     glm::mat4x4 transform();
     glm::mat4x4 xyz;
     CgBaseRenderer *renderer;
+    bool lighton;
 public:
     Pfeil(CgBaseRenderer *renderer,Appearance* appear);
     Pfeil(CgBaseRenderer *renderer, Appearance *appear, glm::mat4x4 mat);
@@ -24,8 +25,10 @@ public:
 
     glm::mat4 transformation;
     void render();
-    void render(glm::mat4x4 p);
+    void render(glm::mat4x4 p,bool lighton);
 
+    void setMaterialZylinder();
+    void setMaterialKegel();
 };
 
 #endif // PFEIL_H

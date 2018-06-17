@@ -141,8 +141,6 @@ void CgSceneControl::setRenderer(CgBaseRenderer *r) {
 
     //  setShaderSourceFiles("../UebungSS2018/CgShader/lighton.vert","../UebungSS2018/CgShader/simple.frag");
     m_renderer->setSceneControl(this);
-
-    m_renderer->setShaderSourceFiles("../UebungSS2018/CgShader/lightsoff.vert","../UebungSS2018/CgShader/lightsoff.frag");
 }
 void CgSceneControl::resetObject(){
     delete dreiecke;
@@ -193,7 +191,7 @@ void CgSceneControl::renderCoords()
 {
 
     koordinatensystem=new Koordinatensystem(m_renderer,m_current_transformation);
-    koordinatensystem->renderO();
+    koordinatensystem->renderO(lighton);
 }
 
 
@@ -211,9 +209,8 @@ void CgSceneControl::renderDreiecke()
 
 void CgSceneControl::renderObjects() {
 
-
     m_renderer->setProjectionMatrix(m_proj_matrix);
-    m_renderer->setLookAtMatrix(cam->getLookAt());
+    //m_renderer->setLookAtMatrix(cam->getLookAt());
     m_renderer->redraw();
     renderCoords();
     renderWurfel();
@@ -221,7 +218,7 @@ void CgSceneControl::renderObjects() {
     renderDreiecke();
     renderKegel();
     renderZylinder();
-    pfeil = new Pfeil(m_renderer,new Appearance("mamb",glm::vec4(1,0,2,1)),old);
+    pfeil = new Pfeil(m_renderer,new Appearance("material.mamb",glm::vec4(1,0,2,1)),old);
     pfeil->render();
 
     if(sc!=NULL){
@@ -408,33 +405,30 @@ void CgSceneControl::changeKegel(CgBaseEvent *e)
         //resetRenderKegel(refine,hoehe,radius);
         initKegel();
     }
+
 }
 
-void CgSceneControl::setLight()
-{
-    m_renderer->setUniformValue("adir",light->getAdir());
-    m_renderer->setUniformValue("aspec",light->getAspec());
-    m_renderer->setUniformValue("adif",light->getAdif());
-    m_renderer->setUniformValue("aamb",light->getAamb());
-}
 
 void CgSceneControl::setZylinderColor()
 {
-    m_renderer->setUniformValue("mamb",zylinder->getAppear()->getMaterial()->getAmb());
-    m_renderer->setUniformValue("mdif",zylinder->getAppear()->getMaterial()->getDef());
-    m_renderer->setUniformValue("mspec",zylinder->getAppear()->getMaterial()->getSpec());
-    m_renderer->setUniformValue("mshine",zylinder->getAppear()->getMaterial()->getScalar());
+    if(lighton){
+    m_renderer->setUniformValue("material.mamb",zylinder->getAppear()->getMaterial()->getAmb());
+    m_renderer->setUniformValue("material.mdif",zylinder->getAppear()->getMaterial()->getDef());
+    m_renderer->setUniformValue("material.mspec",zylinder->getAppear()->getMaterial()->getSpec());
+    m_renderer->setUniformValue("material.mshine",zylinder->getAppear()->getMaterial()->getScalar());
+    }
+    else{
+        m_renderer->setUniformValue("rgb",zylinder->getAppear()->getMaterial()->getAmb());
+    }
 
 }
 
 void CgSceneControl::renderZylinder()
-{
+{    m_renderer->redraw();
     if(zylinder!=NULL){
-        setLight();
         setZylinderColor();
         m_renderer->render(zylinder,old);
         if(!zylinder->getGeraden().empty()){
-
             for(unsigned int j=0; j<zylinder->getGeraden().size();j++){
                 m_renderer->render(zylinder->getGeraden().at(j),old);
             }
@@ -449,7 +443,6 @@ void calc(){
 void CgSceneControl::initZylinder()
 {
     if(zylinder!=NULL){
-              setLight();
         m_renderer->init(zylinder);
         if(!zylinder->getGeraden().empty())
             for(unsigned int j=0; j<zylinder->getGeraden().size()-1;j++){
@@ -829,31 +822,12 @@ void CgSceneControl::testeMatrizen(CgBaseEvent *e)
 void CgSceneControl::handleLightChange(CgBaseEvent *e)
 {
     if(e->getType()==Cg::CgTurnLightOnOff){
-        lighton=!lighton;
-
-        if(lighton){
-
-            m_renderer->setShaderSourceFiles("../UebungSS2018/CgShader/phong/phong.vert","../UebungSS2018/CgShader/phong/phong.frag");
-            light = new Light();
-            light->setAamb(glm::vec4(1.0,1.0,1.0,1.));
-            light->setAdir(glm::vec3(0.,4.,1.));
-            light->setAdif(glm::vec4(0.3,0.2,.5,1.0));
-            light->setAspec(glm::vec4(1.0,1.0,1.0,1.0));
-            setLight();
+            lighton !=lighton;
             initZylinder();
             renderZylinder();
 
         }
-        else{
-            if(light!=NULL){
-                delete light;
-                light=NULL;
-            }
-            m_renderer->setShaderSourceFiles("../UebungSS2018/CgShader/lightsoff.vert","../UebungSS2018/CgShader/lightsoff.frag");
-            renderZylinder();
-        }
 
-    }
 }
 
 void CgSceneControl::handleEvent(CgBaseEvent *e) {
@@ -871,25 +845,9 @@ void CgSceneControl::handleEvent(CgBaseEvent *e) {
     }
     testeMatrizen(e);
 
-    //setDreiDVector
-    if(e->getType()==Cg::CgChangeLichtFarbe){
-        if(lighton){
-            glm::vec3 c = ((allgemeinesEvent*)e)->getTraegerKlasse()->getDreiDVector();
-            glm::vec4 d = glm::vec4(c.x,c.y,c.z,1);
-            light->setAamb(d);
-        }
-
-    }
-
-
     if(e->getType()==Cg::CgChangeLichtPosition){
-        if(lighton){
-
-            glm::vec3 c = ((allgemeinesEvent*)e)->getTraegerKlasse()->getDreiDVector();
-            light->setAdir(c);
-            setLight();
-        }
-
+        setZylinderColor();
+        renderZylinder();
 
     }
 
