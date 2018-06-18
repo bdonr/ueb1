@@ -23,8 +23,7 @@ public:
     void setZylinder(Zylinder *value);
 
     glm::mat4 transformation;
-    void render();
-    void render(glm::mat4x4 p);
+    void render(glm::mat4x4 transformation,bool lighton);
 
 };
 

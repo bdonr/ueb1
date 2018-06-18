@@ -96,6 +96,13 @@ void Zylinder::handleNormalenberechnen()
             x.push_back(glm::normalize(faceNormals.at(i))+schwerpunkte.at(i));
             geraden.push_back(MeshFactory::createMyPolyline(glm::vec3(244,44,44),x));
         }
+        for (unsigned int i = 0; i < triangleIndices.size(); i = i + 3) {
+                verticesOfFaces.insert(std::pair<unsigned int, unsigned int>(triangleIndices[i], i/3));
+                verticesOfFaces.insert(std::pair<unsigned int, unsigned int>(triangleIndices[i+1], i/3));
+                verticesOfFaces.insert(std::pair<unsigned int, unsigned int>(triangleIndices[i+2], i/3));
+            }
+
+        punktNormalen();
     }
 }
 /**
@@ -219,4 +226,21 @@ glm::vec3 Zylinder::normalen(glm::vec3 a,glm::vec3 b, glm::vec3 c,glm::vec3 mitt
     o.y=k.y+mittelpunkt.y;
     o.z=k.z+mittelpunkt.z;
     return glm::normalize(o);
+}
+
+void Zylinder::punktNormalen(){
+for (unsigned int i = 0 ; i<=this->vertices.size(); i++)
+    {
+      unsigned int number = 0;
+      glm::vec3 vertexNormal;
+      std::multimap<unsigned int, unsigned int>::iterator it;
+      for (it=verticesOfFaces.equal_range(i).first; it!=verticesOfFaces.equal_range(i).second; ++it) {
+        vertexNormal += faceNormals[(*it).second];
+        number ++;
+      }
+      vertexNormal.x /= number;
+      vertexNormal.y /= number;
+      vertexNormal.z /= number;
+      normals.push_back(vertexNormal);
+    }
 }

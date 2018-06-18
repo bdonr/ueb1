@@ -37,8 +37,8 @@ glm::vec3 RotationsKoerper::vectorMalMatrix(glm::vec3 vector,std::vector<glm::ve
 
 void RotationsKoerper::zieheLinieZwischenZweiNachBarSegmenten(){
     //-2 da wir am ende nicht doppelt haben wollen
-    for(int i=0;i<=this->polyVec.size()-2;i++){
-        for(int j=0;j<this->polyVec.at(i)->getVertices().size()-1;j++){
+    for(unsigned int i=0;i<=this->polyVec.size()-2;i++){
+        for(unsigned int j=0;j<this->polyVec.at(i)->getVertices().size()-1;j++){
             std::vector<glm::vec3> x;
             std::vector<glm::vec3> y;
             glm::vec3 a=polyVec.at(i)->getVertices().at(j);
@@ -102,7 +102,7 @@ std::vector<glm::vec3> RotationsKoerper::initLines()
     vect.push_back(glm::vec3(1,.75,0));
     vect.push_back(glm::vec3(1.5,.0,0));
 
-    for(unsigned int i =0;i< hoehe-1; i++){
+    for(int i =0;i< hoehe-1; i++){
         LaneAlgo(vect);
     }
     for(unsigned int i = 0; i < vect.size()-2;i++){

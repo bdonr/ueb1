@@ -65,7 +65,6 @@ void MyPolyline::rechne() {
 }
 
 void MyPolyline::rechneVierPunkteSchema(){
-    unsigned int mitte = this->vertices.size() / 2;
     unsigned int ende = this->vertices.size();
     float w = .0625;
 //    std::cout<<"mitte"<<mitte<<"ende"<<ende<<std::endl;

@@ -81,8 +81,9 @@ Wuerfel::Wuerfel(int id,glm::vec3 colors):id(id),type(Cg::TriangleMesh)
     triangleIndices.push_back(6);
     triangleIndices.push_back(2);
     triangleIndices.push_back(3);
+     berechneSchwerPunkte();
     berechneNormale();
-    berechneSchwerPunkte();
+
     std::cout<<faceNormals.size()<<std::endl;
     for(int i =0;i<faceNormals.size();i++){
         std::vector<glm::vec3> x;
@@ -170,10 +171,17 @@ void Wuerfel::berechneSchwerPunkte()
  */
 void Wuerfel::berechneNormale()
 {
-    for(int i =0;i<triangleIndices.size();i=i+3){
-        faceNormals.push_back(glm::normalize((vertices.at(triangleIndices.at(i))+
-                vertices.at(triangleIndices.at(i+1))+
-                vertices.at(triangleIndices.at(i+2)))));
+    int d=0;
+    for(unsigned int i =0;i<triangleIndices.size();i=i+3){
+
+        if(triangleIndices.at(i+2)<vertices.size()
+                && triangleIndices.at(i)<vertices.size()
+                && triangleIndices.at(i+1)<vertices.size()){
+            faceNormals.push_back(normalen(vertices.at(triangleIndices.at(i)),
+                                           vertices.at(triangleIndices.at(i+1)),
+                                           vertices.at(triangleIndices.at(i+2)),schwerpunkte.at(d)));
+            d++;
+        }
     }
 }
 
@@ -187,7 +195,21 @@ void Wuerfel::setGeraden(const std::vector<MyPolyline *> &value)
 {
     geraden = value;
 }
+glm::vec3 Wuerfel::normalen(glm::vec3 a,glm::vec3 b, glm::vec3 c,glm::vec3 mittelpunkt){
+    glm::vec3 k;
 
+    glm::vec3 vab = b-a;
+    glm::vec3 vac = c-a;
+
+    k.x = vab.y*vac.z - vac.y*vab.z;
+    k.y = vab.z*vac.x - vac.z*vab.x;
+    k.z = vab.x*vac.y - vac.x*vab.y;
+    glm::vec3 o;
+    o.x=k.x+mittelpunkt.x;
+    o.y=k.y+mittelpunkt.y;
+    o.z=k.z+mittelpunkt.z;
+    return glm::normalize(o);
+}
 
 
 

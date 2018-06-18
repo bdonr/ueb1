@@ -10,6 +10,7 @@
 
 #include "../CgBase/CgBaseRenderer.h"
 #include <glm/glm.hpp>
+#include "CgClass/light.h"
 
 class CgBaseSceneControl;
 class CgQtGlBufferObject;
@@ -59,6 +60,7 @@ public:
     bool getLighting();
 
 
+    void slotCustomColor();
 public slots:
 
 
@@ -70,6 +72,12 @@ public slots:
     void slotPolygonFilled();
     void cleanup();
 
+    void slotCustomRotationX(int x);
+    void slotCustomRotationZ(int z);
+    void slotCustomColorX(int x);
+    void slotCustomColorZ(int z);
+    void slotCustomRotationY(int y);
+    void slotCustomColorY(int y);
 signals:
 
     void mouseEvent(QMouseEvent *event) ;
@@ -108,6 +116,7 @@ private:
 
     bool m_custom_rotation;
     bool m_lighting;
+    Light* light;
 
 
     CgBaseSceneControl* m_scene_control;

@@ -49,6 +49,8 @@ namespace Cg{
     CgChangeLichtFarbe              = 0x1627132,
     CgChangeLichtPosition           = 0x4653786,
     CgTurnLightOnOff                = 0x3223223,
+    CgCreateWuerfel                 = 0x2121233,
+    CgShowNormalsWuerfel            = 0x2125524,
     // feel free to add whatever you like
     }EventType;
 

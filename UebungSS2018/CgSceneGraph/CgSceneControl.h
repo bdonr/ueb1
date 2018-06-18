@@ -63,7 +63,6 @@ public:
 
     void initRotationBody();
 
-    void renderWurfel();
 
     void changeColorCube(CgBaseEvent *e);
 
@@ -232,6 +231,7 @@ public:
     void handleLightChange(CgBaseEvent *e);
 
     void changeTageswert(CgBaseEvent *e);
+    void renderWuerfel(bool x);
 private:
 
     int tab;

@@ -16,13 +16,14 @@ private:
     glm::mat4x4 rotationX();
     glm::mat4x4 rotationY();
     glm::mat4x4 rotationZ();
+    bool lighton;
 public:
     Koordinatensystem(CgBaseRenderer *render, glm::mat4x4 x);
-    void renderO();
     std::vector<Pfeil *> getPfeile() const;
     void setPfeile(const std::vector<Pfeil *> &value);
     glm::mat4x4 getTranslation() const;
     void setTranslation(const glm::mat4x4 &value);
+    void renderO(glm::mat4x4 x, bool lighton);
 };
 
 #endif // KOORDINATENSYSTEM_H

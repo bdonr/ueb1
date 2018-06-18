@@ -73,28 +73,38 @@ void Scenegraph::setSc(SceneEntity *value)
  * @param render
  * @param sc
  */
-void Scenegraph::setUniform(int i, CgBaseRenderer *render, SceneEntity* sc)
+void Scenegraph::setUniform(int i, CgBaseRenderer *render, SceneEntity* sc,bool lighton)
 {
-    render->setUniformValue("mamb",sc->getChildren().at(i)->getAppear()->getMaterial()->getAmb());
-    render->setUniformValue("mdif",sc->getChildren().at(i)->getAppear()->getMaterial()->getDef());
-    render->setUniformValue("mspec",sc->getChildren().at(i)->getAppear()->getMaterial()->getSpec());
-    render->setUniformValue("mshine",sc->getChildren().at(i)->getAppear()->getMaterial()->getScalar());
-}
-void Scenegraph::setUniform(CgBaseRenderer *render, SceneEntity* sc)
-{
-    render->setUniformValue("mamb",sc->getAppear()->getMaterial()->getAmb());
-    render->setUniformValue("mdif",sc->getAppear()->getMaterial()->getDef());
-    render->setUniformValue("mspec",sc->getAppear()->getMaterial()->getSpec());
-    render->setUniformValue("mshine",sc->getAppear()->getMaterial()->getScalar());
-}
+    if(lighton){
+      render->setUniformValue("material.mamb",sc->getChildren().at(i)->getAppear()->getMaterial()->getAmb());
+      render->setUniformValue("material.mdif",sc->getChildren().at(i)->getAppear()->getMaterial()->getDef());
+      render->setUniformValue("material.mspec",sc->getChildren().at(i)->getAppear()->getMaterial()->getSpec());
+      render->setUniformValue("material.mshine",sc->getChildren().at(i)->getAppear()->getMaterial()->getScalar());
+      }
+      else{
+          render->setUniformValue("rgb",sc->getChildren().at(i)->getAppear()->getMaterial()->getAmb());
+  }
 
+}
+void Scenegraph::setUniform(CgBaseRenderer *render, SceneEntity* sc,bool lighton)
+{
+    if(lighton){
+    render->setUniformValue("material.mamb",sc->getAppear()->getMaterial()->getAmb());
+    render->setUniformValue("material.mdif",sc->getAppear()->getMaterial()->getDef());
+    render->setUniformValue("material.mspec",sc->getAppear()->getMaterial()->getSpec());
+    render->setUniformValue("material.mshine",sc->getAppear()->getMaterial()->getScalar());
+    }
+    else{
+        render->setUniformValue("rgb",sc->getAppear()->getMaterial()->getAmb());
+    }
+}
 /**
  * @brief Scenegraph::render
  * @param render
  * @param sc
  * lasse jede SceneEntitty sein eigenes Object rendern
  */
-void Scenegraph::render(CgBaseRenderer *render,SceneEntity* sc)
+void Scenegraph::render(CgBaseRenderer *render,SceneEntity* sc,bool lighton)
 {
 
     counter+=(counter+counterIncre)%360;
@@ -107,11 +117,11 @@ void Scenegraph::render(CgBaseRenderer *render,SceneEntity* sc)
     sc->rotate(counter,counter,counter);
     for(int i=0; i < sc->getChildren().size(); i++){
         sc->getChildren().at(i)->rotate(counter,counter,counter);
-        setUniform(i, render, sc);
-        this->render(render,sc->getChildren().at(i));
+        setUniform(i, render, sc,lighton);
+        this->render(render,sc->getChildren().at(i),lighton);
 
     }
-    setUniform(render,sc);
+    setUniform(render,sc,lighton);
     render->init(sc->getOb());
     render->render(sc->getOb(),ma);
     matrixstack.pop();

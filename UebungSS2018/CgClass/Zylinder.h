@@ -27,6 +27,9 @@ private:
     std::vector<glm::vec3> faceColors;
     std::vector<MyPolyline*> geraden;
     std::vector<glm::vec3> schwerpunkte;
+    std::vector<glm::vec3> normals;
+    std::multimap<unsigned int, unsigned int> verticesOfFaces;
+
     void create();
     void erstelleRechtEck(glm::vec3 p1, glm::vec3 p2, glm::vec3 p3, int count);
 public:
@@ -59,6 +62,7 @@ public:
     Appearance *getAppear() const;
     void setAppear(Appearance *value);
     void handleNormalenberechnen();
+    void punktNormalen();
 };
 
 #endif // Zylinder_H

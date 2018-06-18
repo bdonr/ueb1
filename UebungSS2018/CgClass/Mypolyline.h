@@ -7,10 +7,12 @@
 class MyPolyline : public CgBasePolyline
 {
 private:
-    glm::vec3 color;
-    enum Cg::ObjectType type;
     unsigned int id;
+    enum Cg::ObjectType type;
     unsigned int width;
+    glm::vec3 color;
+
+
     std::vector<glm::vec3> vertices;
 public:
     MyPolyline(unsigned int id,glm::vec3 color,std::vector<glm::vec3> x);

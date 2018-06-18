@@ -3,6 +3,7 @@
 #include "CgBase/CgBaseTriangleMesh.h"
 #include "CgClass/Mypolyline.h"
 #include "CgClass/meshfactory.h"
+#include <map>
 
 class MyPolyline;
 class Dreiecke:public CgBaseTriangleMesh
@@ -19,9 +20,10 @@ private:
     std::vector<unsigned int> indeces;
     std::vector<glm::vec3> facenormals;
     std::vector<glm::vec3> fcolor;
-    std::vector<glm::vec3> pointnormals;
+    std::vector<glm::vec3> normals;
     std::vector<MyPolyline*> geraden;
-
+    std::vector<glm::vec3> schwerpunkte;
+    std::multimap<unsigned int, unsigned int> verticesOfFaces;
 public:
     Dreiecke();
     Dreiecke(int id,std::vector<glm::vec3>x,std::vector<unsigned int>k);
@@ -46,6 +48,11 @@ public:
     glm::vec3 normalenV(glm::vec3 a, glm::vec3 b, glm::vec3 c, glm::vec3 mittelpunkt);
     std::vector<MyPolyline *> getGeraden() const;
     void setGeraden(const std::vector<MyPolyline *> &value);
+    void punktNormalen();
+
+    void berechneNormale();
+    void berechneSchwerPunkte();
+    glm::vec3 normalen(glm::vec3 a, glm::vec3 b, glm::vec3 c, glm::vec3 mittelpunkt);
 };
 
 #endif // DREIECK_H

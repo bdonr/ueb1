@@ -20,35 +20,29 @@ void Pfeil::setZylinder(Zylinder *value)
     zylinder = value;
 }
 
-void Pfeil::render(glm::mat4x4 p)
+void Pfeil::render(glm::mat4x4 transformation,bool lighton)
 {
 
-    renderer->setUniformValue("mamb",getKegel()->getAppear()->getMaterial()->getAmb());
-    renderer->setUniformValue("mdif",getKegel()->getAppear()->getMaterial()->getDef());
-    renderer->setUniformValue("mspec",getKegel()->getAppear()->getMaterial()->getSpec());
-    renderer->setUniformValue("mshine",getKegel()->getAppear()->getMaterial()->getScalar());
-    renderer->render(this->getKegel(),p*transform());
+    if(lighton){
+        renderer->setUniformValue("material.mamb",getZylinder()->getAppear()->getMaterial()->getAmb());
+        renderer->setUniformValue("material.mdif",getZylinder()->getAppear()->getMaterial()->getDef());
+        renderer->setUniformValue("material.mspec",getZylinder()->getAppear()->getMaterial()->getSpec());
+        renderer->setUniformValue("material.mshine",getZylinder()->getAppear()->getMaterial()->getScalar());
+    }else{
+        renderer->setUniformValue("rgb",getZylinder()->getAppear()->getMaterial()->getAmb());
+    }
+    renderer->render(this->getZylinder(),transformation);
+    if(lighton){
+        renderer->setUniformValue("material.mamb",getKegel()->getAppear()->getMaterial()->getAmb());
+        renderer->setUniformValue("material.mdif",getKegel()->getAppear()->getMaterial()->getDef());
+        renderer->setUniformValue("material.mspec",getKegel()->getAppear()->getMaterial()->getSpec());
+        renderer->setUniformValue("material.mshine",getKegel()->getAppear()->getMaterial()->getScalar());
+    }
+    else{
+        renderer->setUniformValue("rgb",getKegel()->getAppear()->getMaterial()->getAmb());
+    }
+    renderer->render(this->getKegel(),transformation*transform());
 
-    renderer->setUniformValue("mamb",getZylinder()->getAppear()->getMaterial()->getAmb());
-    renderer->setUniformValue("mdif",getZylinder()->getAppear()->getMaterial()->getDef());
-    renderer->setUniformValue("mspec",getZylinder()->getAppear()->getMaterial()->getSpec());
-    renderer->setUniformValue("mshine",getZylinder()->getAppear()->getMaterial()->getScalar());
-    renderer->render(this->getZylinder(),p*xyz);
-}
-
-void Pfeil::render()
-{
-    renderer->setUniformValue("mamb",getZylinder()->getAppear()->getMaterial()->getAmb());
-    renderer->setUniformValue("mdif",getZylinder()->getAppear()->getMaterial()->getDef());
-    renderer->setUniformValue("mspec",getZylinder()->getAppear()->getMaterial()->getSpec());
-    renderer->setUniformValue("mshine",getZylinder()->getAppear()->getMaterial()->getScalar());
-    renderer->render(this->getKegel(),xyz*transform());
-
-    renderer->setUniformValue("mamb",getZylinder()->getAppear()->getMaterial()->getAmb());
-    renderer->setUniformValue("mdif",getZylinder()->getAppear()->getMaterial()->getDef());
-    renderer->setUniformValue("mspec",getZylinder()->getAppear()->getMaterial()->getSpec());
-    renderer->setUniformValue("mshine",getZylinder()->getAppear()->getMaterial()->getScalar());
-    renderer->render(this->getZylinder(),xyz);
 }
 
 Pfeil::Pfeil(CgBaseRenderer *render,Appearance* appear)
@@ -76,10 +70,10 @@ Pfeil::Pfeil(CgBaseRenderer *renderer, Appearance *appear, glm::mat4x4 mat):rend
 
 
 glm::mat4x4 Pfeil::transform(){
-    return glm::mat4x4( glm::vec4(0.01,0,0,0),
-                        glm::vec4(0,0.01,0,0),
-                        glm::vec4(0,0,.01,0),
-                        glm::vec4(0,0,100,.01));
+    return glm::mat4x4( glm::vec4(01,0,0,0),
+                        glm::vec4(0,1,0,0),
+                        glm::vec4(0,0,1,0),
+                        glm::vec4(0,0,0,1));
 }
 
 

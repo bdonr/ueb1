@@ -167,9 +167,9 @@ private:
     QPushButton* bt_rese_poly;
     QPushButton* bt_show_normal;
     QString s;
-    int tag = 1;
+    int tag;
 
-    int SuperVar = 1;
+    int SuperVar;
 //    int varGruen = 1;
 //    int varBlau = 1;
 //    int varLichtX = 1;
@@ -250,6 +250,8 @@ private slots:
     void materialChanged();
     void changeLichtFarbe();
     void changeLichtPosition();
+    void createWuerfel();
+    void showWuerfelNormals();
 
     void reranderLabelofSlider();
 };

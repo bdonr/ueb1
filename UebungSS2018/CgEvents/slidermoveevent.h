@@ -8,9 +8,10 @@ class SliderMoveEvent: public CgBaseEvent
 {
 private:
     enum Cg::EventType type;
-    float radius;
     int refine;
-    float hoehe;
+     float hoehe;
+    float radius;
+
 
 public:
 

@@ -1,16 +1,9 @@
 #ifndef LIGHT_H
 #define LIGHT_H
-
 #include "glm/common.hpp"
 
 class Light
 {
-
-
-    /*varying vec4 adif;
-    varying vec4 aamb;
-    varying vec4 aspec;
-*/
 
 private : glm::vec3 source;
     glm::vec4 adif;

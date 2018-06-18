@@ -52,8 +52,8 @@ glm::mat4x4 Koordinatensystem::rotationX()
 
 
     return glm::mat4x4(glm::vec4(1,0,0,0),
-                       glm::vec4(0,glm::cos(glm::radians(90.0)),glm::sin(glm::radians(90.0)),0),
-                       glm::vec4(0,(-1)*glm::sin(glm::radians(90.0)),glm::cos(glm::radians(90.0)),0),
+                       glm::vec4(0,glm::cos(glm::radians(270.0)),glm::sin(glm::radians(270.0)),0),
+                       glm::vec4(0,(-1)*glm::sin(glm::radians(270.0)),glm::cos(glm::radians(270.0)),0),
                        glm::vec4(0,0,0,1));
 }
 
@@ -74,10 +74,10 @@ glm::mat4x4 Koordinatensystem::rotationZ()
 }
 
 
-void Koordinatensystem::renderO()
+void Koordinatensystem::renderO(glm::mat4x4 x,bool lighton)
 {
 
-    pfeile.at(0)->render(getTranslation()*rotationX());
-    pfeile.at(1)->render(getTranslation()*rotationY());
-    pfeile.at(2)->render(getTranslation()*rotationZ());
+    pfeile.at(0)->render(x*rotationX(),lighton);
+    pfeile.at(1)->render(x*rotationY(),lighton);
+    pfeile.at(2)->render(x*rotationZ(),lighton);
 }

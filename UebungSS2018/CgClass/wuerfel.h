@@ -31,6 +31,7 @@ public:
     std::vector<MyPolyline *> getGeraden() const;
     void setGeraden(const std::vector<MyPolyline *> &value);
 
+    glm::vec3 normalen(glm::vec3 a, glm::vec3 b, glm::vec3 c, glm::vec3 mittelpunkt);
 private:
     unsigned int id;
     enum Cg::ObjectType type;

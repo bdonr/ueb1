@@ -43,6 +43,9 @@
 //sozusagen der eigentliche Konstruktor.
 void CgQtGui::init()
 {
+    tag=1;
+
+    SuperVar=1;
     //--------------------------------------------------------------
     // füllen der liste Der materialien
     amb.push_back(glm::vec4(.25f,.25f,.25f,1.0));
@@ -361,13 +364,13 @@ void CgQtGui::page1(QWidget* parent)
     QLabel* lab1= new QLabel("erstelle Wuerfel");
     tab3_control->addWidget(lab1);
 
-    QPushButton* myButton1 = new QPushButton("Zeige Würfell");
+    QPushButton* myButton1 = new QPushButton("Zeige Würfel");
     tab3_control->addWidget(myButton1);
-    //connect(myButton1, SIGNAL( clicked() ), this, SLOT(slotMyButton1Pressed()) );
+    connect(myButton1, SIGNAL( clicked() ), this, SLOT(createWuerfel()) );
 
     QPushButton* myButton2 = new QPushButton("Zeige Normale");
     tab3_control->addWidget(myButton2);
-    //connect(myButton2, SIGNAL( clicked() ), this, SLOT(slotMyButton1Pressed()) );
+    connect(myButton2, SIGNAL( clicked() ), this, SLOT(showWuerfelNormals()) );
 
 
     QLabel* lab2= new QLabel("Rot");
@@ -1098,6 +1101,17 @@ void CgQtGui::changeLichtPosition()
     std::cout<<"change Licht Position"<<std::endl;
     traeger->setDreiDVector(glm::vec3(sl_licht_X->value(),sl_licht_Y->value(),sl_licht_Z->value()));
     notifyObserver(new allgemeinesEvent(Cg::CgChangeLichtPosition,traeger));
+}
+
+void CgQtGui::createWuerfel()
+{
+    notifyObserver(new allgemeinesEvent(Cg::CgCreateWuerfel,NULL));
+}
+
+void CgQtGui::showWuerfelNormals()
+{
+    notifyObserver(new allgemeinesEvent(Cg::CgShowNormalsWuerfel,NULL));
+
 }
 //SLOT zur globalen anzeigen der werte der jewaligen slider
 void CgQtGui::reranderLabelofSlider()

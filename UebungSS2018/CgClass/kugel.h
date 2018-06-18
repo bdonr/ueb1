@@ -5,12 +5,16 @@
 #include "vector"
 #include "glm/glm.hpp"
 #include "CgClass/appearance.h"
+#include <map>
 class Kugel : public CgBaseTriangleMesh
 {
 
 
 private :
+    int id;
     float radius;float hoehe;
+    int refine;
+        enum Cg::ObjectType type;
     std::vector<glm::vec3> vertices;
     std::vector<glm::vec3>vertexNormals;
     std::vector<glm::vec3> vertexColors;
@@ -18,10 +22,13 @@ private :
     std::vector<unsigned int> triangleIndices;
     std::vector<glm::vec3> faceNormals;
     std::vector<glm::vec3> faceColors;
-    enum Cg::ObjectType type;
+
     Appearance* appear;
-    int refine;
-    int id;
+    std::vector<glm::vec3> schwerpunkte;
+    std::vector<glm::vec3> normals;
+     std::vector<MyPolyline*> geraden;
+    std::multimap<unsigned int, unsigned int> verticesOfFaces;
+
 public:
     Kugel();
     Kugel(int id,float radius,float hoehe, int refine);
@@ -43,6 +50,10 @@ public:
     int create();
     Appearance *getAppear() const;
     void setAppear(Appearance *value);
+    void berechneSchwerPunkte();
+    void berechneNormale();
+    glm::vec3 normalen(glm::vec3 a, glm::vec3 b, glm::vec3 c, glm::vec3 mittelpunkt);
+    void punktNormalen();
 };
 
 #endif // KUGEL_H

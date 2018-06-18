@@ -13,7 +13,7 @@
 #include <stdio.h>
 #include <string.h>
 #include "CgUtils/ObjLoader.h"
-#include "CgEvents/objectopenevent.h"0.8 0.5 0.5 0.7
+#include "CgEvents/objectopenevent.h"
 #include "CgEvents/allgemeinesEvent.h"
 #include "CgClass/scenegraph.h"
 #include "CgClass/sceneentity.h"
@@ -79,7 +79,7 @@ CgSceneControl::CgSceneControl() {
     lighton=false;
     cam = new Kamera();
 
-    cam->setProjection(cam->perspective(100,eye.x,eye.y,eye.z));
+
 
     sc=NULL;
     wuerfel=NULL;
@@ -104,8 +104,6 @@ CgSceneControl::CgSceneControl() {
 
     createStandartMatrix();
     verschiebung=glm::vec3(0,0,0);
-
-
 }
 
 CgSceneControl::~CgSceneControl() {
@@ -141,7 +139,6 @@ void CgSceneControl::setRenderer(CgBaseRenderer *r) {
 
     //  setShaderSourceFiles("../UebungSS2018/CgShader/lighton.vert","../UebungSS2018/CgShader/simple.frag");
     m_renderer->setSceneControl(this);
-
     m_renderer->setShaderSourceFiles("../UebungSS2018/CgShader/lightsoff.vert","../UebungSS2018/CgShader/lightsoff.frag");
 }
 void CgSceneControl::resetObject(){
@@ -156,14 +153,14 @@ void CgSceneControl::renderRotationsBody()
         if(!rotationbody->getKeisVec().empty())
             if(rotationbody->getKeisVec().size()>0){
                 for(unsigned int i = 0; i<rotationbody->getKeisVec().size();i++){
-                    m_renderer->setUniformValue("mamp",glm::vec4(1.,1.,1.,1.));
+                    m_renderer->setUniformValue("rgb",glm::vec4(1.,1.,1.,1.));
                     m_renderer->render(rotationbody->getKeisVec().at(i),old);
                 }
             }
         if(!rotationbody->getPolyVec().empty()){
             if(rotationbody->getPolyVec().size()>0){
                 for(unsigned int i = 0; i<rotationbody->getPolyVec().size();i++){
-                    m_renderer->setUniformValue("mamp",glm::vec3(1.,1.,1.));
+                    m_renderer->setUniformValue("rgb",glm::vec3(1.,1.,1.));
                     m_renderer->render(rotationbody->getPolyVec().at(i),old);
                 }
             }
@@ -171,7 +168,7 @@ void CgSceneControl::renderRotationsBody()
         if(!rotationbody->getNormale().empty()){
             if(rotationbody->getNormale().size()>0){
                 for(unsigned int i = 0; i<rotationbody->getNormale().size();i++){
-                    m_renderer->setUniformValue("mamp",glm::vec3(255.,2.,3.));
+                    m_renderer->setUniformValue("rgb",glm::vec3(255.,2.,3.));
                     m_renderer->render(rotationbody->getNormale().at(i),old);
                 }
             }
@@ -179,12 +176,14 @@ void CgSceneControl::renderRotationsBody()
     }
 }
 
-void CgSceneControl::renderWurfel()
+void CgSceneControl::renderWuerfel(bool draw)
 {
-    if(wuerfel){
+    if(wuerfel!=NULL){
         m_renderer->render(wuerfel,old );
-        for(unsigned int i =0; i<wuerfel->getGeraden().size();i++){
-            m_renderer->render(wuerfel->getGeraden().at(i),old);
+        if(draw){
+            for(unsigned int i =0; i<wuerfel->getGeraden().size();i++){
+                m_renderer->render(wuerfel->getGeraden().at(i),old);
+            }
         }
     }
 }
@@ -193,7 +192,7 @@ void CgSceneControl::renderCoords()
 {
 
     koordinatensystem=new Koordinatensystem(m_renderer,m_current_transformation);
-    koordinatensystem->renderO();
+    koordinatensystem->renderO(m_current_transformation,lighton);
 }
 
 
@@ -211,21 +210,21 @@ void CgSceneControl::renderDreiecke()
 
 void CgSceneControl::renderObjects() {
 
-
-    m_renderer->setProjectionMatrix(m_proj_matrix);
+    cam->setProjection(cam->perspective(-100.,-100.,9.,-10.));
+    m_renderer->setProjectionMatrix(cam->getProjection());
     m_renderer->setLookAtMatrix(cam->getLookAt());
     m_renderer->redraw();
     renderCoords();
-    renderWurfel();
+    renderWuerfel(true);
     renderRotationsBody();
     renderDreiecke();
     renderKegel();
     renderZylinder();
-    pfeil = new Pfeil(m_renderer,new Appearance("mamb",glm::vec4(1,0,2,1)),old);
-    pfeil->render();
+    pfeil = new Pfeil(m_renderer,new Appearance("rgb",glm::vec4(1,0,2,1)),old);
+    pfeil->render(m_current_transformation,lighton);
 
     if(sc!=NULL){
-        sc->render(m_renderer,sc->getSc());
+        sc->render(m_renderer,sc->getSc(),lighton);
     }
     m_renderer->redraw();
 }
@@ -477,7 +476,7 @@ void CgSceneControl::changeZylinder(CgBaseEvent *e)
         else{
             k = zylinder->getAppear();
         }
-        zylinder = zylinder = MeshFactory::createZylinder(refine,hoehe,radius,shownormals);
+        zylinder = MeshFactory::createZylinder(refine,hoehe,radius,shownormals);
         zylinder->setAppear(k);
 
         //resetRenderKegel(refine,hoehe,radius);
@@ -715,11 +714,7 @@ void CgSceneControl::loadObject(CgBaseEvent *e)
         }
         dreiecke = objecte.at(((allgemeinesEvent*)e)->getTraegerKlasse()->getAn_aus());
         //   dreiecke = objecte.at(((ObjectOpenEvent*) e)->getWahl());
-        if(!dreiecke->getGeraden().empty()){
-            for(unsigned int i=0; i<dreiecke->getGeraden().size();i++){
-                m_renderer->init(dreiecke->getGeraden().at(i));
-            }
-        }
+
         this->m_renderer->init(dreiecke);
         renderDreiecke();
         this->m_renderer->redraw();
@@ -780,7 +775,7 @@ void CgSceneControl::handleMaterial(CgBaseEvent *e)
             if(st.compare("Planet2")==0){
                 sc->findAndSetAppear(k,Cg::Planet2);
             }
-            sc->render(m_renderer,sc->getSc());
+            sc->render(m_renderer,sc->getSc(),lighton);
         }
 
     }
@@ -794,7 +789,6 @@ void CgSceneControl::testeMatrizen(CgBaseEvent *e)
     if(e->getType()==Cg::CgMatritzeChecken){
         glm::mat4 standart = glm::mat4(glm::vec4(1,0,0,0),glm::vec4(0,1,0,0),glm::vec4(0,0,1,0),glm::vec4(0,0,0,1));
         std::cout << "asdasd"<<std::endl;
-        glm::vec3 ankle = glm::vec3(30.0,20.0,40.0);
         glm::mat4 trans;
         trans = glm::rotate(trans, glm::radians(30.0f), glm::vec3(1.0, 0.0, 0.0));
         trans = glm::rotate(trans, glm::radians(20.0f), glm::vec3(0.0, 1.0, 0.0));
@@ -879,6 +873,27 @@ void CgSceneControl::handleEvent(CgBaseEvent *e) {
         }
 
     }
+    if(e->getType()==Cg::CgCreateWuerfel){
+        reset();
+            this->wuerfel = MeshFactory::createWuerfel(glm::vec3(1.,1.,1.));
+            m_renderer->init(wuerfel);
+            renderWuerfel(false);
+
+
+    }
+
+    if(e->getType()==Cg::CgShowNormalsWuerfel){
+        reset();
+            this->wuerfel = MeshFactory::createWuerfel(glm::vec3(1.,1.,1.));
+            m_renderer->init(wuerfel);
+            for(unsigned int i =0;i< wuerfel->getGeraden().size();i++){
+                m_renderer->init(wuerfel->getGeraden().at(i));
+            }
+            renderWuerfel(true);
+
+
+    }
+
 
 
     if(e->getType()==Cg::CgChangeLichtPosition){
@@ -974,7 +989,7 @@ void CgSceneControl::changeTageswert(CgBaseEvent* e){
 
             }else{
                 sc->setCounterIncre(sc->getCounterIncre()-2);
-                            std::cout<<"verringert "<<sc->getCounterIncre()<<std::endl;
+                std::cout<<"verringert "<<sc->getCounterIncre()<<std::endl;
             }
         }
 
